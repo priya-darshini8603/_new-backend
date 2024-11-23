@@ -22,4 +22,3 @@ sidebarClose.addEventListener('click', () => {
 navClose.addEventListener('click', () => {
     navSidebar.classList.remove('active');
 });
-(JAVASCRITP)

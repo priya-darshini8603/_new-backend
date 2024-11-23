@@ -9,6 +9,10 @@ mongoose.connect("mongodb://localhost:27017/SAMPLE_PRJ")
 })
 
 const logInSchema=new mongoose.Schema({
+    usertype:{
+        type:String,
+        required:true
+    },
     name:{
         type:String,
         required:true

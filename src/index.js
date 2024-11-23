@@ -7,6 +7,7 @@ const templatepath=path.join(__dirname,'../template')
 app.use(express.static(path.join(__dirname, '../static')));
 app.use(express.static(path.join(__dirname, '../public/admindash')));
 
+
 const collection=require("./mongodb")
 app.use(express.json())
 app.set("view engine","hbs")
@@ -26,6 +27,19 @@ app.get("/signup",(req,res)=>{
 app.get("/admindash",(req,res)=>{
     res.render("admindash");
 })
+app.get("/contact",(req,res)=>{
+    res.render("contact");
+})
+app.get("/about",(req,res)=>{
+    res.render("about");
+})
+app.get("/payment",(req,res)=>{
+    res.render("payment");
+})
+app.get("/routelist",(req,res)=>{
+    res.render("routelist");
+})
+
 
 app.post("/login",async(req,res)=>{
 
