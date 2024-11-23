@@ -10,6 +10,15 @@ body {
 header {
     color: white;
 }
+.nav-link {
+    color:black !important;
+    font-size: 1rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #f8c146 !important;
+}
 
 /* Navbar Styling */
 .navbar {
