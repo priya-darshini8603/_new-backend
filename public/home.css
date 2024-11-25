@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f7fa;
 }
 
 header {
@@ -170,5 +171,5 @@ main {
     height: 2px;
     background: linear-gradient(to right, #121212, #5c5c5c);
     margin: 20px 0;
-    width: 5%;
+    max-width:5%;
 }
