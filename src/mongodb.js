@@ -9,9 +9,10 @@ mongoose.connect("mongodb://localhost:27017/SAMPLE_PRJ")
 })
 
 const logInSchema=new mongoose.Schema({
-    usertype:{
+    userType:{
         type:String,
-        required:true
+        required:true,
+        enum:['admin','bus incharge']
     },
     name:{
         type:String,
@@ -23,6 +24,21 @@ const logInSchema=new mongoose.Schema({
     }
 })
 
-const LogInCollection=new mongoose.model('LogInCollection',logInSchema)
 
-module.exports=LogInCollection
+
+
+const paymentSchema = new mongoose.Schema({
+    email: { type: String, required: true },
+    route: { type: String, required: true },
+    amount: { type: Number, required: true },
+    paymentId: { type: String},
+    orderId: { type: String, required: true },
+    status: { type: String, default: "Pending" },
+    createdAt: { type: Date, default: Date.now },
+});
+
+const LogInCollection=new mongoose.model('LogInCollection',logInSchema);
+const PaymentCollection= new mongoose.model('PaymentCollection', paymentSchema);
+
+module.exports = {LogInCollection,PaymentCollection};
+
