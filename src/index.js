@@ -30,7 +30,7 @@ const razorpay = new Razorpay({
     key_secret: "nUMwcrj3cYvjfT4XSB0IHhTl",
 });
 
-app.get("/",(req,res)=>{
+app.get(["/" || "home"],(req,res)=>{
     res.render("home");
 })
 app.get("/login",(req,res)=>{
