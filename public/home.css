@@ -10,6 +10,18 @@ body {
 header {
     color: white;
 }
+<<<<<<< HEAD
+=======
+.nav-link {
+    color:black !important;
+    font-size: 1rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #f8c146 !important;
+}
+>>>>>>> 42343cd0c5e39a31f0c256e432f892b6f679b787
 
 /* Navbar Styling */
 .navbar {
@@ -158,7 +170,11 @@ main {
     }
 
     .fade-in-text {
+<<<<<<< HEAD
         font-size: 40px;
+=======
+        font-size: 50px;
+>>>>>>> 42343cd0c5e39a31f0c256e432f892b6f679b787
     }
 }
 
@@ -187,7 +203,11 @@ main {
     }
 
     .fade-in-text {
+<<<<<<< HEAD
         font-size: 30px;
+=======
+        font-size: 45px;
+>>>>>>> 42343cd0c5e39a31f0c256e432f892b6f679b787
     }
 }
 
@@ -217,7 +237,11 @@ main {
     }
 
     .fade-in-text {
+<<<<<<< HEAD
         font-size: 25px;
+=======
+        font-size: 30px;
+>>>>>>> 42343cd0c5e39a31f0c256e432f892b6f679b787
     }
 
     footer {
@@ -256,7 +280,11 @@ main {
     }
 
     .fade-in-text {
+<<<<<<< HEAD
         font-size: 15px;
+=======
+        font-size: 20px;
+>>>>>>> 42343cd0c5e39a31f0c256e432f892b6f679b787
     }
 
     footer {
@@ -302,6 +330,7 @@ main {
         margin: 5px;
     }
 }
+<<<<<<< HEAD
 
 .nav-link {
     color:black !important;
@@ -312,3 +341,5 @@ main {
 .nav-link:hover {
     color: #f8c146!important;
 }
+=======
+>>>>>>> 42343cd0c5e39a31f0c256e432f892b6f679b787
