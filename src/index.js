@@ -184,7 +184,7 @@ app.post('/verify-payment', async (req, res) => {
       
       { new: true }
     );
-    console.log(paymentid)
+    console.log(payment);
 
     res.json({ success: true, message: 'Payment verified successfully', payment });
   } catch (error) {
@@ -194,6 +194,6 @@ app.post('/verify-payment', async (req, res) => {
 });   
 
 
-app.listen(3000,()=>{
+app.listen(4000,()=>{
     console.log("port connected")
 })
