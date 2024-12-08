@@ -184,7 +184,7 @@ app.post('/verify-payment', async (req, res) => {
       
       { new: true }
     );
-    console.log(payment);
+    console.log(paymentid)
 
     res.json({ success: true, message: 'Payment verified successfully', payment });
   } catch (error) {
