@@ -206,6 +206,11 @@ main {
         padding: 8px 15px;
         font-size: 0.875rem;
     }
+    .contact-info p {
+        margin: 5px 0; 
+        line-height: 1.6; 
+        text-align: left; /* Ensures left alignment for paragraph text */
+    }
 
     .breadcrumb-item {
         font-size: 0.875rem;
@@ -238,6 +243,11 @@ main {
     .breadcrumb {
         padding: 8px 15px;
         font-size: 1rem;
+    }
+    .contact-info p {
+        margin: 5px 0; 
+        line-height: 1.6; 
+        text-align: left; /* Ensures left alignment for paragraph text */
     }
 
     .breadcrumb-item {
@@ -312,6 +322,7 @@ main {
 .contact-info p {
     margin: 5px 0; 
     line-height: 1.6; 
+    text-align: left; /* Ensures left alignment for paragraph text */
 }
 
 /* Responsive Design */
@@ -338,7 +349,11 @@ main {
     .transport-info h2, .announcements h2 {
         font-size: 30px;
     }
-
+    .contact-info p {
+        margin: 5px 0; 
+        line-height: 1.6; 
+        text-align: left; /* Ensures left alignment for paragraph text */
+    }
     .fade-in-text {
         font-size: 40px;
     }
@@ -355,7 +370,7 @@ main {
     }
 
     .photo-container img {
-        width: 100%;
+        width: auto;
         height: auto;
     }
 
@@ -366,6 +381,11 @@ main {
 
     .transport-info h2, .announcements h2 {
         font-size: 28px;
+    }
+    .contact-info p {
+        margin: 5px 0; 
+        line-height: 1.6; 
+        text-align: left; /* Ensures left alignment for paragraph text */
     }
 
     .fade-in-text {
@@ -384,7 +404,7 @@ main {
     }
 
     .photo-container img {
-        width: 100%;
+        width: auto;
         height: auto;
     }
 
@@ -401,15 +421,12 @@ main {
     .fade-in-text {
         font-size: 25px;
     }
-
-    footer {
-        padding: 15px;
+    .contact-info p {
+        margin: 5px 0; 
+        line-height: 1.6; 
+        text-align: left; /* Ensures left alignment for paragraph text */
     }
 
-    .contact-info {
-        padding: 10px;
-        margin: 10px;
-    }
 }
 
 @media (max-width: 576px) {
@@ -423,8 +440,9 @@ main {
     }
 
     .photo-container img {
-        width: 100%;
+        width: auto;
         height: auto;
+        
     }
 
     .transport-info, .announcements {
@@ -441,13 +459,10 @@ main {
         font-size: 15px;
     }
 
-    footer {
-        padding: 10px;
-    }
-
-    .contact-info {
-        padding: 10px;
-        margin: 8px;
+    .contact-info p {
+        margin: 5px 0; 
+        line-height: 1.6; 
+        text-align: left; /* Ensures left alignment for paragraph text */
     }
 }
 
@@ -470,22 +485,17 @@ main {
     .navbar-nav li a {
         font-size: 16px;
     }
+    .contact-info p {
+        margin: 5px 0; 
+        line-height: 1.6; 
+        text-align: left; /* Ensures left alignment for paragraph text */
+    }
 
     .navbar-toggler {
         margin-top: 5px;
     }
 
-    footer {
-        padding: 8px;
-    }
 
-    .contact-info {
-        padding: 8px;
-        margin: 5px;
-    }
-<<<<<<< HEAD
-}
-=======
 }
 
 .nav-link {
@@ -497,4 +507,3 @@ main {
 .nav-link:hover {
     color: #f8c146 !important;
 }
->>>>>>> 983a864639181816d1160d03f374eedf57339c0a
