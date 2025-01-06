@@ -7,7 +7,7 @@ router.get("/signup", (req, res) => res.render("signup"));
 router.get("/routelist", (req, res) => res.render("routelist"));
 router.get("/contact", (req, res) => res.render("contact"));
 router.get("/about", (req, res) => res.render("about"));
-
+router.get("/businchargedash", (req, res) => res.render("businchargedash"));
 router.post("/login",authController.login);
 router.post("/signup",authController.signup);
 
