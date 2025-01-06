@@ -10,6 +10,7 @@ const mongoose = require('./mongodb');
 const authRoutes = require('./routes/authRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const socketIo = require('socket.io');
+const trackerRoutes = require('./routes/trackerRoutes');
 
 
 const config = require('./config/razorpay');
@@ -19,6 +20,7 @@ const io = socketIo(server);
 app.use(express.static('public'));
 app.use(express.static('static'));
 app.use(bodyParser.json());
+app.use('/api/location',trackerRoutes);
 
 
 
@@ -41,9 +43,7 @@ app.set('views', templatepath);
 
 app.use(authRoutes);
 app.use(paymentRoutes);
-app.get("tracker",function(req,res){
-  res.render("hey")
-})
+
 
 
 app.listen(4000, () => {
