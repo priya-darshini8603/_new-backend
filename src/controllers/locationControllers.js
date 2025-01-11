@@ -12,3 +12,4 @@ const saveLocation = async (req, res) => {
 };
 
 module.exports = { saveLocation };
+
