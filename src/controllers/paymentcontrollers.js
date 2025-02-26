@@ -11,7 +11,7 @@ const razorpay = new Razorpay({
 module.exports = {
   createOrder: async (req, res) => {
     try {
-      console.log(req.body);
+      
       const { route, email, amount } = req.body;
       const options = {
         amount: amount * 100, // Amount in paise
@@ -41,6 +41,7 @@ module.exports = {
   verifyPayment: async (req, res) => {
     try {
       const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
+      console("at verification");
       console.log(req.body);
       if (!razorpay_payment_id || !razorpay_order_id || !razorpay_signature) {
         return res.status(400).json({ success: false, message: 'Missing required fields' });

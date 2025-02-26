@@ -106,13 +106,12 @@
       <div class="box">
         <h1>Login</h1>
         <form action="/login" method="post" id="loginForm">
-          <input type="radio" id="admin" name="role" value="admin" />
+          <input type="radio" id="admin" name="userType" value="admin" required />
           <label for="admin">Admin</label><br />
-          <input
-            type="radio"
+          <input type="radio"
             id="busIncharge"
-            name="role"
-            value="busIncharge"
+            name="userType"
+            value="busIncharge" required
           />
           <label for="busIncharge">Bus Incharge</label><br /><br />
           <label for="username">Username:</label>
