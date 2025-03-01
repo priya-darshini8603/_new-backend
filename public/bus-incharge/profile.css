@@ -1,0 +1,301 @@
+body {
+    font-family: 'Poppins', sans-serif;
+  margin:0;
+}
+
+.profile-container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: auto;
+    background: linear-gradient(135deg, #f5f7fa, white);
+    color: #2c3e50;
+    padding: 20px;
+    padding-bottom: 40px;
+    box-sizing: border-box;
+}
+
+.section {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.psection {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    padding-bottom: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #1E90FF;
+    object-fit: cover;
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: 28px;
+    color: #2c3e50;
+}
+
+.profile-info p {
+    margin: 6px 0;
+    color: #7f8c8d;
+}
+
+.edit-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #1E90FF, #007BFF);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.edit-btn:hover {
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    box-shadow: 0 6px 15px rgba(0, 91, 187, 0.4);
+    transform: translateY(-2px);
+}
+
+.edit-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(0, 91, 187, 0.3);
+}
+.edit-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.profile-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.value,
+.profile-container input.edit-input {
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.profile-container input.edit-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .profile-details {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+#driverName {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #1E90FF;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s ease;
+}
+
+.edit-icon:hover {
+    background: #1C86EE;
+}
+
+/* Toast Notification Container */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Toast Base Styles */
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: slideIn 0.5s ease forwards, fadeOut 5s ease forwards 3s;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Toast Variants */
+.toast.success {
+    background: linear-gradient(135deg, #4CAF50, #2E8B57);
+    color: white;
+}
+
+.toast.error {
+    background: linear-gradient(135deg, #A9A9A9, #808080);
+    /* Gray color */
+    color: white;
+}
+
+.toast.info {
+    background: linear-gradient(135deg, #1E90FF, #4682B4);
+    color: white;
+}
+
+/* Toast Icon */
+.toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* Toast Message */
+.toast-message {
+    flex-grow: 1;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* Close Button */
+.toast-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.toast-close:hover {
+    transform: scale(1.2);
+}
+
+/* Progress Bar */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    animation: progress 3s linear forwards;
+}
+
+/* Slide-in Animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Fade-out Animation */
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+/* Progress Animation */
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0;
+    }
+}
+.error {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}
