@@ -1,0 +1,429 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+    background: var(--grey);
+    color: var(--black1);
+}
+
+
+input,
+select {
+    padding: 17px 30px;
+    margin: 5px;
+    border-radius: 50px;
+    border: 1px solid #cbd5e1;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background-color: white;
+    outline: none;
+}
+
+select {
+    cursor: pointer;
+}
+
+.filter-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    background-color: transparent;
+    color: #287bff;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 2px solid #287bff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #287bff;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(40, 123, 255, 0.4);
+}
+
+.button:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 5px rgba(40, 123, 255, 0.2);
+}
+
+.button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background-color: transparent;
+    color: #aaa;
+    border: 2px solid #ccc;
+    box-shadow: none;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 12px;
+    background-color: #e2e8f0;
+    border-radius: 12px;
+}
+
+.search-box input {
+    padding: 12px;
+    border-radius: 25px;
+    border: 1px solid #cbd5e1;
+    width: 220px;
+}
+
+#showEntries,
+#filter {
+    padding: 10px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+.toolbar{
+    margin-top:8px;
+}
+
+#showEntries:hover,
+#filter:hover {
+    border-color: #287bff;
+}
+
+#showEntries:focus,
+#filter:focus {
+    border-color: #287bff;
+    outline: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+tr:hover {
+    background-color: #e2e8f0;
+    transition: 0.3s ease-in-out;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+th:last-child,
+td:last-child {
+    border-right: none;
+}
+
+th {
+    background-color: #333;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s ease-in-out;
+    border-right: 1px solid #555;
+}
+
+th:hover {
+    background-color: #444;
+}
+
+/* Sorting Icons */
+.sort-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    color: #94a3b8;
+    transition: color 0.3s ease;
+}
+
+th:hover .sort-icon {
+    color: white;
+}
+
+/* Status Badges */
+.status-active {
+    padding: 6px 12px;
+    background-color: #10b981;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.status-inactive {
+    padding: 6px 12px;
+    background-color: #e53e3e;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+/* Message Button */
+.msg {
+    width: 40px;
+    height: 40px;
+    border-radius: 90%;
+    background-color: #287bff;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 16px;
+    width: 320px;
+    font-size: 20px;
+    
+}
+
+.close {
+    display:flex;
+    justify-content: flex-end;
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s ease-in-out;
+    
+}
+
+.close:hover {
+    color: red;
+}
+
+/* Textarea */
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+/* Send Button */
+.send-btn {
+    font-family: inherit;
+    font-size: 20px;
+    background: royalblue;
+    color: white;
+    padding: 0.7em 1em 0.7em 0.9em;
+    display: flex;
+    justify-content: center;
+    border: none;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.send-btn span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+}
+
+.send-btn svg {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.send-btn:hover .svg-wrapper {
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.send-btn:hover svg {
+    transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.send-btn:hover span {
+    transform: translateX(2em);
+}
+
+.send-btn:active {
+    transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+    from {
+        transform: translateY(0.1em);
+    }
+
+    to {
+        transform: translateY(-0.1em);
+    }
+}
+
+/* Toast Base Styles */
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: slideIn 0.5s ease forwards, fadeOut 5s ease forwards 3s;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Toast Variants */
+.toast.success {
+    background: linear-gradient(135deg, #4CAF50, #2E8B57);
+    color: white;
+}
+
+.toast.error {
+    background: linear-gradient(135deg, #A9A9A9, #808080);
+    /* Gray color */
+    color: white;
+}
+
+.toast.info {
+    background: linear-gradient(135deg, #1E90FF, #4682B4);
+    color: white;
+}
+
+/* Toast Icon */
+.toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* Toast Message */
+.toast-message {
+    flex-grow: 1;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* Close Button */
+.toast-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.toast-close:hover {
+    transform: scale(1.2);
+}
+
+/* Progress Bar */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    animation: progress 3s linear forwards;
+}
+
+/* Slide-in Animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Fade-out Animation */
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+/* Progress Animation */
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0;
+    }
+}
+.error {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}
+
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
