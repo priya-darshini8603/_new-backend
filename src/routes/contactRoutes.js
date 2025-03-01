@@ -1,5 +1,7 @@
 // Bus route data
-const routes = [
+const contactRoutes = require('./routes/contactRoutes'); 
+const router = express.Router();
+contactRoutes.routes = [
     { number: 1, bus: "KA50 B 0786", driver: "Nagaraju", contact: "9980325093" },
     { number: 2, bus: "KA50 A 6147", driver: "Maruthi", contact: "8861785966" },
     { number: 3, bus: "KA50 A 6140", driver: "Shashi Kumar", contact: "8431410999" },
