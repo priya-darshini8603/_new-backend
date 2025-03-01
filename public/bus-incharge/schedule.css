@@ -1,0 +1,370 @@
+body {
+	font-family: 'Poppins', sans-serif;
+	color: #333;
+	margin: 0;
+	padding: 0;
+}
+
+.layout-container {
+	display: flex;
+	gap: 15px;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+
+.pickup-container,
+.event-container {
+	flex: 0 0 50%;
+	border: 1px solid #ddd;
+	border-radius: 12px;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	box-sizing: border-box;
+	background: #fff;
+	overflow: hidden;
+	margin-top: 15px;
+	margin-bottom: 40px;
+}
+
+
+.pickup-container h3 {
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+.event-container h3,
+.pickup-container h3 {
+	font-size: 24px;
+	border-bottom: 2px solid #6c757d;
+	padding-bottom: 10px;
+	color: #495057;
+	font-weight: bold;
+}
+
+
+.event {
+	display: flex;
+	background: #fff;
+	border-radius: 10px;
+	margin: 20px 0;
+	overflow: hidden;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s;
+}
+
+.event:hover {
+	transform: scale(1.02);
+}
+
+.event-left {
+	background: linear-gradient(135deg, #007bff, #6610f2);
+	min-width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+	border-radius: 10px 0 0 10px;
+}
+
+.event-left .date {
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.event-right {
+	flex-grow: 1;
+	padding: 20px;
+}
+
+.event-title {
+	font-size: 20px;
+	color: #007bff;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+.event .event-right {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 24px;
+}
+
+.event .event-right h3.event-title {
+	font-size: 24px;
+	margin: 24px 0 10px 0;
+	color: #218bbb;
+	text-transform: uppercase;
+}
+
+.event-description {
+	font-size: 14px;
+	color: #6c757d;
+}
+
+@media (max-width: 576px) {
+	.event {
+		flex-direction: column;
+	}
+
+	.event-left {
+		border-radius: 10px 10px 0 0;
+		padding: 10px;
+	}
+}
+
+.event .event-right .event-timing {
+	background: #fff8ba;
+	display: flex;
+	width: 180px;
+	padding: 8px;
+	border-radius: 16px;
+	margin: 24px 0;
+	font-size: 14px;
+	justify-content: center;
+}
+
+.event .event-right .event-timing img {
+	height: 20px;
+	padding-right: 8px;
+}
+
+.event .event-right .location img {
+	height: 20px;
+	padding-right: 8px;
+
+}
+
+.nav-buttons {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.event .event-right {
+	position: relative;
+}
+
+.event .event-right .location {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.nav-buttons button {
+	background-color: transparent;
+	border: 2px solid #287bff;
+	padding: 10px 20px;
+	border-radius: 30px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #287bff;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	outline: none;
+	margin: 0 5px;
+}
+
+.nav-buttons button:hover {
+	background-color: #287bff;
+	color: white;
+	transform: scale(1.1);
+	border-color: #1a5cb0;
+}
+
+.abody {
+	background: #f9f9f9;
+	border-radius: 0 0 10px 10px;
+}
+
+.abody .time {
+	padding-left: 40px;
+}
+
+.abody a,
+.event .event-right .location a {
+	text-decoration: none;
+	color: #287bff;
+	font-weight: 600;
+	transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.event .event-right .location img {
+	padding:7px 0 0 0;
+}
+
+.abody a:hover,
+.event .event-right .location a:hover {
+	color: #1a5cb0;
+
+}
+
+.abody a:active,
+.event .event-right .location a:active {
+	color: #0f3c7a;
+}
+
+.abody a {
+	padding-top: 7px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+	.layout-container {
+		flex-direction: column;
+	}
+
+	.pickup-container,
+	.event-container {
+		flex: 1 0 100%;
+	}
+
+	.event {
+		flex-direction: column;
+	}
+}
+
+.pickup-container h2,
+.pickup-container h1 {
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.pickup-container h2 {
+	font-size: 18px;
+	color: #021f2d;
+
+}
+
+.pickup-container ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+}
+
+.pickup-container ul li {
+	position: relative;
+	padding-bottom: 4px;
+	padding-top: 18px;
+	border-top: 1px solid #dce7eb;
+}
+
+.pickup-container ul li input[type="checkbox"] {
+	position: absolute;
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0;
+}
+
+.pickup-container ul li i {
+	position: absolute;
+	transform: translate(-6px, 0);
+	margin-top: 16px;
+	right: 0;
+}
+
+.pickup-container ul li input[type=checkbox]:checked~.abody p {
+	margin-top: 0;
+	max-height: 0;
+	opacity: 0;
+	transform: translateX(-50%);
+}
+
+.pickup-container ul li input[type="checkbox"]:checked~i::before {
+	transform: translate(2px, 0) rotate(45deg);
+}
+
+.pickup-container ul li input[type="checkbox"]:checked~i::after {
+	transform: translate(-2px, 0) rotate(-45deg);
+}
+
+.pickup-container ul li i::before,
+.pickup-container ul li i::after {
+	content: "";
+	position: absolute;
+	background: #333;
+	width: 3px;
+	height: 9px;
+}
+
+.pickup-container ul li i::before {
+	transform: translate(-2px, 0)rotate(45deg);
+}
+
+.pickup-container ul li i:after {
+	transform: translate(2px, 0) rotate(-45deg);
+}
+
+.abody p {
+	font-size: 16px;
+	color: rgba(48, 69, 92, 0.8);
+	line-height: 26px;
+	letter-spacing: 1px;
+	position: relative;
+	padding: 0 11px;
+	max-height: 800px;
+	margin-top: 14px;
+	opacity: 1;
+	transform: translate(0, 0);
+	overflow: hidden;
+}
+
+.transition,
+.abody p,
+.pickup-container ul li i:before,
+.pickup-container ul li i:after {
+	transition: all 0.25s ease-in-out;
+
+}
+
+.flipIn,
+.pickup-container h1,
+.pickup-container ul li {
+	animation: flipdown 0.5s ease both;
+}
+
+
+.pickup-container ul li:last-of-type {
+	padding-bottom: 0;
+}
+
+@keyframes flipdown {
+	0% {
+		opacity: 0;
+		transform-origin: top center;
+		transform: rotateX(-90deg);
+	}
+
+	5% {
+		opacity: 1;
+	}
+
+	80% {
+		transform: rotateX(8deg);
+	}
+
+	83% {
+		transform: rotateX(6deg);
+	}
+
+	92% {
+		transform: rotateX(-3deg);
+	}
+
+	100% {
+		transform-origin: top center;
+		transform: rotateX(0deg);
+	}
+}
