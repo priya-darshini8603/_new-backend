@@ -43,6 +43,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'hbs');
+//app.set('view engine','js')
 app.set('views', templatepath);
 
 
