@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+:root {
+    --blue: #287bff;
+    --white: #fff;
+    --grey: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+    background: var(--grey);
+    color: var(--black1);
+}
+
+.student-details {
+    padding: 1rem;
+}
+.student-details h2 {
+    color:black;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    
+}
+.student-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--blue);
+    margin-bottom: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.student-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+
+}
+
+.student-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 8px 16px var(--shadow);
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+}
+
+.student-card h3 {
+    color: var(--blue);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.student-card p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+
+.payment-status {
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.paid {
+    background: #d4edda;
+    color: #155724;
+}
+
+.unpaid {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+@media (max-width: 768px) {
+    .student-card-container {
+        grid-template-columns: 1fr;
+    }
+}
+.breadcrumb {
+    display: flex;
+    align-items: baseline;
+    padding: 20px 30px 0;
+    background-color: #fff;
+    border-left: 4px solid blue;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ 
+}
+
+.breadcrumb-title {
+    font-size: 28px;
+    color: #2C2C2C;
+    font-weight: 500;
+    
+}
+
+.breadcrumb-nav {
+    display: flex;
+    align-items: baseline;
+  
+}
+
+.breadcrumb-link {
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 400;
+    padding-left:20px;
+    padding-right:2px;
+    align-items: baseline;
+    color:blue;
+
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-current {
+    font-size: 16px;
+    color: var(--blue);
+    font-weight: 500;
+    
+    
+}
+.breadcrumb-link span{
+color:black;
+}
+
+
+#searchInput {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 300px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: blue;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.search-container {
+    margin-left: auto;
+}
+
+@media (max-width: 768px) {
+    #searchInput {
+        width: 100%;
+        margin: 10px 0;
+    }   
+}
