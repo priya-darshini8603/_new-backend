@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+
+
+.outer-card {
+    background: white;
+    padding: 20px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    margin-bottom:50px;
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.left-section {
+    flex: 2;
+    padding: 20px;
+}
+
+.lh-right-section {
+    flex: 1;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    display: none;
+    max-height: 500px;
+    overflow-y: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+
+h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.s-btn {
+    padding: 12px 18px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.s-btn:nth-child(1) {
+    background: linear-gradient(45deg, #00b09b, #96c93d);
+}
+
+.s-btn:nth-child(1):hover {
+    background: linear-gradient(45deg, #96c93d, #00b09b);
+}
+
+.s-btn:nth-child(3) {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+}
+
+.s-btn:nth-child(3):hover {
+    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+}
+
+select {
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #00b09b;
+    border-radius: 25px;
+    cursor: pointer;
+    background: white;
+    font-weight: bold;
+    color: #333;
+}
+
+.map-container {
+    width: 100%;
+    height: 300px;
+    margin-top: 20px;
+    display: none;
+    border: 2px solid #00b09b;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* History Section */
+.history-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00b09b;
+    margin-bottom: 10px;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f1f8e9;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border-left: 5px solid #00b09b;
+}
+
+.history-text {
+    font-size: 14px;
+}
+
+.view-map {
+    background: linear-gradient(45deg, #ff9800, #ff5722);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .right-section {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Toast Notification Container */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Toast Base Styles */
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: slideIn 0.5s ease forwards, fadeOut 5s ease forwards 3s;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Toast Variants */
+.toast.success {
+    background: linear-gradient(135deg, #4CAF50, #2E8B57);
+    color: white;
+}
+
+.toast.error {
+    background: linear-gradient(135deg, #A9A9A9, #808080);
+    /* Gray color */
+    color: white;
+}
+
+.toast.info {
+    background: linear-gradient(135deg, #1E90FF, #4682B4);
+    color: white;
+}
+
+/* Toast Icon */
+.toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* Toast Message */
+.toast-message {
+    flex-grow: 1;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+}
+
+.toast-close:hover {
+    color:red;
+}
+
+
+/* Progress Bar */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    animation: progress 3s linear forwards;
+}
+
+/* Slide-in Animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Fade-out Animation */
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+/* Progress Animation */
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0;
+    }
+}
+
+.error {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}
+
+.description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.datetime {
+    font-size: 14px;
+    font-weight: bold;
+    color: #002c44;
+    margin-bottom: 15px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block !important;
+}
+
+.notification-icon {
+    font-size: 25px;
+    color: #8b6d6d;
+    display: inline-block !important;
+}
