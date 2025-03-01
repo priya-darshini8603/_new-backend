@@ -1,0 +1,486 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #f9f9f9;
+    color: #333;
+}
+
+.notification-panel h3 {
+    margin: 0;
+    padding: 15px;
+    background: #457fa0;
+    color: white;
+    font-size: 16px;
+}
+
+.notification {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.notification:last-child {
+    border-bottom: none;
+}
+
+.notification:hover {
+    background: #f0f0f0;
+}
+
+.notification strong {
+    display: block;
+    font-weight: bold;
+}
+
+.notification p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+.view-all {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #457fa0;
+    font-weight: bold;
+    border-top: 1px solid #eee;
+}
+
+.view-all:hover {
+    background: #f0f0f0;
+}
+
+#notifTitle {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#notifDescription {
+
+    line-height: 1.5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+    color: #333;
+}
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #6a11cb, #2575fc);
+    --success-gradient: linear-gradient(135deg, #4caf50, #66bb6a);
+    --neutral-gradient: linear-gradient(135deg, #888, #aaa);
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+.notification-page {
+    padding: 40px;
+}
+
+
+
+
+.breadcrumb {
+    display: flex;
+    align-items: baseline;
+    padding: 20px 30px 0;
+    background-color: #fff;
+    border-left: 4px solid blue;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 8px;
+}
+
+.breadcrumb-title {
+    font-size: 28px;
+    color: #2C2C2C;
+    font-weight: 500;
+}
+
+.breadcrumb-nav {
+    display: flex;
+    align-items: baseline;
+}
+
+.breadcrumb-link {
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 400;
+    padding-left: 20px;
+    padding-right: 2px;
+    align-items: baseline;
+    color: blue;
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-current {
+    font-size: 16px;
+    color: var(--blue);
+    font-weight: 500;
+}
+
+.breadcrumb-link span {
+    color: black;
+}
+
+#searchInput {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 300px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: blue;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.search-container {
+    margin-left: auto;
+}
+
+@media (max-width: 768px) {
+    #searchInput {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+.student-details {
+    padding: 1rem;
+}
+
+.student-details h2 {
+    color: black;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+
+.notification-container {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+}
+
+.notification-icon {
+    font-size: 24px;
+    cursor: pointer;
+    position: relative;
+    /* Allows absolute positioning of badge */
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-size: 12px;
+}
+
+.notification-panel {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: 300px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.notification-panel h3 {
+    margin: 0;
+    padding: 15px;
+    background: #457fa0;
+    color: white;
+    font-size: 16px;
+}
+
+
+.view-all {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #457fa0;
+    font-weight: bold;
+    border-top: 1px solid #eee;
+}
+
+.view-all:hover {
+    background: #f0f0f0;
+}
+
+.notification-details {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    max-width: 400px;
+    width: 100%;
+}
+
+.notification-page {
+    display: none;
+    padding: 20px;
+}
+
+.notification-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+
+@media (max-width: 600px) {
+    .notification-panel {
+        right: 10px;
+        width: 90%;
+    }
+
+    .notification-details {
+        width: 90%;
+    }
+}
+
+.notification {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    transition: background 0.3s;
+}
+
+.notification:hover {
+    background-color: #f9f9f9;
+}
+
+.notification-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-content strong {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.notification-content p {
+    color: #666;
+    padding-bottom: 40px;
+    font-size: 14px;
+    word-break: break-word;
+}
+
+.notification-right {
+    padding-top: 50px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: blue;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+    margin: 0 0 10px;
+    color: rgb(71, 71, 255);
+    font-weight: bold;
+}
+
+.card p {
+    margin: 5px 0;
+    color: #444;
+}
+
+.image-name-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.notification-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.name-role {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-name-container h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #457fa0;
+    padding-bottom: 5px;
+
+}
+
+.image-name-container h6 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    color: #666;
+}
+
+
+.n-view-btn,
+.n-reply-btn {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    font-weight: bold;
+}
+
+.n-view-btn:hover,
+.n-reply-btn:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    transform: scale(1.05);
+}
+
+.notification-details,
+.reply-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 40px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    z-index: 2000;
+    max-width: 600px;
+    width: 90%;
+}
+
+.popup-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.popup-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.n-send-btn {
+    background: var(--success-gradient);
+    color: white;
+}
+
+.n-send-btn:hover {
+    background: linear-gradient(135deg, #66bb6a, #4caf50);
+    transform: scale(1.05);
+}
+
+.n-close-btn {
+    background: linear-gradient(135deg, #e70e0e, #f23d3d);
+    color: white;
+}
+
+.n-close-btn:hover {
+    background: linear-gradient(135deg, #e70e0e, #fa9b9b);
+    transform: scale(1.05);
+}
+
+.reply-popup textarea {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+#replyTitle{
+    padding-bottom: 10px;
+}
+
+.n-reply-btn {
+    margin-left: auto; 
+    display: block;
+}
