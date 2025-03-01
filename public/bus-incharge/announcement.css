@@ -1,0 +1,245 @@
+.announcement {
+    background: #f8f9fa;
+    padding: 15px;
+    border-left: 5px solid #007bff;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    margin-top: 20px;
+}
+
+.announcement:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.announcement h3 {
+    color: #007bff;
+    margin-bottom: 5px;
+}
+
+.announcement .date {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.announcement p {
+    color: #333;
+}
+
+.view-pdf {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    color: #007bff;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    padding:15px;
+}
+
+.view-pdf:hover {
+    color: #003a78;
+   
+}
+.a-breadcrumb {
+    display: flex;
+    align-items: baseline;
+    padding: 20px 30px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ 
+}
+
+.breadcrumb-title {
+    font-size: 28px;
+    color: #2C2C2C;
+    font-weight: 500;
+    
+}
+
+.breadcrumb-nav {
+    display: flex;
+    align-items: baseline;
+  
+}
+
+.breadcrumb-link {
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 400;
+    padding-left:20px;
+    padding-right:2px;
+    align-items: baseline;
+    color:blue;
+
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-current {
+    font-size: 16px;
+    color: var(--blue);
+    font-weight: 500;
+    
+    
+}
+.breadcrumb-link span{
+color:black;
+}
+.student-details {
+    padding: 1rem;
+}
+.student-details h2 {
+    color:black;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    
+}
+#searchInput {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 300px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: blue;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.search-container {
+    margin-left: auto;
+}
+
+@media (max-width: 768px) {
+    #searchInput {
+        width: 100%;
+        margin: 10px 0;
+    }   
+}
+@media (max-width: 1024px) {
+    .announcement {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .announcement h3 {
+        font-size: 18px;
+    }
+
+    .breadcrumb-title {
+        font-size: 24px;
+    }
+
+    .breadcrumb-link {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Fix breadcrumb separator issue */
+    .breadcrumb-nav {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .breadcrumb-link {
+        font-size: 14px;
+        padding: 0 5px;
+    }
+
+    /* Adjust search bar width */
+    #searchInput {
+        width: calc(100% - 40px);
+        margin: 10px auto;
+        display: block;
+    }
+
+    /* Improve Announcement Box Padding */
+    .announcement {
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    }
+    
+    /* Fix Footer Spacing */
+    footer {
+        padding: 8px;
+        margin-top:30px;
+        font-size: 12px;
+        text-align: center;
+    }
+    .view-pdf {
+        position: relative;
+        display: block;
+        text-align: right;
+        margin-top: 10px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .announcement {
+        padding: 8px;
+        font-size: 12px;
+        border-left: 3px solid #007bff;
+    }
+
+    .announcement h3 {
+        font-size: 14px;
+    }
+
+    .announcement .date {
+        font-size: 10px;
+    }
+
+    .announcement p {
+        font-size: 12px;
+    }
+
+    .view-pdf {
+        font-size: 10px;
+        bottom: 5px;
+        right: 8px;
+    }
+
+    .a-breadcrumb {
+        padding: 10px;
+    }
+
+    .breadcrumb-title {
+        font-size: 20px;
+    }
+
+    .breadcrumb-link {
+        font-size: 12px;
+        padding-left: 5px;
+    }
+
+    .breadcrumb-current {
+        font-size: 12px;
+    }
+
+    .student-details h2 {
+        font-size: 18px;
+    }
+
+    #searchInput {
+        width: 100%;
+        font-size: 10px;
+        padding: 5px 8px;
+    }
+}
