@@ -1,79 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tracking</title>
-    <link rel="stylesheet" href="../public/tracker.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
-    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
-    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    
-</head>
-<body>
-    <h2>Tracking Map</h2>
-    <div id="map" style="width: 100%; height: 500px;"></div>
-</body>
+<html>
+  <head>
+    <title>Google Map with GPS & Location Picker</title>
+    <style>
+      #googleMap {
+        width: 100%;
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Google Map with GPS & Location Picker</h1>
+    <div id="googleMap"></div>
+
     <script>
+      function myMap() {
+        var map;
+        var marker;
+
+        // Default location (if GPS is not available)
+        var defaultLocation = { lat: 51.508742, lng: -0.120850 };
+
         // Initialize the map
-        const map = L.map('map');
-        map.setView([12.9716, 77.5946], 13); // Set initial map view to Bangalore coordinates
+        map = new google.maps.Map(document.getElementById("googleMap"), {
+          center: defaultLocation,
+          zoom: 15,
+        });
 
-        // Set up tile layer (OpenStreetMap)
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
+        // Try to get the user's GPS location
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              var userLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              };
 
-        let marker, circle, zoomed;
+              map.setCenter(userLocation);
 
-        // Watch the position of the user's device and update the location in real time
-        navigator.geolocation.watchPosition(success, error);
-
-        function success(pos) {
-            const lat = pos.coords.latitude;
-            const lng = pos.coords.longitude;
-            const accuracy = pos.coords.accuracy;
-
-            // Remove previous marker and circle if any
-            if (marker) {
-                map.removeLayer(marker);
-                map.removeLayer(circle);
+              // Place a marker on the user's location
+              marker = new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                title: "Your Location",
+              });
+            },
+            function () {
+              alert("Geolocation failed or permission denied.");
             }
-
-            // Add new marker and circle (accuracy circle)
-            marker = L.marker([lat, lng]).addTo(map);
-            circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
-
-            // Zoom map to fit the accuracy circle
-            if (!zoomed) {
-                zoomed = map.fitBounds(circle.getBounds());
-            }
-
-            // Center map to the current location
-            map.setView([lat, lng]);
-
-            // Send the current location to the server (backend)
-            fetch('/api/location/save', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ latitude: lat, longitude: lng, accuracy })
-            })
-            .then((response) => response.json())
-            .then((data) => console.log('Location saved:', data))
-            .catch((error) => console.error('Error saving location:', error));
+          );
+        } else {
+          alert("Geolocation is not supported by this browser.");
         }
 
-        function error(err) {
-            if (err.code === 1) {
-                alert("Please allow geolocation access.");
-            } else {
-                alert("Cannot get current location.");
-            }
-        }
+        // Add event listener to allow user to select a location
+        map.addListener("click", function (event) {
+          var clickedLocation = {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+          };
+
+          // If marker exists, move it; otherwise, create a new marker
+          if (marker) {
+            marker.setPosition(clickedLocation);
+          } else {
+            marker = new google.maps.Marker({
+              position: clickedLocation,
+              map: map,
+              title: "Selected Location",
+            });
+          }
+
+          map.setCenter(clickedLocation);
+        });
+      }
     </script>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlYZZp6L_JhQWszvRdz-VTDcbJK-SnA5E&callback=myMap" async defer></script>
+  </body>
 </html>
