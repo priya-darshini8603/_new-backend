@@ -1,14 +1,15 @@
 const LogInCollection = require("../models/loginModel");
+const bcrypt = require("bcryptjs");
 
 exports.login = async (req, res) => {
     try {
         
-        const check = await LogInCollection.findOne({name: req.body.name
+        const check = await LogInCollection.findOne({email: req.body.email
            
              });
         
         
-        if(check.userType===req.body.userType){
+        if(check.role===req.body.role){
             
       
         
@@ -33,18 +34,23 @@ exports.login = async (req, res) => {
 
 exports.signup = async (req, res) => {
     try {
-        const { userType, name, password } = req.body;
-        const checking = await LogInCollection.findOne({ name:name });
-        if (checking) {
-            return res.send("User details already exist.");
-        } else {
-            const user = new LogInCollection({userType, name, password });
-            await user.save();
-            res.redirect('login');
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: "User already exists!" });
         }
+
+        // Hash password before saving
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create and save new user
+        const newUser = new User({ Name, userType, email, password: hashedPassword });
+        await newUser.save();
+
+        res.status(201).json({ message: "Signup successful!" });
+
     } catch (error) {
-        console.log(error)
-        res.status(500).send("An error occurred while processing the request.");
+        console.error("❌ Signup Error:", error);
+        res.status(500).json({ message: "Something went wrong!" });
     }
 };
 

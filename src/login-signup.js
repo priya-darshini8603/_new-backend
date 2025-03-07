@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const signinForm = document.getElementById("login-form");
+  const loginForm = document.getElementById("login-form");
   const goToSignup = document.getElementById("go-to-signup");
   const goToLogin = document.getElementById("go-to-login"); 
 
   if (goToSignup) {
     goToSignup.addEventListener("click", function () {
+      
       window.location.href = "/signup"; 
     });
   }
@@ -14,13 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "/login"; 
     });
   }
+  
+
 
   // Handle login form submission
-  if (signinForm) {
+  if (loginForm) {
     signinForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
+    
       const role = document.querySelector('input[name="role"]:checked').value;
+
+      
 
       if (role === "admin") {
         window.location.href = "/admindash";
