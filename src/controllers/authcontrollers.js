@@ -33,6 +33,7 @@ exports.login = async (req, res) => {
 };
 
 exports.signup = async (req, res) => {
+    const{Name,email,password,role}=req.body;
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -43,7 +44,7 @@ exports.signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create and save new user
-        const newUser = new User({ Name, userType, email, password: hashedPassword });
+        const newUser = new User({ Name,  email, password: hashedPassword ,role});
         await newUser.save();
 
         res.status(201).json({ message: "Signup successful!" });

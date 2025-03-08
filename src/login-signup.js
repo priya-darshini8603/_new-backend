@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Handle login form submission
   if (loginForm) {
-    signinForm.addEventListener("submit", function (event) {
+    loginForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
     
