@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Handle form submission
-  if (loginForm) {
+  /*if (loginForm) {
 
     loginForm.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -37,5 +37,5 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "/bus-incharge/busincharge-dashboard"; 
       }
     });
-  }
+  }*/
 });
