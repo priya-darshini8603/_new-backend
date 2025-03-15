@@ -39,6 +39,10 @@ app.use('/api/location',trackerRoutes);
 
 app.get('/bus-incharge/:page', (req, res) => res.render(`bus-incharge/${req.params.page}`));
 app.use('/bus-incharge/js', express.static('src/bus-incharge'));
+app.use('/images', express.static('public/images'));
+app.use('/', express.static('public/css/bus-incharge'));
+app.use(express.static('public/css'));
+app.use('/js', express.static('public/javascript'));
 app.use('/js', express.static('src'));
 
 app.listen(4000, () => {
