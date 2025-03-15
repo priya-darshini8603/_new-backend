@@ -217,7 +217,7 @@
                                 or everyone.Allow location access and choose your audience to share with.</p>
                             <p class="datetime" id="datetime"></p>
                             <div class="button-container">
-                                <button class="s-btn" onclick="getLocation()">Allow Location Access</button>
+                                <button class="s-btn" id="allowLocationBtn" onclick="showMap()">Allow Location Access</button>
                                 <select id="shareWith" title="Select audience to share location">
                                     <option value="All">🌍 Share with All</option>
                                     <option value="Students">🎓 Share with Students</option>
@@ -225,8 +225,7 @@
                                 </select>
                                 <button class="s-btn" onclick="shareLocation()">Share 📤</button>
                             </div>
-                            <div class="map-container" id="mapContainer">
-                                <iframe id="map" title="Google Maps Location"></iframe>
+                            <div class="map-container" id="googleMap">
                             </div>
                         </div>
 
@@ -252,6 +251,7 @@
     <script src="/bus-incharge/js/share-location.js"></script>
     <script src="/bus-incharge/js/notification.js"></script>
     <script src="/bus-incharge/js/dashboard.js"></script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlYZZp6L_JhQWszvRdz-VTDcbJK-SnA5E&callback=myMap" async defer></script>
 </body>
 
 </html>
