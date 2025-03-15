@@ -1,4 +1,4 @@
-const Location = require('../models/busModel');
+const Location = require('../models/buslocation');
 
 const saveLocation = async (req, res) => {
     try {
