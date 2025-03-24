@@ -6,6 +6,7 @@ const http=require('http')
 const path = require('path');
 const hbs = require('hbs');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
 const config = require('./config/razorpay');
 
 const bodyParser = require('body-parser');
@@ -14,7 +15,7 @@ const mongoose = require('./mongodb');
 const authRoutes = require('./routes/authRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 
-const trackerRoutes = require('./routes/trackerRoutes');
+const gpsRoutes = require('./routes/gpsroute');
 const templatepath = path.join('template');
 const server = http.createServer(app);
 //praser
@@ -30,12 +31,14 @@ app.set('views', templatepath);
 
 app.use(authRoutes);
 app.use(paymentRoutes);
+app.use(gpsRoutes);
+
 
 
 //app.use(express.static('public'));
 //app.use(express.static('static'));
 app.use(bodyParser.json());
-app.use('/api/location',trackerRoutes);
+
 
 app.get('/bus-incharge/:page', (req, res) => res.render(`bus-incharge/${req.params.page}`));
 app.use('/bus-incharge/js', express.static('src/bus-incharge'));
