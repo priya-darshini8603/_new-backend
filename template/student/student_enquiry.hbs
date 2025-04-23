@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Bus Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/student_enquiry.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="index.html"><i class="fa fa-home"></i> Home</a>
+        <a href="/student/student_registration"><i class="fa fa-user-plus"></i> Registration</a>
+        <a href="#payment"><i class="fa fa-credit-card"></i> Payment</a>
+        <a href="/student/student_enquiry"><i class="fa fa-question-circle"></i> Enquiry</a>
+        <a href="/student/student_complaint"><i class="fa fa-comments"></i> Complaint Box</a>
+        <a href="/student/student_tracking"><i class="fa fa-map-marker-alt"></i> Tracking</a>
+        <a href="/student/routelist"><i class="fa fa-route"></i> Route List</a>
+        <div class="auth-buttons">
+            <button>Log Out</button>
+            
+        </div>
+    </div>
+
+    <!-- Enquiry Form -->
+    <div class="enquiry-form">
+        <h2>Enquiry Form</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="tel" placeholder="Phone Number" pattern="[0-9]{10}" required>
+            <input type="email" placeholder="Email" required>
+            
+            <select required>
+                <option value="" disabled selected>Select Route Number</option>
+                <!-- Loop for 26 route numbers -->
+                <script>
+                    for (let i = 1; i <= 26; i++) {
+                        document.write(`<option value="${i}">Route ${i}</option>`);
+                    }
+                </script>
+            </select>
+
+            <select required>
+                <option value="" disabled selected>Priority Level</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+
+            <textarea placeholder="Leave your message here" required></textarea>
+            <button type="submit">Submit Enquiry</button>
+        </form>
+    </div>
+
+</body>
+</html>

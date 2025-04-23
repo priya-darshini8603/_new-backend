@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - College Bus Management</title>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/student_profile.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="/student/student_home.html"><i class="fas fa-home"></i> Home</a>
+            <a href="/student/student_registration.html"><i class="fas fa-user-plus"></i> Registration</a>
+            <a href="payment.html"><i class="fas fa-credit-card"></i> Payment</a>
+            <a href="/student/student_enquiry.html"><i class="fas fa-question-circle"></i> Enquiry</a>
+            <a href="/student/student_complaint.html"><i class="fas fa-comments"></i> Complaint Box</a>
+            <a href="tracking.html"><i class="fas fa-map-marker-alt"></i> Tracking</a>
+            <a href="/student/routelist.html"><i class="fas fa-route"></i> Route List</a>
+            <a href="/student/student_profile.html" class="active"><i class="fas fa-user"></i> Profile</a>
+        </div>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <!-- Profile Update Section -->
+    <div class="profile-container">
+        <h2>Update Profile</h2>
+        <form>
+            <div class="profile-picture">
+                <img id="profileImage" src="default-profile.png" alt="Profile Picture">
+                <input type="file" id="uploadImage" accept="image/*">
+            </div>
+            <input type="text" placeholder="Your Name" required>
+            <input type="text" placeholder="Course" required>
+            <input type="text" placeholder="Semester" required>
+            <input type="text" placeholder="Route Number" required>
+            <input type="text" placeholder="Pick-up Point" required>
+            <input type="tel" placeholder="Phone Number" required>
+            <input type="email" placeholder="Email" required>
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
+
+</body>
+</html>

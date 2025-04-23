@@ -1,0 +1,120 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('https://source.unsplash.com/1600x900/?bus,transport') no-repeat center center/cover;
+    background-size: cover;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #004080;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    flex-wrap: wrap;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.navbar a:hover {
+    background-color: #002060;
+    border-radius: 5px;
+}
+
+.navbar a i {
+    margin-right: 8px;
+}
+
+/* Authentication Buttons */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons button {
+    background-color: white;
+    color: #004080;
+    border: 1px solid #004080;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.auth-buttons button:hover {
+    background-color: #004080;
+    color: white;
+}
+
+/* Enquiry Form */
+.enquiry-form {
+    background: white;
+    padding: 20px;
+    margin: 50px auto;
+    width: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.enquiry-form h2 {
+    color: #004080;
+}
+
+.enquiry-form input,
+.enquiry-form select,
+.enquiry-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.enquiry-form textarea {
+    height: 100px;
+    resize: none;
+}
+
+.enquiry-form button {
+    background-color: #004080;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.enquiry-form button:hover {
+    background-color: #002060;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .enquiry-form {
+        width: 80%;
+    }
+
+    .auth-buttons {
+        margin-top: 10px;
+        justify-content: center;
+    }
+}

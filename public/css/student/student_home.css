@@ -1,0 +1,171 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Top Horizontal Navbar */
+.top-navbar {
+    background-color: #003366;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+}
+
+/* Hamburger Menu */
+.menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Right-aligned nav links */
+.nav-links {
+    display: flex;
+}
+
+.nav-links a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.nav-links a i {
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+.nav-links a:hover {
+    background-color: #002b5e;
+    border-radius: 5px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: -280px; /* Initially Hidden */
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: #003366;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+/* Sidebar when opened */
+.sidebar.open {
+    left: 0;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #002b5e;
+}
+
+/* Sidebar Heading */
+.navbar-heading {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Close Button (X) */
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Sidebar Links */
+.sidebar a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 18px 25px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.sidebar a i {
+    margin-right: 12px;
+    font-size: 22px;
+}
+
+.sidebar a:hover {
+    background-color: #002b5e;
+}
+
+/* Container */
+.container {
+    margin-top: 90px;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Grid Section */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 180px);
+    gap: 15px;
+    text-align: center;
+}
+
+/* Grid Items */
+.grid-item {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.grid-item i {
+    font-size: 36px;
+    color: #004080;
+    margin-bottom: 8px;
+}
+
+.grid-item p {
+    margin: 0;
+    font-size: 18px;
+}
+
+.grid-item:hover {
+    background: #004080;
+    color: white;
+    cursor: pointer;
+}
+
+.grid-item:hover i {
+    color: white;
+}
