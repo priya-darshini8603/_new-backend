@@ -11,6 +11,7 @@ router.get("/about", (req, res) => res.render("about"));
 router.get("/gpstracker", (req, res) => res.render("gpstracker"));
 router.get("/otp", (req, res) => res.render("otp"));
 router.get("/resetpassword", (req, res) => res.render("resetpassword"));
+//router.get("/student", (req, res) => res.render("student"));
 
 
 
