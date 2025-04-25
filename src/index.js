@@ -17,6 +17,9 @@ const paymentRoutes = require('./routes/paymentRoutes');
 
 const gpsRoutes = require('./routes/gpsroute');
 const templatepath = path.join('template');
+const otpRoutes = require("./routes/otpRoutes");
+app.use("/api/otp", otpRoutes);
+
 const server = http.createServer(app);
 //praser
 app.use(express.json());
