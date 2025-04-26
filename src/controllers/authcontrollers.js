@@ -60,7 +60,7 @@ exports.login = async (req, res) => {
         if (role === "admin") {
             return res.redirect("/admindash");
         } else if (role === "student") {
-            return res.redirect("/student-dashboard");
+            return res.redirect("student/student_home");
         } else if (role === "busincharge") {
             return res.redirect("/bus-incharge/busincharge-dashboard");
         }
