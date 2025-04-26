@@ -69,7 +69,7 @@ exports.login = async (req, res) => {
         // Redirect to the correct dashboard based on the role
         console.log(token);
         if (role === "admin") {
-            return res.redirect("/admindash");
+            return res.redirect("/admin/admindashboard");
         } else if (role === "student") {
             return res.redirect("student/student_home");
         } else if (role === "busincharge") {

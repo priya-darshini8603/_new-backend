@@ -60,6 +60,14 @@ app.use(express.static('public/css'));
 app.use('/js', express.static('public/javascript'));
 app.use('/js', express.static('src'));
 
+app.get('/admin/:page', (req, res) => res.render(`admin/${req.params.page}`));
+app.use('/admin/js', express.static('public/javascript/admin'));
+app.use('/images', express.static('public/images'));
+app.use('/', express.static('public/css/student'));
+app.use(express.static('public/css'));
+app.use('/js', express.static('public/javascript'));
+app.use('/js', express.static('src'));
+
 
 app.listen(4000, () => {
   console.log('Server running on port 4000');
