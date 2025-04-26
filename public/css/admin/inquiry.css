@@ -1,0 +1,366 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f8f9fa;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5b86e5;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+  height: 40px;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icons a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-icons a:hover {
+  color: black;
+}
+
+.notification-count {
+  background-color: #ff6384;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+#notification-bell {
+  position: relative;
+}
+
+.sidebar {
+  width: 250px;
+  background: #5b86e5;
+  color: white;
+  position: fixed;
+  top: 60px; /* Adjusted to account for navbar height */
+  left: 0;
+  height: calc(100% - 60px);
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar a {
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background: #495057;
+}
+
+.sidebar i {
+  font-size: 20px;
+}
+
+.sidebar span {
+  font-size: 16px;
+}
+
+.breadcrumb-link {
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 400;
+  padding-left: 20px;
+  padding-right: 2px;
+  align-items: baseline;
+  color: white;
+  margin-right: 3000px;
+}
+
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.container {
+  display: flex;
+  margin-top: 30px;
+}
+
+.content {
+  width: calc(100% - 250px);
+  padding: 20px;
+  margin-left: 250px;
+}
+
+.table-wrapper {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background: #5b86e5;
+  color: white;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.resolved {
+  background-color: green;
+}
+
+.pending {
+  background-color: red;
+}
+
+.form-wrapper {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.form-wrapper form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-wrapper form input,
+.form-wrapper form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-wrapper form button {
+  padding: 10px;
+  background: #5b86e5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-wrapper form button:hover {
+  background: #4a75c5;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+  /* Mobile Phones */
+  .navbar {
+    padding: 10px;
+  }
+
+  .sidebar {
+    width: 100%; /* Full width for mobile */
+    height: auto;
+    position: relative;
+    top: 0;
+    padding-top: 20px;
+  }
+
+  .content {
+    width: 100%; /* Full width for mobile */
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .breadcrumb-link {
+    margin-right: 0; /* Remove excessive margin */
+    padding-left: 10px;
+  }
+
+  .table-wrapper,
+  .form-wrapper {
+    padding: 10px;
+  }
+
+  table {
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+
+  th,
+  td {
+    padding: 6px; /* Smaller padding for mobile */
+  }
+
+  .badge {
+    font-size: 10px; /* Smaller badge for mobile */
+  }
+
+  .form-wrapper form input,
+  .form-wrapper form textarea {
+    padding: 8px; /* Smaller padding for form inputs */
+  }
+
+  .form-wrapper form button {
+    padding: 8px; /* Smaller button for mobile */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Tablets */
+  .sidebar {
+    width: 200px; /* Slightly narrower sidebar for tablets */
+  }
+
+  .content {
+    width: calc(100% - 200px); /* Adjust content width for tablets */
+    margin-left: 200px;
+  }
+
+  .breadcrumb-link {
+    margin-right: 0; /* Remove excessive margin */
+  }
+
+  .table-wrapper,
+  .form-wrapper {
+    padding: 15px;
+  }
+
+  table {
+    font-size: 15px; /* Medium font size for tablets */
+  }
+
+  th,
+  td {
+    padding: 8px; /* Medium padding for tablets */
+  }
+
+  .badge {
+    font-size: 12px; /* Medium badge for tablets */
+  }
+
+  .form-wrapper form input,
+  .form-wrapper form textarea {
+    padding: 10px; /* Medium padding for form inputs */
+  }
+
+  .form-wrapper form button {
+    padding: 10px; /* Medium button for tablets */
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Small Laptops */
+  .sidebar {
+    width: 220px; /* Slightly wider sidebar for small laptops */
+  }
+
+  .content {
+    width: calc(100% - 220px); /* Adjust content width for small laptops */
+    margin-left: 220px;
+  }
+
+  .table-wrapper,
+  .form-wrapper {
+    padding: 20px;
+  }
+
+  table {
+    font-size: 16px; /* Standard font size for small laptops */
+  }
+
+  th,
+  td {
+    padding: 10px; /* Standard padding for small laptops */
+  }
+
+  .badge {
+    font-size: 14px; /* Standard badge for small laptops */
+  }
+
+  .form-wrapper form input,
+  .form-wrapper form textarea {
+    padding: 12px; /* Standard padding for form inputs */
+  }
+
+  .form-wrapper form button {
+    padding: 12px; /* Standard button for small laptops */
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Monitors and Large Screens */
+  .sidebar {
+    width: 250px; /* Wider sidebar for large screens */
+  }
+
+  .content {
+    width: calc(100% - 250px); /* Adjust content width for large screens */
+    margin-left: 250px;
+  }
+
+  .table-wrapper,
+  .form-wrapper {
+    padding: 25px;
+  }
+
+  table {
+    font-size: 18px; /* Larger font size for monitors */
+  }
+
+  th,
+  td {
+    padding: 12px; /* Larger padding for monitors */
+  }
+
+  .badge {
+    font-size: 16px; /* Larger badge for monitors */
+  }
+
+  .form-wrapper form input,
+  .form-wrapper form textarea {
+    padding: 15px; /* Larger padding for form inputs */
+  }
+
+  .form-wrapper form button {
+    padding: 15px; /* Larger button for monitors */
+  }
+}

@@ -1,0 +1,286 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Teacher Details</title>
+    <link rel="stylesheet" href="/teacherdetails.css" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+      <div class="profile-region"></div>
+      <div class="nav-icons">
+        <a href="/admin/index" class="breadcrumb-link">Home</a>
+        <a href="/admin/notification" id="notification-bell">
+          <i class="fas fa-bell"></i>
+          <span class="notification-count" id="notification-count">0</span>
+        </a>
+        <a href="/admin/view-profile">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="/admin/manage_admin">
+        <i class="fas fa-user-tie"></i>
+        <span>Manage Admin</span>
+      </a>
+      <a href="/admin/teacherdetails">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>Manage Teacher</span>
+      </a>
+      <a href="/admin/studentdetails">
+        <i class="fas fa-user-graduate"></i>
+        <span>Manage Student</span>
+      </a>
+      <a href="/admin/driverdetails">
+        <i class="fas fa-car"></i>
+        <span>Manage Driver</span>
+      </a>
+      <a href="/admin/route">
+        <i class="fas fa-route"></i>
+        <span>Route List</span>
+      </a>
+      <a href="/admin/scheduleevent">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Schedule</span>
+      </a>
+      <a href="/admin/complaintbox">
+        <i class="fas fa-comment-dots"></i>
+        <span>Complaint Box</span>
+      </a>
+      <a href="/admin/seatavailable">
+        <i class="fas fa-chair"></i>
+        <span>Seat Availability</span>
+      </a>
+      <a href="/admin/notify">
+        <i class="fas fa-bell"></i>
+        <span>Admin Notification</span>
+      </a>
+      <a href="/admin/inquiery">
+        <i class="fas fa-question-circle"></i>
+        <span>Inquiry</span>
+      </a>
+      <a href="/admin/payment-records">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Payments</span>
+      </a>
+      <a href="/admin/admlogin">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <h1 class="text-center">Teacher Details</h1>
+      <div class="search-container mb-3">
+        <input
+          type="text"
+          id="search"
+          class="form-control"
+          placeholder="Search by name or ID"
+        />
+        <button
+          type="button"
+          class="btn btn-primary mt-2"
+          onclick="searchTeacher()"
+        >
+          Search
+        </button>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Bus Number</th>
+            <th>Route Number</th>
+            <th>Department</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="teacher-details">
+          <!-- Teacher details will be populated here -->
+        </tbody>
+      </table>
+      <div class="button-container text-center">
+        <a href="/admin/add_teacher" class="btn btn-primary">Add Teacher</a>
+      </div>
+    </div>
+
+    <!-- Add Teacher Modal -->
+    <div
+      class="modal fade"
+      id="addTeacherModal"
+      tabindex="-1"
+      aria-labelledby="addTeacherModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addTeacherModalLabel">Add Teacher</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addTeacherForm">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required />
+              </div>
+              <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" class="form-control" id="id" required />
+              </div>
+              <div class="form-group">
+                <label for="busNumber">Bus Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="busNumber"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="routeNumber">Route Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="routeNumber"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="department">Department</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="department"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phoneNumber"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Add Teacher</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Teacher Modal -->
+    <div
+      class="modal fade"
+      id="editTeacherModal"
+      tabindex="-1"
+      aria-labelledby="editTeacherModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editTeacherModalLabel">Edit Teacher</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="editTeacherForm">
+              <div class="form-group">
+                <label for="editName">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="editId">ID</label>
+                <input type="text" class="form-control" id="editId" readonly />
+              </div>
+              <div class="form-group">
+                <label for="editBusNumber">Bus Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editBusNumber"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="editRouteNumber">Route Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editRouteNumber"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="editDepartment">Department</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editDepartment"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="editPhoneNumber">Phone Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editPhoneNumber"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Save Changes
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    ></script>
+    <script src="/js/teacherdetails.js"></script>
+  </body>
+</html>

@@ -1,0 +1,227 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Management</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/manage_admin.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+      <div class="profile-region"></div>
+      <div class="nav-icons">
+        <a href="/dmin/newadmin" class="breadcrumb-link">Home</a>
+        <a href="/admin/notification" id="notification-bell">
+          <i class="fas fa-bell"></i>
+          <span class="notification-count" id="notification-count">0</span>
+        </a>
+        <a href="/admin/view-profile">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="/admin/manage_admin">
+        <i class="fas fa-user-tie"></i>
+        <span>Manage Admin</span>
+      </a>
+      <a href="/admin/teacherdetails">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>Manage Teacher</span>
+      </a>
+      <a href="/admin/studentdetails">
+        <i class="fas fa-user-graduate"></i>
+        <span>Manage Student</span>
+      </a>
+      <a href="/admin/driverdetails">
+        <i class="fas fa-car"></i>
+        <span>Manage Driver</span>
+      </a>
+      <a href="/admin/route">
+        <i class="fas fa-route"></i>
+        <span>Route List</span>
+      </a>
+      <a href="/admin/scheduleevent">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Schedule</span>
+      </a>
+      <a href="/admin/complaintbox">
+        <i class="fas fa-comment-dots"></i>
+        <span>Complaint Box</span>
+      </a>
+      <a href="/admin/seatavailable">
+        <i class="fas fa-chair"></i>
+        <span>Seat Availability</span>
+      </a>
+      <a href="/admin/notify">
+        <i class="fas fa-bell"></i>
+        <span>Admin Notification</span>
+      </a>
+      <a href="/admin/inquiery">
+        <i class="fas fa-question-circle"></i>
+        <span>Inquiry</span>
+      </a>
+      <a href="/admin/payment-records">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Payments</span>
+      </a>
+      <a href="/admin/admlogin">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+    <h3>Manage Admin</h3>
+
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by name, email, or admin ID..."
+          class="form-control"
+        />
+      </div>
+
+      <!-- Table -->
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Profile Picture</th>
+              <th>Contact</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Admin ID</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body">
+            <!-- Table rows will be populated here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Add Admin Button -->
+      <div class="button-container">
+        <a href="/admin/add_admin" class="btn btn-primary">Add Admin</a>
+      </div>
+    </div>
+
+    <!-- Edit Admin Modal -->
+    <div
+      class="modal fade"
+      id="editAdminModal"
+      tabindex="-1"
+      aria-labelledby="editAdminModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editAdminModalLabel">Edit Admin</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="edit-admin-form">
+              <div class="form-group">
+                <label for="edit-first-name">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="edit-first-name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="edit-last-name">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="edit-last-name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="edit-profile-pic">Profile Picture</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="edit-profile-pic"
+                  accept="image/*"
+                />
+              </div>
+              <div class="form-group">
+                <label for="edit-contact">Contact</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="edit-contact"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="edit-email">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="edit-email"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="edit-gender">Gender</label>
+                <select class="form-control" id="edit-gender" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="edit-admin-id">Admin ID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="edit-admin-id"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Save changes
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    ></script>
+    <script src="/js/manage_admin.js"></script>
+  </body>
+</html>

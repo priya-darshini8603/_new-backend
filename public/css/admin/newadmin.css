@@ -1,0 +1,340 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f8f9fa;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5b86e5;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+  height: 40px;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icons a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-icons a:hover {
+  color: black;
+}
+
+.notification-count {
+  background-color: #ff6384;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+#notification-bell {
+  position: relative;
+}
+
+.sidebar {
+  width: 250px;
+  background: #5b86e5;
+  color: white;
+  position: fixed;
+  top: 60px; /* Adjusted to account for navbar height */
+  left: 0;
+  height: calc(100% - 60px);
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.sidebar a {
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background: #495057;
+}
+
+.sidebar i {
+  font-size: 20px;
+}
+
+.sidebar span {
+  font-size: 16px;
+}
+
+.container {
+  display: flex;
+  margin-top: 60px;
+}
+
+.content {
+  width: calc(100% - 250px);
+  padding: 20px;
+  margin-left: 250px;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.chart-container canvas,
+.chart-container svg {
+  width: 100%;
+  height: auto;
+}
+
+.chart {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  color: #5b86e5;
+  background: white;
+  font-weight: bold;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+  flex: 1 1 calc(33.333% - 20px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card i {
+  font-size: 30px;
+  margin-right: 20px;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 2px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.notification-popup {
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  z-index: 20;
+  padding: 20px;
+}
+
+.notification-popup h3 {
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.notification-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item i {
+  font-size: 40px;
+  margin-right: 10px;
+}
+
+.notification-item span {
+  font-size: 14px;
+}
+
+.view-all {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: #287bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.view-all:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+  /* Mobile Phones */
+  .navbar {
+    padding: 10px;
+  }
+
+  .sidebar {
+    width: 100%; /* Full width for mobile */
+    height: auto;
+    position: relative;
+    top: 0;
+    padding-top: 20px;
+  }
+
+  .content {
+    width: 100%; /* Full width for mobile */
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .chart-container {
+    flex-direction: column; /* Stack charts vertically on mobile */
+  }
+
+  .chart {
+    max-width: 100%; /* Full width for mobile */
+    margin-bottom: 20px; /* Add spacing between stacked charts */
+  }
+
+  .cards {
+    flex-direction: column; /* Stack cards vertically on mobile */
+  }
+
+  .card {
+    flex: 1 1 100%; /* Full width for mobile */
+    margin: 10px 0; /* Add spacing between stacked cards */
+  }
+
+  .notification-popup {
+    width: 90%; /* Wider popup for mobile */
+    right: 5%; /* Center the popup */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Tablets */
+  .sidebar {
+    width: 200px; /* Slightly narrower sidebar for tablets */
+  }
+
+  .content {
+    width: calc(100% - 200px); /* Adjust content width for tablets */
+    margin-left: 200px;
+  }
+
+  .chart {
+    max-width: 90%; /* Adjust chart width for tablets */
+  }
+
+  .card {
+    flex: 1 1 calc(50% - 20px); /* Two cards per row on tablets */
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Small Laptops */
+  .sidebar {
+    width: 220px; /* Slightly wider sidebar for small laptops */
+  }
+
+  .content {
+    width: calc(100% - 220px); /* Adjust content width for small laptops */
+    margin-left: 220px;
+  }
+
+  .chart {
+    max-width: 80%; /* Adjust chart width for small laptops */
+  }
+
+  .card {
+    flex: 1 1 calc(33.333% - 20px); /* Three cards per row on small laptops */
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Monitors and Large Screens */
+  .sidebar {
+    width: 250px; /* Wider sidebar for large screens */
+  }
+
+  .content {
+    width: calc(100% - 250px); /* Adjust content width for large screens */
+    margin-left: 250px;
+  }
+
+  .chart {
+    max-width: 400px; /* Fixed width for large screens */
+  }
+
+  .card {
+    flex: 1 1 calc(33.333% - 20px); /* Three cards per row on large screens */
+  }
+}
+.sidebar-toggle {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #5b86e5;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar-toggle {
+    display: block; /* Show toggle button on small screens */
+  }
+
+  .sidebar {
+    transform: translateX(-100%); /* Hide sidebar by default */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar.active {
+    transform: translateX(0); /* Show sidebar when active */
+  }
+}

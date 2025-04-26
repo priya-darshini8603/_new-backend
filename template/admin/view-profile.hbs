@@ -1,0 +1,239 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <link rel="stylesheet" href="/viewprofile.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <style></style>
+
+  <body>
+    <nav class="navbar">
+      <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+      <div class="profile-region"></div>
+      <div class="nav-icons">
+        <a href="/admin/newadmin" class="breadcrumb-link">Home</a>
+        <a href="/admin/notification" id="notification-bell">
+          <i class="fas fa-bell"></i>
+          <span class="notification-count" id="notification-count">0</span>
+        </a>
+        <a href="/admin/view-profile">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+    </nav>
+
+    <div class="notification-popup" id="notification-popup">
+      <h3 id="notification-count-popup">0 Notifications</h3>
+      <div id="notification-list">
+        <!-- Notifications will be dynamically added here -->
+      </div>
+      <a href="/admin/notification" class="view-all">View All</a>
+    </div>
+
+    <div class="sidebar">
+      <a href="/admin/manage_admin">
+        <i class="fas fa-user-tie"></i>
+        <span>Manage Admin</span>
+      </a>
+      <a href="/admin/teacherdetails">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>Manage Teacher</span>
+      </a>
+      <a href="/admin/studentdetails">
+        <i class="fas fa-user-graduate"></i>
+        <span>Manage Student</span>
+      </a>
+      <a href="/admin/driverdetails">
+        <i class="fas fa-car"></i>
+        <span>Manage Driver</span>
+      </a>
+      <a href="/admin/route">
+        <i class="fas fa-route"></i>
+        <span>Route List</span>
+      </a>
+      <a href="/admin/scheduleevent">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Schedule</span>
+      </a>
+      <a href="/admin/complaintbox">
+        <i class="fas fa-comment-dots"></i>
+        <span>Complaint Box</span>
+      </a>
+      <a href="/admin/seatavailable">
+        <i class="fas fa-chair"></i>
+        <span>Seat Availability</span>
+      </a>
+      <a href="/admin/notify">
+        <i class="fas fa-bell"></i>
+        <span>Admin Notification</span>
+      </a>
+      <a href="/admin/inquiery">
+        <i class="fas fa-question-circle"></i>
+        <span>Inquiry</span>
+      </a>
+      <a href="/admin/payment-records">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Payments</span>
+      </a>
+      <a href="/admin/admlogin">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+
+    <!-- Cards -->
+    <div class="student-details">
+      <div class="breadcrumb">
+        <h2 class="breadcrumb-title">My Profile</h2>
+      </div>
+      <div class="profile-container">
+        <!-- Driver Profile -->
+        <div class="psection">
+          <div class="header">
+            <div class="profile-header">
+              <div class="image-container">
+                <img
+                  id="profilePhoto"
+                  src="avatar.png"
+                  alt="Profile Photo"
+                  class="profile-photo"
+                />
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept="image/*"
+                  style="display: none"
+                />
+                <button
+                  class="edit-icon"
+                  onclick="document.getElementById('fileInput').click()"
+                >
+                  ✎
+                </button>
+              </div>
+
+              <div class="profile-info">
+                <h2 id="driverName">Joe Vijay</h2>
+              </div>
+            </div>
+            <button
+              class="edit-btn"
+              onclick="editSection(this, ['driverName'])"
+            >
+              Edit ✎
+            </button>
+          </div>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="section">
+          <div class="header">
+            <span class="section-title">Personal Information</span>
+            <button
+              class="edit-btn"
+              onclick="editSection(this, ['gender', 'phoneNumber', 'licenseNumber', 'dob', 'joinedDate', 'experience'])"
+            >
+              Edit ✎
+            </button>
+          </div>
+          <div class="profile-details" id="personalInfo">
+            <div class="detail-item">
+              <span class="label">Admin Id :</span><span
+                class="value"
+              >DR12345</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Gender:</span><span
+                class="value"
+                id="gender"
+              >Male</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Email:</span><span
+                class="value"
+              >vijay.joe@example.com</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Phone Number:</span><span
+                class="value"
+                id="phoneNumber"
+              >7890987670</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">License Number:</span><span
+                class="value"
+                id="licenseNumber"
+              >LIC4567890</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Date of Birth:</span><span
+                class="value"
+                id="dob"
+              >23-06-1986</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Joined Date:</span><span
+                class="value"
+                id="joinedDate"
+              >15-06-2024</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Years of Experience:</span><span
+                class="value"
+                id="experience"
+              >8</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Address Section -->
+        <div class="section">
+          <div class="header">
+            <span class="section-title">Address</span>
+            <button
+              class="edit-btn"
+              onclick="editSection(this, ['address', 'postal'])"
+            >
+              Edit ✎
+            </button>
+          </div>
+          <div class="profile-details">
+            <div class="detail-item">
+              <span class="label">Address:</span><span
+                class="value"
+                id="address"
+              >3rd Cross, 123 Main Street, Rajajinagar</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Postal Code:</span><span
+                class="value"
+                id="postal"
+              >560078</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="/js/viewprofile.js"></script>
+  </body>
+</html>

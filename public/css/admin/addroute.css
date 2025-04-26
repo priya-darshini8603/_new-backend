@@ -1,0 +1,300 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: white; /* Light blue background */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #5b86e5;
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.navbar .logo {
+  height: 40px;
+}
+
+.logo img {
+  height: 10px;
+}
+
+.container {
+  display: flex;
+  margin-top: 90px; /* Adjust for fixed navbar */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  color: #5b86e5;
+}
+
+.content {
+  width: 80%;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-wrapper {
+  width: 100%;
+  margin-top: 20px;
+}
+
+h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.button {
+  padding: 10px 20px;
+  background: #5b86e5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.button:hover {
+  background: #4a75c5;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background: #5b86e5;
+  color: white;
+}
+
+.edit-btn,
+.delete-btn {
+  cursor: pointer;
+  margin: 0 5px;
+  color: #5b86e5;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+  /* Mobile Phones */
+  .container {
+    margin-top: 70px; /* Adjust for smaller navbar */
+  }
+
+  .content {
+    width: 95%; /* Increase width for smaller screens */
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 24px; /* Smaller font size for mobile */
+  }
+
+  h3 {
+    font-size: 18px; /* Smaller font size for mobile */
+  }
+
+  .button {
+    padding: 8px 16px; /* Smaller button for mobile */
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 6px; /* Smaller padding for table cells */
+    font-size: 12px; /* Smaller font size for table content */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Tablets */
+  .content {
+    width: 90%; /* Slightly wider for tablets */
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Small Laptops */
+  .content {
+    width: 85%;
+    padding: 25px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+
+  .button {
+    padding: 12px 24px;
+    font-size: 18px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Monitors and Large Screens */
+  .content {
+    width: 80%;
+    padding: 30px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  .button {
+    padding: 15px 30px;
+    font-size: 20px;
+  }
+
+  th,
+  td {
+    padding: 12px;
+    font-size: 18px;
+  }
+}
+
+/* Specific Device Adjustments */
+/* iPhone 5/SE */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+  .content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  th,
+  td {
+    padding: 4px;
+    font-size: 10px;
+  }
+}
+
+/* iPad */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+  .content {
+    width: 90%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
+
+/* Samsung Galaxy S8/S9 */
+@media only screen and (min-device-width: 360px) and (max-device-width: 740px) and (-webkit-min-device-pixel-ratio: 4) {
+  .content {
+    width: 95%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  .button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 6px;
+    font-size: 12px;
+  }
+}

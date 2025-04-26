@@ -1,0 +1,338 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5b86e5;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+  height: 40px;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icons a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-icons a:hover {
+  color: black;
+}
+
+.notification-count {
+  background-color: #ff6384;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #5b86e5;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  padding-top: 20px;
+  z-index: 1000;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #495057;
+}
+
+.sidebar i {
+  margin-right: 10px;
+}
+
+/* Main Content */
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  margin-top: 60px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+/* Search Bar */
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Table */
+.table-responsive {
+  margin-top: 20px;
+  overflow-x: auto; /* Allow horizontal scrolling for tables */
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Button Container */
+.button-container {
+  margin-top: 20px;
+  text-align: right;
+}
+
+/* Modal */
+.modal-content {
+  padding: 20px;
+}
+
+.modal-header {
+  border-bottom: 1px solid #ddd;
+}
+
+h3 {
+  color: black;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modal-body .form-group {
+  margin-bottom: 15px;
+}
+
+.modal-body label {
+  font-weight: bold;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+  /* Mobile Phones */
+  .navbar {
+    padding: 10px;
+  }
+
+  .sidebar {
+    width: 100%; /* Full width for mobile */
+    height: auto;
+    position: relative;
+    top: 0;
+    padding-top: 20px;
+  }
+
+  .content {
+    margin-left: 0; /* Remove margin for mobile */
+    padding: 10px;
+  }
+
+  .search-bar input {
+    width: 100%; /* Full width for mobile */
+  }
+
+  .table-responsive {
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+
+  .table th,
+  .table td {
+    padding: 6px; /* Smaller padding for mobile */
+  }
+
+  .profile-pic {
+    width: 40px; /* Smaller profile picture for mobile */
+    height: 40px;
+  }
+
+  .button-container {
+    text-align: center; /* Center buttons for mobile */
+  }
+
+  .modal-content {
+    padding: 15px; /* Smaller padding for mobile */
+  }
+
+  .modal-title {
+    font-size: 18px; /* Smaller font size for mobile */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Tablets */
+  .sidebar {
+    width: 200px; /* Slightly narrower sidebar for tablets */
+  }
+
+  .content {
+    margin-left: 200px; /* Adjust margin for tablets */
+  }
+
+  .search-bar input {
+    width: 80%; /* Adjust input width for tablets */
+  }
+
+  .table-responsive {
+    font-size: 15px; /* Medium font size for tablets */
+  }
+
+  .table th,
+  .table td {
+    padding: 8px; /* Medium padding for tablets */
+  }
+
+  .profile-pic {
+    width: 45px; /* Medium profile picture for tablets */
+    height: 45px;
+  }
+
+  .modal-content {
+    padding: 20px; /* Medium padding for tablets */
+  }
+
+  .modal-title {
+    font-size: 20px; /* Medium font size for tablets */
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Small Laptops */
+  .sidebar {
+    width: 220px; /* Slightly wider sidebar for small laptops */
+  }
+
+  .content {
+    margin-left: 220px; /* Adjust margin for small laptops */
+  }
+
+  .search-bar input {
+    width: 70%; /* Adjust input width for small laptops */
+  }
+
+  .table-responsive {
+    font-size: 16px; /* Standard font size for small laptops */
+  }
+
+  .table th,
+  .table td {
+    padding: 10px; /* Standard padding for small laptops */
+  }
+
+  .profile-pic {
+    width: 50px; /* Standard profile picture for small laptops */
+    height: 50px;
+  }
+
+  .modal-content {
+    padding: 25px; /* Standard padding for small laptops */
+  }
+
+  .modal-title {
+    font-size: 22px; /* Standard font size for small laptops */
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Monitors and Large Screens */
+  .sidebar {
+    width: 250px; /* Wider sidebar for large screens */
+  }
+
+  .content {
+    margin-left: 250px; /* Wider margin for large screens */
+  }
+
+  .search-bar input {
+    width: 60%; /* Adjust input width for large screens */
+  }
+
+  .table-responsive {
+    font-size: 18px; /* Larger font size for monitors */
+  }
+
+  .table th,
+  .table td {
+    padding: 12px; /* Larger padding for monitors */
+  }
+
+  .profile-pic {
+    width: 60px; /* Larger profile picture for monitors */
+    height: 60px;
+  }
+
+  .modal-content {
+    padding: 30px; /* Larger padding for monitors */
+  }
+
+  .modal-title {
+    font-size: 24px; /* Larger font size for monitors */
+  }
+}
+.sidebar-toggle {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #5b86e5;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar-toggle {
+    display: block; /* Show toggle button on small screens */
+  }
+
+  .sidebar {
+    transform: translateX(-100%); /* Hide sidebar by default */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar.active {
+    transform: translateX(0); /* Show sidebar when active */
+  }
+}

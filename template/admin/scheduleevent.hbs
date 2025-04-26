@@ -1,0 +1,209 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schedule Page</title>
+    <link rel="stylesheet" href="/scheduleevent.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <nav class="navbar">
+      <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+      <div class="profile-region"></div>
+      <div class="nav-icons">
+        <a href="/admin/index" class="breadcrumb-link">Home</a>
+        <a href="/admin/notification" id="notification-bell">
+          <i class="fas fa-bell"></i>
+          <span class="notification-count" id="notification-count">0</span>
+        </a>
+        <a href="/admin/view-profile">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="/admin/manage_admin">
+        <i class="fas fa-user-tie"></i>
+        <span>Manage Admin</span>
+      </a>
+      <a href="/admin/teacherdetails">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>Manage Teacher</span>
+      </a>
+      <a href="/admin/student/studentdetails">
+        <i class="fas fa-user-graduate"></i>
+        <span>Manage Student</span>
+      </a>
+      <a href="/admin/driverdetails">
+        <i class="fas fa-car"></i>
+        <span>Manage Driver</span>
+      </a>
+      <a href="/admin/route">
+        <i class="fas fa-route"></i>
+        <span>Route List</span>
+      </a>
+      <a href="/admin/scheduleevent">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Schedule</span>
+      </a>
+      <a href="/admin/complaintbox">
+        <i class="fas fa-comment-dots"></i>
+        <span>Complaint Box</span>
+      </a>
+      <a href="/admin/seatavailable">
+        <i class="fas fa-chair"></i>
+        <span>Seat Availability</span>
+      </a>
+      <a href="/admin/notify">
+        <i class="fas fa-bell"></i>
+        <span>Admin Notification</span>
+      </a>
+      <a href="/admin/inquiery">
+        <i class="fas fa-question-circle"></i>
+        <span>Inquiry</span>
+      </a>
+      <a href="/admin/payment-records">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Payments</span>
+      </a>
+      <a href="/admin/admlogin">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="container">
+      <h1>Event Scheduling</h1>
+      <div class="calendar-and-events">
+        <!-- Calendar -->
+        <div class="calendar">
+          <div class="calendar-header">
+            <button id="prev-month">&lt;</button>
+            <h2 id="calendar-title"></h2>
+            <button id="next-month">&gt;</button>
+          </div>
+          <div class="calendar-body" id="calendar-body"></div>
+        </div>
+
+        <!-- Event Lists -->
+        <div class="event-lists">
+          <div class="event-list" id="accepted-events">
+            <h3>Accepted Events</h3>
+            <ul>
+              <!-- Accepted events will be dynamically generated here -->
+            </ul>
+          </div>
+          <div class="event-list" id="rejected-events">
+            <h3>Rejected Events</h3>
+            <ul>
+              <!-- Rejected events will be dynamically generated here -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Wrapper -->
+      <div class="table-wrapper">
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search events..." />
+          <div class="actions">
+            <i class="fas fa-plus" id="add-event"></i>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Event Name</th>
+              <th>Buses Required</th>
+              <th>Start Point</th>
+              <th>Destination Point</th>
+              <th>Time</th>
+              <th>Date</th>
+              <th>Students</th>
+              <th>Purpose</th>
+              <th>View</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="event-list">
+            <!-- Event details will be dynamically generated here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Popups -->
+    <div class="popup" id="event-popup">
+      <h2>Event Details</h2>
+      <p id="popup-event-name"></p>
+      <p id="popup-buses-required"></p>
+      <p id="popup-start-point"></p>
+      <p id="popup-destination-point"></p>
+      <p id="popup-time"></p>
+      <p id="popup-date"></p>
+      <p id="popup-students"></p>
+      <p id="popup-purpose"></p>
+      <div class="actions">
+        <button class="accept" id="accept-event">Accept</button>
+        <button class="reject" id="reject-event">Reject</button>
+        <button class="close" id="close-popup">Close</button>
+      </div>
+    </div>
+
+    <div class="popup" id="add-event-popup">
+      <h2>Add Event</h2>
+      <form id="add-event-form">
+        <div class="form-group">
+          <label for="event-name">Event Name:</label>
+          <input type="text" id="event-name" required />
+        </div>
+        <div class="form-group">
+          <label for="buses-required">Buses Required:</label>
+          <input type="number" id="buses-required" required />
+        </div>
+        <div class="form-group">
+          <label for="start-point">Start Point:</label>
+          <input type="text" id="start-point" required />
+        </div>
+        <div class="form-group">
+          <label for="destination-point">Destination Point:</label>
+          <input type="text" id="destination-point" required />
+        </div>
+        <div class="form-group">
+          <label for="time">Time:</label>
+          <input type="time" id="time" required />
+        </div>
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input type="date" id="date" required />
+        </div>
+        <div class="form-group">
+          <label for="students">Students:</label>
+          <input type="number" id="students" required />
+        </div>
+        <div class="form-group">
+          <label for="purpose">Purpose:</label>
+          <input type="text" id="purpose" required />
+        </div>
+        <div class="actions">
+          <button type="submit" class="save">Save</button>
+          <button type="button" class="close" id="close-add-event-popup">
+            Close
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script src="/js/scheduleevent.js"></script>
+  </body>
+</html>
