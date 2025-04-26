@@ -7,17 +7,17 @@ const path = require("path");
 const hbs = require("hbs");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-const config = require("../../../src/config/razorpay");
+const config = require("../../src/config/razorpay");
 
 const bodyParser = require("body-parser");
 const mongoose = require("./mongodb");
 
-const authRoutes = require("../../../src/routes/authRoutes");
-const paymentRoutes = require("../../../src/routes/paymentRoutes");
+const authRoutes = require("../../src/routes/authRoutes");
+const paymentRoutes = require("../../src/routes/paymentRoutes");
 
-const gpsRoutes = require("../../../src/routes/gpsroute");
+const gpsRoutes = require("../../src/routes/gpsroute");
 const templatepath = path.join("template");
-const otpRoutes = require("../../../src/routes/otpRoutes");
+const otpRoutes = require("../../src/routes/otpRoutes");
 app.use("/api/otp", otpRoutes);
 
 const server = http.createServer(app);
@@ -57,6 +57,8 @@ app.use("/", express.static("public/css/admin"));
 app.use(express.static("public/css"));
 app.use("/js", express.static("public/javascript"));
 app.use("/js", express.static("src"));
+
+app.get("/admin/:page", (req, res) => res.render(`admin/${req.params.page}`));
 
 app.get("/student/:page", (req, res) =>
   res.render(`student/${req.params.page}`)
