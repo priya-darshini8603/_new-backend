@@ -3,6 +3,9 @@ const OTPCollection = require("../models/otpModel");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "yourSecretKey";
+
 
 exports.signup = async (req, res) => {
     
@@ -55,8 +58,16 @@ exports.login = async (req, res) => {
         if (!isMatch) {
             return res.send(`<script>alert("Wrong password"); window.history.back();</script>`);
         }
-
+        const payload = {
+            id: user._id,
+            email: user.email,
+            role: user.role
+          };
+      
+          const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+          res.cookie('token', token, { httpOnly: true, secure: false }); 
         // Redirect to the correct dashboard based on the role
+        console.log(token);
         if (role === "admin") {
             return res.redirect("/admindash");
         } else if (role === "student") {
