@@ -12,6 +12,7 @@ const config = require('./config/razorpay');
 const bodyParser = require('body-parser');
 const mongoose = require('./mongodb');
 
+
 const authRoutes = require('./routes/authRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 
