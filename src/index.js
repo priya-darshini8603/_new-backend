@@ -44,7 +44,7 @@ app.use(bodyParser.json());
 
 
 app.get('/bus-incharge/:page', (req, res) => res.render(`bus-incharge/${req.params.page}`));
-app.use('/bus-incharge/js', express.static('src/bus-incharge'));
+app.use('/bus-incharge/js', express.static('public/javascript/bus-incharge'));
 app.use('/images', express.static('public/images'));
 app.use('/', express.static('public/css/bus-incharge'));
 app.use(express.static('public/css'));
