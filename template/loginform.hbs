@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/loginform.css" />
   </head>
   <body>
-    <div class="container" id="signup" style="display: none">
+    <div class="container" id="signup" action="/loginform" method="POST" style="display: none">
       <h1 class="form-title">Register</h1>
       <form method="post" action="../images/register.php">
         <div class="input-group">
@@ -124,7 +124,7 @@
           </label>
         </div>
         <p class="recover">
-          <a href="/admin/forgpass">Forget Password</a>
+          <a href="/forgpass">Forget Password</a>
         </p>
         <input type="submit" class="btn" value="Sign In" name="signIn" />
       </form>
