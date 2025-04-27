@@ -2,12 +2,6 @@ const LogInCollection = require("../models/loginModel");
 const OTPCollection = require("../models/otpModel");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
-<<<<<<< HEAD
-=======
-const nodemailer=require("nodemailer");
-const flash = require('connect-flash');
-
->>>>>>> 4f1127d3e9cdf968f8deba9c96d1eb061a108ff5
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "yourSecretKey";
@@ -106,7 +100,6 @@ exports.login = async (req, res) => {
     }
 };
 
-<<<<<<< HEAD
 // OTP generation function
 exports.otp = async (req, res) => {
     const { email } = req.body;
@@ -140,91 +133,6 @@ exports.resetpassword = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     await LogInCollection.findOneAndUpdate({ email }, { password: hashedPassword });
-=======
-exports.forgpass = async (req, res) => {
-    const { email } = req.body;
-  
-    try {
-      // Find user in the database by email
-      const user = await LogInCollection.findOne({ email });
-      
-      if (!user) {
-        // If user not found
-       // Using flash to send message
-       
-        return res.redirect('/loginform'); 
-        
-      }
-  
-      // Generate OTP
-      const otp = crypto.randomInt(1000, 9999).toString();
-      const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // OTP valid for 5 minutes
-  
-      // Save OTP to the database
-      await OTPCollection.create({ email, otp, expiresAt });
-  
-      // Set up nodemailer transport using your email provider (e.g., Gmail)
-      let transporter = nodemailer.createTransport({
-        service: 'gmail', // Using Gmail service (can be replaced with others)
-        auth: {
-          user: 'paaani2004@gmail.com', // Your email
-          pass: 'oiqh sxvd tsct okcl'  // Your email password or app-specific password
-        }
-      });
-  
-      // Setup email data
-      const mailOptions = {
-        from: '1nt22cs129.pavani@nmit.ac.in', // Sender address
-        to: email, // Recipient address
-        subject: 'Password Reset OTP',
-        text: `Your OTP for password reset is: ${otp}. It is valid for 5 minutes.`
-      };
-  
-      // Send email
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          return res.status(500).json({ message: 'Failed to send OTP email!' });
-        }
-        console.log('OTP email sent: ' + info.response);
-        res.redirect('/otp');
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Server error' });
-    }
-  };
-
-
-  
-  exports.resetpassword = async (req, res) => {
-    const { email, otp, newPassword } = req.body;
-  
-    try {
-      // Find OTP record by email and OTP
-      const otpRecord = await OTPCollection.findOne({ email, otp });
-  
-      if (!otpRecord || otpRecord.expiresAt < Date.now()) {
-        // Invalid or expired OTP
-        return res.status(400).json({ message: 'Invalid or expired OTP' });
-      }
-  
-      // Hash the new password
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
-  
-      // Update password in the user collection
-      await LogInCollection.findOneAndUpdate({ email }, { password: hashedPassword });
-  
-      // Delete the OTP record after successful password reset
-      await OTPCollection.deleteOne({ email });
-  
-      res.status(200).json({ message: 'Password updated successfully!' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Server error' });
-    }
-  };
-    
->>>>>>> 4f1127d3e9cdf968f8deba9c96d1eb061a108ff5
 
     await OTPCollection.deleteOne({ email }); // Remove OTP after successful reset
 

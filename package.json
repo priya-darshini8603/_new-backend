@@ -14,12 +14,8 @@
     "leaflet": "^1.9.4",
     "mongoose": "^8.8.2",
     "nodemailer": "^6.10.1",
-<<<<<<< HEAD
     "nodemon": "^3.1.7",
     "pngjs": "^7.0.0",
-=======
-    "nodemon": "^3.1.10",
->>>>>>> 4f1127d3e9cdf968f8deba9c96d1eb061a108ff5
     "razorpay": "^2.9.5",
     "react-leaflet": "^4.2.1",
     "socket.io": "^4.8.1",
