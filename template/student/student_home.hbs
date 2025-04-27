@@ -17,7 +17,7 @@
         <div class="nav-links">
             <a href="/student/student_home"><i class="fa fa-home"></i> Home</a>
             <a href="#notifications"><i class="fa fa-bell"></i> Notifications</a>
-            <a href="#logout"><i class="fa fa-sign-out-alt"></i> Log Out</a>
+            <a href="/login" onclick="logout(); return false;"><i class="fa fa-sign-out-alt"></i> Log Out</a>
         </div>
     </div>
 
@@ -50,6 +50,44 @@
             <div class="grid-item"><i class="fa fa-route"></i><p>Route List</p></div>
         </div>
     </div>
+
+    <!-- JWT Auto Logout Script -->
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script>
+      function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+      }
+
+      function checkTokenExpiration() {
+        const token = getCookie("token");
+        if (!token) {
+          window.location.href = "/login"; // If token is missing, go to login
+          return;
+        }
+
+        try {
+          const decoded = jwt_decode(token);
+          const now = Date.now() / 1000;
+
+          if (decoded.exp < now) {
+            alert("Session expired. You will be logged out.");
+            document.cookie = "token=; Max-Age=0; path=/"; // Clear cookie
+            window.location.href = "/login";
+          }
+        } catch (err) {
+          console.error("Invalid token");
+          window.location.href = "/login";
+        }
+      }
+
+      function logout() {
+        document.cookie = "token=; Max-Age=0; path=/";
+        window.location.href = "/login";
+      }
+
+      setInterval(checkTokenExpiration, 5000);
+    </script>
 
     <script src="/student/js/student_home.js"></script>
 </body>
