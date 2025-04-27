@@ -1,67 +1,95 @@
-// Function to search for a driver
-function searchDriver() {
-  const searchInput = document.getElementById("search").value.toLowerCase();
-  const tableRows = document
-    .getElementById("driver-details")
-    .getElementsByTagName("tr");
+document.addEventListener("DOMContentLoaded", function () {
+  const driverTableBody = document.getElementById("driver-details");
 
-  for (let i = 0; i < tableRows.length; i++) {
-    const cells = tableRows[i].getElementsByTagName("td");
-    const driverName = cells[0].textContent.toLowerCase();
-    const busNumber = cells[1].textContent.toLowerCase();
+  // Retrieve driver details from localStorage
+  let drivers = JSON.parse(localStorage.getItem("drivers")) || [];
 
-    if (driverName.includes(searchInput) || busNumber.includes(searchInput)) {
-      tableRows[i].style.display = "";
-    } else {
-      tableRows[i].style.display = "none";
-    }
+  // Function to render the driver table
+  function renderDrivers(filteredDrivers = drivers) {
+    driverTableBody.innerHTML = ""; // Clear the table body
+
+    filteredDrivers.forEach((driver, index) => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${driver.name}</td>
+        <td>${driver.busNumber}</td>
+        <td>${driver.routeNumber}</td>
+        <td>${driver.phoneNumber}</td>
+        <td>
+          <button class="btn btn-sm btn-primary edit-btn" onclick="editDriver(${index})">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+          <button class="btn btn-sm btn-danger delete-btn" onclick="deleteDriver(${index})">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      `;
+
+      driverTableBody.appendChild(row);
+    });
   }
-}
 
-// Function to handle edit and delete actions
-document.addEventListener("DOMContentLoaded", () => {
-  const editButtons = document.querySelectorAll(".edit-btn");
-  const deleteButtons = document.querySelectorAll(".delete-btn");
+  // Function to handle searching drivers
+  window.searchDriver = function () {
+    const searchInput = document.getElementById("search").value.toLowerCase();
 
-  editButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      const row = button.closest("tr");
-      const cells = row.getElementsByTagName("td");
+    // Filter drivers based on the search term
+    const filteredDrivers = drivers.filter(
+      (driver) =>
+        driver.name.toLowerCase().includes(searchInput) ||
+        driver.busNumber.toLowerCase().includes(searchInput)
+    );
 
-      const driverName = cells[0].textContent;
-      const busNumber = cells[1].textContent;
-      const routeNumber = cells[2].textContent;
-      const phoneNumber = cells[3].textContent;
+    // Render filtered drivers
+    renderDrivers(filteredDrivers);
+  };
 
-      // Populate the form with the current values
-      document.getElementById("edit-driver-name").value = driverName;
-      document.getElementById("edit-bus-number").value = busNumber;
-      document.getElementById("edit-route-number").value = routeNumber;
-      document.getElementById("edit-phone-number").value = phoneNumber;
+  // Function to handle editing a driver
+  window.editDriver = function (index) {
+    const driver = drivers[index];
 
-      // Show the edit modal (assuming you have a modal for editing)
-      $("#editDriverModal").modal("show");
+    // Populate the edit modal with driver details
+    document.getElementById("edit-driver-name").value = driver.name;
+    document.getElementById("edit-bus-number").value = driver.busNumber;
+    document.getElementById("edit-route-number").value = driver.routeNumber;
+    document.getElementById("edit-phone-number").value = driver.phoneNumber;
 
-      // Save changes
-      document.getElementById("save-changes").onclick = function () {
-        cells[0].textContent =
-          document.getElementById("edit-driver-name").value;
-        cells[1].textContent = document.getElementById("edit-bus-number").value;
-        cells[2].textContent =
-          document.getElementById("edit-route-number").value;
-        cells[3].textContent =
-          document.getElementById("edit-phone-number").value;
-        $("#editDriverModal").modal("hide");
+    // Show the edit modal
+    $("#editDriverModal").modal("show");
+
+    // Handle form submission for editing
+    document.getElementById("save-changes").onclick = function () {
+      // Update the driver's details
+      drivers[index] = {
+        name: document.getElementById("edit-driver-name").value,
+        busNumber: document.getElementById("edit-bus-number").value,
+        routeNumber: document.getElementById("edit-route-number").value,
+        phoneNumber: document.getElementById("edit-phone-number").value,
       };
-    });
-  });
 
-  deleteButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      const row = button.closest("tr");
-      row.remove();
-    });
-  });
+      // Save updated data to localStorage
+      localStorage.setItem("drivers", JSON.stringify(drivers));
+
+      // Re-render the table and hide the modal
+      renderDrivers();
+      $("#editDriverModal").modal("hide");
+    };
+  };
+
+  // Function to handle deleting a driver
+  window.deleteDriver = function (index) {
+    if (confirm("Are you sure you want to delete this driver?")) {
+      drivers.splice(index, 1); // Remove the driver from the array
+
+      // Save updated data to localStorage
+      localStorage.setItem("drivers", JSON.stringify(drivers));
+
+      // Re-render the table
+      renderDrivers();
+    }
+  };
+
+  // Initial render of the table
+  renderDrivers();
 });

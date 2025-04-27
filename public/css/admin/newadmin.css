@@ -1,17 +1,26 @@
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
+  background: #f8f9fa;
   margin: 0;
   padding: 0;
-  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
+/* Navbar Styles */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #5b86e5;
-  color: white;
   padding: 10px 20px;
+  background: #5b86e5;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -19,20 +28,25 @@ body {
   height: 40px;
 }
 
-.nav-icons {
+.navbar .nav-icons {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.nav-icons a {
+.navbar .nav-icons a {
   color: white;
   text-decoration: none;
   font-size: 16px;
+  cursor: pointer;
 }
 
-.nav-icons a:hover {
+.navbar .nav-icons a:hover {
   color: black;
+}
+
+#notification-bell {
+  position: relative;
 }
 
 .notification-count {
@@ -44,10 +58,7 @@ body {
   margin-left: 5px;
 }
 
-#notification-bell {
-  position: relative;
-}
-
+/* Sidebar Styles */
 .sidebar {
   width: 250px;
   background: #5b86e5;
@@ -84,6 +95,7 @@ body {
   font-size: 16px;
 }
 
+/* Content Styles */
 .container {
   display: flex;
   margin-top: 60px;
@@ -98,11 +110,56 @@ body {
   transition: margin-left 0.3s ease-in-out;
 }
 
+h1 {
+  color: #5b86e5;
+  margin-bottom: 20px;
+}
+
+/* Form Styles */
+form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+form button:hover {
+  background: #219150;
+}
+
+/* Chart Styles */
 .chart-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin: 10px 0 20px;
   width: 100%;
 }
 
@@ -124,6 +181,7 @@ body {
   max-width: 400px;
 }
 
+/* Card Styles */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -154,6 +212,7 @@ body {
   box-shadow: 2px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Notification Popup Styles */
 .notification-popup {
   display: none;
   position: fixed;
@@ -168,8 +227,7 @@ body {
 }
 
 .notification-popup h3 {
-  margin: 0;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
   font-size: 18px;
 }
 
@@ -206,112 +264,9 @@ body {
   text-decoration: underline;
 }
 
-/* Responsive Styles */
-@media (max-width: 767.98px) {
-  /* Mobile Phones */
-  .navbar {
-    padding: 10px;
-  }
-
-  .sidebar {
-    width: 100%; /* Full width for mobile */
-    height: auto;
-    position: relative;
-    top: 0;
-    padding-top: 20px;
-  }
-
-  .content {
-    width: 100%; /* Full width for mobile */
-    margin-left: 0;
-    padding: 10px;
-  }
-
-  .chart-container {
-    flex-direction: column; /* Stack charts vertically on mobile */
-  }
-
-  .chart {
-    max-width: 100%; /* Full width for mobile */
-    margin-bottom: 20px; /* Add spacing between stacked charts */
-  }
-
-  .cards {
-    flex-direction: column; /* Stack cards vertically on mobile */
-  }
-
-  .card {
-    flex: 1 1 100%; /* Full width for mobile */
-    margin: 10px 0; /* Add spacing between stacked cards */
-  }
-
-  .notification-popup {
-    width: 90%; /* Wider popup for mobile */
-    right: 5%; /* Center the popup */
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-  /* Tablets */
-  .sidebar {
-    width: 200px; /* Slightly narrower sidebar for tablets */
-  }
-
-  .content {
-    width: calc(100% - 200px); /* Adjust content width for tablets */
-    margin-left: 200px;
-  }
-
-  .chart {
-    max-width: 90%; /* Adjust chart width for tablets */
-  }
-
-  .card {
-    flex: 1 1 calc(50% - 20px); /* Two cards per row on tablets */
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  /* Small Laptops */
-  .sidebar {
-    width: 220px; /* Slightly wider sidebar for small laptops */
-  }
-
-  .content {
-    width: calc(100% - 220px); /* Adjust content width for small laptops */
-    margin-left: 220px;
-  }
-
-  .chart {
-    max-width: 80%; /* Adjust chart width for small laptops */
-  }
-
-  .card {
-    flex: 1 1 calc(33.333% - 20px); /* Three cards per row on small laptops */
-  }
-}
-
-@media (min-width: 1200px) {
-  /* Monitors and Large Screens */
-  .sidebar {
-    width: 250px; /* Wider sidebar for large screens */
-  }
-
-  .content {
-    width: calc(100% - 250px); /* Adjust content width for large screens */
-    margin-left: 250px;
-  }
-
-  .chart {
-    max-width: 400px; /* Fixed width for large screens */
-  }
-
-  .card {
-    flex: 1 1 calc(33.333% - 20px); /* Three cards per row on large screens */
-  }
-}
+/* Sidebar Toggle Button */
 .sidebar-toggle {
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
   top: 10px;
   left: 10px;
@@ -324,17 +279,104 @@ body {
   z-index: 1001;
 }
 
+/* Responsive Styles */
 @media (max-width: 767.98px) {
   .sidebar-toggle {
-    display: block; /* Show toggle button on small screens */
+    display: block;
   }
 
   .sidebar {
-    transform: translateX(-100%); /* Hide sidebar by default */
+    transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
   }
 
   .sidebar.active {
-    transform: translateX(0); /* Show sidebar when active */
+    transform: translateX(0);
+  }
+
+  .content {
+    width: 100%;
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .chart-container {
+    flex-direction: column;
+  }
+
+  .chart {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  .card {
+    flex: 1 1 100%;
+    margin: 10px 0;
+  }
+
+  .notification-popup {
+    width: 90%;
+    right: 5%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .content {
+    width: calc(100% - 200px);
+    margin-left: 200px;
+  }
+
+  .chart {
+    max-width: 90%;
+  }
+
+  .card {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sidebar {
+    width: 220px;
+  }
+
+  .content {
+    width: calc(100% - 220px);
+    margin-left: 220px;
+  }
+
+  .chart {
+    max-width: 80%;
+  }
+
+  .card {
+    flex: 1 1 calc(33.333% - 20px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .sidebar {
+    width: 250px;
+  }
+
+  .content {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+  }
+
+  .chart {
+    max-width: 400px;
+  }
+
+  .card {
+    flex: 1 1 calc(33.333% - 20px);
   }
 }

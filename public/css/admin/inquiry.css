@@ -47,6 +47,42 @@ body {
 #notification-bell {
   position: relative;
 }
+.status-tabs {
+  margin-bottom: 20px;
+}
+
+.status-tab {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.status-tab.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+}
+
+.badge.pending {
+  background-color: #ffc107;
+}
+
+.badge.ongoing {
+  background-color: #17a2b8;
+}
+
+.badge.completed {
+  background-color: #28a745;
+}
 
 .sidebar {
   width: 250px;

@@ -1,30 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   const adminTableBody = document.getElementById("admin-table-body");
 
-  // Example data
-  const admins = [
-    {
-      firstName: "John",
-      lastName: "Doe",
-      profilePic: "images/default-profile.png",
-      contact: "1234567890",
-      email: "john.doe@example.com",
-      gender: "Male",
-      adminId: "A001",
-    },
-    {
-      firstName: "Jane",
-      lastName: "Smith",
-      profilePic: "images/default-profile.png",
-      contact: "0987654321",
-      email: "jane.smith@example.com",
-      gender: "Female",
-      adminId: "A002",
-    },
-  ];
-
   function renderTable() {
-    adminTableBody.innerHTML = "";
+    const admins = JSON.parse(localStorage.getItem("admins")) || []; // Retrieve admins from localStorage
+    adminTableBody.innerHTML = ""; // Clear the table body
+
     admins.forEach((admin, index) => {
       const row = document.createElement("tr");
 
@@ -45,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
       adminTableBody.appendChild(row);
     });
 
+    // Attach event listeners for edit and delete buttons
     document.querySelectorAll(".edit-btn").forEach((button) => {
       button.addEventListener("click", handleEdit);
     });
@@ -56,25 +37,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleEdit(event) {
     const index = event.target.closest("button").dataset.index;
+    const admins = JSON.parse(localStorage.getItem("admins")) || [];
     const admin = admins[index];
+
     const newFirstName = prompt("Enter new first name:", admin.firstName);
     const newLastName = prompt("Enter new last name:", admin.lastName);
 
     if (newFirstName && newLastName) {
       admins[index].firstName = newFirstName;
       admins[index].lastName = newLastName;
+      localStorage.setItem("admins", JSON.stringify(admins)); // Save updated data to localStorage
       renderTable();
     }
   }
 
   function handleDelete(event) {
     const index = event.target.closest("button").dataset.index;
-    admins.splice(index, 1);
+    const admins = JSON.parse(localStorage.getItem("admins")) || [];
+    admins.splice(index, 1); // Remove the admin from the array
+    localStorage.setItem("admins", JSON.stringify(admins)); // Save updated data to localStorage
     renderTable();
   }
 
-  renderTable();
+  renderTable(); // Initial render of the table
 });
+
 function previewProfilePic(event) {
   const input = event.target;
   const preview = document.getElementById("profile-pic-preview");
@@ -89,4 +76,71 @@ function previewProfilePic(event) {
 
     reader.readAsDataURL(input.files[0]); // Read the selected file
   }
+}
+
+// Form submission logic
+document
+  .getElementById("admin-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const firstName = document.getElementById("first-name").value;
+    const lastName = document.getElementById("last-name").value;
+    const contact = document.getElementById("contact").value;
+    const email = document.getElementById("mail").value;
+    const gender = document.getElementById("gender").value;
+    const adminId = document.getElementById("admin-id").value;
+    const profilePicInput = document.getElementById("profile-pic");
+
+    if (profilePicInput.files && profilePicInput.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const profilePic = e.target.result;
+        saveAdmin(
+          firstName,
+          lastName,
+          profilePic,
+          contact,
+          email,
+          gender,
+          adminId
+        );
+      };
+      reader.readAsDataURL(profilePicInput.files[0]);
+    } else {
+      const profilePic = "images/default-profile.png";
+      saveAdmin(
+        firstName,
+        lastName,
+        profilePic,
+        contact,
+        email,
+        gender,
+        adminId
+      );
+    }
+  });
+
+function saveAdmin(
+  firstName,
+  lastName,
+  profilePic,
+  contact,
+  email,
+  gender,
+  adminId
+) {
+  const admins = JSON.parse(localStorage.getItem("admins")) || [];
+  admins.push({
+    firstName,
+    lastName,
+    profilePic,
+    contact,
+    email,
+    gender,
+    adminId,
+  });
+  localStorage.setItem("admins", JSON.stringify(admins)); // Save to localStorage
+  alert("Admin details submitted successfully.");
+  window.location.href = "/admin/manage_admin.hbs"; // Redirect to manage_admin page
 }

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Route</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="admin/routeform.css" />
+    <link rel="stylesheet" href="/admin/addroute.css" />
   </head>
   <body>
     <div class="form-container">
@@ -40,21 +40,7 @@
         <button type="submit">Add Route</button>
       </form>
     </div>
-    <script>
-      document .getElementById("add-route-form") .addEventListener("submit",
-      function (event) { event.preventDefault(); const routeNumber =
-      document.getElementById("route-number").value; const busNumber =
-      document.getElementById("bus-number").value; const numStudents =
-      document.getElementById("num-students").value; const numSeats =
-      document.getElementById("num-seats").value; const startPoint =
-      document.getElementById("start-point").value; const destinationPoint =
-      document.getElementById("destination-point").value; const driverName =
-      document.getElementById("driver-name").value; const routeDetails = {
-      routeNumber, busNumber, numStudents, numSeats, startPoint,
-      destinationPoint, driverName, }; let routes =
-      JSON.parse(localStorage.getItem("routes")) || [];
-      routes.push(routeDetails); localStorage.setItem("routes",
-      JSON.stringify(routes)); window.location.href = "/admin/route"; });
+    <scriptsrc="/admin/js/addrout.js"></script>
     </script>
   </body>
 </html>

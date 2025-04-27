@@ -12,9 +12,15 @@ document
       year: document.getElementById("year").value,
     };
 
-    // Store data in localStorage
-    localStorage.setItem("studentData", JSON.stringify(studentData));
+    // Retrieve existing students from localStorage
+    let students = JSON.parse(localStorage.getItem("students")) || [];
 
-    // Redirect to teacher details page
-    window.location.href = "studentdetails.html";
+    // Add the new student to the array
+    students.push(studentData);
+
+    // Save updated data to localStorage
+    localStorage.setItem("students", JSON.stringify(students));
+
+    // Redirect to the student details page
+    window.location.href = "/admin/studentdetails.hbs";
   });

@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>View Teacher Details</title>
-    <link rel="stylesheet" href="/teacherdetails.css" />
+    <link rel="stylesheet" href="/admin/teacherdetails.css" />
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
@@ -117,7 +117,13 @@
         </tbody>
       </table>
       <div class="button-container text-center">
-        <a href="/admin/add_teacher" class="btn btn-primary">Add Teacher</a>
+        <button
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#addTeacherModal"
+        >
+          Add Teacher
+        </button>
       </div>
     </div>
 
@@ -232,6 +238,15 @@
                 <input type="text" class="form-control" id="editId" readonly />
               </div>
               <div class="form-group">
+                <label for="editDepartment">Department</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editDepartment"
+                  required
+                />
+              </div>
+              <div class="form-group">
                 <label for="editBusNumber">Bus Number</label>
                 <input
                   type="text"
@@ -246,15 +261,6 @@
                   type="text"
                   class="form-control"
                   id="editRouteNumber"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="editDepartment">Department</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editDepartment"
                   required
                 />
               </div>
@@ -281,6 +287,6 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     ></script>
-    <script src="/js/teacherdetails.js"></script>
+    <script src="/admin/js/teacherdetails.js"></script>
   </body>
 </html>

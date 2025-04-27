@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Route Management</title>
-    <link rel="stylesheet" href="/route.css" />
+    <link rel="stylesheet" href="/admin/route.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -123,6 +123,9 @@
             name="route-number"
             required
           />
+          <tbody id="route-list">
+            <!-- Route details will be dynamically populated here -->
+          </tbody>
 
           <label for="edit-bus-number">Bus Number:</label>
           <input type="text" id="edit-bus-number" name="bus-number" required />
@@ -167,6 +170,6 @@
       </div>
     </div>
 
-    <script src="/js/route.js"></script>
+    <script src="/admin/js/route.js"></script>
   </body>
 </html>

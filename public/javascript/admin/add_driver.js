@@ -15,5 +15,5 @@ document
     localStorage.setItem("drivers", JSON.stringify(drivers));
 
     alert("Driver details submitted successfully.");
-    window.location.href = "driver details.html";
+    window.location.href = "/admin/driverdetails.hbs";
   });

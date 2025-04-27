@@ -2,9 +2,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Inquiry Page</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="admin/inquiry.css" />
+    <title>Inquiry Management</title>
+    <link rel="stylesheet" href="/admin/inquiry.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -14,7 +13,7 @@
     <nav class="navbar">
       <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
       <div class="nav-icons">
-        <a href="/admin/newadmin" class="breadcrumb-link">Home</a>
+        <a href="/admin/index" class="breadcrumb-link">Home</a>
         <a href="/admin/notification" id="notification-bell">
           <i class="fas fa-bell"></i>
           <span class="notification-count" id="notification-count">0</span>
@@ -24,6 +23,7 @@
         </a>
       </div>
     </nav>
+
     <div class="sidebar">
       <a href="/admin/manage_admin">
         <i class="fas fa-user-tie"></i>
@@ -77,6 +77,8 @@
 
     <main class="content">
       <h2>Inquiry Management</h2>
+
+      <!-- Inquiry Form -->
       <div class="form-wrapper">
         <h3>Add New Inquiry</h3>
         <form id="inquiry-form">
@@ -86,8 +88,18 @@
           <button type="submit">Submit Inquiry</button>
         </form>
       </div>
+
+      <!-- Status Tabs -->
+
+      <!-- Inquiry Table -->
       <div class="table-wrapper">
         <h3>Inquiries</h3>
+        <div class="status-tabs">
+          <button class="status-tab active" data-status="All">All Inquiries</button>
+          <button class="status-tab" data-status="Pending">Pending</button>
+          <button class="status-tab" data-status="Ongoing">Ongoing</button>
+          <button class="status-tab" data-status="Completed">Solved</button>
+        </div>
         <table id="inquiry-table">
           <thead>
             <tr>
@@ -96,44 +108,16 @@
               <th>Email</th>
               <th>Message</th>
               <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>John Doe</td>
-              <td>john.doe@example.com</td>
-              <td>Bus schedule inquiry</td>
-              <td>
-                <span class="badge pending"><i class="fas fa-times-circle"></i>
-                  Pending</span>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jane Smith</td>
-              <td>jane.smith@example.com</td>
-              <td>Payment issue</td>
-              <td>
-                <span class="badge resolved"><i class="fas fa-check-circle"></i>
-                  Resolved</span>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Alice Johnson</td>
-              <td>alice.johnson@example.com</td>
-              <td>Bus route change request</td>
-              <td>
-                <span class="badge pending"><i class="fas fa-times-circle"></i>
-                  Pending</span>
-              </td>
-            </tr>
+            <!-- Rows will be dynamically populated here -->
           </tbody>
         </table>
       </div>
     </main>
 
-    <script src="/js/inquiry.js"></script>
+    <script src="/admin/js/inquiry.js"></script>
   </body>
 </html>

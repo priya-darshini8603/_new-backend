@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Driver Details</title>
-    <link rel="stylesheet" href="admin/driverdetails.css" />
+    <link rel="stylesheet" href="/admin/driverdetails.css" />
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
@@ -70,96 +70,19 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-blue">
-      <a class="navbar-brand" href="#">
-        <img src="../images/nmit-logo.svg" alt="Logo" class="logo" />
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/index">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/manage_admin">Manage Admin</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="notificationDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <img
-                src="../images/notification-icon.svg"
-                alt="Notifications"
-                width="30"
-                height="30"
-              />
-            </a>
-            <div
-              class="dropdown-menu dropdown-menu-right"
-              aria-labelledby="notificationDropdown"
-            >
-              <h6 class="dropdown-header">Notifications</h6>
-              <div id="notification-list">
-                <a class="dropdown-item" href="#">Notification 1</a>
-                <a class="dropdown-item" href="#">Notification 2</a>
-              </div>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-center" href="#">View All
-                Notifications</a>
-            </div>
-          </li>
-          <!-- Profile Dropdown -->
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <img
-                src="../images/profile-pic.jpg"
-                class="rounded-circle"
-                alt="Profile"
-                width="30"
-                height="30"
-              />
-            </a>
-            <div
-              class="dropdown-menu dropdown-menu-right"
-              aria-labelledby="navbarDropdown"
-            >
-              <a class="dropdown-item" href="/admin/view profile">View Profile</a>
-              <a class="dropdown-item" href="/admin/changepassword">Change
-                Password</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/admin/index">Logout</a>
-            </div>
-          </li>
-        </ul>
+    <nav class="navbar">
+      <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+      <div class="nav-icons">
+        <a href="/admin/index" class="breadcrumb-link">Home</a>
+        <a href="/admin/notification" id="notification-bell">
+          <i class="fas fa-bell"></i>
+          <span class="notification-count" id="notification-count">0</span>
+        </a>
+        <a href="/admin/view-profile">
+          <i class="fas fa-user"></i>
+        </a>
       </div>
     </nav>
-
     <!-- Main Content -->
     <div class="main-content">
       <div class="container">
@@ -286,6 +209,6 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     ></script>
-    <script src="/js/driverdetails.js"></script>
+    <script src="/admin/js/driverdetails.js"></script>
   </body>
 </html>
