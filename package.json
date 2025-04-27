@@ -4,16 +4,22 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.3",
+    "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-session": "^1.18.1",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
     "leaflet": "^1.9.4",
     "mongoose": "^8.8.2",
     "nodemailer": "^6.10.1",
+<<<<<<< HEAD
     "nodemon": "^3.1.7",
     "pngjs": "^7.0.0",
+=======
+    "nodemon": "^3.1.10",
+>>>>>>> 4f1127d3e9cdf968f8deba9c96d1eb061a108ff5
     "razorpay": "^2.9.5",
     "react-leaflet": "^4.2.1",
     "socket.io": "^4.8.1",

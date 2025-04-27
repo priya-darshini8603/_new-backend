@@ -1,0 +1,37 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #5b86e5;
+  color: blue;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
+.navbar .logo {
+  height: 40px;
+}
+.navbar .nav-icons {
+  display: flex;
+  align-items: center;
+  margin-right: 15%;
+  color: white;
+  margin-right: 730px;
+}
+.navbar .nav-icons a {
+  color: white;
+  font-size: 20px;
+  margin-left: 15px;
+  cursor: pointer;
+  position: relative;
+}
+.container {
+  margin-top: 80px;
+  max-width: 600px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

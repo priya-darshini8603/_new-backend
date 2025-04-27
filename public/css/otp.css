@@ -12,9 +12,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../images/clg-bg.jpg");
-  background-position: center;
-  background-size: cover;
+  background: white;
 }
 
 :where(.container, form, .input-field, header) {
@@ -22,35 +20,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.otp-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
-.otp-message {
-  font-size: 1rem;
-  color:rgb(0, 0, 0);
-  text-align: center;
-  padding: 12px 20px;
-  display: inline-block;
-  width: auto;
-  max-width: 100%;
-  margin-bottom: 70px;
-  font-weight: 500;
-  background: linear-gradient(135deg, rgb(242, 242, 242), rgb(220, 220, 220), rgb(180, 180, 180));
-  border-radius:10px;
-  
-}
-
-.otp-message i {
-  color: #4169E1;
-  margin-bottom: 20px;
-  font-size: 1.2rem;
 }
 
 .container {
@@ -62,7 +31,6 @@ body {
   width: 100%;
   max-width: 400px;
 }
-
 
 .container header {
   height: 65px;
@@ -96,7 +64,6 @@ form .input-field {
   font-size: 1.125rem;
   text-align: center;
   border: 1px solid #ddd;
-  appearance: textfield;
   -moz-appearance: textfield;
 }
 
@@ -126,9 +93,6 @@ form button {
 form button:hover {
   background: #0e4bf1;
 }
-
-
-
 @media (max-width: 600px) {
   .container {
     padding: 15px 30px;
@@ -156,7 +120,6 @@ form button:hover {
     padding: 8px 0;
   }
 }
-
 @media (max-width: 768px) {
   .container {
     padding: 20px 40px;
@@ -184,7 +147,6 @@ form button:hover {
     padding: 8px 0;
   }
 }
-
 @media (max-width: 1024px) {
   .container {
     padding: 20px 50px;
@@ -212,7 +174,6 @@ form button:hover {
     padding: 9px 0;
   }
 }
-
 @media (max-width: 1280px) {
   .container {
     padding: 30px 50px;
@@ -240,7 +201,6 @@ form button:hover {
     padding: 10px 0;
   }
 }
-
 @media (max-width: 1440px) {
   .container {
     padding: 40px 70px;
@@ -268,7 +228,6 @@ form button:hover {
     padding: 11px 0;
   }
 }
-
 @media (max-width: 1500px) {
   .container {
     padding: 40px 70px;
@@ -295,7 +254,6 @@ form button:hover {
     padding: 12px 0;
   }
 }
-
 @media (max-width: 320px) {
   .container {
     padding: 10px 15px;

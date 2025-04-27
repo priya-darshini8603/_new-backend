@@ -7,4 +7,3 @@ mongoose.connect("mongodb://localhost:27017/SAMPLE_PRJ")
 .catch((e)=>{
     console.log('failed');
 })
-
