@@ -17,10 +17,11 @@ router.get("/forgpass", (req, res) => res.render("forgpass"));
 
 
 
-router.post("/otp",authController.otp);
+//router.post("/otp",authController.otp);
 router.post("/resetpassword",authController.resetpassword);
 router.post("/login",authController.login);
 router.post("/signup",authController.signup);
+router.post("/forgpass",authController.forgpass);
 
 
 
