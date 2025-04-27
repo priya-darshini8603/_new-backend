@@ -2,31 +2,30 @@ const LogInCollection = require("../models/loginModel");
 const OTPCollection = require("../models/otpModel");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "yourSecretKey";
 
-// Password pattern (at least 8 characters, with upper, lower, number, special character)
-const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+const passwordPattern = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[\W_]).{8,}$/;
 
-// Signup function
+// Signup
 exports.signup = async (req, res) => {
     try {
         const { name, email, password, role } = req.body;
 
-        // Check if user already exists
         const existingUser = await LogInCollection.findOne({ email });
-
         if (existingUser) {
-            return res.send(`<script>alert("User already exists!"); window.history.back();</script>`);
+            return res.send('<script>alert("User already exists!"); window.history.back();</script>');
         }
 
-        // Validate password strength
         if (!passwordPattern.test(password)) {
-            return res.send(`<script>alert("Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."); window.history.back();</script>`);
+            return res.send(
+              `<script>alert("Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."); 
+              window.history.back();
+              </script>`);
         }
 
-        // Hash the password before saving
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new LogInCollection({
@@ -37,34 +36,31 @@ exports.signup = async (req, res) => {
         });
 
         await newUser.save();
-
-        // Redirect to login page after successful signup
-        return res.redirect("/login");
+        return res.redirect("/loginform");
     } catch (error) {
         console.error("Error during signup:", error);
-        return res.send(`<script>alert("Something went wrong. Please try again later."); window.history.back();</script>`);
+        return res.send('<script>alert("Something went wrong. Please try again later."); window.history.back();</script>');
     }
 };
 
-// Login function
+// Login
 exports.login = async (req, res) => {
     try {
         const { email, password, role } = req.body;
-
         const user = await LogInCollection.findOne({ email });
 
         if (!user) {
-            return res.send(`<script>alert("User not found"); window.history.back();</script>`);
+            return res.send('<script>alert("User not found"); window.history.back();</script>');
         }
 
         if (user.role !== role) {
-            return res.send(`<script>alert("Select the proper user type"); window.history.back();</script>`);
+            return res.send('<script>alert("Select the proper user type"); window.history.back();</script>');
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.send(`<script>alert("Wrong password"); window.history.back();</script>`);
+            return res.send('<script>alert("Wrong password"); window.history.back();</script>');
         }
 
         const payload = {
@@ -73,19 +69,14 @@ exports.login = async (req, res) => {
             role: user.role
         };
 
-        // Set the token to expire in 1 minute (60 seconds)
         const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "60s" });
 
-        // Set the token in the cookies
         res.cookie('token', token, {
-            httpOnly: false, // To allow JavaScript access to cookies
-            secure: false, // Set to true if you're using https
-            maxAge: 60 * 1000 // Token will expire in 60 seconds
+            httpOnly: false,
+            secure: false,
+            maxAge: 60 * 1000
         });
 
-        console.log(token);
-
-        // Redirect to the correct dashboard based on the role
         if (role === "admin") {
             return res.redirect("/admin/admindashboard");
         } else if (role === "student") {
@@ -93,67 +84,98 @@ exports.login = async (req, res) => {
         } else if (role === "busincharge") {
             return res.redirect("/bus-incharge/busincharge-dashboard");
         }
-
     } catch (error) {
         console.error("Error during login:", error);
-        return res.send(`<script>alert("Something went wrong. Please try again later."); window.history.back();</script>`);
+        return res.send('<script>alert("Something went wrong. Please try again later."); window.history.back();</script>');
     }
 };
 
-// OTP generation function
-exports.otp = async (req, res) => {
+// Forgot password (generate OTP)
+exports.forgpass = async (req, res) => {
     const { email } = req.body;
-    const user = await LogInCollection.findOne({ email });
 
-    if (!user) return res.status(404).json({ message: "User not found" });
+    try {
+        const user = await LogInCollection.findOne({ email });
 
-    const otp = crypto.randomInt(1000, 9999).toString();
-    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // OTP expires in 5 minutes
+        if (!user) {
+            return res.redirect('/loginform');
+        }
 
-    await OTPCollection.create({ email, otp, expiresAt });
+        const otp = crypto.randomInt(1000, 9999).toString();
+        const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
 
-    console.log(`OTP for ${email}: ${otp}`); // Replace this with email sending logic
+        await OTPCollection.create({ email, otp, expiresAt });
 
-    res.json({ message: "OTP sent successfully!" });
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'paaani2004@gmail.com',
+                pass: 'oiqh sxvd tsct okcl'
+            }
+        });
+
+        const mailOptions = {
+            from: '1nt22cs129.pavani@nmit.ac.in',
+            to: email,
+            subject: 'Password Reset OTP',
+            text: `Your OTP for password reset is: ${otp}.It is valid for 5 minutes.`
+        
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error("Error sending email:", error);
+                return res.status(500).json({ message: 'Failed to send OTP email!' });
+            }
+            console.log('OTP email sent: ' + info.response);
+            res.redirect('/otp');
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
 };
 
-// Function to verify OTP and reset password
+// Reset Password
 exports.resetpassword = async (req, res) => {
     const { email, otp, newPassword } = req.body;
-    const otpRecord = await OTPCollection.findOne({ email, otp });
 
-    if (!otpRecord || otpRecord.expiresAt < Date.now()) {
-        return res.status(400).json({ message: "Invalid or expired OTP" });
+    try {
+        const otpRecord = await OTPCollection.findOne({ email, otp });
+
+        if (!otpRecord || otpRecord.expiresAt < Date.now()) {
+            return res.status(400).json({ message: 'Invalid or expired OTP' });
+        }
+
+        if (!passwordPattern.test(newPassword)) {
+            return res.status(400).json({ message: "New password must be strong." });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await LogInCollection.findOneAndUpdate({ email }, { password: hashedPassword });
+        await OTPCollection.deleteOne({ email });
+
+        res.status(200).json({ message: 'Password updated successfully!' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
     }
-
-    // Validate new password strength
-    if (!passwordPattern.test(newPassword)) {
-        return res.status(400).json({ message: "New password must be at least 8 characters long and include uppercase, lowercase, number, and special character." });
-    }
-
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    await LogInCollection.findOneAndUpdate({ email }, { password: hashedPassword });
-
-    await OTPCollection.deleteOne({ email }); // Remove OTP after successful reset
-
-    res.json({ message: "Password updated successfully!" });
 };
 
-// Middleware to check if token is expired
+// Middleware - Check token
 exports.checkTokenExpiration = (req, res, next) => {
     const token = req.cookies.token;
 
     if (!token) {
-        return res.redirect("/login");
+        return res.redirect("/loginform");
     }
 
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
-        req.user = decoded; // Add user info to request object
+        req.user = decoded;
         next();
     } catch (error) {
         console.error("Invalid or expired token:", error);
-        res.clearCookie("token"); // Clear cookie
-        res.redirect("/login"); // Redirect to login page
-    }
+        res.clearCookie("token");
+        res.redirect("/loginform");
+}
 };
