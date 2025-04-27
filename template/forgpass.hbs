@@ -12,7 +12,7 @@
   <body>
     <div class="container">
       <h1 class="form-title">Forget Password</h1>
-      <form id="forget-password-form">
+      <form id="forget-password-form"  method="POST" action="/forgpass">
         <div class="input-group">
           <i class="fas fa-envelope"></i>
           <input
@@ -24,7 +24,7 @@
           />
           <label for="email">Email</label>
         </div>
-        <input type="submit" class="btn" value="Send Reset Link" />
+        <input type="submit" class="btn" value="Generate OTP" />
       </form>
       <div class="links">
         <p>Remembered your password?</p>
@@ -33,11 +33,15 @@
     </div>
     <script>
       document .getElementById("signInButton") .addEventListener("click",
-      function () { window.location.href = "/admin/loginform"; }); document
-      .getElementById("forget-password-form") .addEventListener("submit",
-      function (event) { event.preventDefault(); const email =
-      document.getElementById("email").value; // Simulate sending reset link
+      function () { window.location.href = "/loginform"; }); 
+
+
+      /*document.getElementById("forget-password-form") .addEventListener("submit",
+      function (event) { event.preventDefault(); 
+      const email =document.getElementById("email").value; // Simulate sending reset link
       alert(`A reset link has been sent to ${email}`); });
+      */
+      
     </script>
   </body>
 </html>

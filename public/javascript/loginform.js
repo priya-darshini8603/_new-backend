@@ -29,11 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Redirect to the respective page based on the role
     if (role === "admin") {
-      window.location.href = "/admindashboard.html";
+      window.location.href = "/admin/admindashboard";
     } else if (role === "student") {
-      window.location.href = "/student_dashboard.html";
+      window.location.href = "/student/student_home";
     } else if (role === "busincharge") {
-      window.location.href = "busincharge_dashboard.html";
+      window.location.href = "busincharge/busincharge-dashboard";
     }
   });
 
