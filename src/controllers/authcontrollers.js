@@ -12,24 +12,26 @@ const passwordPattern = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[\W_]).{8,}$/;
 // Signup
 exports.signup = async (req, res) => {
     try {
-        const { name, email, password, role } = req.body;
+        const { fName, lName,email, password, role } = req.body;
+        
 
         const existingUser = await LogInCollection.findOne({ email });
         if (existingUser) {
             return res.send('<script>alert("User already exists!"); window.history.back();</script>');
         }
 
-        if (!passwordPattern.test(password)) {
+        /*if (!passwordPattern.test(password)) {
             return res.send(
               `<script>alert("Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."); 
               window.history.back();
               </script>`);
-        }
+        }*/
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new LogInCollection({
-            Name: name,
+            fName: fName,
+            lName:lName,
             email,
             password: hashedPassword,
             role
@@ -110,7 +112,7 @@ exports.forgpass = async (req, res) => {
             service: 'gmail',
             auth: {
                 user: 'paaani2004@gmail.com',
-                pass: 'oiqh sxvd tsct okcl'
+                pass: 'adko nuwa nyus ogvp'
             }
         });
 

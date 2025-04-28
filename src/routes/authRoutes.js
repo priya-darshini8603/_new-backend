@@ -4,7 +4,7 @@ const authController = require("../controllers/authcontrollers");
 
 router.get("[/,home]", (req, res) => res.render("home"));
 router.get("/loginform", (req, res) => res.render("loginform"));
-router.get("/signup", (req, res) => res.render("signup"));
+
 router.get("/routelist", (req, res) => res.render("routelist"));
 router.get("/contact", (req, res) => res.render("contact"));
 router.get("/about", (req, res) => res.render("about"));
