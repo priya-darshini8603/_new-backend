@@ -78,25 +78,25 @@
 
   <!-- Password Strength Validation Script -->
   <script>
-  function validateSignupForm() {
-    const password = document.getElementById('password').value;
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    function validateSignupForm() {
+      const password = document.getElementById('password').value;
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-    if (!passwordPattern.test(password)) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Weak Password',
-        text: 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character!',
-      });
-      return false; // Prevent form submission
+      if (!passwordPattern.test(password)) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Weak Password',
+          text: 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character!',
+        });
+        return false; // Prevent form submission
+      }
+      return true; // Allow form submission
     }
-    return true; // Allow form submission
-  }
 
-  document.getElementById('go-to-login').addEventListener('click', function () {
-    window.location.href = "/login";
-  });
-</script>
+    document.getElementById('go-to-login').addEventListener('click', function () {
+      window.location.href = "/login";
+    });
+  </script>
 
 </body>
 

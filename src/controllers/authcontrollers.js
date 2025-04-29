@@ -7,31 +7,35 @@ const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "yourSecretKey";
 
-const passwordPattern = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[\W_]).{8,}$/;
+// Updated password pattern for validation
+const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
 // Signup
 exports.signup = async (req, res) => {
     try {
-        const { fName, lName,email, password, role } = req.body;
-        
+        const { fName, lName, email, password, role } = req.body;
 
+        // Check if user already exists
         const existingUser = await LogInCollection.findOne({ email });
         if (existingUser) {
             return res.send('<script>alert("User already exists!"); window.history.back();</script>');
         }
 
-        /*if (!passwordPattern.test(password)) {
+        // Ensure password matches the pattern
+        if (!passwordPattern.test(password)) {
             return res.send(
               `<script>alert("Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."); 
               window.history.back();
-              </script>`);
-        }*/
+              </script>`
+            );
+        }
 
+        // Hash the password before saving
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new LogInCollection({
             fName: fName,
-            lName:lName,
+            lName: lName,
             email,
             password: hashedPassword,
             role
@@ -120,8 +124,7 @@ exports.forgpass = async (req, res) => {
             from: '1nt22cs129.pavani@nmit.ac.in',
             to: email,
             subject: 'Password Reset OTP',
-            text: `Your OTP for password reset is: ${otp}.It is valid for 5 minutes.`
-        
+            text: `Your OTP for password reset is: ${otp}. It is valid for 5 minutes.`
         };
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
@@ -148,6 +151,7 @@ exports.resetpassword = async (req, res) => {
             return res.status(400).json({ message: 'Invalid or expired OTP' });
         }
 
+        // Check if new password matches the pattern
         if (!passwordPattern.test(newPassword)) {
             return res.status(400).json({ message: "New password must be strong." });
         }
@@ -166,9 +170,8 @@ exports.resetpassword = async (req, res) => {
 // Middleware - Check token
 exports.checkTokenExpiration = (req, res, next) => {
     const token = req.cookies.token;
-
     if (!token) {
-        return res.redirect("/loginform");
+        return res.redirect('/login');
     }
 
     try {
@@ -176,8 +179,6 @@ exports.checkTokenExpiration = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-        console.error("Invalid or expired token:", error);
-        res.clearCookie("token");
-        res.redirect("/loginform");
-}
+        return res.redirect('/login');
+    }
 };
