@@ -1,4 +1,4 @@
-// Function to move to the next input field
+// Move to next input
 function moveToNext(input, nextIndex) {
   const inputs = document.querySelectorAll(".input-field input");
   if (input.value.length === 1 && nextIndex < inputs.length) {
@@ -7,12 +7,11 @@ function moveToNext(input, nextIndex) {
   }
 }
 
-// Function to verify OTP
+// Verify OTP
 function verifyOTP() {
   const inputs = document.querySelectorAll(".input-field input");
   let otp = "";
 
-  // Collect OTP from all input fields
   for (let input of inputs) {
     if (input.value === "") {
       alert("Please enter all OTP digits.");
@@ -20,32 +19,24 @@ function verifyOTP() {
     }
     otp += input.value;
   }
- if(otp){
-  window.location.href = "/resetpassword"; // Redirect to the password reset page
-}
 
-// Add event listeners to input fields for navigation
-document.querySelectorAll(".input-field input").forEach((input, index) => {
-  input.addEventListener("input", function () {
-    moveToNext(input, index + 1); // Move to the next input field after a digit is entered
-  });
-});
-
-// Add event listener to submit the OTP (e.g., for a button click)
-document.getElementById("verifyButton").addEventListener("click", verifyOTP);
-  /* Simulate OTP verification
-  //if (otp === "1234") {
-    // Replace "1234" with the actual OTP logic
-    //alert("OTP Verified!");
+  if (otp) {
+    // You can also send OTP via fetch/AJAX if needed
     window.location.href = "/resetpassword";
-  //} else {
-    //alert("Invalid OTP. Please try again.");
-  //}
+  }
 }
-*/
- //Add event listeners to input fields for navigation
-document.querySelectorAll(".input-field input").forEach((input, index) => {
-  input.addEventListener("input", function () {
-    moveToNext(input, index + 1);
+
+// Setup input navigation on load
+document.addEventListener("DOMContentLoaded", () => {
+  const inputs = document.querySelectorAll(".input-field input");
+
+  inputs.forEach((input, index) => {
+    if (index !== 0) input.disabled = true;
+
+    input.addEventListener("input", function () {
+      moveToNext(input, index + 1);
+    });
   });
+
+  document.getElementById("verifyButton").addEventListener("click", verifyOTP);
 });
