@@ -6,36 +6,29 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "yourSecretKey";
-
-// Updated password pattern for validation
 const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-// Signup
 exports.signup = async (req, res) => {
     try {
         const { fName, lName, email, password, role } = req.body;
 
-        // Check if user already exists
         const existingUser = await LogInCollection.findOne({ email });
         if (existingUser) {
             return res.send('<script>alert("User already exists!"); window.history.back();</script>');
         }
 
-        // Ensure password matches the pattern
         if (!passwordPattern.test(password)) {
             return res.send(
               `<script>alert("Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."); 
               window.history.back();
-              </script>`
-            );
+              </script>`);
         }
 
-        // Hash the password before saving
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new LogInCollection({
-            fName: fName,
-            lName: lName,
+            fName,
+            lName,
             email,
             password: hashedPassword,
             role
@@ -48,6 +41,7 @@ exports.signup = async (req, res) => {
         return res.send('<script>alert("Something went wrong. Please try again later."); window.history.back();</script>');
     }
 };
+
 
 // Login
 exports.login = async (req, res) => {
@@ -76,6 +70,7 @@ exports.login = async (req, res) => {
         };
 
         const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "60s" });
+        console.log("Generated JWT Token:", token);
 
         res.cookie('token', token, {
             httpOnly: false,
@@ -124,7 +119,8 @@ exports.forgpass = async (req, res) => {
             from: '1nt22cs129.pavani@nmit.ac.in',
             to: email,
             subject: 'Password Reset OTP',
-            text: `Your OTP for password reset is: ${otp}. It is valid for 5 minutes.`
+            text: `Your OTP for password reset is: ${otp}.It is valid for 5 minutes.`
+        
         };
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
@@ -140,38 +136,47 @@ exports.forgpass = async (req, res) => {
     }
 };
 
-// Reset Password
+
+// POST /resetpassword
 exports.resetpassword = async (req, res) => {
-    const { email, otp, newPassword } = req.body;
+  const { email, newPassword, confirmPassword } = req.body;
 
-    try {
-        const otpRecord = await OTPCollection.findOne({ email, otp });
-
-        if (!otpRecord || otpRecord.expiresAt < Date.now()) {
-            return res.status(400).json({ message: 'Invalid or expired OTP' });
-        }
-
-        // Check if new password matches the pattern
-        if (!passwordPattern.test(newPassword)) {
-            return res.status(400).json({ message: "New password must be strong." });
-        }
-
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-        await LogInCollection.findOneAndUpdate({ email }, { password: hashedPassword });
-        await OTPCollection.deleteOne({ email });
-
-        res.status(200).json({ message: 'Password updated successfully!' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server error' });
+  try {
+    // Validate password match
+    if (newPassword !== confirmPassword) {
+      return res.render("resetpassword", { message: "Passwords do not match." });
     }
+
+    // Find user
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.render("resetpassword", { message: "User not found." });
+    }
+
+    // Hash and update password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    // Redirect to loginform
+    res.redirect("/loginform");
+
+  } catch (error) {
+    console.error("Error resetting password:", error);
+    res.status(500).render("resetpassword", { message: "Something went wrong. Try again." });
+  }
 };
 
+
+
+
 // Middleware - Check token
+
 exports.checkTokenExpiration = (req, res, next) => {
     const token = req.cookies.token;
+
     if (!token) {
-        return res.redirect('/login');
+        return res.redirect("/loginform");  // Ensure this route is properly defined
     }
 
     try {
@@ -179,6 +184,8 @@ exports.checkTokenExpiration = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-        return res.redirect('/login');
+        console.error("Invalid or expired token:", error);
+        res.clearCookie("token");
+        return res.redirect("/loginform");  // Make sure this is the correct route
     }
 };

@@ -17,7 +17,7 @@
         <div class="nav-links">
             <a href="/student/student_home"><i class="fa fa-home"></i> Home</a>
             <a href="#notifications"><i class="fa fa-bell"></i> Notifications</a>
-            <a href="/login" onclick="logout(); return false;"><i class="fa fa-sign-out-alt"></i> Log Out</a>
+            <a href="/loginform" onclick="logout(); return false;"><i class="fa fa-sign-out-alt"></i> Log Out</a>
         </div>
     </div>
 
@@ -62,7 +62,7 @@
       function checkTokenExpiration() {
         const token = getCookie("token");
         if (!token) {
-          window.location.href = "/login"; // If token is missing, go to login
+          window.location.href = "/loginform"; // If token is missing, go to login
           return;
         }
 
@@ -73,17 +73,17 @@
           if (decoded.exp < now) {
             alert("Session expired. You will be logged out.");
             document.cookie = "token=; Max-Age=0; path=/"; // Clear cookie
-            window.location.href = "/login";
+            window.location.href = "/loginform";
           }
         } catch (err) {
           console.error("Invalid token");
-          window.location.href = "/login";
+          window.location.href = "/loginform";
         }
       }
 
       function logout() {
         document.cookie = "token=; Max-Age=0; path=/";
-        window.location.href = "/login";
+        window.location.href = "/loginform";
       }
 
       setInterval(checkTokenExpiration, 5000);
