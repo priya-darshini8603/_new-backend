@@ -1,4 +1,4 @@
-// Highlight the current sidebar item
+// Highlight the current active menu link
 document.querySelectorAll('.sidebar ul li a').forEach(link => {
     if (link.href === window.location.href) {
         link.style.color = '#004080';

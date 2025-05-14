@@ -1,77 +1,79 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #004080;
+    padding: 10px 20px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: space-between;
+    color: white;
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.navbar .nav-links li {
+    margin-left: 20px;
+}
+
+.navbar .nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .container {
-    background: #ffffff;
-    padding: 20px;
-    width: 400px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-h2 {
-    color: #333;
-}
-
-p {
-    color: #666;
-    font-size: 14px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.name-container {
     display: flex;
-    gap: 10px;
+    height: calc(100vh - 60px);
 }
 
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+.sidebar {
+    width: 220px;
+    background-color: #f0f0f0;
+    padding: 20px;
 }
 
-input:focus, textarea:focus {
-    border-color: #004080;
-    outline: none;
+.sidebar ul {
+    list-style: none;
 }
 
-textarea {
-    height: 100px;
-    resize: none;
+.sidebar ul li {
+    margin: 20px 0;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color:#004080;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+.sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
 }
 
-button:hover {
-    background-color: #004080;
+.sidebar ul li a:hover {
+    color: #004080;
+}
+
+.dashboard {
+    flex: 1;
+    padding: 30px;
+    background-color: #fafafa;
+    overflow-y: auto;
+}
+
+.dashboard h1 {
+    margin-bottom: 30px;
 }

@@ -2,55 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Bus Management System</title>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="/student/css/student_home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="/student_home.css">
 </head>
 <body>
 
-    <!-- Top Horizontal Navbar -->
-    <div class="top-navbar">
-        <button class="menu-btn" onclick="toggleSidebar()">
-            <i class="fa fa-bars"></i>
-        </button>
-        <div class="nav-links">
-            <a href="/student/student_home"><i class="fa fa-home"></i> Home</a>
-            <a href="#notifications"><i class="fa fa-bell"></i> Notifications</a>
-            <a href="#logout"><i class="fa fa-sign-out-alt"></i> Log Out</a>
-        </div>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">
+        <img src="/images/logo.png" alt="Logo"> <!-- (Put your logo in /images/logo.png) -->
+        <span>Student Dashboard</span>
     </div>
+    <ul class="nav-links">
+        <li><a href="/student/student_home">Home</a></li>
+        <li><a href="/student/student_profile">Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
 
-    <!-- Sidebar Navbar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2 class="navbar-heading">STUDENT</h2>
-            <button class="close-btn" onclick="toggleSidebar()">
-                <i class="fa fa-times"></i>
-            </button>
+<!-- Sidebar + Main -->
+<div class="container">
+    <aside class="sidebar">
+        <ul>
+            <li><a href="/student/student_profile"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="/student/student_registration"><i class="fas fa-pen"></i> Registration</a></li>
+            <li><a href="#"><i class="fas fa-credit-card"></i> Payment</a></li>
+            <li><a href="/student/student_enquiry"><i class="fas fa-question-circle"></i> Enquiry</a></li>
+            <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Complaint</a></li>
+            <li><a href="#"><i class="fas fa-map"></i> Tracking</a></li>
+            <li><a href="/student/routelist"><i class="fas fa-route"></i> Route List</a></li>
+        </ul>
+    </aside>
+
+    <main class="dashboard">
+        <h1>Welcome to Student Dashboard</h1>
+        <div class="cards">
+            <div class="card"><a href="/student/student_profile"><i class="fas fa-user"></i><p>Profile</p></a></div>
+            <div class="card"><a href="/student/student_registration"><i class="fas fa-pen"></i><p>Registration</p></a></div>
+            <div class="card"><a href="#"><i class="fas fa-credit-card"></i><p>Payment</p></a></div>
+            <div class="card"><a href="/student/student_enquiry"><i class="fas fa-question-circle"></i><p>Enquiry</p></a></div>
+            <div class="card"><a href="#"><i class="fas fa-exclamation-triangle"></i><p>Complaint</p></a></div>
+            <div class="card"><a href="#"><i class="fas fa-map"></i><p>Tracking</p></a></div>
+            <div class="card"><a href="/student/routelist"><i class="fas fa-route"></i><p>Route List</p></a></div>
         </div>
-        <a href="/student/student_profile"><i class="fa fa-user"></i> Profile</a>
-        <a href="/student/student_registration"><i class="fa fa-user-plus"></i> Registration</a>
-        <a href="/student/student_payment"><i class="fa fa-credit-card"></i> Payment</a>
-        <a href="/student/student_enquiry"><i class="fa fa-question-circle"></i> Enquiry</a>
-        <a href="/student/c3"><i class="fa fa-comments"></i> Complaint Box</a>
-        <a href="#tracking"><i class="fa fa-map-marker-alt"></i> Tracking</a>
-        <a href="/student/routelist"><i class="fa fa-route"></i> Route List</a>
-    </div>
+    </main>
+</div>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="grid-container">
-            <div class="grid-item"><i class="fa fa-user"></i><p>Profile</p></div>
-            <div class="grid-item"><i class="fa fa-user-plus"></i><p>Registration</p></div>
-            <div class="grid-item"><i class="fa fa-credit-card"></i><p>Payment</p></div>
-            <div class="grid-item"><i class="fa fa-question-circle"></i><p>Enquiry</p></div>
-            <div class="grid-item"><i class="fa fa-comments"></i><p>Complaint Box</p></div>
-            <div class="grid-item"><i class="fa fa-map-marker-alt"></i><p>Tracking</p></div>
-            <div class="grid-item"><i class="fa fa-route"></i><p>Route List</p></div>
-        </div>
-    </div>
+<script src="/student/js/student_home.js"></script>
 
-    <script src="/student/js/student_home.js"></script>
 </body>
 </html>

@@ -1,120 +1,63 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: url('https://source.unsplash.com/1600x900/?bus,transport') no-repeat center center/cover;
-    background-size: cover;
-}
+/* Consistent layout for all student pages */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Navigation Bar */
 .navbar {
     background-color: #004080;
+    padding: 10px 20px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    color: white;
 }
-
-.navbar a {
+.navbar .logo {
+    display: flex;
+    align-items: center;
+}
+.navbar .logo img {
+    width: 40px;
+    margin-right: 10px;
+}
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+}
+.navbar .nav-links li {
+    margin-left: 20px;
+}
+.navbar .nav-links li a {
     color: white;
     text-decoration: none;
-    padding: 10px 15px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-}
-
-.navbar a:hover {
-    background-color: #002060;
-    border-radius: 5px;
-}
-
-.navbar a i {
-    margin-right: 8px;
-}
-
-/* Authentication Buttons */
-.auth-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.auth-buttons button {
-    background-color: white;
-    color: #004080;
-    border: 1px solid #004080;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
     font-weight: bold;
 }
-
-.auth-buttons button:hover {
-    background-color: #004080;
-    color: white;
+.container {
+    display: flex;
+    height: calc(100vh - 60px);
 }
-
-/* Enquiry Form */
-.enquiry-form {
-    background: white;
+.sidebar {
+    width: 220px;
+    background-color: #f0f0f0;
     padding: 20px;
-    margin: 50px auto;
-    width: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    text-align: center;
 }
-
-.enquiry-form h2 {
+.sidebar ul {
+    list-style: none;
+}
+.sidebar ul li {
+    margin: 20px 0;
+}
+.sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+}
+.sidebar ul li a:hover {
     color: #004080;
 }
-
-.enquiry-form input,
-.enquiry-form select,
-.enquiry-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+.dashboard {
+    flex: 1;
+    padding: 30px;
+    background-color: #fafafa;
+    overflow-y: auto;
 }
-
-.enquiry-form textarea {
-    height: 100px;
-    resize: none;
-}
-
-.enquiry-form button {
-    background-color: #004080;
-    color: white;
-    border: none;
-    padding: 12px;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.enquiry-form button:hover {
-    background-color: #002060;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .enquiry-form {
-        width: 80%;
-    }
-
-    .auth-buttons {
-        margin-top: 10px;
-        justify-content: center;
-    }
+.dashboard h1 {
+    margin-bottom: 30px;
 }
