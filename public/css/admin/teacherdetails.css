@@ -1,0 +1,223 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5b86e5;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+  height: 40px;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icons a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-icons a:hover {
+  color: black;
+}
+
+.notification-count {
+  background-color: #ff6384;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #5b86e5;
+  position: fixed;
+  left: 0;
+  padding-top: 20px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: white;
+}
+
+.sidebar i {
+  margin-right: 10px;
+}
+
+.sidebar a:hover i {
+  color: #5b86e5; /* Change icon color on hover */
+}
+
+/* Main Content */
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  margin-top: 60px;
+}
+
+/* Search Bar */
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Table */
+.table-responsive {
+  margin-top: 20px;
+  overflow-x: auto; /* Enable horizontal scrolling for small screens */
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+/* Button Container */
+.button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+  /* Mobile Phones */
+  .navbar {
+    padding: 10px;
+  }
+
+  .sidebar {
+    width: 100%; /* Full width for mobile */
+    height: auto;
+    position: relative;
+    padding-top: 10px;
+  }
+
+  .content {
+    margin-left: 0; /* Remove margin for mobile */
+    padding: 10px;
+  }
+
+  .search-container input {
+    padding: 8px; /* Smaller padding for mobile */
+  }
+
+  .table th,
+  .table td {
+    padding: 8px; /* Smaller padding for mobile */
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+
+  .button-container {
+    margin-top: 10px; /* Smaller margin for mobile */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Tablets */
+  .sidebar {
+    width: 200px; /* Slightly narrower sidebar for tablets */
+  }
+
+  .content {
+    margin-left: 200px; /* Adjust margin for tablets */
+  }
+
+  .search-container input {
+    padding: 10px; /* Medium padding for tablets */
+  }
+
+  .table th,
+  .table td {
+    padding: 10px; /* Medium padding for tablets */
+    font-size: 15px; /* Medium font size for tablets */
+  }
+
+  .button-container {
+    margin-top: 15px; /* Medium margin for tablets */
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Small Laptops */
+  .sidebar {
+    width: 220px; /* Slightly wider sidebar for small laptops */
+  }
+
+  .content {
+    margin-left: 220px; /* Adjust margin for small laptops */
+  }
+
+  .search-container input {
+    padding: 12px; /* Standard padding for small laptops */
+  }
+
+  .table th,
+  .table td {
+    padding: 12px; /* Standard padding for small laptops */
+    font-size: 16px; /* Standard font size for small laptops */
+  }
+
+  .button-container {
+    margin-top: 20px; /* Standard margin for small laptops */
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Monitors and Large Screens */
+  .sidebar {
+    width: 250px; /* Wider sidebar for large screens */
+  }
+
+  .content {
+    margin-left: 250px; /* Adjust margin for large screens */
+  }
+
+  .search-container input {
+    padding: 15px; /* Larger padding for monitors */
+  }
+
+  .table th,
+  .table td {
+    padding: 15px; /* Larger padding for monitors */
+    font-size: 18px; /* Larger font size for monitors */
+  }
+
+  .button-container {
+    margin-top: 25px; /* Larger margin for monitors */
+  }
+}

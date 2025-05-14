@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <div class="otp-wrapper" >
+  <div class="otp-wrapper">
     <div class="otp-message">
       <i class="fas fa-envelope"></i> We have sent a
       <strong>One-Time Password (OTP)</strong> to your registered email.
@@ -27,19 +27,19 @@
       <div id="otp-step">
         <h4>Enter OTP Code</h4>
         <form id="otp-form" action="/otp" method="POST">
-      
           <div class="input-field">
-            <input type="number" required oninput="moveToNext(this, 1)" />
-            <input type="number" required disabled oninput="moveToNext(this, 2)" />
-            <input type="number" required disabled oninput="moveToNext(this, 3)" />
+            <input type="number" required />
+            <input type="number" required disabled />
+            <input type="number" required disabled />
             <input type="number" required disabled />
           </div>
-          <button type="submit">Verify OTP</button>
+          <button type="button" id="verifyButton">Verify OTP</button>
         </form>
+
       </div>
     </div>
   </div>
-
+ 
   <script src="/js/otp.js"></script>
 </body>
 

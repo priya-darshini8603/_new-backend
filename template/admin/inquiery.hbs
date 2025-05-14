@@ -1,0 +1,123 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inquiry Management</title>
+    <link rel="stylesheet" href="/admin/inquiry.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+      <div class="nav-icons">
+        <a href="/admin/index" class="breadcrumb-link">Home</a>
+        <a href="/admin/notification" id="notification-bell">
+          <i class="fas fa-bell"></i>
+          <span class="notification-count" id="notification-count">0</span>
+        </a>
+        <a href="/admin/view-profile">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar">
+      <a href="/admin/manage_admin">
+        <i class="fas fa-user-tie"></i>
+        <span>Manage Admin</span>
+      </a>
+      <a href="/admin/teacherdetails">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>Manage Teacher</span>
+      </a>
+      <a href="/admin/studentdetails">
+        <i class="fas fa-user-graduate"></i>
+        <span>Manage Student</span>
+      </a>
+      <a href="/admin/driverdetails">
+        <i class="fas fa-car"></i>
+        <span>Manage Driver</span>
+      </a>
+      <a href="/admin/route">
+        <i class="fas fa-route"></i>
+        <span>Route List</span>
+      </a>
+      <a href="/admin/scheduleevent">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Schedule</span>
+      </a>
+      <a href="/admin/complaintbox">
+        <i class="fas fa-comment-dots"></i>
+        <span>Complaint Box</span>
+      </a>
+      <a href="/admin/seatavailable">
+        <i class="fas fa-chair"></i>
+        <span>Seat Availability</span>
+      </a>
+      <a href="/admin/notify">
+        <i class="fas fa-bell"></i>
+        <span>Admin Notification</span>
+      </a>
+      <a href="/admin/inquiery">
+        <i class="fas fa-question-circle"></i>
+        <span>Inquiry</span>
+      </a>
+      <a href="/admin/payment-records">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Payments</span>
+      </a>
+      <a href="/admin/admlogin">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+
+    <main class="content">
+      <h2>Inquiry Management</h2>
+
+      <!-- Inquiry Form -->
+      <div class="form-wrapper">
+        <h3>Add New Inquiry</h3>
+        <form id="inquiry-form">
+          <input type="text" id="name" placeholder="Name" required />
+          <input type="email" id="email" placeholder="Email" required />
+          <textarea id="message" placeholder="Message" required></textarea>
+          <button type="submit">Submit Inquiry</button>
+        </form>
+      </div>
+
+      <!-- Status Tabs -->
+
+      <!-- Inquiry Table -->
+      <div class="table-wrapper">
+        <h3>Inquiries</h3>
+        <div class="status-tabs">
+          <button class="status-tab active" data-status="All">All Inquiries</button>
+          <button class="status-tab" data-status="Pending">Pending</button>
+          <button class="status-tab" data-status="Ongoing">Ongoing</button>
+          <button class="status-tab" data-status="Completed">Solved</button>
+        </div>
+        <table id="inquiry-table">
+          <thead>
+            <tr>
+              <th>Inquiry ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Rows will be dynamically populated here -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script src="/admin/js/inquiry.js"></script>
+  </body>
+</html>

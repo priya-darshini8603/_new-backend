@@ -1,0 +1,214 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Driver Details</title>
+    <link rel="stylesheet" href="/admin/driverdetails.css" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* Custom CSS for sidebar and layout */
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="/admin/manage_admin">
+        <i class="fas fa-user-tie"></i>
+        <span>Manage Admin</span>
+      </a>
+      <a href="/admin/teacherdetails">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>Manage Teacher</span>
+      </a>
+      <a href="/admin/studentdetails">
+        <i class="fas fa-user-graduate"></i>
+        <span>Manage Student</span>
+      </a>
+      <a href="/admin/driverdetails">
+        <i class="fas fa-car"></i>
+        <span>Manage Driver</span>
+      </a>
+      <a href="/admin/route">
+        <i class="fas fa-route"></i>
+        <span>Route List</span>
+      </a>
+      <a href="/admin/scheduleevent">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Schedule</span>
+      </a>
+      <a href="/admin/complaintbox">
+        <i class="fas fa-comment-dots"></i>
+        <span>Complaint Box</span>
+      </a>
+      <a href="/admin/seatavailable">
+        <i class="fas fa-chair"></i>
+        <span>Seat Availability</span>
+      </a>
+      <a href="/admin/notify">
+        <i class="fas fa-bell"></i>
+        <span>Admin Notification</span>
+      </a>
+      <a href="/admin/inquiery">
+        <i class="fas fa-question-circle"></i>
+        <span>Inquiry</span>
+      </a>
+      <a href="/admin/payment-records">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Payments</span>
+      </a>
+      <a href="/admin/admlogin">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+      <div class="nav-icons">
+        <a href="/admin/index" class="breadcrumb-link">Home</a>
+        <a href="/admin/notification" id="notification-bell">
+          <i class="fas fa-bell"></i>
+          <span class="notification-count" id="notification-count">0</span>
+        </a>
+        <a href="/admin/view-profile">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+    </nav>
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="container">
+        <h1>Driver Details</h1>
+        <div class="search-container">
+          <input
+            type="text"
+            id="search"
+            placeholder="Search by driver name or bus number"
+          />
+          <button type="button" onclick="searchDriver()">Search</button>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Driver Name</th>
+              <th>Bus Number</th>
+              <th>Route Number</th>
+              <th>Phone Number</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="driver-details">
+            <!-- Example row -->
+            <tr>
+              <td>John Doe</td>
+              <td>1234</td>
+              <td>56</td>
+              <td>9876543210</td>
+              <td>
+                <a href="#" class="btn btn-sm btn-primary edit-btn">
+                  <i class="fas fa-pencil-alt"></i>
+                </a>
+                <a href="#" class="btn btn-sm btn-danger delete-btn">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Edit Driver Modal -->
+        <div
+          class="modal fade"
+          id="editDriverModal"
+          tabindex="-1"
+          aria-labelledby="editDriverModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editDriverModalLabel">
+                  Edit Driver
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="edit-driver-form">
+                  <div class="form-group">
+                    <label for="edit-driver-name">Driver Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="edit-driver-name"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-bus-number">Bus Number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="edit-bus-number"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-route-number">Route Number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="edit-route-number"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-phone-number">Phone Number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="edit-phone-number"
+                      required
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="save-changes"
+                  >
+                    Save changes
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="button-container">
+          <a href="/admin/add_driver" class="btn btn-primary">Add Driver</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    ></script>
+    <script src="/admin/js/driverdetails.js"></script>
+  </body>
+</html>

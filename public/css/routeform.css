@@ -1,0 +1,208 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Use min-height instead of height for better responsiveness */
+}
+
+/* Form Container */
+.form-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Use percentage for better responsiveness */
+  max-width: 400px; /* Set a max-width for larger screens */
+}
+
+h2 {
+  text-align: center;
+  color: #5b86e5;
+  font-size: 24px; /* Default font size */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+  color: #333;
+  font-size: 14px; /* Default font size */
+}
+
+input {
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px; /* Default font size */
+}
+
+button {
+  padding: 10px;
+  margin-top: 20px;
+  background: #5b86e5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px; /* Default font size */
+}
+
+button:hover {
+  background: #4a75c5;
+}
+
+.button {
+  padding: 10px 20px;
+  background: #5b86e5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 16px; /* Default font size */
+}
+
+.button:hover {
+  background: #4a75c5;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+  /* Mobile Phones */
+  .form-container {
+    padding: 15px; /* Smaller padding for mobile */
+  }
+
+  h2 {
+    font-size: 20px; /* Smaller font size for mobile */
+  }
+
+  label {
+    font-size: 12px; /* Smaller font size for mobile */
+  }
+
+  input {
+    padding: 8px; /* Smaller padding for mobile */
+    font-size: 12px; /* Smaller font size for mobile */
+  }
+
+  button {
+    padding: 8px; /* Smaller padding for mobile */
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+
+  .button {
+    padding: 8px 16px; /* Smaller padding for mobile */
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Tablets */
+  .form-container {
+    width: 80%; /* Slightly wider for tablets */
+    max-width: 500px; /* Adjust max-width for tablets */
+  }
+
+  h2 {
+    font-size: 22px; /* Medium font size for tablets */
+  }
+
+  label {
+    font-size: 14px; /* Medium font size for tablets */
+  }
+
+  input {
+    padding: 10px; /* Medium padding for tablets */
+    font-size: 14px; /* Medium font size for tablets */
+  }
+
+  button {
+    padding: 10px; /* Medium padding for tablets */
+    font-size: 16px; /* Medium font size for tablets */
+  }
+
+  .button {
+    padding: 10px 20px; /* Medium padding for tablets */
+    font-size: 16px; /* Medium font size for tablets */
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Small Laptops */
+  .form-container {
+    width: 70%; /* Slightly wider for small laptops */
+    max-width: 600px; /* Adjust max-width for small laptops */
+  }
+
+  h2 {
+    font-size: 24px; /* Standard font size for small laptops */
+  }
+
+  label {
+    font-size: 16px; /* Standard font size for small laptops */
+  }
+
+  input {
+    padding: 12px; /* Standard padding for small laptops */
+    font-size: 16px; /* Standard font size for small laptops */
+  }
+
+  button {
+    padding: 12px; /* Standard padding for small laptops */
+    font-size: 18px; /* Standard font size for small laptops */
+  }
+
+  .button {
+    padding: 12px 24px; /* Standard padding for small laptops */
+    font-size: 18px; /* Standard font size for small laptops */
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Monitors and Large Screens */
+  .form-container {
+    width: 50%; /* Wider for large screens */
+    max-width: 700px; /* Adjust max-width for large screens */
+  }
+
+  h2 {
+    font-size: 26px; /* Larger font size for monitors */
+  }
+
+  label {
+    font-size: 18px; /* Larger font size for monitors */
+  }
+
+  input {
+    padding: 15px; /* Larger padding for monitors */
+    font-size: 18px; /* Larger font size for monitors */
+  }
+
+  button {
+    padding: 15px; /* Larger padding for monitors */
+    font-size: 20px; /* Larger font size for monitors */
+  }
+
+  .button {
+    padding: 15px 30px; /* Larger padding for monitors */
+    font-size: 20px; /* Larger font size for monitors */
+  }
+}
+/* mobile*/
+button:focus,
+input:focus {
+  outline: 2px solid #5b86e5;
+  outline-offset: 2px;
+}

@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
       errorMessage.style.display = "block";
     } else {
       errorMessage.style.display = "none";
-      window.location.href = "/login";
+      window.location.href = "/loginform";
     }
   });
 });

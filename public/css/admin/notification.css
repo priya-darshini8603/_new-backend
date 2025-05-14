@@ -1,0 +1,366 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5b86e5;
+  color: white;
+  padding: 20px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 35px;
+}
+
+.navbar .logo {
+  height: 40px;
+  width: 400px;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icons a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-icons a:hover {
+  color: black;
+}
+
+.notification-count {
+  background-color: #ff6384;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.navbar .nav-icons a .notification-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+#notification-bell {
+  position: relative;
+  margin-right: 40px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: #5b86e5;
+  color: white;
+  position: fixed;
+  left: 0;
+  height: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+  top: 75px;
+  z-index: 1000;
+}
+
+.sidebar a {
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background: #495057;
+}
+
+/* Main Content */
+.container {
+  margin-left: 250px;
+  margin-top: 70px;
+  padding: 20px;
+  flex: 1;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.container h1 {
+  margin-bottom: 20px;
+}
+
+/* Search Bar */
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  border: none;
+  background: #5b86e5;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Notification List */
+.notification-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notification-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-item .profile-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification-item .profile-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.notification-item .profile-info .details p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.notification-item .profile-info .details .name {
+  font-weight: bold;
+}
+
+.notification-item .profile-info .details .designation {
+  color: #777;
+}
+
+.notification-item .notification-content {
+  flex: 1;
+  margin-left: 20px;
+}
+
+/* Popup */
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.popup h2 {
+  margin-top: 0;
+}
+
+.popup .actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.popup .actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup .actions .close {
+  background: #e74c3c;
+  color: white;
+}
+
+.popup .actions .send {
+  background: #27ae60;
+  color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+  /* Mobile Phones */
+  .navbar {
+    padding: 10px;
+  }
+
+  .navbar .logo {
+    width: 200px; /* Smaller logo for mobile */
+  }
+
+  .sidebar {
+    width: 100%; /* Full width for mobile */
+    height: auto;
+    position: relative;
+    top: 0;
+    padding-top: 20px;
+  }
+
+  .container {
+    margin-left: 0; /* Remove margin for mobile */
+    margin-top: 20px;
+    padding: 10px;
+  }
+
+  .search-bar {
+    flex-direction: column; /* Stack search bar elements vertically */
+  }
+
+  .search-bar button {
+    width: 100%; /* Full width for mobile */
+  }
+
+  .notification-item {
+    flex-direction: column; /* Stack notification items vertically */
+    align-items: flex-start;
+  }
+
+  .notification-item .notification-content {
+    margin-left: 0; /* Remove margin for mobile */
+    margin-top: 10px;
+  }
+
+  .popup {
+    width: 90%; /* Wider popup for mobile */
+    padding: 15px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Tablets */
+  .navbar .logo {
+    width: 300px; /* Medium logo for tablets */
+  }
+
+  .sidebar {
+    width: 200px; /* Slightly narrower sidebar for tablets */
+  }
+
+  .container {
+    margin-left: 200px; /* Adjust margin for tablets */
+  }
+
+  .search-bar input {
+    width: 70%; /* Adjust input width for tablets */
+  }
+
+  .popup {
+    width: 70%; /* Adjust popup width for tablets */
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Small Laptops */
+  .navbar .logo {
+    width: 400px; /* Larger logo for small laptops */
+  }
+
+  .sidebar {
+    width: 220px; /* Slightly wider sidebar for small laptops */
+  }
+
+  .container {
+    margin-left: 220px; /* Adjust margin for small laptops */
+  }
+
+  .search-bar input {
+    width: 60%; /* Adjust input width for small laptops */
+  }
+
+  .popup {
+    width: 50%; /* Adjust popup width for small laptops */
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Monitors and Large Screens */
+  .navbar .logo {
+    width: 500px; /* Largest logo for monitors */
+  }
+
+  .sidebar {
+    width: 250px; /* Wider sidebar for large screens */
+  }
+
+  .container {
+    margin-left: 250px; /* Adjust margin for large screens */
+  }
+
+  .search-bar input {
+    width: 50%; /* Adjust input width for large screens */
+  }
+
+  .popup {
+    width: 40%; /* Adjust popup width for large screens */
+  }
+}
+.sidebar-toggle {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #5b86e5;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar-toggle {
+    display: block; /* Show toggle button on small screens */
+  }
+
+  .sidebar {
+    transform: translateX(-100%); /* Hide sidebar by default */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar.active {
+    transform: translateX(0); /* Show sidebar when active */
+  }
+}

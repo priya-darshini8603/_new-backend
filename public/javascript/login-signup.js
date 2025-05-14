@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "/login"; 
     });
   }
-
-  // Handle form submission
-  /*if (loginForm) {
+/*
+  Handle form submission
+  if (loginForm) {
 
     loginForm.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (role === "admin") {
         window.location.href = "/admindash"; 
       } else if (role === "student") {
-        window.location.href = "/student-dashboard"; 
+        window.location.href = "/student/student_home"; 
       } else if (role === "busincharge") {
         window.location.href = "/bus-incharge/busincharge-dashboard"; 
       }

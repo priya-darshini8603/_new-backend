@@ -1,0 +1,207 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for Devices */
+.device-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Device Card */
+.device-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.device-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Grid */
+@media (max-width: 1200px) {
+  .device-card {
+    width: 180px;
+  }
+}
+
+@media (max-width: 992px) {
+  .device-card {
+    width: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .device-card {
+    width: 140px;
+  }
+}
+
+@media (max-width: 576px) {
+  .device-card {
+    width: 100%;
+  }
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5b86e5;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+  height: 40px;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icons a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-icons a:hover {
+  color: black;
+}
+
+.notification-count {
+  background-color: #ff6384;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #5b86e5;
+  position: fixed;
+  left: 0;
+  padding-top: 20px;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: white;
+}
+
+.sidebar i {
+  margin-right: 10px;
+}
+
+/* Main Content */
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  margin-top: 60px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  /* Sidebar */
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  /* Main Content */
+  .content {
+    margin-left: 0;
+  }
+
+  /* Navbar */
+  .navbar {
+    padding: 10px;
+  }
+
+  .nav-icons {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Navbar */
+  .navbar .logo {
+    height: 30px;
+  }
+
+  .nav-icons a {
+    font-size: 14px;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebar a {
+    padding: 10px;
+  }
+
+  /* Main Content */
+  .content {
+    padding: 10px;
+  }
+}
+
+/* Toggle Button for Sidebar (Mobile) */
+.sidebar-toggle {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #5b86e5;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle {
+    display: block;
+  }
+}
