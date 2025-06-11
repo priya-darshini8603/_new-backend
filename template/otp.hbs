@@ -26,7 +26,8 @@
       </header>
       <div id="otp-step">
         <h4>Enter OTP Code</h4>
-        <form id="otp-form" action="/otp" method="POST">
+        <form id="otp-form" action="/verifyotp" method="POST">
+           <input type="hidden" name="email" id="emailField" value="{{email}}"/>
           <div class="input-field">
             <input type="number" required />
             <input type="number" required disabled />
@@ -39,8 +40,13 @@
       </div>
     </div>
   </div>
+ <script>
+  localStorage.setItem("userEmail", "{{email}}");
+  </script>
+  <script src="/js/otp.js">
  
-  <script src="/js/otp.js"></script>
+  </script>
+
 </body>
 
 </html>

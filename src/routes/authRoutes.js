@@ -22,6 +22,7 @@ router.post("/resetpassword",authController.resetpassword);
 router.post("/login",authController.login);
 router.post("/signup",authController.signup);
 router.post("/forgpass",authController.forgpass);
+router.post("/verifyotp", authController.verifyotp);
 
 
 

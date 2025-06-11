@@ -70,13 +70,14 @@ exports.login = async (req, res) => {
         };
 
         const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "60s" });
-        console.log("Generated JWT Token:", token);
+        //console.log("Generated JWT Token:", token);
 
-        res.cookie('token', token, {
+        /*res.cookie('token', token, {
             httpOnly: false,
             secure: false,
             maxAge: 60 * 1000
-        });
+        });*/
+        
 
         if (role === "admin") {
             return res.redirect("/admin/admindashboard");
@@ -128,7 +129,7 @@ exports.forgpass = async (req, res) => {
                 return res.status(500).json({ message: 'Failed to send OTP email!' });
             }
             console.log('OTP email sent: ' + info.response);
-            res.redirect('/otp');
+            res.render('otp',{email});
         });
     } catch (error) {
         console.error(error);
@@ -136,25 +137,49 @@ exports.forgpass = async (req, res) => {
     }
 };
 
+exports.verifyotp = async (req, res) => {
+  const { email, otp } = req.body;
+  
+  try {
+    const record = await OTPCollection.findOne({ email });
+    
+    if (
+      !record ||
+      record.otp !== otp ||
+      new Date() > record.expiresAt
+    ) {
+      return res.render("otp", { email, message: "Invalid or expired OTP." });
+    }
+
+    // OTP valid, render reset password page
+    console.log("resetpassword")
+    res.render("resetpassword", { email});
+  } catch (error) {
+    console.error(error);
+    res.render("otp", { email, message: "Server error verifying OTP." });
+  }
+};
+
 
 // POST /resetpassword
 exports.resetpassword = async (req, res) => {
-  const { email, newPassword, confirmPassword } = req.body;
+  const { email, newpassword, confirmpassword } = req.body;
 
   try {
     // Validate password match
-    if (newPassword !== confirmPassword) {
-      return res.render("resetpassword", { message: "Passwords do not match." });
+    if (newpassword !== confirmpassword) {
+      return res.render("resetpassword",email, { message: "Passwords do not match." });
     }
 
     // Find user
-    const user = await User.findOne({ email });
+    const user = await LogInCollection.findOne({ email });
     if (!user) {
-      return res.render("resetpassword", { message: "User not found." });
+      return res.render("resetpassword",email, { message: "User not found." });
     }
-
+   
     // Hash and update password
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const hashedPassword = await bcrypt.hash(newpassword, 10);
+
     user.password = hashedPassword;
     await user.save();
 

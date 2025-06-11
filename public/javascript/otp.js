@@ -7,6 +7,7 @@ function moveToNext(input, nextIndex) {
   }
 }
 
+
 // Verify OTP
 function verifyOTP() {
   const inputs = document.querySelectorAll(".input-field input");
@@ -19,24 +20,46 @@ function verifyOTP() {
     }
     otp += input.value;
   }
+ let form = document.getElementById("otp-form");
+ // Set OTP value in a hidden field
+  let existing = document.getElementById("otpCombined");
 
-  if (otp) {
-    // You can also send OTP via fetch/AJAX if needed
-    window.location.href = "/resetpassword";
+   if (!existing) {
+    let hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "otp";
+    hiddenInput.id = "otpCombined";
+    hiddenInput.value = otp;
+    form.appendChild(hiddenInput);
+  } else {
+    existing.value = otp;
   }
+  // Set email from localStorage if needed
+  
+  // Submit the form to server for verification
+  form.submit();
 }
 
 // Setup input navigation on load
 document.addEventListener("DOMContentLoaded", () => {
   const inputs = document.querySelectorAll(".input-field input");
-
+   // Handle OTP inputs
   inputs.forEach((input, index) => {
     if (index !== 0) input.disabled = true;
 
     input.addEventListener("input", function () {
       moveToNext(input, index + 1);
     });
+    input.addEventListener("keydown", (e) => {
+      if (
+        e.key === "Backspace" &&
+        input.value.length === 0 &&
+        index > 0
+      ) {
+        inputs[index - 1].focus();
+      }
   });
-
+});
+// Attach the verify button
   document.getElementById("verifyButton").addEventListener("click", verifyOTP);
 });
