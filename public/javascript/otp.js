@@ -34,9 +34,7 @@ function verifyOTP() {
   } else {
     existing.value = otp;
   }
-  // Set email from localStorage if needed
   
-  // Submit the form to server for verification
   form.submit();
 }
 

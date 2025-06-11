@@ -16,7 +16,7 @@ const mongoose = require('./mongodb');
 const authRoutes = require('./routes/authRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 
-const gpsRoutes = require('./routes/gpsroute');
+
 const templatepath = path.join('template');
 
 
@@ -35,12 +35,11 @@ app.set('views', templatepath);
 
 app.use(authRoutes);
 app.use(paymentRoutes);
-app.use(gpsRoutes);
 
 
 
-//app.use(express.static('public'));
-//app.use(express.static('static'));
+
+
 app.use(bodyParser.json());
 
 

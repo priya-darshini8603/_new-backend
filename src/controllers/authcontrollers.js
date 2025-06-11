@@ -69,14 +69,14 @@ exports.login = async (req, res) => {
             role: user.role
         };
 
-        const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "60s" });
-        //console.log("Generated JWT Token:", token);
+        const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+    
 
-        /*res.cookie('token', token, {
+        res.cookie('token', token, {
             httpOnly: false,
             secure: false,
-            maxAge: 60 * 1000
-        });*/
+            maxAge: 3600000
+        });
         
 
         if (role === "admin") {
