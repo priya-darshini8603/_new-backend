@@ -1,8 +1,15 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const session = require("express-session");
 
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
 const http=require('http')
+
 const path = require('path');
 const hbs = require('hbs');
 const cors = require('cors');
@@ -13,12 +20,15 @@ const bodyParser = require('body-parser');
 const mongoose = require('./mongodb');
 
 
+
 const authRoutes = require('./routes/authRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const profileRoutes=require('./routes/profileRoutes');
 
 const templatepath = path.join('template');
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 
 const server = http.createServer(app);

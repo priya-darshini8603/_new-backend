@@ -1,25 +1,27 @@
-const Admin = require("../models/Admin");
+const ProfileCollection = require("../models/profileModel");
 
-// POST /admin/profile/update
-exports.updateProfileAdmin = async (req, res) => {
+exports.profileupdate = async (req, res) => {
   try {
-    const { name, email, password, profilePic } = req.body;
+    const updateData = {
+      fName: req.body.fName,
+      lName: req.body.lName,
+      gender: req.body.gender,
+      phone_num: req.body.phone_num,
+      license_num: req.body.license_num,
+      DOB: req.body.DOB,
+      joined_date: req.body.joined_date,
+      years_of_experience: req.body.years_of_experience,
+      address: req.body.address,
+      postal_code: req.body.postal_code,
+      route_num: req.body.route_num,
+    };
 
-    let admin = await Admin.findOne({ email });
+    await ProfileCollection.updateOne({ email: req.body.email }, { $set: updateData }, { upsert: true });
 
-    if (!admin) {
-      admin = new Admin({ name, email, password, profilePic });
-    } else {
-      admin.name = name;
-      admin.password = password;
-      admin.profilePic = profilePic;
-    }
-
-    await admin.save();
-
-    res.status(200).json({ message: "Profile updated successfully" });
+     res.redirect("/bus-incharge/profile?status=success");
   } catch (err) {
-    console.error("Error updating profile:", err);
-    res.status(500).json({ message: "Error updating profile" });
+    console.error("Profile update error:", err);
+    
+    res.redirect("/bus-incharge/profile");
   }
 };
