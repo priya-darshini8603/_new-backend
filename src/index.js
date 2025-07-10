@@ -26,8 +26,8 @@ const mongoose = require('./mongodb');
 
 const authRoutes = require('./routes/authRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
-const profileRoutes=require('./routes/profileRoutes');
-const countRoutes=require('./routes/countRoutes');
+const businchargeRoutes=require('./routes/businchargeRoutes');
+const adminRoutes=require('./routes/adminRoutes');
 
 const templatepath = path.join('template');
 
@@ -49,8 +49,8 @@ app.set('views', templatepath);
 
 app.use(authRoutes);
 app.use(paymentRoutes);
-app.use(profileRoutes);
-app.use(countRoutes);
+app.use(businchargeRoutes);
+app.use(adminRoutes);
 
 
 

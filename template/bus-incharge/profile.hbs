@@ -242,7 +242,7 @@
                    <input type="hidden" name="route_num" id="route_numHidden" value="{{profile.route_num}}" />
                 </div>
               </div>
-              <button class="edit-btn" onclick="editSection(this, ['route_num'])">Edit ✎</button>
+              <button type="button" class="edit-btn" onclick="editSection(this, ['route_num'])">Edit ✎</button>
             </div>
           </div>
 
@@ -251,7 +251,7 @@
           <div class="section">
             <div class="header">
               <span class="section-title">Personal Information</span>
-              <button class="edit-btn"
+              <button type="button" class="edit-btn"
                 onclick="editSection(this, ['gender', 'phoneNumber', 'licenseNumber', 'dob', 'joinedDate', 'experience'])">Edit
                 ✎</button>
             </div>
@@ -279,7 +279,7 @@
           <div class="section">
             <div class="header">
               <span class="section-title">Address</span>
-              <button class="edit-btn" onclick="editSection(this, ['address', 'postal'])">Edit ✎</button>
+              <button type="button" class="edit-btn" onclick="editSection(this, ['address', 'postal'])">Edit ✎</button>
             </div>
             <div class="profile-details">
               <div class="detail-item"><span class="label">Address:</span><span class="value" id="address">

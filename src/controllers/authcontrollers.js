@@ -93,6 +93,9 @@ exports.login = async (req, res) => {
         } else if (role === "busincharge") {
             return res.redirect("/bus-incharge/busincharge-dashboard");
         }
+        else{
+            return res.redirect("/teacher/teacherhome");
+        }
     } catch (error) {
         console.error("Error during login:", error);
         return res.send('<script>alert("Something went wrong. Please try again later."); window.history.back();</script>');
