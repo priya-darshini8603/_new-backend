@@ -15,7 +15,10 @@ const profileSchema = new mongoose.Schema({
   years_of_experience:String,
   address: String,
   postal_code:String,
-  route_num:String
+  route_num:String,
+  profileImage: {
+  data: Buffer,
+  contentType: String}
   // store base64 or file path
 });
 

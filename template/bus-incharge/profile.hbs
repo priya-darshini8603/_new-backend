@@ -209,7 +209,7 @@
         </div>
 
 <!--changed as per backend -->
-        <form action="/profileupdate" method="POST" id="profileForm">
+        <form action="/profileupdate" method="POST" enctype="multipart/form-data" id="profileForm">
           <input type="hidden" name="email" value="{{profile.email}}" />
           <input type="hidden" name="fName" id="fNameHidden" value="{{profile.fName}}" />
           <input type="hidden" name="lName" id="lNameHidden" value="{{profile.lName}}" />
@@ -221,7 +221,8 @@
   <input type="hidden" name="years_of_experience" id="experienceHidden" value="{{profile.years_of_experience}}" />
   <input type="hidden" name="address" id="addressHidden" value="{{profile.address}}" />
   <input type="hidden" name="postal_code" id="postalHidden" value="{{profile.postal_code}}" />
-  <input type="hidden" name="route_num" id="routeHidden" value="{{profile.route_num}}" />
+  
+ 
         <div class="profile-container">
 
           <!-- Driver Profile -->
@@ -229,17 +230,19 @@
             <div class="header">
               <div class="profile-header">
                 <div class="image-container">
-                  <img id="profilePhoto" src="../images/avatar.png" alt="Profile Photo" class="profile-photo" />
-                  <input type="file" id="fileInput" accept="image/*" style="display: none;" />
-                  <button class="edit-icon" onclick="document.getElementById('fileInput').click()">✎</button>
+                  <img id="profilePhoto"  src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}" alt="Profile Photo" class="profile-photo" />
+                  <input type="file" id="fileInput" accept="image/*" name="profileImage" style="display: none;" />
+                  <button type="button" class="edit-icon" onclick="document.getElementById('fileInput').click()">✎</button>
+                  <button type="submit" class="save-image-btn" id="saveImageBtn" style="display:none;">💾</button>
                 </div>
                 <div class="profile-info">
                   <h2 id="driverName">{{profile.fName}} {{profile.lName}}</h2>
                   <p>Route Driver</p>
-                  <p id="route_num">Route Number: <span>{{profile.route_num}}</span></p>
+                  <p>Route Number: <span id="route_num">{{profile.route_num}}</span></p>
+                   <input type="hidden" name="route_num" id="route_numHidden" value="{{profile.route_num}}" />
                 </div>
               </div>
-              <button class="edit-btn" onclick="editSection(this, ['driverName','route_num'])">Edit ✎</button>
+              <button class="edit-btn" onclick="editSection(this, ['route_num'])">Edit ✎</button>
             </div>
           </div>
 

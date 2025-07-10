@@ -1,5 +1,8 @@
 const ProfileCollection = require("../models/profileModel");
-
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+exports.uploadMiddleware = upload.single("profileImage");
 exports.profileupdate = async (req, res) => {
   try {
     const updateData = {
@@ -14,9 +17,20 @@ exports.profileupdate = async (req, res) => {
       address: req.body.address,
       postal_code: req.body.postal_code,
       route_num: req.body.route_num,
+     
     };
+   if (req.file) {
+      updateData.profileImage = {
+        data: req.file.buffer,
+        contentType: req.file.mimetype
+      };
+    }
 
-    await ProfileCollection.updateOne({ email: req.body.email }, { $set: updateData }, { upsert: true });
+    await ProfileCollection.updateOne(
+      { email: req.body.email },
+      { $set: updateData },
+      { upsert: true }
+    );
 
      res.redirect("/bus-incharge/profile?status=success");
   } catch (err) {

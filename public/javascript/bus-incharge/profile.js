@@ -126,16 +126,18 @@ const urlParams = new URLSearchParams(window.location.search);
 document.getElementById("fileInput").addEventListener("change", function () {
     const file = this.files[0];
     if (file) {
+        document.getElementById("saveImageBtn").style.display = "inline-block";
         const reader = new FileReader();
         reader.onload = function (e) {
             const imageUrl = e.target.result;
-            document.getElementById("profilePhoto").src = imageUrl;
-            localStorage.setItem("profileImage", imageUrl);
-            setTimeout(() => showToast("Profile image updated successfully!", "success"), 100);
+            document.getElementById("profilePhoto").src =imageUrl;
+           
         };
         reader.readAsDataURL(file);
-    } else {
-        setTimeout(() => showToast("Failed to upload image.", "error"), 100);
+
+    } 
+    else{
+        alert("Failed to load image.");
     }
 });
 
