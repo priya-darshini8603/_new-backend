@@ -1,6 +1,8 @@
 const ProfileCollection = require("../models/profileModel");
 
 const multer = require("multer");
+const InquiryCollection=require("../models/inquiryModel");
+
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 exports.uploadMiddleware = upload.single("profileImage");
@@ -40,3 +42,41 @@ exports.profileupdate = async (req, res) => {
     res.redirect("/bus-incharge/profile");
   }
 };
+function generateInquiryRefId() {
+  const year = new Date().getFullYear();
+  const random = Math.random().toString(36).substring(2, 8).toUpperCase();
+  return `INQ${year}-${random}`;
+}
+exports.submitinquiry = async (req, res) => {
+  try {
+    let inquiryRefId;
+    let existing;
+
+    // Ensure unique inquiry_ref_id
+    do {
+      inquiryRefId = generateInquiryRefId();
+      existing = await InquiryCollection.findOne({ inquiry_ref_id: inquiryRefId });
+    } while (existing);
+
+    const newInquiry = new InquiryCollection({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      phone: req.body.phone,
+      email: req.body.email,
+      route: req.body.route,
+      priority: req.body.priority,
+      message: req.body.message,
+      inquiry_ref_id: inquiryRefId
+    });
+
+    await newInquiry.save();
+    res.redirect("/bus-incharge/inquiry"); // or wherever you want to redirect
+  } catch (err) {
+    console.error("Failed to submit inquiry:", err);
+    res.status(500).send("Error saving inquiry");
+  }
+};
+
+
+
+

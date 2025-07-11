@@ -6,6 +6,16 @@ const PaymentCollection = require("../models/paymentModel");
 const businchargeControllers = require("../controllers/businchargecontrollers");
 const loginCollection = require("../models/loginModel"); 
 
+//post methods
+router.post("/profileupdate", businchargeControllers.uploadMiddleware,businchargeControllers.profileupdate);
+router.post("/submitinquiry",businchargeControllers.submitinquiry);
+
+
+
+
+
+
+
 router.get("/bus-incharge/busincharge-dashboard", async (req, res) => {
   try {
     const studentCount = await loginCollection.countDocuments({ role: "student" });
@@ -67,7 +77,7 @@ router.get("/bus-incharge/profile", async (req, res) => {
 
 
 
-router.post("/profileupdate", businchargeControllers.uploadMiddleware,businchargeControllers.profileupdate);
+
 
 router.get("/bus-incharge/busdetails", async (req, res) => {
   try {
@@ -100,10 +110,11 @@ router.get("/bus-incharge/busdetails", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-router.get("/bus-incharge/view-payments/:id", async (req, res) => {
+router.get("/bus-incharge/view-payments/:ref_id", async (req, res) => {
   try {
-    const payment = await PaymentCollection.findById(req.params.id).lean();
+     const payment = await PaymentCollection.findOne({ payment_ref_id: req.params.ref_id }).lean();
     if (!payment) return res.status(404).send("Payment not found");
+   
 
     // Format date
     const date = new Date(payment.createdAt);
@@ -115,6 +126,11 @@ router.get("/bus-incharge/view-payments/:id", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+function generatePaymentRefId() {
+  const year = new Date().getFullYear();
+  const random = Math.random().toString(36).substring(2, 8).toUpperCase();
+  return `PAY-${year}-${random}`;
+}
 router.get("/bus-incharge/view-all-payments",async (req,res)=>{
   try{
   const payments=await PaymentCollection.find().lean()
@@ -145,7 +161,7 @@ router.get("/bus-incharge/staffdetails",async (req,res)=>{
   try{
     //need to change to profile after student page updated
     const staff=await loginCollection.find({role:"teacher"}).lean()
-    console.log(staff)
+    
     res.render("bus-incharge/staffdetails", { staff });
     
   }

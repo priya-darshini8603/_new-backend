@@ -1,15 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const loginCollection = require("../models/loginModel"); 
+const InquiryCollection = require("../models/inquiryModel"); 
+const adminControllers = require("../controllers/admincontrollers");
 // adjust path as needed
+
+router.post("/inquiryupdate/:id",adminControllers.inquiryupdate);
 
 router.get("/admin/admindashboard", async (req, res) => {
   try {
     const studentCount = await loginCollection.countDocuments({ role: "student" });
     const teacherCount = await loginCollection.countDocuments({ role: "teacher" });
     const driverCount = await loginCollection.countDocuments({ role: "busincharge" });
-
-    console.log(driverCount);
     res.render("./admin/admindashboard", { studentCount, teacherCount, driverCount });
   } catch (error) {
     console.error("Error fetching dashboard counts:", error);
@@ -18,49 +20,26 @@ router.get("/admin/admindashboard", async (req, res) => {
 });
 
 
-const multer = require("multer");
-const BusDetails = require("../models/busdetailsModel");
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-
+router.get("/admin/inquiry/status/:status", adminControllers.getInquiriesByStatus);
 router.get("/admin/add-bus", (req, res) => {
   res.render("./admin/addbus");
 });
 
-router.post("/admin/add-bus", upload.single("busImage"), async (req, res) => {
-  try {
-    const {
-      busNumber,
-      routeNumber,
-      totalSeats,
-      availableSeats,
-      pickupPoints,
-      lastServiceDate,
-      nextServiceDate
-    } = req.body;
-
-    const newBus = new BusDetails({
-      busNumber,
-      routeNumber,
-      totalSeats,
-      availableSeats,
-      pickupPoints,
-      lastServiceDate,
-      nextServiceDate,
-      image: req.file.buffer,
-      imageType: req.file.mimetype
-    });
-
-    await newBus.save();
-    
-    res.redirect("/admin/addbus");
-  } catch (err) {
-    console.error("Error adding bus:", err);
-    res.status(500).send("Failed to add bus.");
+router.get("/admin/inquiry",async (req,res)=>{
+  try{
+    const inquiries=await InquiryCollection.find()
+     if (!inquiries || inquiries.length === 0) {
+      console.log("No inquiries found.");
+    }
+     console.log(inquiries);
+    res.render("./admin/inquiry", {inquiries});
+   
   }
-});
-
+  catch{
+    res.status(500).send("Internal Server Error");
+  }
+})
 
 
 

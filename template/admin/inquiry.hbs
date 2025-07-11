@@ -61,7 +61,7 @@
         <i class="fas fa-bell"></i>
         <span>Admin Notification</span>
       </a>
-      <a href="/admin/inquiery">
+      <a href="/admin/inquiry">
         <i class="fas fa-question-circle"></i>
         <span>Inquiry</span>
       </a>
@@ -98,26 +98,28 @@
           <button class="status-tab active" data-status="All">All Inquiries</button>
           <button class="status-tab" data-status="Pending">Pending</button>
           <button class="status-tab" data-status="Ongoing">Ongoing</button>
-          <button class="status-tab" data-status="Completed">Solved</button>
+          <button class="status-tab" data-status="Solved">Solved</button>
         </div>
         <table id="inquiry-table">
           <thead>
+            
             <tr>
               <th>Inquiry ID</th>
               <th>Name</th>
               <th>Email</th>
               <th>Message</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th>Priority</th>
+              <th>Action</th>
+              
             </tr>
           </thead>
-          <tbody>
-            <!-- Rows will be dynamically populated here -->
+          <tbody id="table-body">
+           
           </tbody>
         </table>
       </div>
     </main>
-
-    <script src="/admin/js/inquiry.js"></script>
+  <script src="/admin/js/inquiry.js"></script>
+    
   </body>
 </html>

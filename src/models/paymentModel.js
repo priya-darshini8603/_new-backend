@@ -8,9 +8,19 @@ const paymentSchema = new mongoose.Schema({
   routeNUmber:Number,
   pickupPoint: String,
   amount: Number,
-  paymentId: String,
+  phone_num:Number,
+  razorpay_payment_id: {
+  type: String,
+  required: true
+},
   status: String,
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  payment_ref_id: {
+  type: String,
+  required: true,
+  unique: true
+},
+
 
 });
 

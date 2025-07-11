@@ -1,91 +1,62 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const inquiryForm = document.getElementById("inquiry-form");
-  const inquiryTable = document
-    .getElementById("inquiry-table")
-    .getElementsByTagName("tbody")[0];
   const statusTabs = document.querySelectorAll(".status-tab");
+  const tableBody = document.getElementById("table-body");
 
-  // Retrieve inquiries from localStorage
-  let inquiries = JSON.parse(localStorage.getItem("inquiries")) || [];
+  function renderTableRows(inquiries) {
+    tableBody.innerHTML = "";
 
-  // Function to render the inquiry table
-  function renderTable(filterStatus = "All") {
-    inquiryTable.innerHTML = ""; // Clear the table body
+    if (!inquiries.length) {
+      tableBody.innerHTML = `<tr><td colspan="6">No inquiries found</td></tr>`;
+      return;
+    }
 
-    inquiries
-      .filter(
-        (inquiry) => filterStatus === "All" || inquiry.status === filterStatus
-      )
-      .forEach((inquiry, index) => {
-        const row = inquiryTable.insertRow();
+    inquiries.forEach((inquiry) => {
+   
 
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-        const cell3 = row.insertCell(2);
-        const cell4 = row.insertCell(3);
-        const cell5 = row.insertCell(4);
-        const cell6 = row.insertCell(5);
+      const row = document.createElement("tr");
+      row.setAttribute("data-status", inquiry.status);
 
-        cell1.textContent = index + 1; // Inquiry ID
-        cell2.textContent = inquiry.name;
-        cell3.textContent = inquiry.email;
-        cell4.textContent = inquiry.message;
-        cell5.innerHTML = `<span class="badge ${inquiry.status.toLowerCase()}">${
-          inquiry.status
-        }</span>`;
-        cell6.innerHTML = `
-          <button class="btn btn-sm btn-success" onclick="updateStatus(${index}, 'Completed')">Completed</button>
-          <button class="btn btn-sm btn-warning" onclick="updateStatus(${index}, 'Ongoing')">Ongoing</button>
-          <button class="btn btn-sm btn-danger" onclick="updateStatus(${index}, 'Pending')">Pending</button>
-        `;
+      row.innerHTML = `
+        <td>${inquiry.inquiry_ref_id}</td>
+        <td>${inquiry.first_name || ""} ${inquiry.last_name || ""}</td>
+        <td>${inquiry.email}</td>
+        <td>${inquiry.message}</td>
+        <td>${inquiry.priority|| "-"}</td>
+        <td>
+          <form action="/inquiryupdate/${inquiry._id}" method="POST">
+            <button type="submit" name="status" value="Solved" class="btn btn-success">Solved</button>
+            <button type="submit" name="status" value="Ongoing" class="btn btn-warning">Ongoing</button>
+            <button type="submit" name="status" value="Pending" class="btn btn-danger">Pending</button>
+          </form>
+        </td>
+      `;
+
+      tableBody.appendChild(row);
+    });
+  }
+
+  function fetchInquiries(status) {
+    fetch(`/admin/inquiry/status/${status}`)
+      .then((res) => res.json())
+      .then((data) => renderTableRows(data))
+      .catch((err) => {
+        console.error("Failed to fetch inquiries", err);
+        tableBody.innerHTML = `<tr><td colspan="6">Error loading inquiries</td></tr>`;
       });
   }
 
-  // Function to update the status of an inquiry
-  window.updateStatus = function (index, status) {
-    inquiries[index].status = status;
-
-    // Save updated inquiries to localStorage
-    localStorage.setItem("inquiries", JSON.stringify(inquiries));
-
-    // Re-render the table
-    renderTable();
-  };
-
-  // Handle form submission
-  inquiryForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
-
-    // Add the new inquiry to the array
-    const newInquiry = { name, email, message, status: "Pending" };
-    inquiries.push(newInquiry);
-
-    // Save inquiries to localStorage
-    localStorage.setItem("inquiries", JSON.stringify(inquiries));
-
-    // Re-render the table
-    renderTable();
-
-    // Reset the form
-    inquiryForm.reset();
-  });
-
-  // Handle status tab clicks
+  // Event listener for tabs
   statusTabs.forEach((tab) => {
     tab.addEventListener("click", function () {
       const status = this.dataset.status;
-      renderTable(status);
 
-      // Highlight the active tab
       statusTabs.forEach((t) => t.classList.remove("active"));
       this.classList.add("active");
+
+      fetchInquiries(status);
     });
   });
 
-  // Initial render of the table
-  renderTable();
+  // Initial load
+  fetchInquiries("All");
 });
