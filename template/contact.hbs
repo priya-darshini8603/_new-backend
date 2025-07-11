@@ -19,47 +19,60 @@
 
 <body>
     <div class="container-fluid">
-        <header>
-            <div class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">
-                    <img src="../images/nmit-logo.svg" class="logo" alt="Logo" />
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/admindashboard">Admin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/bus-incharge/busincharge-dashboard">Bus Incharge</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://nitte.edu.in/nmit/about-nmit-bangalore.php">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/routelist">Route List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/payment">Fee Payment</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/loginform">Login/Register</a>
-                        </li>
-                    </ul>
+        <header class="custom-header bg-white shadow sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <!-- Logo -->
+                    <a href="/" class="flex-shrink-0">
+                        <img src="../images/nmit-logo.svg" alt="Logo" class="h-12 w-auto" />
+                    </a>
 
+                    <!-- Hamburger Button (Mobile) -->
+                    <div class="lg:hidden">
+                        <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                            <i class="ri-menu-line text-3xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Nav Links -->
+                    <nav class="hidden lg:flex space-x-6">
+                        <a href="/"
+                            class="text-gray-600 hover:text-primary font-medium no-underline hover:no-underline">Home</a>
+                        <a href="https://nitte.edu.in/nmit/about-nmit-bangalore.php"
+                            class="text-gray-600 hover:text-primary font-medium no-underline hover:no-underline">About</a>
+                        <a href="/routelist"
+                            class="text-gray-600 hover:text-primary font-medium no-underline hover:no-underline">Route
+                            List</a>
+                        <a href="/payment"
+                            class="text-gray-600 hover:text-primary font-medium no-underline hover:no-underline">Fee
+                            Payment</a>
+                        <a href="/contact"
+                            class="text-gray-600 hover:text-primary font-medium no-underline hover:no-underline">Contact</a>
+                        <a href="/loginform"
+                            class="text-gray-600 hover:text-primary font-medium no-underline hover:no-underline">Login/Register</a>
+                    </nav>
                 </div>
             </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="lg:hidden hidden px-4 pb-4 space-y-2 bg-white shadow">
+                <a href="/"
+                    class="block text-gray-700 hover:text-primary font-medium no-underline hover:no-underline">Home</a>
+                <a href="https://nitte.edu.in/nmit/about-nmit-bangalore.php"
+                    class="block text-gray-700 hover:text-primary font-medium no-underline hover:no-underline">About</a>
+                <a href="/routelist"
+                    class="block text-gray-700 hover:text-primary font-medium no-underline hover:no-underline">Route
+                    List</a>
+                <a href="/payment"
+                    class="block text-gray-700 hover:text-primary font-medium no-underline hover:no-underline">Fee
+                    Payment</a>
+                <a href="/contact"
+                    class="block text-gray-700 hover:text-primary font-medium no-underline hover:no-underline">Contact</a>
+                <a href="/loginform"
+                    class="block text-gray-700 hover:text-primary font-medium no-underline hover:no-underline">Login/Register</a>
+            </div>
         </header>
+
 
         <section class="relative bg-gradient-to-br from-primary via-secondary to-blue-50 py-20"
             style="background-image: url('../images/clg-bg.jpg'); background-size: cover; background-position: center;">
@@ -194,8 +207,11 @@
                                             <div class="space-y-3">
                                                 <a href="tel:080 2216 7800"
                                                     class="block p-3 bg-gray-50 rounded-xl hover:bg-primary/5 transition-colors">
-                                                    <p class="text-sm text-gray-500">General Inquiries</p>
-                                                    <p class="text-lg font-semibold text-gray-900">080 2216 7800
+                                                    <p class="text-sm text-gray-500 no-underline hover:no-underline">
+                                                        General Inquiries</p>
+                                                    <p
+                                                        class="text-lg font-semibold text-gray-900 no-underline hover:no-underline">
+                                                        080 2216 7800
                                                     </p>
                                                 </a>
                                             </div>
@@ -228,13 +244,15 @@
                                                 </div>
                                                 <p class="text-gray-900 font-medium mb-2">NMIT Transport Department
                                                 </p>
-                                                <p class="text-gray-600 mb-2">NITTE Campus, 6429, NITTE Meenakshi College Rd, BSF Campus, Yelahanka, Bengaluru, Govindapura, Karnataka 560064</p>
-                                                
+                                                <p class="text-gray-600 mb-2">NITTE Campus, 6429, NITTE Meenakshi
+                                                    College Rd, BSF Campus, Yelahanka, Bengaluru, Govindapura, Karnataka
+                                                    560064</p>
+
                                                 <div class="mt-4 flex items-center text-primary">
                                                     <i class="ri-time-line mr-2"></i>
                                                     <span class="text-sm">Monday - Friday, 8.30AM - 5PM</span>
                                                 </div>
-                                                 <div class="mt-2 flex items-center text-primary">
+                                                <div class="mt-2 flex items-center text-primary">
                                                     <i class="ri-time-line mr-2"></i>
                                                     <span class="text-sm">Saturday, 8.30AM - 1.30PM</span>
                                                 </div>
@@ -257,8 +275,7 @@
                 </div>
                 <div
                     class="bg-white/70 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden border border-indigo-100/20 hover:shadow-2xl transition-all duration-300">
-                    <div class="h-96 bg-cover bg-center relative"
-                        style="background-image: url('../images/map.png');">
+                    <div class="h-96 bg-cover bg-center relative" style="background-image: url('../images/map.png');">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div class="bg-white rounded-full p-4 shadow-lg">
                                 <div class="w-8 h-8 flex items-center justify-center">
@@ -271,11 +288,12 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900">Bus Transportation Facility</h3>
-                                <p class="text-gray-600">NITTE Campus, 6429, NITTE Meenakshi College Rd, BSF Campus, Yelahanka, Bengaluru, Govindapura, Karnataka 560064</p>
+                                <p class="text-gray-600">NITTE Campus, 6429, NITTE Meenakshi College Rd, BSF Campus,
+                                    Yelahanka, Bengaluru, Govindapura, Karnataka 560064</p>
                             </div>
                             <a href="https://maps.app.goo.gl/2RqNKcjKUzHKzDQy6" target="_blank"
                                 rel="noopener noreferrer"
-                                class="bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-blue-400 text-white px-6 py-2 rounded-button transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap transform hover:-translate-y-0.5 inline-block">
+                                class="bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-blue-400 text-white px-6 py-2 rounded-button transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap transform hover:-translate-y-0.5 inline-block no-underline hover:no-underline">
                                 Get Directions
                             </a>
 

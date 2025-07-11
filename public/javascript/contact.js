@@ -68,3 +68,10 @@ tailwind.config = {
         }
     }
 }
+
+ const toggleBtn = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  toggleBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
