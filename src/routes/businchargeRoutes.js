@@ -134,7 +134,7 @@ router.get("/bus-incharge/studentdetails",async (req,res)=>{
     //need to change to profile after student page updated
     const students=await loginCollection.find({role:"student"}).lean()
     res.render("bus-incharge/studentdetails",  {students});
-    console.log(students);
+    
   }
   catch{
     res.status(500).send("Internal Server Error");
@@ -145,6 +145,7 @@ router.get("/bus-incharge/staffdetails",async (req,res)=>{
   try{
     //need to change to profile after student page updated
     const staff=await loginCollection.find({role:"teacher"}).lean()
+    console.log(staff)
     res.render("bus-incharge/staffdetails", { staff });
     
   }

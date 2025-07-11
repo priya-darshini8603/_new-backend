@@ -107,7 +107,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/bus-incharge/logout">
+                    <a href="/loginform">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -134,7 +134,7 @@
                             <img src="../images/avatar.png" alt="User Menu" id="avatar" class="avatar"></img></div>
                         <div class="collapse-menu" id="collapseMenu">
                             <a href="/bus-incharge/profile">View Profile</a>
-                            <a href="/bus-incharge/logout">Log Out</a>
+                            <a href="/loginform">Log Out</a>
                         </div>
 
                     </div>
@@ -216,51 +216,17 @@
 
                 <div class="staff-card-container">
                     <!-- Student Card 1 -->
+                    {{#each staff}}
                     <div class="staff-card">
                         <img src="../images/avatar.png" alt="Teacher Image" class="staff-image">
-                        <h3>Priya Darshini I</h3>
-                        <p><strong>Teacher ID:</strong> 67976</p>
-                        <p><strong>Designation:</strong> Assistant Professor</p>
-                        <p><strong>Branch:</strong> Computer Science</p>
-                        <p><strong>Pickup Point:</strong> Yelahanka</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
+                        <h3>{{fName}}{{lName}}</h3>
+                        <p><strong>Teacher ID:</strong> </p>
+                        <p><strong>Designation:</strong> {{designation}}</p>
+                        <p><strong>Branch:</strong> {{branch}}</p>
+                        <p><strong>Pickup Point:</strong>{{pickupPoint}}</p>
+                        <p><strong>Phone Number:</strong>{{phone_num}}</p>
                     </div>
-                    <div class="staff-card">
-                        <img src="../images/avatar.png" alt="Teacher Image" class="staff-image">
-                        <h3>Priya</h3>
-                        <p><strong>Teacher ID:</strong> 67976</p>
-                        <p><strong>Designation:</strong> Assistant Professor</p>
-                        <p><strong>Branch:</strong> Computer Science</p>
-                        <p><strong>Pickup Point:</strong> Yelahanka</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
-                    </div>
-                    <div class="staff-card">
-                        <img src="../images/avatar.png" alt="Staff Image" class="staff-image">
-                        <h3>Himanchi</h3>
-                        <p><strong>Teacher ID:</strong> 67976</p>
-                        <p><strong>Designation:</strong> Assistant Professor</p>
-                        <p><strong>Branch:</strong> Computer Science</p>
-                        <p><strong>Pickup Point:</strong> Yelahanka</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
-                    </div>
-                    <div class="staff-card">
-                        <img src="../images/avatar.png" alt="Staff Image" class="staff-image">
-                        <h3>Aswini</h3>
-                        <p><strong>Teacher ID:</strong> 67976</p>
-                        <p><strong>Designation:</strong> Assistant Professor</p>
-                        <p><strong>Branch:</strong> Computer Science</p>
-                        <p><strong>Pickup Point:</strong> Yelahanka</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
-                    </div>
-                    <div class="staff-card">
-                        <img src="../images/avatar.png" alt="Staff Image" class="staff-image">
-                        <h3>Neha</h3>
-                        <p><strong>Teacher ID:</strong> 67976</p>
-                        <p><strong>Designation:</strong> Assistant Professor</p>
-                        <p><strong>Branch:</strong> Computer Science</p>
-                        <p><strong>Pickup Point:</strong> Yelahanka</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
 
