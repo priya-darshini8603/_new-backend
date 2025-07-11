@@ -215,80 +215,24 @@
                 </div>
 
                 <div class="student-card-container">
-                    <!-- Student Card 1 -->
+                   <!-- Student Card 1 -->
+                   
+                   {{#each students}}
                     <div class="student-card">
                         <img src="../images/avatar.png" alt="Student Image" class="student-image">
-                        <h3>Priya Darshini I</h3>
-                        <p><strong>Student ID:</strong> 67976</p>
-                        <p><strong>USN:</strong> 1NT22CS146</p>
-                        <p><strong>Branch:</strong> Computer Science</p>
-                        <p><strong>Semester:</strong> 5th</p>
-                        <p><strong>Pickup Point:</strong> Yelahanka</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
+                        <h3>{{fName}}{{lName}}</h3>
+                        <p><strong>USN:</strong>{{usn}}</p>
+                        <p><strong>Branch:</strong>{{branch}}</p>
+                        <p><strong>Semester:</strong>{{semester}}</p>
+                        <p><strong>Pickup Point:</strong>{{pickupPoint}}</p>
+                        <p><strong>Phone Number:</strong>{{phone_num}}</p>
                         <p class="payment-status paid">Payment Status: Paid</p>
                     </div>
-
-                    <!-- Student Card 2 -->
-                    <div class="student-card">
-                        <img src="../images/avatar.png" alt="Student Image" class="student-image">
-                        <h3>Aswini</h3>
-                        <p><strong>Student ID:</strong> 67976</p>
-                        <p><strong>USN:</strong> 1NT22ME123</p>
-                        <p><strong>Branch:</strong> Mechanical Engineering</p>
-                        <p><strong>Semester:</strong> 7th</p>
-                        <p><strong>Pickup Point:</strong> Hebbal</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
-                        <p class="payment-status unpaid">Payment Status: Unpaid</p>
-                    </div>
-
-                    <!-- Student Card 3 -->
-                    <div class="student-card">
-                        <img src="../images/avatar.png" alt="Student Image" class="student-image">
-                        <h3>Pavani</h3>
-                        <p><strong>Student ID:</strong> 67976</p>
-                        <p><strong>USN:</strong> 1NT22EC456</p>
-                        <p><strong>Branch:</strong> Electronics and Communication</p>
-                        <p><strong>Semester:</strong> 3rd</p>
-                        <p><strong>Pickup Point:</strong> RT Nagar</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
-                        <p class="payment-status paid">Payment Status: Paid</p>
-                    </div>
-                    <div class="student-card">
-                        <img src="../images/avatar.png" alt="Student Image" class="student-image">
-                        <h3>Darshini</h3>
-                        <p><strong>Student ID:</strong> 67976</p>
-                        <p><strong>USN:</strong> 1NT22CS143</p>
-                        <p><strong>Branch:</strong> Computer Science</p>
-                        <p><strong>Semester:</strong> 5th</p>
-                        <p><strong>Pickup Point:</strong> Yelahanka</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
-                        <p class="payment-status paid">Payment Status: Paid</p>
-                    </div>
-                    <div class="student-card">
-                        <img src="../images/avatar.png" alt="Student Image" class="student-image">
-                        <h3>Neha</h3>
-                        <p><strong>Student ID:</strong> 67976</p>
-                        <p><strong>USN:</strong> 1NT22CS142</p>
-                        <p><strong>Branch:</strong> Computer Science</p>
-                        <p><strong>Semester:</strong> 5th</p>
-                        <p><strong>Pickup Point:</strong> Yelahanka</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
-                        <p class="payment-status paid">Payment Status: Paid</p>
-                    </div>
-                    <div class="student-card">
-                        <img src="../images/avatar.png" alt="Student Image" class="student-image">
-                        <h3>Ila</h3>
-                        <p><strong>Student ID:</strong> 67976</p>
-                        <p><strong>USN:</strong> 1NT22CS146</p>
-                        <p><strong>Branch:</strong> Computer Science</p>
-                        <p><strong>Semester:</strong> 5th</p>
-                        <p><strong>Pickup Point:</strong> Yelahanka</p>
-                        <p><strong>Phone Number:</strong> 8122332228</p>
-                        <p class="payment-status unpaid">Payment Status: Unpaid</p>
-                    </div>
-                </div>
+                    
+                   {{/each}}
+  
             </div>
-
+ 
         </main>
         <footer class="bg-body-tertiary text-center">
             <div class="rights text-center p-3">

@@ -1,94 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Razorpay Payment</title>
+  <title>Student Payment</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
-  <h1>Enter Route and Email to Pay</h1>
-  <form id="paymentForm">
-    <label for="route">Route:</label>
-    <input type="text" id="route" name="route" required />
-    <br /><br />
+  <h2>Student Bus Payment</h2>
+  <form id="paymentForm" method="POST" action="/razorpay/submit">
+    <label>Name:</label><input type="text" name="studentName" required><br>
+    <label>USN:</label><input type="text" name="usn" required><br>
+    <label>Branch:</label><input type="text" name="branch" required><br>
+    <label>Semester:</label><input type="text" name="semester" required><br>
+    <label>Email:</label><input type="email" name="email" required><br>
+    <label>Pickup Point:</label><input type="text" name="pickupPoint" required><br>
+    <label>Amount (₹):</label><input type="number" name="amount" required><br><br>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required />
-    <br /><br />
-
-    <label for="amount">Amount (₹):</label>
-    <input type="number" id="amount" name="amount" required />
-    <br /><br />
-
-    <button type="submit">Pay Now</button>
+    <button type="button" onclick="payNow()">Pay Now</button>
   </form>
 
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
-    document.getElementById('paymentForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
+    function payNow() {
+      const form = document.getElementById('paymentForm');
+      const formData = new FormData(form);
+      const amount = formData.get("amount") * 100; // Convert to paise
 
-      const route = document.getElementById('route').value;
-      const email = document.getElementById('email').value;
-      const amount = document.getElementById('amount').value;
-
-      // Create Order
-      const response = await fetch('http://localhost:4000/create-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ route,email,amount }),
-      });
-
-      const data = await response.json();
-      
-      if (!data.success) {
-        alert('Failed to create order: ' + data.message);
-        return;
-      }
-
-      const { order } = data;
-
-      // Razorpay options
       const options = {
-        key: 'rzp_test_XLEobc5mihNeOK', // Replace with your test Key ID
-        amount: order.amount, // Amount in paise
-        currency: order.currency,
-        orderId: order.id,
+        key: 'rzp_test_XLEobc5mihNeOK', // Replace with your Razorpay key
+        amount: amount,
+        currency: 'INR',
         name: 'Bus Payment',
-        description: `Payment for route: ${route}`,
-        handler: async function (response) {
-          console.log('Razorpay Response:', response); // Log the response object
-
-          // Check if all the required fields exist
-          if (response.razorpay_payment_id && response.razorpay_order_id && response.razorpay_signature) {
-            // Proceed with payment verification
-            const verifyResponse = await fetch('http://localhost:4000/verify-payment', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_signature: response.razorpay_signature,
-              }),
-            });
-
-            const verifyData = await verifyResponse.json();
-            
-            if (verifyData.success) {
-              alert('Payment successful!');
-            } else {
-              alert('Payment verification failed!');
-            }
-          } else {
-            alert('Incomplete payment response received.',response);
-          }
+        description: 'Student Bus Payment',
+        handler: function (response) {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = "razorpay_payment_id";
+          input.value = response.razorpay_payment_id;
+          form.appendChild(input);
+          form.submit();
         },
         prefill: {
-          email: email,
-        },
+          email: formData.get("email")
+        }
       };
 
       const rzp = new Razorpay(options);
       rzp.open();
-    });
+    }
   </script>
 </body>
 </html>

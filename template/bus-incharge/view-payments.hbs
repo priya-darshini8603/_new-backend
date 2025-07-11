@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/bus-incharge/logout">
+                    <a href="/loginform">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -213,23 +213,22 @@
                     <span>/</span>
                 </div>
                 <div class="payment-details">
-                    <div class="detail-item"><span class="label">Student Name:</span><span class="value">Priya Darshini
-                            I</span></div>
-                    <div class="detail-item"><span class="label">ID:</span><span class="value">12345</span></div>
-                    <div class="detail-item"><span class="label">USN:</span><span class="value">1NT22CS146</span></div>
-                    <div class="detail-item"><span class="label">Branch:</span><span class="value">Computer
-                            Science</span></div>
-                    <div class="detail-item"><span class="label">Semester:</span><span class="value">5</span></div>
-                    <div class="detail-item"><span class="label">Pickup Point:</span><span class="value">Devaiah
-                            Park</span></div>
+                    <div class="detail-item"><span class="label">Student Name:</span><span class="value">{{payment.studentName}}
+                            </span></div>
+                    <div class="detail-item"><span class="label">ID:</span><span class="value">{{payment._id}}</span></div>
+                    <div class="detail-item"><span class="label">USN:</span><span class="value">{{payment.usn}}</span></div>
+                    <div class="detail-item"><span class="label">Branch:</span><span class="value">{{payment.branch}}</span></div>
+                    
+                    <div class="detail-item"><span class="label">Semester:</span><span class="value">{{payment.semester}}</span></div>
+                    <div class="detail-item"><span class="label">Pickup Point:</span><span class="value">{{payment.pickupPoint}}</span></div>
                     <div class="detail-item"><span class="label">Phone Number:</span><span
                             class="value">7654334567</span></div>
-                    <div class="detail-item"><span class="label">Receipt No:</span><span class="value">REC2024001</span>
+                    <div class="detail-item"><span class="label">Receipt No:</span><span class="value"></span>
                     </div>
-                    <div class="detail-item"><span class="label">Paid Date:</span><span class="value">01-02-2025</span>
+                    <div class="detail-item"><span class="label">Paid Date:</span><span class="value">{{payment.formattedDate}}</span>
                     </div>
                     <div class="detail-item"><span class="label">Due Amount:</span><span class="value">₹ 0</span></div>
-                    <div class="detail-item"><span class="label">Amount Paid:</span><span class="value">₹ 30,000</span>
+                    <div class="detail-item"><span class="label">Amount Paid:</span><span class="value">{{payment.amount}}</span>
                     </div>
                 </div>
 

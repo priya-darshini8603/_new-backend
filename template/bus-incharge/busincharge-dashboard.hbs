@@ -245,6 +245,7 @@
                         <h2>Recent Payments</h2>
                         <a href="/bus-incharge/view-all-payments" class="d-btn">View All</a>
                     </header>
+                   
                     <table>
                         <thead>
                             <tr>
@@ -260,53 +261,43 @@
                             </tr>
                         </thead>
                         <tbody>
+                             {{#each payments}}
                             <tr>
-                                <td>12345</td>
-                                <td>Priya</td>
-                                <td>123</td>
-                                <td>CSE</td>
-                                <td>3rd SEM</td>
-                                <td>DEVAIAH PARK</td>
-                                <td>Rs 30000</td>
-                                <td>12-09-2025</td>
-                                <td><a href="/bus-incharge/view-payments" class="d-btn">View</a></td>
+                                <td>{{_id}}</td>
+                                <td>{{studentName}}</td>
+                                <td>{{usn}}</td>
+                                <td>{{branch}}</td>
+                                <td>{{semester}}</td>
+                                <td>{{pickupPoint}}</td>
+                                <td>{{amount}}</td>
+                                <td>{{createdAtFormatted}}</td>
+                                <td><a href="/bus-incharge/view-payments/{{_id}}" class="d-btn">View</a></td>
                             </tr>
-                            <tr>
-                                <td>23456</td>
-                                <td>Aswini</td>
-                                <td>12345</td>
-                                <td>CSE</td>
-                                <td>3rd SEM</td>
-                                <td>DEVAIAH PARK</td>
-                                <td>Rs 30000</td>
-                                <td>30-10-2025</td>
-                                <td><a href="/bus-incharge/view-payments" class="d-btn">View</a></td>
-                            </tr>
+                             {{/each}}
                         </tbody>
                     </table>
+                   
                 </div>
                 <div class="recentCustomers">
                     <header class="cardHeader">
                         <h2>New Students And Teachers</h2>
                     </header>
+                    {{#each newUsers}}
                     <table>
                         <tr>
                             <td width="60px">
-                                <div class="imgBx"><img src="../images/avatar.png" alt="Student"></div>
+                                <div class="imgBx"><img src="{{#if this.profileImageBase64}}data:{{this.profileImageType}};base64,{{this.profileImageBase64}}{{else}}../images/avatar.png{{/if}}"
+                                alt="{{this.role}}"></div>
                             </td>
                             <td>
-                                <h4>Pavani<br><span>Malleshwaram</span><br><span>Student</span></h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="imgBx"><img src="../images/avatar.png" alt="Staff"></div>
-                            </td>
-                            <td>
-                                <h4>Neha<br><span>Rajajinagar</span><br><span>Staff</span></h4>
+                                 <h4>{{this.fName}}<br>
+                                        <span>{{this.pickupPoint}}</span><br>
+                                        <span>{{#if (eq this.role "teacher")}}Teacher{{else}}Student{{/if}}</span>
+                                </h4>
                             </td>
                         </tr>
                     </table>
+                    {{/each}}
                 </div>
             </section>
         </main>

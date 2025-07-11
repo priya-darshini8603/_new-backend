@@ -51,6 +51,9 @@ app.use(authRoutes);
 app.use(paymentRoutes);
 app.use(businchargeRoutes);
 app.use(adminRoutes);
+hbs.registerHelper('eq', function (a, b) {
+  return a === b;
+});
 
 
 
