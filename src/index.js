@@ -2,11 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const session = require("express-session");
-
+const MongoStore = require('connect-mongo');
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: 'mongodb://localhost:27017/SAMPLE_PRJ',
+    ttl: 60 * 60// session time to live in seconds
+  }),
   cookie: {
     maxAge: 60 * 60 * 1000  // 1 hour = 60 min * 60 sec * 1000 ms
   }

@@ -29,6 +29,7 @@ router.post("/razorpay/submit", async (req, res) => {
       email,
       pickupPoint,
       amount,
+      phone_num,
       razorpay_payment_id,
     } = req.body;
 
@@ -51,6 +52,7 @@ router.post("/razorpay/submit", async (req, res) => {
       email,
       pickupPoint,
       amount,
+      phone_num,
       razorpay_payment_id,
       payment_ref_id: paymentRefId,
       receiptId: `REC${Math.floor(Math.random() * 1000000)}`,

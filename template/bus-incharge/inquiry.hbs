@@ -132,7 +132,7 @@
 
                     <div class="right-section">
                         <div class="user">
-                            <img src="../images/avatar.png" alt="User Menu" id="avatar" class="avatar"></img></div>
+                            <img src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}" alt="User Menu" id="avatar" class="avatar"></img></div>
                         <div class="collapse-menu" id="collapseMenu">
                             <a href="/bus-incharge/profile">View Profile</a>
                             <a href="/loginform">Log Out</a>

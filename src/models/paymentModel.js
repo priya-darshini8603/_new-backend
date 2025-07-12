@@ -8,7 +8,7 @@ const paymentSchema = new mongoose.Schema({
   routeNUmber:Number,
   pickupPoint: String,
   amount: Number,
-  phone_num:Number,
+  phone_num:{type:String},
   razorpay_payment_id: {
   type: String,
   required: true

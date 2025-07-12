@@ -222,8 +222,8 @@
                     <div class="detail-item"><span class="label">Semester:</span><span class="value">{{payment.semester}}</span></div>
                     <div class="detail-item"><span class="label">Pickup Point:</span><span class="value">{{payment.pickupPoint}}</span></div>
                     <div class="detail-item"><span class="label">Phone Number:</span><span
-                            class="value">7654334567</span></div>
-                    <div class="detail-item"><span class="label">Receipt No:</span><span class="value"></span>
+                            class="value">{{payment.phone_num}}</span></div>
+                    <div class="detail-item"><span class="label">Receipt No:</span>{{payment.razorpay_payment_id}}<span class="value"></span>
                     </div>
                     <div class="detail-item"><span class="label">Paid Date:</span><span class="value">{{payment.formattedDate}}</span>
                     </div>
