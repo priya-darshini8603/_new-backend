@@ -6,10 +6,11 @@ const PaymentCollection = require("../models/paymentModel");
 const businchargeControllers = require("../controllers/businchargecontrollers");
 const loginCollection = require("../models/loginModel"); 
 const mongoose = require("mongoose");
+
 //post methods
 router.post("/profileupdate", businchargeControllers.uploadMiddleware,businchargeControllers.profileupdate);
 router.post("/submitinquiry",businchargeControllers.submitinquiry);
-
+router.get("/busincharge/chat", businchargeControllers.renderChatPage);
 
 
 
@@ -57,7 +58,7 @@ router.get("/bus-incharge/busincharge-dashboard", async (req, res) => {
 const payments = await PaymentCollection
   .find()
   .sort({ createdAt: -1 }) // sort newest first
-  .limit(2)
+  .limit(5)
 payments.forEach(payment => {
   if (payment.createdAt) {
     const date = new Date(payment.createdAt);
@@ -221,7 +222,7 @@ router.get("/bus-incharge/schedule", async (req, res) => {
     const busData = await mongoose.connection.db
       .collection("routelists") // your route list collection name
       .findOne({ routeNumber:"profile.route_num"});
-    console.log(busData);
+    
     res.render("bus-incharge/schedule", {
       pickupPoints: busData?.pickupSchedule || [],
     });

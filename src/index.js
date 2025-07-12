@@ -16,6 +16,36 @@ app.use(session({
   }
 }));
 const http=require('http')
+const Message = require('./models/Message');
+//for chatting
+const { Server } = require('socket.io');
+const server = http.createServer(app);
+const io = new Server(server);
+io.on('connection', async (socket) => {
+  console.log('A user connected');
+
+  const previousMessages = await Message.find().sort({ createdAt: 1 });
+  previousMessages.forEach(msg => {
+    socket.emit("message", {
+      user: msg.sender,
+      text: msg.text,
+      time: msg.createdAt.toLocaleTimeString(),
+    });
+  });
+
+  socket.on('chatMessage', async msg => {
+     const newMsg = await Message.create({ sender: "You", text: msg });
+        io.emit("message", {
+            user: newMsg.sender,
+            text:newMsg.text,
+            time: newMsg.createdAt.toLocaleTimeString(),
+        });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+});
 
 const path = require('path');
 const hbs = require('hbs');
@@ -39,7 +69,7 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 
-const server = http.createServer(app);
+
 //praser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -81,6 +111,6 @@ app.use('/admin/js', express.static('public/javascript/admin'));
 app.use('/', express.static('public/css/student'));
 
 
-app.listen(4000, () => {
+server.listen(4000, () => {
   console.log('Server running on port 4000');
 });

@@ -293,10 +293,12 @@
   
   .my_msg {
     justify-content: flex-end;
+    display:flex;
   }
   
   .friend_msg {
-    justify-content: flex-start;
+  justify-content: flex-start;
+  display:flex;
   }
   
   .friend_msg p {
