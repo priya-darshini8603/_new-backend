@@ -5,7 +5,7 @@ const ProfileCollection = require("../models/profileModel");
 const PaymentCollection = require("../models/paymentModel");
 const businchargeControllers = require("../controllers/businchargecontrollers");
 const loginCollection = require("../models/loginModel"); 
-
+const mongoose = require("mongoose");
 //post methods
 router.post("/profileupdate", businchargeControllers.uploadMiddleware,businchargeControllers.profileupdate);
 router.post("/submitinquiry",businchargeControllers.submitinquiry);
@@ -14,6 +14,31 @@ router.post("/submitinquiry",businchargeControllers.submitinquiry);
 
 
 
+
+// Middleware: applies to all /bus-incharge/* routes
+router.use("/bus-incharge", async (req, res, next) => {
+  try {
+    const email = req.session?.user?.email;
+    if (!email) return res.redirect("/loginform");
+
+    const profile = await ProfileCollection.findOne({ email });
+
+    if (profile?.profileImage?.data) {
+      const profileImageBase64 = profile.profileImage.data.toString("base64");
+      const profileImageType = profile.profileImage.contentType || "image/jpeg";
+      res.locals.profileImageBase64 = profileImageBase64;
+      res.locals.profileImageType = profileImageType;
+    } else {
+      res.locals.profileImageBase64 = null;
+      res.locals.profileImageType = "image/jpeg";
+    }
+
+    next();
+  } catch (error) {
+    console.error("Bus-incharge profile image middleware error:", error);
+    res.status(500).send("Something went wrong");
+  }
+});
 
 
 router.get("/bus-incharge/busincharge-dashboard", async (req, res) => {
@@ -38,19 +63,8 @@ payments.forEach(payment => {
     const date = new Date(payment.createdAt);
     payment.createdAtFormatted = date.toLocaleDateString('en-GB'); // DD-MM-YYYY
   }
-});
-const email = req.query.email || req.session?.user?.email;
-const profile = await ProfileCollection.findOne({ email })// Important: .lean() converts it to plain object
-
-  let profileImageBase64 = null;
-  let profileImageType = "image/jpeg";
-  if (profile?.profileImage?.data) {
-      profileImageBase64 = profile.profileImage.data.toString("base64");
-      profileImageType = profile.profileImage.contentType || "image/jpeg";
-    }
-
-    
-    res.render("./bus-incharge/busincharge-dashboard", { studentCount, teacherCount, driverCount,paidCount,unpaidCount,payments,newUsers:allNewUsers,profileImageBase64,profileImageType });
+}); 
+res.render("./bus-incharge/busincharge-dashboard", { studentCount, teacherCount, driverCount,paidCount,unpaidCount,payments,newUsers:allNewUsers });
   } catch (error) {
     console.error("Error fetching dashboard counts:", error);
     res.status(500).send("Internal Server Error");
@@ -86,18 +100,18 @@ router.get("/bus-incharge/profile", async (req, res) => {
 
 router.get("/bus-incharge/busdetails", async (req, res) => {
   try {
-    const email = req.session?.user?.email; // or req.query.email if using query
+     const email = req.session?.user?.email;
     if (!email) return res.redirect("/loginform");
 
-    // Get assigned route number for the busincharge
+    // Step 1: Get bus-incharge's profile
     const profile = await ProfileCollection.findOne({ email });
-    const assignedRouteNumber = Number(profile?.route_num); 
-     let profileImageBase64 = null;
-  let profileImageType = "image/jpeg";
-  if (profile?.profileImage?.data) {
-      profileImageBase64 = profile.profileImage.data.toString("base64");
-      profileImageType = profile.profileImage.contentType || "image/jpeg";
+
+    if (!profile || !profile.route_num) {
+      return res.status(404).send("No assigned route found for this user.");
     }
+
+    const assignedRouteNumber = profile.route_num;
+    // Get assigned route number for the busincharge 
     const bus = await BusCollection.findOne({ routeNumber: assignedRouteNumber });
     
   let busImageBase64 = null;
@@ -109,8 +123,6 @@ router.get("/bus-incharge/busdetails", async (req, res) => {
     }
 
     res.render("./bus-incharge/busdetails", {
-      profileImageBase64,
-      profileImageType,
       bus,
       busImageBase64,
       busImageType,
@@ -126,15 +138,8 @@ router.get("/bus-incharge/busdetails", async (req, res) => {
 
 router.get("/bus-incharge/view-payments/:ref_id", async (req, res) => {
   try {
-    const email = req.query.email || req.session?.user?.email;
-      const profile = await ProfileCollection.findOne({ email })// Important: .lean() converts it to plain object
-
-  let profileImageBase64 = null;
-  let profileImageType = "image/jpeg";
-  if (profile?.profileImage?.data) {
-      profileImageBase64 = profile.profileImage.data.toString("base64");
-      profileImageType = profile.profileImage.contentType || "image/jpeg";
-    }
+    
+    
      const payment = await PaymentCollection.findOne({ payment_ref_id: req.params.ref_id }).lean();
     if (!payment) return res.status(404).send("Payment not found");
    
@@ -143,7 +148,7 @@ router.get("/bus-incharge/view-payments/:ref_id", async (req, res) => {
     const date = new Date(payment.createdAt);
     payment.formattedDate = date.toLocaleDateString('en-GB'); // dd-mm-yyyy
     
-    res.render("bus-incharge/view-payments", { payment,profileImageBase64,profileImageType });
+    res.render("bus-incharge/view-payments", { payment});
   } catch (err) {
     console.error("Error fetching payment:", err);
     res.status(500).send("Internal Server Error");
@@ -158,22 +163,14 @@ function generatePaymentRefId() {
 
 router.get("/bus-incharge/view-all-payments",async (req,res)=>{
   try{
-    const email = req.query.email || req.session?.user?.email;
-    const profile = await ProfileCollection.findOne({ email })// Important: .lean() converts it to plain object
-
-  let profileImageBase64 = null;
-  let profileImageType = "image/jpeg";
-  if (profile?.profileImage?.data) {
-      profileImageBase64 = profile.profileImage.data.toString("base64");
-      profileImageType = profile.profileImage.contentType || "image/jpeg";
-    }
+   
   const payments=await PaymentCollection.find().lean()
    payments.forEach(payment => {
       const date = new Date(payment.createdAt);
       payment.formattedDate = !isNaN(date) ? date.toLocaleDateString('en-GB') : 'N/A';
     });
     
-  res.render("bus-incharge/view-all-payments", { payments,profileImageBase64,profileImageType });
+  res.render("bus-incharge/view-all-payments", { payments });
   }
   catch{
     res.status(500).send("Internal Server Error");
@@ -183,18 +180,10 @@ router.get("/bus-incharge/view-all-payments",async (req,res)=>{
 
 router.get("/bus-incharge/studentdetails",async (req,res)=>{
   try{
-    const email = req.query.email || req.session?.user?.email;
-    const profile = await ProfileCollection.findOne({ email })// Important: .lean() converts it to plain object
-
-  let profileImageBase64 = null;
-  let profileImageType = "image/jpeg";
-  if (profile?.profileImage?.data) {
-      profileImageBase64 = profile.profileImage.data.toString("base64");
-      profileImageType = profile.profileImage.contentType || "image/jpeg";
-    }
+   
     //need to change to profile after student page updated
     const students=await loginCollection.find({role:"student"}).lean()
-    res.render("bus-incharge/studentdetails",  {students,profileImageBase64,profileImageType});
+    res.render("bus-incharge/studentdetails",  {students});
     
   }
   catch{
@@ -205,19 +194,11 @@ router.get("/bus-incharge/studentdetails",async (req,res)=>{
 
 router.get("/bus-incharge/staffdetails",async (req,res)=>{
   try{
-    const email = req.query.email || req.session?.user?.email;
-    const profile = await ProfileCollection.findOne({ email })// Important: .lean() converts it to plain object
-
-  let profileImageBase64 = null;
-  let profileImageType = "image/jpeg";
-  if (profile?.profileImage?.data) {
-      profileImageBase64 = profile.profileImage.data.toString("base64");
-      profileImageType = profile.profileImage.contentType || "image/jpeg";
-    }
+    
     //need to change to profile after student page updated
     const staff=await loginCollection.find({role:"teacher"}).lean()
     
-    res.render("bus-incharge/staffdetails", { staff,profileImageBase64,profileImageType });
+    res.render("bus-incharge/staffdetails", { staff });
     
   }
   catch{
@@ -225,28 +206,31 @@ router.get("/bus-incharge/staffdetails",async (req,res)=>{
   }
 });
 
-router.get("/bus-incharge/inquiry", async (req, res) => {
+router.get("/bus-incharge/schedule", async (req, res) => {
   try {
-    const email = req.query.email || req.session?.user?.email;
-   
-    if (!email) return res.redirect("/loginform")
-    
-   const profile = await ProfileCollection.findOne({ email })// Important: .lean() converts it to plain object
+    const email = req.session?.user?.email;
+    if (!email) return res.redirect("/loginform");
 
-  let profileImageBase64 = null;
-  let profileImageType = "image/jpeg";
-  if (profile?.profileImage?.data) {
-      profileImageBase64 = profile.profileImage.data.toString("base64");
-      profileImageType = profile.profileImage.contentType || "image/jpeg";
-    }
+    const profile = await ProfileCollection.findOne({ email });
+    const routeNumber = profile?.route_num;
 
-   
+    if (!routeNumber) return res.status(404).send("No route assigned");
+
+    //connect directly from database stored collection
     
-    res.render("./bus-incharge/inquiry", { profileImageBase64,profileImageType });
+    const busData = await mongoose.connection.db
+      .collection("routelists") // your route list collection name
+      .findOne({ routeNumber:"profile.route_num"});
+    console.log(busData);
+    res.render("bus-incharge/schedule", {
+      pickupPoints: busData?.pickupSchedule || [],
+    });
   } catch (err) {
-    console.error("Error loading profile:", err);
+    console.error("Error loading pickup points:", err);
     res.status(500).send("Internal Server Error");
   }
 });
+
+
 
 module.exports = router;

@@ -214,65 +214,20 @@
           <div class="pickup-container">
             <h3>Bus Pickup Points</h3>
             <ul>
+               {{#each pickupPoints}}
               <li>
                 <input type="checkbox" checked="">
                 <i></i>
-                <h2>Navarang Circle</h2>
+                <h2>{{this.stopName}}</h2>
                 <div class="abody">
-                  <p>🚍⬆️ Pickup Time: 7:35 AM <span class="time">🚌⬇️ Drop Time: 6:15 PM </span> <a href="">📍 View Map
+                  <p>🚍⬆️ Pickup Time:{{this.pickupTime}} <span class="time">🚌⬇️ Drop Time: 6:15 PM </span> <a href="">📍 View Map
                     </a></p>
                 </div>
               </li>
-
-              <li>
-                <input type="checkbox" checked="">
-                <i></i>
-                <h2>Kuvempu Metro Station</h2>
-                <div class="abody">
-                  <p>🚍⬆️ Pickup Time: 7:35 AM <span class="time">🚌⬇️ Drop Time: 6:15 PM </span> <a href="">📍 View Map
-                    </a></p>
-                </div>
-              </li>
-              <li>
-                <input type="checkbox" checked="">
-                <i></i>
-                <h2>Harishchandra Ghat </h2>
-                <div class="abody">
-                  <p>🚍⬆️ Pickup Time: 7:35 AM <span class="time">🚌⬇️ Drop Time: 6:15 PM </span> <a href="">📍 View Map
-                    </a></p>
-                </div>
-              </li>
-              <li>
-                <input type="checkbox" checked="">
-                <i></i>
-                <h2>Devaiah Park</h2>
-                <div class="abody">
-                  <p>🚍⬆️ Pickup Time: 7:35 AM <span class="time">🚌⬇️ Drop Time: 6:15 PM </span> <a href="">📍 View Map
-                    </a></p>
-                </div>
-              </li>
-              <li>
-                <input type="checkbox" checked="">
-                <i></i>
-                <h2> KC General </h2>
-                <div class="abody">
-                  <p>🚍⬆️ Pickup Time: 7:35 AM <span class="time">🚌⬇️ Drop Time: 6:15 PM </span> <a href="">📍 View Map
-                    </a></p>
-                </div>
-              </li>
-              <li>
-                <input type="checkbox" checked="">
-                <i></i>
-                <h2>Malleshwaram</h2>
-                <div class="abody">
-                  <p>🚍⬆️ Pickup Time: 7:35 AM <span class="time">🚌⬇️ Drop Time: 6:15 PM </span> <a href="">📍 View Map
-                    </a></p>
-                </div>
-              </li>
+              {{/each}}
             </ul>
           </div>
-
-          <div class="event-container">
+            <div class="event-container">
             <h3>Upcoming Events</h3>
             <div class="event">
               <div class="event-left">
