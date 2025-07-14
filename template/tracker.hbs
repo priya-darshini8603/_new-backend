@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Map with GPS & Location Picker</title>
+    <style>
+      #googleMap {
+        width: 100%;
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Google Map with GPS & Location Picker</h1>
+    <div id="googleMap"></div>
+
+    <script>
+      function myMap() {
+        var map;
+        var marker;
+
+        // Default location (if GPS is not available)
+        var defaultLocation = { lat: 51.508742, lng: -0.120850 };
+
+        // Initialize the map
+        map = new google.maps.Map(document.getElementById("googleMap"), {
+          center: defaultLocation,
+          zoom: 15,
+        });
+
+        // Try to get the user's GPS location
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              var userLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              };
+
+              map.setCenter(userLocation);
+
+              // Place a marker on the user's location
+              marker = new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                title: "Your Location",
+              });
+            },
+            function () {
+              alert("Geolocation failed or permission denied.");
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+
+        // Add event listener to allow user to select a location
+        map.addListener("click", function (event) {
+          var clickedLocation = {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+          };
+
+          // If marker exists, move it; otherwise, create a new marker
+          if (marker) {
+            marker.setPosition(clickedLocation);
+          } else {
+            marker = new google.maps.Marker({
+              position: clickedLocation,
+              map: map,
+              title: "Selected Location",
+            });
+          }
+
+          map.setCenter(clickedLocation);
+        });
+      }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlYZZp6L_JhQWszvRdz-VTDcbJK-SnA5E&callback=myMap" async defer></script>
+  </body>
+</html>

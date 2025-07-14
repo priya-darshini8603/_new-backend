@@ -1,0 +1,63 @@
+/* Consistent layout for all student pages */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.navbar {
+    background-color: #004080;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+.navbar .logo {
+    display: flex;
+    align-items: center;
+}
+.navbar .logo img {
+    width: 40px;
+    margin-right: 10px;
+}
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+}
+.navbar .nav-links li {
+    margin-left: 20px;
+}
+.navbar .nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.container {
+    display: flex;
+    height: calc(100vh - 60px);
+}
+.sidebar {
+    width: 220px;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+.sidebar ul {
+    list-style: none;
+}
+.sidebar ul li {
+    margin: 20px 0;
+}
+.sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+}
+.sidebar ul li a:hover {
+    color: #004080;
+}
+.dashboard {
+    flex: 1;
+    padding: 30px;
+    background-color: #fafafa;
+    overflow-y: auto;
+}
+.dashboard h1 {
+    margin-bottom: 30px;
+}

@@ -1,0 +1,96 @@
+.filter-section {
+  margin-bottom: 30px;
+  padding: 25px 70px 30px 25px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.filter-section:hover {
+  transform: scale(1.005);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+  .form-label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+     margin-right: 30px;
+    display: block;
+    
+  }
+
+  .custom-select {
+    padding: 12px;
+    color: #495057;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-sizing: content-box;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+ 
+  .custom-select:hover {
+    border-color: #0056b3;
+    background-color: #f1f1f1;
+  }
+
+  
+
+  .form-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color:black;
+  }
+
+  .route-section {
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+  }
+
+  .route-section h5 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #0056b3;
+    transition: color 0.3s ease-in-out;
+  }
+
+ 
+
+  .route-section p {
+    font-size: 1rem;
+    color: #6c757d;
+  }
+
+  .card-body {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .card-body:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-body .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .card-body .card-text {
+    font-size: 1rem;
+    color: #495057;
+  }
+
+
+  hr.my-5 {
+    border: 0;
+    border-top: 2px solid #007bff;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  

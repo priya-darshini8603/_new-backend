@@ -1,0 +1,175 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Route Management</title>
+    <link rel="stylesheet" href="/admin/route.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+      <div class="profile-region"></div>
+      <div class="nav-icons">
+        <a href="/admin/index" class="breadcrumb-link">Home</a>
+        <a href="/admin/notification" id="notification-bell">
+          <i class="fas fa-bell"></i>
+          <span class="notification-count" id="notification-count">0</span>
+        </a>
+        <a href="/admin/view-profile">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="/admin/manage_admin">
+        <i class="fas fa-user-tie"></i>
+        <span>Manage Admin</span>
+      </a>
+      <a href="/admin/teacherdetails">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>Manage Teacher</span>
+      </a>
+      <a href="/admin/studentdetails">
+        <i class="fas fa-user-graduate"></i>
+        <span>Manage Student</span>
+      </a>
+      <a href="/admin/driverdetails">
+        <i class="fas fa-car"></i>
+        <span>Manage Driver</span>
+      </a>
+      <a href="/admin/route">
+        <i class="fas fa-route"></i>
+        <span>Route List</span>
+      </a>
+      <a href="/admin/scheduleevent">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Schedule</span>
+      </a>
+      <a href="/admin/complaintbox">
+        <i class="fas fa-comment-dots"></i>
+        <span>Complaint Box</span>
+      </a>
+      <a href="/admin/seatavailable">
+        <i class="fas fa-chair"></i>
+        <span>Seat Availability</span>
+      </a>
+      <a href="/admin/notify">
+        <i class="fas fa-bell"></i>
+        <span>Admin Notification</span>
+      </a>
+      <a href="/admin/inquiry">
+        <i class="fas fa-question-circle"></i>
+        <span>Inquiry</span>
+      </a>
+      <a href="/admin/payment-records">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Payments</span>
+      </a>
+      <a href="/loginform">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+      <main class="content">
+        <div class="table-wrapper">
+          <h3>Route Details</h3>
+          <a
+            href="/admin/addroute"
+            target="_blank"
+            id="add-route-btn"
+            class="button"
+          >Add Route</a>
+          <table>
+            <thead>
+              <tr>
+                <th>Route Number</th>
+                <th>Bus Number</th>
+                <th>Number of Students</th>
+                <th>Number of Seats</th>
+                <th>Start Point</th>
+                <th>Destination Point</th>
+                <th>Driver Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="route-list">
+              <!-- Route details will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Edit Route</h3>
+        <form id="edit-route-form">
+          <label for="edit-route-number">Route Number:</label>
+          <input
+            type="text"
+            id="edit-route-number"
+            name="route-number"
+            required
+          />
+          <tbody id="route-list">
+            <!-- Route details will be dynamically populated here -->
+          </tbody>
+
+          <label for="edit-bus-number">Bus Number:</label>
+          <input type="text" id="edit-bus-number" name="bus-number" required />
+
+          <label for="edit-num-students">Number of Students:</label>
+          <input
+            type="number"
+            id="edit-num-students"
+            name="num-students"
+            required
+          />
+
+          <label for="edit-num-seats">Number of Seats:</label>
+          <input type="number" id="edit-num-seats" name="num-seats" required />
+
+          <label for="edit-start-point">Start Point:</label>
+          <input
+            type="text"
+            id="edit-start-point"
+            name="start-point"
+            required
+          />
+
+          <label for="edit-destination-point">Destination Point:</label>
+          <input
+            type="text"
+            id="edit-destination-point"
+            name="destination-point"
+            required
+          />
+
+          <label for="edit-driver-name">Driver Name:</label>
+          <input
+            type="text"
+            id="edit-driver-name"
+            name="driver-name"
+            required
+          />
+
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="/admin/js/route.js"></script>
+  </body>
+</html>

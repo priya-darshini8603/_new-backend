@@ -1,0 +1,247 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--black1);
+}
+
+.search-box input,
+.toolbar select {
+    padding: 17px 30px;
+    margin: 5px;
+    border-radius: 50px;
+    border: 1px solid #cbd5e1;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background-color: white;
+    outline: none;
+}
+
+.toolbar select {
+    cursor: pointer;
+}
+
+.filter-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-section label {
+    color: blue;
+}
+
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 12px;
+    background-color: #e2e8f0;
+    border-radius: 12px;
+}
+
+.search-box input {
+    padding: 12px;
+    border-radius: 25px;
+    border: 1px solid #cbd5e1;
+    width: 220px;
+}
+
+#showEntries,
+#filter {
+    padding: 10px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.toolbar {
+    margin-top: 8px;
+}
+
+#showEntries:hover,
+#filter:hover {
+    border-color: #287bff;
+}
+
+#showEntries:focus,
+#filter:focus {
+    border-color: #287bff;
+    outline: none;
+}
+
+#sortableTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: none;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#sortableTable tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+
+#sortableTable tbody tr:hover {
+    background-color: #e2e8f0;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#sortableTable th,
+#sortableTable td {
+    padding: 15px;
+    text-align: left;
+}
+
+#sortableTable th {
+    background-color: transparent;
+    color: black;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+
+
+#sortableTable th:hover {
+    color: #287bff;
+}
+
+
+.breadcrumb {
+    display: flex;
+    align-items: baseline;
+    padding: 20px 30px 0;
+    background-color: #fff;
+    border-left: 4px solid blue;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.breadcrumb-title {
+    font-size: 28px;
+    color: #2C2C2C;
+    font-weight: 500;
+
+}
+
+.breadcrumb-nav {
+    display: flex;
+    align-items: baseline;
+
+}
+
+.breadcrumb-link {
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 400;
+    padding-left: 20px;
+    padding-right: 2px;
+    align-items: baseline;
+    color: blue;
+
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-current {
+    font-size: 16px;
+    color: var(--blue);
+    font-weight: 500;
+
+
+}
+
+.breadcrumb-link span {
+    color: black;
+}
+
+
+#searchInput {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 300px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: blue;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.search-container {
+    margin-left: auto;
+}
+
+@media (max-width: 768px) {
+    #searchInput {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+.student-details {
+    padding: 1rem;
+}
+
+.student-details h2 {
+    color: black;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.view-btn {
+    padding: 11px 20px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #1E90FF, #007BFF);
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.view-btn:hover {
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    box-shadow: 0 6px 15px rgba(0, 91, 187, 0.4);
+    transform: translateY(-2px);
+}
+
+.view-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(0, 91, 187, 0.3);
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register & Login</title>
+  <link rel="stylesheet" href="loginform.css" />
+  <link rel="stylesheet" href="home.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="/" class="navbar-brand">
+        <img src="../images/nmit-logo.svg" class="logo" alt="Logo" />
+      </a>
+      <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+      <ul class="nav-list" id="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="https://nitte.edu.in/nmit/about-nmit-bangalore.php">About</a></li>
+        <li><a href="/routelist">Route List</a></li>
+        <li><a href="/payment">Fee Payment</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/loginform">Login/Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="main-content">
+
+
+    <div class="container" id="signup" style="display: none">
+      <h1 class="form-title">Register</h1>
+      <form method="POST" action="/signup">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" name="fName" id="fName" placeholder="First Name" required />
+          <label for="fName">First Name</label>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" name="lName" id="lName" placeholder="Last Name" required />
+          <label for="lName">Last Name</label>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" name="email" id="email" placeholder="Email" required />
+          <label for="email">Email</label>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" name="password" id="password" placeholder="Password" required />
+          <label for="password">Password</label>
+        </div>
+        <div class="checkbox-field">
+          <label><input type="radio" name="role" value="admin" required /> Admin</label>
+          <label><input type="radio" name="role" value="student" required /> Student</label>
+          <label><input type="radio" name="role" value="busincharge" required /> Bus Incharge</label>
+          <label><input type="radio" name="role" value="teacher" required /> Teacher</label>
+        </div>
+        <input type="submit" class="btn" value="Sign Up" name="signUp" />
+      </form>
+      <p class="or">----------or----------</p>
+      <div class="icons">
+        <i class="fab fa-google google-icon"></i>
+        <i class="fab fa-facebook"></i>
+      </div>
+      <div class="links">
+        <p>Already Have Account ?
+          <button id="signInButton">Sign In</button>
+        </p>
+      </div>
+    </div>
+
+    <div class="container" id="signIn">
+      <h1 class="form-title">Sign In</h1>
+      <form method="POST" action="/login">
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" name="email" id="signin-email" placeholder="Email" required />
+          <label for="signin-email">Email</label>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" name="password" id="signin-password" placeholder="Password" required />
+          <label for="signin-password">Password</label>
+        </div>
+        <div class="checkbox-field">
+          <label><input type="radio" name="role" value="admin" required /> Admin</label>
+          <label><input type="radio" name="role" value="student" required /> Student</label>
+          <label><input type="radio" name="role" value="busincharge" required /> Bus Incharge</label>
+          <label><input type="radio" name="role" value="teacher" required />teacher</label>
+        </div>
+        <p class="recover"><a href="/forgpass">Forget Password ?</a></p>
+        <input type="submit" class="btn" value="Sign In" name="signIn" />
+      </form>
+      <p class="or">----------or----------</p>
+      <div class="icons">
+        <i class="fab fa-google google-icon"></i>
+        <i class="fab fa-facebook"></i>
+      </div>
+      <div class="links">
+        <p>Don't have account yet?
+          <button id="signUpButton">Sign Up</button>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="rights text-center p-3">
+    &copy; 2024 Nitte Meenakshi Institute Of Technology. All Rights Reserved.
+  </div>
+
+  <script src="/js/loginform.js"></script>
+</body>
+
+</html>

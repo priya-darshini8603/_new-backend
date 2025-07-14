@@ -1,0 +1,59 @@
+{
+  "routeNumber": "2",
+  "pickupSchedule": [
+    {
+      "stopName": "Chikkabanavara",
+      "pickupTime": "7:10 AM",
+      "estimatedReachTime": "6:15 PM",
+      "fees": 30000
+    },
+    {
+      "stopName": "Chikkabanavara RS",
+      "pickupTime": "7:15 AM",
+      "estimatedReachTime": "6:10 PM",
+      "fees": 30000
+    },
+    {
+      "stopName": "Sapthagiri Hospital",
+      "pickupTime": "7:18 AM",
+      "estimatedReachTime": "6:05 PM",
+      "fees": 30000
+    },
+    {
+      "stopName": "Sapthagiri College",
+      "pickupTime": "7:20 AM",
+      "estimatedReachTime": "6:00 PM",
+      "fees": 30000
+    },
+    {
+      "stopName": "Bonemill Bus Stop",
+      "pickupTime": "7:22 AM",
+      "estimatedReachTime": "5:55 PM",
+      "fees": 30000
+    },
+    {
+      "stopName": "Bagalagunte",
+      "pickupTime": "7:25 AM",
+      "estimatedReachTime": "5:55 PM",
+      "fees": 30000
+    },
+    {
+      "stopName": "Widia School Stop",
+      "pickupTime": "7:27 AM",
+      "estimatedReachTime": "5:45 PM",
+      "fees": 30000
+    },
+    {
+      "stopName": "8th Mile",
+      "pickupTime": "7:30 AM",
+      "estimatedReachTime": "5:30 PM",
+      "fees": 30000
+    },
+    {
+      "stopName": "NMIT",
+      "pickupTime": "8:30 AM",
+      "estimatedReachTime": "4:40 PM",
+      "fees": 30000
+    }
+  ]
+}

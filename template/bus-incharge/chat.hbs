@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CHAT</title>
+    <link rel="stylesheet" href="/chat.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div class="container">
+        
+        <div class="leftSide">
+            
+            <div class="header">
+                <ul class="nav_icons">
+                    <li>
+                        <ion-icon name="scan-circle-outline"></ion-icon>
+                    </li>
+                    <li>
+                        <ion-icon name="people"></ion-icon>
+                    </li>
+                    <li class="menu-wrapper">
+                        <button class="menu-button" onclick="toggleMenu(this)">
+                            <ion-icon name="ellipsis-vertical" size="large"></ion-icon>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="create-group.html">
+                                <ion-icon name="add-circle-outline"></ion-icon> Create Group
+                            </a>
+                            <a href="all-users.html">
+                                <ion-icon name="people-outline"></ion-icon> See All Users
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Search Chat -->
+            <div class="search_chat">
+                <div>
+                    <input type="text" placeholder="Search or start new chat">
+                    <ion-icon name="search-outline"></ion-icon>
+                </div>
+            </div>
+            <!-- CHAT LIST -->
+            
+           <div class="chatlist">
+            {{#each contacts}}
+             <a href="/bus-incharge/chat/{{encodeURIComponent name}}" class="chat-link">
+                <div class="block {{#if unread}}unread{{/if}} {{#if active}}active{{/if}}">
+                 <div class="imgBox">
+                    <img src="{{avatar}}" class="cover" alt="User Avatar">
+                 </div>
+        <div class="details">
+          <div class="listHead">
+            <h4>{{displayName}}</h4>
+            <p class="time">{{lastMessageTime}}</p>
+          </div>
+          <div class="message_p">
+            <p>{{lastMessage}}</p>
+          </div>
+          <div class="roleTag">
+            <small>{{role}}</small>
+          </div>
+        </div>
+      </div>
+    </a>
+  {{/each}}
+</div>
+</div>
+
+         
+       
+                
+        <div class="rightSide">
+            <div class="header">
+                <div class="imgText">
+                    <div class="userimg">
+                        <img src="{{selectedAvatar}}" alt="" class="cover">
+                    </div>
+                    <h4>{{selectedDisplayName}}<br><span>online</span></h4>
+                </div>
+                <ul class="nav_icons">
+                    <li>
+                        <ion-icon name="search-outline"></ion-icon>
+                    </li>
+                    <li class="menu-wrapper">
+                        <button class="menu-button" onclick="toggleMenu(this)">
+                            <ion-icon name="ellipsis-vertical" size="large"></ion-icon>
+                        </button>
+                        <div class="dropdown-menu">
+                            <span>
+                                <ion-icon name="checkbox-outline"></ion-icon>
+                                Select
+                            </span>
+                            <span>
+                                <ion-icon name="trash-outline"></ion-icon>
+                                Delete Message
+                            </span>
+
+                            <span>
+                                <ion-icon name="arrow-undo-outline"></ion-icon>
+                                Forward
+                            </span>
+                            <span>
+                                <ion-icon name="trash-bin-outline"></ion-icon>
+                                Clear Chat
+                            </span>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- CHAT-BOX -->
+            <div class="chatbox" id="chatBox">
+                 {{#each messages}}
+                    <div class="message {{#if isMe}}my_msg{{else}}friend_msg{{/if}}">
+                        <p>{{message}}<br><span>{{time}}</span></p>
+                    </div>
+                {{/each}}
+                
+            </div>
+
+            <!-- CHAT INPUT -->
+            <div class="chat_input">
+                <ion-icon name="happy-outline"></ion-icon>
+                <ion-icon name="attach-outline"></ion-icon>
+                <input type="text" placeholder="Type a message" id="msgInput">
+                <ion-icon name="mic"></ion-icon>
+                <ion-icon name="send" id="sendBtn"></ion-icon></button>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        function toggleMenu(btn) {
+            const wrapper = btn.closest('.menu-wrapper');
+            wrapper.classList.toggle('active');
+
+            // Close others if open
+            document.querySelectorAll('.menu-wrapper').forEach(w => {
+                if (w !== wrapper) w.classList.remove('active');
+            });
+        }
+
+        // Close on outside click
+        document.addEventListener('click', e => {
+            document.querySelectorAll('.menu-wrapper').forEach(w => {
+                if (!w.contains(e.target)) w.classList.remove('active');
+            });
+        });
+    </script>
+   
+    <script>
+        const USER_EMAIL = "{{user.email}}";
+        const SELECTED_USER_EMAIL = "{{selectedUser}}";
+    </script>
+    <script src="/bus-incharge/js/chat.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

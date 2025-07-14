@@ -1,0 +1,140 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notification Page</title>
+    <link rel="stylesheet" href="/admin/notification.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* Add your CSS styles here */
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+      <div class="profile-region"></div>
+      <div class="nav-icons">
+        <a href="/admin/index" class="breadcrumb-link">Home</a>
+        <a href="/admin/notification" id="notification-bell">
+          <i class="fas fa-bell"></i>
+          <span class="notification-count" id="notification-count">0</span>
+        </a>
+        <a href="/admin/view-profile">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="/admin/manage_admin">
+        <i class="fas fa-user-tie"></i>
+        <span>Manage Admin</span>
+      </a>
+      <a href="/admin/teacherdetails">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>Manage Teacher</span>
+      </a>
+      <a href="/admin/studentdetails">
+        <i class="fas fa-user-graduate"></i>
+        <span>Manage Student</span>
+      </a>
+      <a href="/admin/driverdetails">
+        <i class="fas fa-car"></i>
+        <span>Manage Driver</span>
+      </a>
+      <a href="/admin/route">
+        <i class="fas fa-route"></i>
+        <span>Route List</span>
+      </a>
+      <a href="/admin/scheduleevent">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Schedule</span>
+      </a>
+      <a href="/admin/complaintbox">
+        <i class="fas fa-comment-dots"></i>
+        <span>Complaint Box</span>
+      </a>
+      <a href="/admin/seatavailable">
+        <i class="fas fa-chair"></i>
+        <span>Seat Availability</span>
+      </a>
+      <a href="/admin/notify">
+        <i class="fas fa-bell"></i>
+        <span>Admin Notification</span>
+      </a>
+      <a href="/admin/inquiry">
+        <i class="fas fa-question-circle"></i>
+        <span>Inquiry</span>
+      </a>
+      <a href="/admin/payment-records">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Payments</span>
+      </a>
+      <a href="/loginform">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+      <h1>Notifications</h1>
+
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search notifications..."
+        />
+        <button><i class="fas fa-search"></i></button>
+      </div>
+
+      <!-- Notification List -->
+      <ul class="notification-list" id="notificationList">
+        <!-- Example Notification Item -->
+        <li class="notification-item">
+          <div class="profile-info">
+            <img src="../images/profile1.jpg" alt="Profile Picture" />
+            <div class="details">
+              <p class="name">John Doe</p>
+              <p class="date">2023-10-15</p>
+              <p class="designation">Teacher</p>
+            </div>
+          </div>
+          <div class="notification-content">
+            <p>Your leave request has been approved.</p>
+          </div>
+        </li>
+        <!-- Add more notification items dynamically -->
+      </ul>
+    </div>
+
+    <!-- Notification Popup -->
+    <div class="popup" id="notificationPopup">
+      <h2>Notification Details</h2>
+      <p id="popupNotificationTitle"></p>
+      <p id="popupSender"></p>
+      <p id="popupDate"></p>
+      <p id="popupContent"></p>
+      <label for="messageRecipient">To:</label>
+      <input type="text" id="messageRecipient" placeholder="Recipient name" />
+      <textarea
+        id="messageContent"
+        rows="5"
+        placeholder="Type your message here..."
+      ></textarea>
+      <div class="actions">
+        <button class="send" id="sendMessage">Send</button>
+        <button class="close" id="closePopup">Close</button>
+      </div>
+    </div>
+
+    <script src="/admin/js/notification.js"></script>
+  </body>
+</html>

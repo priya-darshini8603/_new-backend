@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Payment</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  <h2>Student Bus Payment</h2>
+  <form id="paymentForm" method="POST" action="/razorpay/submit">
+    <label>Name:</label><input type="text" name="studentName" required><br>
+    <label>USN:</label><input type="text" name="usn" required><br>
+    <label>Branch:</label><input type="text" name="branch" required><br>
+    <label>Semester:</label><input type="text" name="semester" required><br>
+
+    <label>Phone Number:</label><input type="text" name="phone_num" required><br>
+    <label>Pickup Point:</label><input type="text" name="pickupPoint" required><br>
+    <label>Amount (₹):</label><input type="number" name="amount" required><br><br>
+
+
+    <button type="button" onclick="payNow()">Pay Now</button>
+  </form>
+
+  <script>
+    function payNow() {
+      const form = document.getElementById('paymentForm');
+      const formData = new FormData(form);
+      const amount = formData.get("amount") * 100; // Convert to paise
+
+      const options = {
+        key: 'rzp_test_XLEobc5mihNeOK', // Replace with your Razorpay key
+        amount: amount,
+        currency: 'INR',
+        name: 'Bus Payment',
+        description: 'Student Bus Payment',
+        handler: function (response) {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = "razorpay_payment_id";
+          input.value = response.razorpay_payment_id;
+          form.appendChild(input);
+          form.submit();
+        },
+        prefill: {
+          email: formData.get("email")
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    }
+  </script>
+</body>
+</html>

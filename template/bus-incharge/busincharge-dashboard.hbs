@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Incharge Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+   <div class="container-fluid">
+        <!-- Navigation -->
+        <nav class="navigation">
+            <ul>
+                <li>
+                 <a href="/bus-incharge/busincharge-dashboard">
+                        <span class="title">
+                            <span class="image-wrapper">
+                                <img src="../images/logoside.png" alt="Logo">
+                            </span>
+                        </span>
+                         
+
+                        <span class="box">NITTE MEENAKSHI
+                            INSTITUTE OF TECHNOLOGY</span>
+                  </a>
+                </li>
+
+                <li class="hovered">
+                    <a href="/bus-incharge/busincharge-dashboard">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/studentdetails">
+                        <span class="icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+                        <span class="title">Student Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/staffdetails">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Teacher Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/busdetails">
+                        <span class="icon"><i class="fa fa-bus" aria-hidden="true"></i></span>
+                        <span class="title">Bus Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/share-location">
+                        <span class="icon">
+                            <i class="fas fa-location"></i>
+                        </span>
+                        <span class="title">Share Location</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/view-all-payments">
+                        <span class="icon"><i class="fa-solid fa-indian-rupee-sign" aria-hidden="true"></i></span>
+                        <span class="title">Payment Records</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/announcement">
+                        <span class="icon"><i class="fa fa-bullhorn" aria-hidden="true"></i></span>
+                        <span class="title">Announcements</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/schedule">
+                        <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                        <span class="title">View Schedule</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/notify">
+                        <span class="icon"><i class="fa fa-bell" aria-hidden="true"></i></span>
+                        <span class="title">Notify Passengers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/chat">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Chat</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/inquiry">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">Inquiry</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/loginform" onclick="logout();return false;">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title" >Log Out</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <header class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                <div class="right-section">
+
+                    <div class="notification-icon" onclick="toggleNotifications()" aria-label="Toggle Notifications">
+                        🔔<span class="badge" id="notifCount">2</span>
+                    </div>
+
+                    <div class="right-section">
+                        <div class="user">
+                            <img src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}" alt="User Menu" id="avatar" class="avatar"></img></div>
+                        <div class="collapse-menu" id="collapseMenu">
+                            <a href="/bus-incharge/profile">View Profile</a>
+                            <a href="/loginform" onclick="logout();return false;">Log Out</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+            <div>
+                 <!-- Notification Dropdown Panel -->
+                <div class="notification-panel" id="notificationPanel" style="display: none;">
+                    <div class="notif-header">
+                        <h3 id="notifHeader">You have 2 notifications</h3>
+                        <button class="dclose" onclick="closePanel()">&times;</button>
+                    </div>
+
+                    <div class="notification"
+                        onclick="openDetails('New Students', 'New student records have been successfully added to the system. Please review the updated student list for further details.')">
+                        <div class="notification-content">
+                            <strong>New Students</strong>
+                            <p>New Students Added</p>
+                            <div class="notification-right">
+                                <img src="../images/avatar.png" alt="Profile" class="profile-image"><span class="user-name">
+                                    <h5>Vanitha</h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notification"
+                        onclick="openDetails('Fees Amount', 'Kindly Note ! Fees amount for this year increased.Its 35000')">
+                        <div class="notification-content">
+                            <strong>Fees Amount</strong>
+                            <p>Fees amount for this year increased.Its 35000</p>
+                            <div class="notification-right">
+                                <img src="../images/avatar.png" alt="Profile" class="profile-image"><span class="user-name">
+                                    <h5>Priya Darshini</h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="/bus-incharge/notification" class="view-all" onclick="showNotificationPageAndClear()">View All</a>
+                </div>
+
+                <div class="notification-details" id="notificationDetails" style="display: none;">
+                    <h2 id="notifTitle">Notification Title</h2>
+                    <p id="notifDescription">Notification description.</p>
+                    <button class="dclose" onclick="closeNotification()">&times;</button>
+                    <button class="n-reply-btn"
+                        onclick="openReplyPopup(document.getElementById('notifTitle').textContent)">Reply</button>
+                </div>
+                <!-- Reply Popup -->
+                <div class="reply-popup" id="replyPopup" style="display: none;">
+                    <h2 id="replyTitle">Reply</h2>
+                    <textarea id="replyMessage" placeholder="Type your message..."></textarea>
+                    <div class="popup-btn-container">
+                        <button class="popup-btn n-send-btn" onclick="sendReply()">Send</button>
+                        <button class="popup-btn n-close-btn" onclick="closeReplyPopup()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Toast Notification Container -->
+            <div id="toast-container"></div>
+
+            <!-- Cards -->
+            <section class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{studentCount}}</div>
+                        <div class="cardName">Total Number<br> Of Students</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{teacherCount}}</div>
+                        <div class="cardName">Total Number<br> Of Teachers</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{paidCount}}</div>
+                        <div class="cardName">Total Students Paid</div>
+                    </div>
+                    <div class="iconBx">
+                        <ion-icon name="cash-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{unpaidCount}}</div>
+                        <div class="cardName">Total Students Unpaid</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </section>
+
+            <section class="details">
+
+                <div class="recentOrders">
+                    <header class="cardHeader">
+                        <h2>Recent Payments</h2>
+                        <a href="/bus-incharge/view-all-payments" class="d-btn">View All</a>
+                    </header>
+                   
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Name</td>
+                                <td>USN</td>
+                                <td>Branch</td>
+                                <td>Semester</td>
+                                <td>Pickup Point</td>
+                                <td>Amount Paid</td>
+                                <td>Paid Date</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             {{#each payments}}
+                            <tr>
+                                <td>{{payment_ref_id}}</td>
+                                <td>{{studentName}}</td>
+                                <td>{{usn}}</td>
+                                <td>{{branch}}</td>
+                                <td>{{semester}}</td>
+                                <td>{{pickupPoint}}</td>
+                                <td>{{amount}}</td>
+                                <td>{{createdAtFormatted}}</td>
+                                <td><a href="/bus-incharge/view-payments/{{payment_ref_id}}" class="d-btn">View</a></td>
+                            </tr>
+                             {{/each}}
+                        </tbody>
+                    </table>
+                   
+                </div>
+                <div class="recentCustomers">
+                    <header class="cardHeader">
+                        <h2>New Students And Teachers</h2>
+                    </header>
+                    {{#each newUsers}}
+                    <table>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="{{#if this.profileImageBase64}}data:{{this.profileImageType}};base64,{{this.profileImageBase64}}{{else}}../images/avatar.png{{/if}}"
+                                alt="{{this.role}}"></div>
+                            </td>
+                            <td>
+                                 <h4>{{this.fName}}{{this.lName}}<br>
+                                        <span>{{this.pickupPoint}}</span><br>
+                                        <span>{{#if (eq this.role "teacher")}}Teacher{{else}}Student{{/if}}</span>
+                                </h4>
+                            </td>
+                        </tr>
+                    </table>
+                    {{/each}}
+                </div>
+            </section>
+        </main>
+        <footer class="bg-body-tertiary text-center">
+            <div class="rights text-center p-3">
+                &copy; 2024 Nitte Meenakshi Institute Of Technology. All Rights Reserved.
+            </div>
+        </footer>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="/bus-incharge/js/dashboard.js"></script>
+    <script src="/bus-incharge/js/notification.js"></script>
+   <!-- JWT Auto Logout Script -->
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script>
+      function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+      }
+
+      function checkTokenExpiration() {
+        const token = getCookie("token");
+        if (!token) {
+          window.location.href = "/loginform"; // If token is missing, go to login
+          return;
+        }
+
+        try {
+          const decoded = jwt_decode(token);
+          const now = Date.now() / 1000;
+
+          if (decoded.exp < now) {
+            alert("Session expired. You will be logged out.");
+            document.cookie = "token=; Max-Age=0; path=/"; // Clear cookie
+            window.location.href = "/loginform";
+          }
+        } catch (err) {
+          console.error("Invalid token");
+          window.location.href = "/loginform";
+        }
+      }
+
+      function logout() {
+        document.cookie = "token=; Max-Age=0; path=/";
+        window.location.href = "/loginform";
+      }
+
+      setInterval(checkTokenExpiration, 5000);
+    </script>
+</body>
+
+</html>
