@@ -1,6 +1,7 @@
 const LogInCollection = require("../models/loginModel");
 const ProfileCollection=require("../models/profileModel");
 const OTPCollection = require("../models/otpModel");
+const contactCollection=require("../models/Contact");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
@@ -39,6 +40,7 @@ exports.signup = async (req, res) => {
 
         const userProfile = new ProfileCollection({ fName,lName,email, role });
             await userProfile.save();
+       
         return res.redirect("/loginform");
     } catch (error) {
         console.error("Error during signup:", error);
@@ -74,9 +76,9 @@ exports.login = async (req, res) => {
         };
 
         const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
-    req.session.user = {
-  email: user.email, // replace with actual variable from DB
-  role: user.role    // if needed
+        req.session.user = {
+        email: user.email, // replace with actual variable from DB
+        role: user.role    // if needed
 };
 
         res.cookie('token', token, {

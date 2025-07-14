@@ -6,11 +6,13 @@ const PaymentCollection = require("../models/paymentModel");
 const businchargeControllers = require("../controllers/businchargecontrollers");
 const loginCollection = require("../models/loginModel"); 
 const mongoose = require("mongoose");
-
+const MessageCollection = require("../models/Message");
+const ContactCollection = require("../models/Contact");
 //post methods
 router.post("/profileupdate", businchargeControllers.uploadMiddleware,businchargeControllers.profileupdate);
 router.post("/submitinquiry",businchargeControllers.submitinquiry);
-router.get("/busincharge/chat", businchargeControllers.renderChatPage);
+
+
 
 
 
@@ -232,6 +234,140 @@ router.get("/bus-incharge/schedule", async (req, res) => {
   }
 });
 
+// 📌 1️⃣ Default route: When no :user is specified
+router.get("/bus-incharge/chat", async (req, res) => {
+  try {
+    const currentUser = req.user;
+     console.log(currentUser);
+    // Get contacts or seed them
+    let contacts = await ContactCollection.find({ owner: currentUser.email }).lean();
 
+    if (contacts.length === 0) {
+      const profiles = await ProfileCollection.find({ email: { $ne: currentUser.email } }).lean();
+
+      const seededContacts = profiles.map(profile => ({
+        owner: currentUser.email,
+        name: profile.email,
+        lastMessage: " ",
+        lastMessageTime: new Date().toLocaleTimeString(),
+        unreadCount: 0
+      }));
+
+      await ContactCollection.insertMany(seededContacts);
+      contacts = seededContacts;
+    }
+
+    // Redirect to first contact's chat if available
+    if (contacts.length > 0) {
+      const firstContactEmail = encodeURIComponent(contacts[0].name);
+      return res.redirect(`/bus-incharge/chat/${firstContactEmail}`);
+    }
+
+    // If no contacts found at all
+    res.render("./bus-incharge/chat", {
+      messages: [],
+      contacts: [],
+      selectedUser: null,
+      selectedDisplayName: "",
+      user: currentUser
+    });
+
+  } catch (err) {
+    console.error("Error loading default chat page:", err);
+    res.status(500).send("Something went wrong");
+  }
+});
+
+router.get("/bus-incharge/chat/:user", async (req, res) => {
+  try {
+    const selectedUser = decodeURIComponent(req.params.user);
+    const currentUser = req.user;
+    console.log(currentUser);
+
+    // 1️⃣ Get all users (excluding self)
+    const profiles = await ProfileCollection.find({ email: { $ne: currentUser.email } }).lean();
+   
+    // 2️⃣ If ContactCollection is empty, seed it
+    let contacts = await ContactCollection.find({owner: currentUser.email}).lean();
+    if (contacts.length === 0) {
+      const seededContacts = profiles.map(profile => ({
+        owner: currentUser.email,
+        name: profile.email,
+        lastMessage: " ",
+        lastMessageTime: new Date().toLocaleTimeString(),
+        unreadCount: 0
+      }));
+      await ContactCollection.insertMany(seededContacts);
+      contacts = seededContacts;
+    }
+
+    // 3️⃣ Build user info map from ProfileCollection
+    const userEmails = contacts.map(c => c.name);
+    const allProfiles = await ProfileCollection.find({ email: { $in: userEmails } }).lean();
+    //profileImage covert into BASE64
+    const profileMap = {};
+          allProfiles.forEach(p => {
+          let avatar = "/images/avatar.png";
+            if (p.profileImage?.data) {
+              const base64 = p.profileImage.data.toString("base64");
+               const type = p.profileImage.contentType || "image/jpeg";
+               avatar = `data:${type};base64,${base64}`;
+            }
+
+         profileMap[p.email] = {
+          displayName: `${p.fName} ${p.lName}`,
+          role: p.role,
+          avatar
+          };
+      });
+
+    // 4️⃣ Enrich contacts for frontend display
+    const enrichedContacts = contacts.map(contact => {
+      const profile = profileMap[contact.name] || {};
+      return {
+        ...contact,
+        displayName: profile.displayName || contact.name,
+        role:profile.role,
+        avatar: profile.avatar || "/images/default.jpg",
+        unread: contact.unreadCount > 0,
+        active: contact.name === selectedUser
+      };
+    });
+
+    // 5️⃣ Get chat messages between current user and selected user
+    const messages = await MessageCollection.find({
+      $or: [
+        { sender: currentUser.email, receiver: selectedUser },
+        { sender: selectedUser, receiver: currentUser.email }
+      ]
+    }).sort({ createdAt: 1 }).lean();
+
+    // 6️⃣ Format for frontend chat view
+    const formattedMessages = messages.map(msg => ({
+      message: msg.text,
+      senderName: profileMap[msg.sender]?.displayName || msg.sender,
+      time: new Date(msg.createdAt).toLocaleTimeString(),
+      isMe: msg.sender === currentUser.email
+    }));
+
+     const selectedProfile = profileMap[selectedUser] || {};
+    // 7️⃣ Render chat view
+    res.render("./bus-incharge/chat", {
+      messages: formattedMessages,
+      contacts: enrichedContacts,
+     
+      selectedUser,
+      selectedDisplayName: selectedProfile.displayName || selectedUser,
+      selectedAvatar: selectedProfile.avatar || "/images/default.jpg",
+      user: currentUser
+    });
+
+  } catch (err) {
+    console.error("Error loading chat page:", err);
+    res.status(500).send("Something went wrong");
+  }
+});
+
+   
 
 module.exports = router;

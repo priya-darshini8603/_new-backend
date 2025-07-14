@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> CHAT</title>
     <link rel="stylesheet" href="/chat.css">
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <style>
 
@@ -49,34 +50,42 @@
                 </div>
             </div>
             <!-- CHAT LIST -->
-            <div class="chatlist">
-                 {{#each contacts}}
+            
+           <div class="chatlist">
+            {{#each contacts}}
+             <a href="/bus-incharge/chat/{{encodeURIComponent name}}" class="chat-link">
                 <div class="block {{#if unread}}unread{{/if}} {{#if active}}active{{/if}}">
-                    <div class="imgBox">
-                        <img src="{{this.avatar}}" class="cover" alt="">
-                    </div>
-                    <div class="details">
-                        <div class="listHead">
-                            <h4>{{this.name}}</h4>
-                            <p class="time">{{this.time}}</p>
-                        </div>
-                        <div class="message_p">
-                            <p>{{this.lastMessage}}</p>
-                            {{#if this.unreadCount}}<b>{{this.unreadCount}}</b>{{/if}}
-                        </div>
-                    </div>
-                </div>
-                {{/each}}
-            </div>
+                 <div class="imgBox">
+                    <img src="{{avatar}}" class="cover" alt="User Avatar">
+                 </div>
+        <div class="details">
+          <div class="listHead">
+            <h4>{{displayName}}</h4>
+            <p class="time">{{lastMessageTime}}</p>
+          </div>
+          <div class="message_p">
+            <p>{{lastMessage}}</p>
+          </div>
+          <div class="roleTag">
+            <small>{{role}}</small>
+          </div>
         </div>
+      </div>
+    </a>
+  {{/each}}
+</div>
+</div>
+
+         
+       
                 
         <div class="rightSide">
             <div class="header">
                 <div class="imgText">
                     <div class="userimg">
-                        <img src="images/img1.jpg" alt="" class="cover">
+                        <img src="{{selectedAvatar}}" alt="" class="cover">
                     </div>
-                    <h4>Priya <br><span>online</span></h4>
+                    <h4>{{selectedDisplayName}}<br><span>online</span></h4>
                 </div>
                 <ul class="nav_icons">
                     <li>
@@ -113,7 +122,7 @@
             <!-- CHAT-BOX -->
             <div class="chatbox" id="chatBox">
                  {{#each messages}}
-                    <div class="message {{#if (eq isMe 'You')}}my_msg{{else}}friend_msg{{/if}}">
+                    <div class="message {{#if isMe}}my_msg{{else}}friend_msg{{/if}}">
                         <p>{{message}}<br><span>{{time}}</span></p>
                     </div>
                 {{/each}}
@@ -130,6 +139,7 @@
             </div>
         </div>
     </div>
+    
 
     <script>
         function toggleMenu(btn) {
@@ -149,7 +159,11 @@
             });
         });
     </script>
-    <script src="/socket.io/socket.io.js"></script>
+   
+    <script>
+        const USER_EMAIL = "{{user.email}}";
+        const SELECTED_USER_EMAIL = "{{selectedUser}}";
+    </script>
     <script src="/bus-incharge/js/chat.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

@@ -463,3 +463,12 @@
     transition: background 0.2s ease;
     gap: 10px;
   }
+  .chatlist a {
+  text-decoration: none;
+  color: inherit; /* optional - keeps default text color */
+}
+
+.chatlist a h4,
+.chatlist a small {
+  text-decoration: none;
+}

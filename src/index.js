@@ -8,6 +8,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
+    
     mongoUrl: 'mongodb://localhost:27017/SAMPLE_PRJ',
     ttl: 60 * 60// session time to live in seconds
   }),
@@ -15,40 +16,20 @@ app.use(session({
     maxAge: 60 * 60 * 1000  // 1 hour = 60 min * 60 sec * 1000 ms
   }
 }));
-const http=require('http')
-const Message = require('./models/Message');
-//for chatting
-const { Server } = require('socket.io');
-const server = http.createServer(app);
-const io = new Server(server);
-io.on('connection', async (socket) => {
-  console.log('A user connected');
 
-  const previousMessages = await Message.find().sort({ createdAt: 1 });
-  previousMessages.forEach(msg => {
-    socket.emit("message", {
-      user: msg.sender,
-      text: msg.text,
-      time: msg.createdAt.toLocaleTimeString(),
-    });
-  });
-
-  socket.on('chatMessage', async msg => {
-     const newMsg = await Message.create({ sender: "You", text: msg });
-        io.emit("message", {
-            user: newMsg.sender,
-            text:newMsg.text,
-            time: newMsg.createdAt.toLocaleTimeString(),
-        });
-  });
-
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
-  });
+app.use((req, res, next) => {
+  if (req.session && req.session.user) {
+    req.user = req.session.user; // ✅ accessible in routes
+    res.locals.user = req.session.user; // ✅ accessible in HBS
+  }
+  next();
 });
+const http=require('http')
+
 
 const path = require('path');
 const hbs = require('hbs');
+hbs.registerHelper('encodeURIComponent', str => encodeURIComponent(str));
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const config = require('./config/razorpay');
@@ -110,6 +91,53 @@ app.get('/admin/:page', (req, res) => res.render(`admin/${req.params.page}`));
 app.use('/admin/js', express.static('public/javascript/admin'));
 app.use('/', express.static('public/css/student'));
 
+const Message = require('./models/Message');
+//for chatting
+const { Server } = require('socket.io');
+const server = http.createServer(app);
+const io=new Server(server);
+// Socket.IO
+const users = {}; // Map email → socket.id
+
+io.on("connection", socket => {
+  console.log("New user connected");
+
+  // Register user email when socket connects
+  socket.on("register", email => {
+    users[email] = socket.id;
+    socket.email = email;
+    console.log("Registered:", email);
+  });
+
+  // Handle chat message
+  socket.on("chatMessage", async ({ sender, receiver, text }) => {
+    if (!sender || !receiver || !text) return;
+
+    const newMsg = await Message.create({ sender, receiver, text });
+    const time = new Date(newMsg.createdAt).toLocaleTimeString();
+
+    // Send to sender
+    io.to(users[sender])?.emit("message", {
+      user: "isMe",
+      text,
+      time
+    });
+
+    // Send to receiver if online
+    if (users[receiver]) {
+      io.to(users[receiver]).emit("message", {
+        user: sender,
+        text,
+        time
+      });
+    }
+  });
+
+  socket.on("disconnect", () => {
+    if (socket.email) delete users[socket.email];
+    console.log("User disconnected:", socket.email);
+  });
+});
 
 server.listen(4000, () => {
   console.log('Server running on port 4000');

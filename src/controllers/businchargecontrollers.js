@@ -79,19 +79,5 @@ exports.submitinquiry = async (req, res) => {
 };
 
 
-exports.renderChatPage = async (req, res) => {
-    const messages = await Message.find().sort({ createdAt: 1 }).lean();
-    const contacts = await Contact.find().lean();
-
-    res.render("chat", {
-        messages: messages.map(msg => ({
-            message: msg.text,
-            time: msg.createdAt.toLocaleTimeString(),
-            isMe: msg.sender === currentUser
-        })),
-        contacts,
-        selectedUser: "Priya", // or dynamically from URL
-    });
-};
 
 
