@@ -1,56 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Bus Management System</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="/student_home.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | BusSys</title>
+
+  <!-- ✅ Correct Font Awesome CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+  <link rel="stylesheet" type="text/css" href="/student_home.css" />
 </head>
 <body>
-
-    <!-- Top Horizontal Navbar -->
-    <div class="top-navbar">
-        <button class="menu-btn" onclick="toggleSidebar()">
-            <i class="fa fa-bars"></i>
-        </button>
-        <div class="nav-links">
-            <a href="/student/student_home"><i class="fa fa-home"></i> Home</a>
-            <a href="#notifications"><i class="fa fa-bell"></i> Notifications</a>
-            <a href="#logout"><i class="fa fa-sign-out-alt"></i> Log Out</a>
-        </div>
-    </div>
-
-    <!-- Sidebar Navbar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2 class="navbar-heading">STUDENT</h2>
-            <button class="close-btn" onclick="toggleSidebar()">
-                <i class="fa fa-times"></i>
-            </button>
-        </div>
-        <a href="/student/student_profile"><i class="fa fa-user"></i> Profile</a>
-        <a href="/student/student_registration"><i class="fa fa-user-plus"></i> Registration</a>
-        <a href="/student/student_payment"><i class="fa fa-credit-card"></i> Payment</a>
-        <a href="/student/student_enquiry"><i class="fa fa-question-circle"></i> Enquiry</a>
-        <a href="/student/c3"><i class="fa fa-comments"></i> Complaint Box</a>
-        <a href="#tracking"><i class="fa fa-map-marker-alt"></i> Tracking</a>
-        <a href="/student/routelist"><i class="fa fa-route"></i> Route List</a>
-    </div>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><i class="fas fa-home"></i> <a href="/student/student_home">Home</a></li>
+        <li><i class="fas fa-id-card"></i> <a href="/student/registration">Registration</a></li>
+        <li><i class="fas fa-credit-card"></i> <a href="/student/payment">Payment</a></li>
+        <li><i class="fas fa-user"></i> <a href="/student/profile">Profile</a></li>
+        <li><i class="fas fa-comment-dots"></i> <a href="/student/complaint">Complaint</a></li>
+        <li><i class="fas fa-question-circle"></i> <a href="/student/enquiry">Enquiry</a></li>
+      </ul>
+      <ul class="sidebar-menu">
+        <li><i class="fas fa-sign-out-alt"></i> <a href="#">Logout</a></li>
+      </ul>
+    </aside>
 
     <!-- Main Content -->
-    <div class="container">
-        <div class="grid-container">
-            <div class="grid-item"><i class="fa fa-user"></i><p>Profile</p></div>
-            <div class="grid-item"><i class="fa fa-user-plus"></i><p>Registration</p></div>
-            <div class="grid-item"><i class="fa fa-credit-card"></i><p>Payment</p></div>
-            <div class="grid-item"><i class="fa fa-question-circle"></i><p>Enquiry</p></div>
-            <div class="grid-item"><i class="fa fa-comments"></i><p>Complaint Box</p></div>
-            <div class="grid-item"><i class="fa fa-map-marker-alt"></i><p>Tracking</p></div>
-            <div class="grid-item"><i class="fa fa-route"></i><p>Route List</p></div>
+    <div class="main-section">
+      <!-- Top Navigation -->
+      <nav class="top-nav">
+        <div class="top-left">
+          <img src="../images/nitte-nmit-logo.png" alt="Nitte Logo" class="top-logo">
         </div>
-    </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+        </div>
+        <div class="nav-actions">
+          <!-- Notification Bell -->
+          <div class="notification-wrapper">
+            <div class="notification-bell" id="bellToggle">
+              <i class="fas fa-bell"></i>
+              <span class="notification-count">2</span>
+            </div>
+            <div class="notification-dropdown" id="notificationMenu">
+              <div class="notif-header">You have 2 notifications</div>
+              <div class="notif-item">
+                <div class="notif-title">New Students</div>
+                <div class="notif-desc">New Students Added</div>
+                <div class="notif-user">👤 Neha</div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-title">Fees Amount</div>
+                <div class="notif-desc">Fees amount for this year increased. It's 35000</div>
+                <div class="notif-user">👤 Himanchi Kumari</div>
+              </div>
+              <div class="notif-footer"><a href="/student/notifications">View All</a></div>
+            </div>
+          </div>
 
-    <script src="/student/js/student_home.js"></script>
+          <!-- Profile -->
+          <div class="profile-dropdown">
+            <img src="https://i.pravatar.cc/40" alt="Profile" class="avatar" id="profileToggle">
+            <div class="dropdown-menu" id="dropdownMenu">
+              <a href="/student/profile"><i class="fas fa-user"></i> Profile</a>
+              <a href="/loginform"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Dashboard Body -->
+      <div class="dashboard-content">
+        <div class="card welcome-card">
+          <h2>Hello Student! 👋</h2>
+          <p>You have 2 updates today. Please check your schedule below!</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Your Bus Info</h3>
+            <p><strong>Route:</strong> Route 12</p>
+            <p><strong>Pickup Point:</strong> Main Gate, 7:10 AM</p>
+            <p><strong>Driver:</strong> Mr. Ramesh (📞 9876543210)</p>
+          </div>
+
+          <div class="card">
+            <h3>Notifications</h3>
+            <ul>
+              <li>🕓 Tomorrow's pickup will be delayed by 15 mins.</li>
+              <li>📢 New route adjustment from next week.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/student_home.js"></script>
 </body>
 </html>

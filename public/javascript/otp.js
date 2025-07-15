@@ -1,4 +1,4 @@
-// Function to move to the next input field
+// Move to next input
 function moveToNext(input, nextIndex) {
   const inputs = document.querySelectorAll(".input-field input");
   if (input.value.length === 1 && nextIndex < inputs.length) {
@@ -7,12 +7,12 @@ function moveToNext(input, nextIndex) {
   }
 }
 
-// Function to verify OTP
+
+// Verify OTP
 function verifyOTP() {
   const inputs = document.querySelectorAll(".input-field input");
   let otp = "";
 
-  // Collect OTP from all input fields
   for (let input of inputs) {
     if (input.value === "") {
       alert("Please enter all OTP digits.");
@@ -20,20 +20,44 @@ function verifyOTP() {
     }
     otp += input.value;
   }
+ let form = document.getElementById("otp-form");
+ // Set OTP value in a hidden field
+  let existing = document.getElementById("otpCombined");
 
-  // Simulate OTP verification
-  if (otp === "1234") {
-    // Replace "1234" with the actual OTP logic
-    alert("OTP Verified!");
-    window.location.href = "/resetpassword";
+   if (!existing) {
+    let hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "otp";
+    hiddenInput.id = "otpCombined";
+    hiddenInput.value = otp;
+    form.appendChild(hiddenInput);
   } else {
-    alert("Invalid OTP. Please try again.");
+    existing.value = otp;
   }
+  
+  form.submit();
 }
 
-// Add event listeners to input fields for navigation
-document.querySelectorAll(".input-field input").forEach((input, index) => {
-  input.addEventListener("input", function () {
-    moveToNext(input, index + 1);
+// Setup input navigation on load
+document.addEventListener("DOMContentLoaded", () => {
+  const inputs = document.querySelectorAll(".input-field input");
+   // Handle OTP inputs
+  inputs.forEach((input, index) => {
+    if (index !== 0) input.disabled = true;
+
+    input.addEventListener("input", function () {
+      moveToNext(input, index + 1);
+    });
+    input.addEventListener("keydown", (e) => {
+      if (
+        e.key === "Backspace" &&
+        input.value.length === 0 &&
+        index > 0
+      ) {
+        inputs[index - 1].focus();
+      }
   });
+});
+// Attach the verify button
+  document.getElementById("verifyButton").addEventListener("click", verifyOTP);
 });

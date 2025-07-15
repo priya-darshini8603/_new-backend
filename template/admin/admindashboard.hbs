@@ -57,11 +57,15 @@
         <i class="fas fa-bell"></i>
         <span>Admin Notification</span>
       </a>
+<<<<<<< HEAD
       <a href="/admin/siteannouncement">
         <i class="fas fa-bullhorn"></i>
         <span>Site Announcements</span>
       </a>
       <a href="/admin/inquiery">
+=======
+      <a href="/admin/inquiry">
+>>>>>>> 5e945c9912a49adbe3e53d6d3d6c92450e154d2f
         <i class="fas fa-question-circle"></i>
         <span>Inquiry</span>
       </a>
@@ -69,7 +73,7 @@
         <i class="fas fa-money-bill-wave"></i>
         <span>Payments</span>
       </a>
-      <a href="/admin/admlogin">
+      <a href="/loginform">
         <i class="fas fa-sign-out-alt"></i>
         <span>Logout</span>
       </a>
@@ -114,7 +118,7 @@
               </li>
               <li><i class="bx bx-chevron-right"></i></li>
               <li>
-                <a class="active" href="/admin/index">Home</a>
+                <a class="active" href="/home">Home</a>
               </li>
             </ul>
           </div>
@@ -124,21 +128,21 @@
           <li>
             <i class="bx bxs-user-graduate"></i>
             <span class="text">
-              <h3>1200</h3>
+              <h3>{{studentCount}}</h3>
               <p>Students</p>
             </span>
           </li>
           <li>
             <i class="bx bxs-chalkboard"></i>
             <span class="text">
-              <h3>50</h3>
+              <h3>{{teacherCount}}</h3>
               <p>Teachers</p>
             </span>
           </li>
           <li>
             <i class="bx bxs-car"></i>
             <span class="text">
-              <h3>15</h3>
+              <h3>{{driverCount}}</h3>
               <p>Drivers</p>
             </span>
           </li>
@@ -285,5 +289,42 @@
     <!-- CONTENT -->
 
     <script src="/admin/js/admindashboard.js"></script>
+    <!-- JWT Auto Logout Script -->
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script>
+      function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+      }
+
+      function checkTokenExpiration() {
+        const token = getCookie("token");
+        if (!token) {
+          window.location.href = "/loginform"; // If token is missing, go to login
+          return;
+        }
+
+        try {
+          const decoded = jwt_decode(token);
+          const now = Date.now() / 1000;
+
+          if (decoded.exp < now) {
+            alert("Session expired. You will be logged out.");
+            document.cookie = "token=; Max-Age=0; path=/"; // Clear cookie
+            window.location.href = "/loginform";
+          }
+        } catch (err) {
+          console.error("Invalid token");
+          window.location.href = "/loginform";
+        }
+      }
+
+      function logout() {
+        document.cookie = "token=; Max-Age=0; path=/";
+        window.location.href = "/loginform";
+      }
+
+      setInterval(checkTokenExpiration, 5000);
+    </script>
   </body>
 </html>

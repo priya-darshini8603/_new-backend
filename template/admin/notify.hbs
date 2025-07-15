@@ -1,4 +1,6 @@
+<!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
   <head>
     <meta charset="UTF-8" />
     <title>Student and Staff Management</title>
@@ -70,168 +72,118 @@
         <i class="fas fa-sign-out-alt"></i>
         <span>Logout</span>
       </a>
+=======
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notify Passengers</title>
+  <link rel="stylesheet" href="/admin/notify.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papapapapapapapap" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <img src="/images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+    <div class="profile-region"></div>
+    <div class="nav-icons">
+      <a href="/admin/index" class="breadcrumb-link">Home</a>
+      <a href="/admin/view-profile"><i class="fas fa-user"></i></a>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="/admin/manage_admin"><i class="fas fa-user-tie"></i><span>Manage Admin</span></a>
+    <a href="/admin/teacherdetails"><i class="fas fa-chalkboard-teacher"></i><span>Manage Teacher</span></a>
+    <a href="/admin/studentdetails.html"><i class="fas fa-user-graduate"></i><span>Manage Student</span></a>
+    <a href="/admin/driverdetails"><i class="fas fa-car"></i><span>Manage Driver</span></a>
+    <a href="/admin/route"><i class="fas fa-route"></i><span>Route List</span></a>
+    <a href="/admin/scheduleevent"><i class="fas fa-calendar-alt"></i><span>Schedule</span></a>
+    <a href="/admin/complaintbox"><i class="fas fa-comment-dots"></i><span>Complaint Box</span></a>
+    <a href="/admin/seatavailable"><i class="fas fa-chair"></i><span>Seat Availability</span></a>
+    <a href="/admin/notify" class="active"><i class="fas fa-bell"></i><span>Admin Notification</span></a>
+    <a href="/admin/inquiry"><i class="fas fa-question-circle"></i><span>Inquiry</span></a>
+    <a href="/admin/payment-records"><i class="fas fa-money-bill-wave"></i><span>Payments</span></a>
+    <a href="/loginform"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="student-details">
+    <div class="breadcrumb">
+      <h2 class="breadcrumb-title">Notify Passengers</h2>
+>>>>>>> 5e945c9912a49adbe3e53d6d3d6c92450e154d2f
     </div>
 
-    <!-- Main Content -->
-    <div class="student-details">
-      <div class="breadcrumb">
-        <h2 class="breadcrumb-title">Notify Passengers</h2>
-      </div>
-      <div class="toolbar">
-        <!-- Left Side: Show Entries Dropdown -->
-        <div>
-          <label for="showEntries">Show</label>
-          <select id="showEntries">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="50">100</option>
-          </select>
-          entries
-        </div>
-
-        <!-- Right Side: Search Box -->
-        <div class="search-box">
-          <input type="text" id="search" placeholder="Search..." />
-        </div>
+    <div class="toolbar">
+      <div>
+        <label for="showEntries">Show</label>
+        <select id="showEntries">
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+        entries
       </div>
 
-      <!-- Filter and Button Container -->
-      <div class="filter-buttons-container">
-        <!-- Filter Section -->
-        <div class="filter-section">
-          <label for="filter">Filter: </label>
-          <select id="filter" onchange="filterList()">
-            <option value="all">All</option>
-            <option value="student">Students</option>
-            <option value="staff">Staffs</option>
-          </select>
-        </div>
-
-        <!-- Buttons Section -->
-        <div class="button-container">
-          <button class="button" onclick="selectAll()">Select All</button>
-          <button class="button" onclick="openModal()">Send Message</button>
-          <button class="button" onclick="resetForm()">Reset</button>
-        </div>
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Search..." />
       </div>
-
-      <!-- Modal for Sending Messages -->
-      <!-- Modal for Sending Messages -->
-      <div id="messageModal" class="modal">
-        <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
-          <h3>Send Message</h3>
-          <textarea
-            id="messageInput"
-            rows="4"
-            placeholder="Your message here..."
-          ></textarea>
-          <br /><br />
-          <button class="send-btn" onclick="submitMessage()">
-            <div class="svg-wrapper-1">
-              <div class="svg-wrapper">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                >
-                  <path fill="none" d="M0 0h24v24H0z"></path>
-                  <path
-                    fill="currentColor"
-                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-            <span>Send</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Table -->
-      <table id="sortableTable">
-        <thead>
-          <tr>
-            <th>Select</th>
-            <th onclick="sortTable(0)">
-              ID
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(1)">
-              Name
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(2)">
-              Role
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(3)">
-              Contact No.
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(3)">
-              Bus N0.
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(3)">
-              Route No.
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(3)">
-              Payment Status.
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(4)">
-              Status
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="personList">
-          <tr data-role="student">
-            <td><input type="checkbox" class="select-person" /></td>
-            <td>12353</td>
-            <td>Alfie Jr</td>
-            <td>Student</td>
-            <td>8792546730</td>
-            <td>12</td>
-            <td>24</td>
-            <td><span class="status-paid">Paid</span></td>
-            <td><span class="status-active">Active</span></td>
-            <td><button class="msg" onclick="openModal()">📩</button></td>
-          </tr>
-          <tr data-role="staff">
-            <td><input type="checkbox" class="select-person" /></td>
-            <td>45678</td>
-            <td>Jane Smith</td>
-            <td>Staff</td>
-            <td>8172546730</td>
-            <td>1</td>
-            <td>20</td>
-            <td><span class="status-paid">Paid</span></td>
-            <td><span class="status-active">Active</span></td>
-            <td><button class="msg" onclick="openModal()">📩</button></td>
-          </tr>
-          <tr data-role="staff">
-            <td><input type="checkbox" class="select-person" /></td>
-            <td>78901</td>
-            <td>John Doe</td>
-            <td>Staff</td>
-            <td>9872546730</td>
-            <td>22</td>
-            <td>19</td>
-            <td><span class="status-paid">Paid</span></td>
-            <td><span class="status-inactive">Inactive</span></td>
-            <td><button class="msg" onclick="openModal()">📩</button></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <!-- JavaScript -->
-    <script src="/admin/js/notify.js"></script>
-  </body>
+    <div class="filter-buttons-container">
+      <div class="filter-section">
+        <label for="filter">Filter:</label>
+        <select id="filter">
+          <option value="all">All</option>
+          <option value="student">Students</option>
+          <option value="staff">Staff</option>
+          <option value="admin">Admin</option>
+          <option value="teacher">Teacher</option>
+          <option value="busincharge">Driver</option>
+        </select>
+      </div>
+      <div class="button-container">
+        <button class="button" onclick="selectAll()">Select All</button>
+        <button class="button" onclick="openModal()">Send Message</button>
+        <button class="button" onclick="resetForm()">Reset</button>
+      </div>
+    </div>
+
+    <!-- Modal for Sending Messages -->
+    <div id="messageModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Send Message</h3>
+        <textarea id="messageInput" rows="4" placeholder="Your message here..."></textarea>
+        <br /><br />
+        <button class="send-btn" onclick="submitMessage()">Send</button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <table id="sortableTable">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Contact No</th>
+          <th>Bus No</th>
+          <th>Route No</th>
+          <th>Payment Status</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="personList">
+        <!-- Dynamically injected rows here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="/admin/notify.js"></script>
+</body>
 </html>

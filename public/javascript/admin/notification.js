@@ -1,4 +1,4 @@
-// Sample Notification Data
+// ✅ Sample Notification Data (for now)
 const notifications = [
   {
     id: 1,
@@ -26,22 +26,21 @@ const notifications = [
   },
 ];
 
-// DOM Elements
+// ✅ DOM Elements
 const notificationList = document.getElementById("notificationList");
 const searchInput = document.getElementById("searchInput");
 const notificationCount = document.getElementById("notification-count");
 const notificationPopup = document.getElementById("notificationPopup");
-const popupNotificationTitle = document.getElementById(
-  "popupNotificationTitle"
-);
+const popupNotificationTitle = document.getElementById("popupNotificationTitle");
 const popupSender = document.getElementById("popupSender");
 const popupDate = document.getElementById("popupDate");
 const popupContent = document.getElementById("popupContent");
 const closePopup = document.getElementById("closePopup");
 
-// Render Notifications
-function renderNotifications(notifications) {
-  notificationList.innerHTML = notifications
+// ✅ Render Notifications
+function renderNotifications(list) {
+  if (!notificationList) return;
+  notificationList.innerHTML = list
     .map(
       (notification) => `
       <li class="notification-item" data-id="${notification.id}">
@@ -62,72 +61,89 @@ function renderNotifications(notifications) {
     .join("");
 }
 
-// Update Notification Count
+// ✅ Update Notification Count
 function updateNotificationCount() {
-  notificationCount.textContent = notifications.length;
+  if (notificationCount) {
+    notificationCount.textContent = notifications.length;
+  }
 }
 
-// Search Notifications
+// ✅ Search Notifications
 function searchNotifications(query) {
-  const filteredNotifications = notifications.filter(
-    (notification) =>
-      notification.name.toLowerCase().includes(query.toLowerCase()) ||
-      notification.designation.toLowerCase().includes(query.toLowerCase()) ||
-      notification.content.toLowerCase().includes(query.toLowerCase())
+  const filtered = notifications.filter((n) =>
+    [n.name, n.designation, n.content].some((field) =>
+      field.toLowerCase().includes(query.toLowerCase())
+    )
   );
-  renderNotifications(filteredNotifications);
+  renderNotifications(filtered);
 }
 
-// Show Notification Details in Popup
+// ✅ Show Notification Details in Popup
 function showNotificationDetails(id) {
   const notification = notifications.find((n) => n.id === id);
   if (notification) {
     popupNotificationTitle.textContent = `Notification from ${notification.name}`;
-    popupSender.textContent = `Sender: ${notification.name}`;
+    popupSender.textContent = `Sender: ${notification.name} (${notification.designation})`;
     popupDate.textContent = `Date: ${notification.date}`;
-    popupContent.textContent = `Content: ${notification.content}`;
-    notificationPopup.style.display = "block";
+    popupContent.textContent = notification.content;
+    notificationPopup.style.display = "flex";
   }
 }
 
-// Close Popup
+// ✅ Close Popup
 function closeNotificationPopup() {
   notificationPopup.style.display = "none";
 }
 
-// Event Listeners
+// ✅ Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
-  // Render initial notifications
+  // Initial render
   renderNotifications(notifications);
   updateNotificationCount();
 
-  // Search functionality
-  searchInput.addEventListener("input", (e) => {
-    searchNotifications(e.target.value);
-  });
+  // Search input
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchNotifications(e.target.value);
+    });
+  }
 
-  // Open notification details popup
-  notificationList.addEventListener("click", (e) => {
-    const notificationItem = e.target.closest(".notification-item");
-    if (notificationItem) {
-      const notificationId = parseInt(notificationItem.dataset.id);
-      showNotificationDetails(notificationId);
-    }
-  });
+  // Click notification to open popup
+  if (notificationList) {
+    notificationList.addEventListener("click", (e) => {
+      const item = e.target.closest(".notification-item");
+      if (item) {
+        const id = parseInt(item.dataset.id, 10);
+        showNotificationDetails(id);
+      }
+    });
+  }
 
   // Close popup
-  closePopup.addEventListener("click", closeNotificationPopup);
+  if (closePopup) {
+    closePopup.addEventListener("click", closeNotificationPopup);
+  }
+
+  // Close popup by clicking outside
+  if (notificationPopup) {
+    window.addEventListener("click", (e) => {
+      if (e.target === notificationPopup) {
+        closeNotificationPopup();
+      }
+    });
+  }
 });
-//mobile menu
+
+// ✅ Mobile Sidebar Toggle
 const sidebarToggle = document.createElement("button");
 sidebarToggle.classList.add("sidebar-toggle");
-sidebarToggle.innerHTML = "☰"; // Hamburger icon
+sidebarToggle.innerHTML = "☰";
 document.body.appendChild(sidebarToggle);
 
 const sidebar = document.querySelector(".sidebar");
 const content = document.querySelector(".container");
 
 sidebarToggle.addEventListener("click", () => {
-  sidebar.classList.toggle("active");
-  content.classList.toggle("active");
+  if (sidebar) sidebar.classList.toggle("active");
+  if (content) content.classList.toggle("active");
 });

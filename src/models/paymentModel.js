@@ -1,13 +1,27 @@
 const mongoose = require("mongoose");
 
 const paymentSchema = new mongoose.Schema({
-    email: String,
-    route: String,
-    amount: Number,
-    orderId: String,
-    paymentId: String,
-    status: String,
-    createdAt: { type: Date, default: Date.now }
+  studentName: String,
+  usn: String,
+  branch: String,
+  semester: String,
+  routeNUmber:Number,
+  pickupPoint: String,
+  amount: Number,
+  phone_num:{type:String},
+  razorpay_payment_id: {
+  type: String,
+  required: true
+},
+  status: String,
+  createdAt: { type: Date, default: Date.now },
+  payment_ref_id: {
+  type: String,
+  required: true,
+  unique: true
+},
+
+
 });
 
 const PaymentCollection = mongoose.model("PaymentCollection", paymentSchema);

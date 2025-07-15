@@ -1,131 +1,208 @@
+// ✅ DYNAMIC LOADING
+async function loadUsers() {
+  try {
+    const res = await fetch('/admin/api/users');
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+
+    const personList = document.getElementById('personList');
+    personList.innerHTML = '';
+
+    if (!data.users || data.users.length === 0) {
+      personList.innerHTML = `
+        <tr><td colspan="10" style="text-align:center;">No users found.</td></tr>
+      `;
+      return;
+    }
+
+    data.users.forEach(user => {
+      const tr = document.createElement('tr');
+      tr.setAttribute('data-role', user.role?.toLowerCase() || "");
+
+      tr.innerHTML = `
+        <td><input type="checkbox" class="select-person" data-name="${user.fName || ''} ${user.lName || ''}" /></td>
+        <td>${user.fName || ''} ${user.lName || ''}</td>
+        <td>${capitalize(user.role || '')}</td>
+        <td>${user.email || ''}</td>
+        <td>${user.contactNo || ''}</td>
+        <td>${user.busNo || ''}</td>
+        <td>${user.routeNo || ''}</td>
+        <td><span class="${user.paymentStatus === 'Paid' ? 'status-paid' : 'status-unpaid'}">${user.paymentStatus || ''}</span></td>
+        <td><span class="${user.status === 'Active' ? 'status-active' : 'status-inactive'}">${user.status || ''}</span></td>
+        <td><button class="msg" onclick="openModal()">📩</button></td>
+      `;
+      personList.appendChild(tr);
+    });
+
+    applyFilters();
+
+  } catch (error) {
+    console.error('Error loading users:', error);
+    alert('Failed to load users. Check console.');
+  }
+}
+
+// ✅ Capitalize helper
+function capitalize(word) {
+  if (!word) return '';
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+// ✅ SELECT ALL / RESET
 function selectAll() {
   document
     .querySelectorAll(".select-person")
-    .forEach((checkbox) => (checkbox.checked = true));
+    .forEach(cb => cb.checked = true);
   alert("All items selected!");
 }
 
 function resetForm() {
   document
     .querySelectorAll(".select-person")
-    .forEach((checkbox) => (checkbox.checked = false));
+    .forEach(cb => cb.checked = false);
   alert("Form reset!");
 }
 
-function sendMessage(name) {
-  alert(`Sending message to ${name}`);
+// ✅ SEARCH FILTER
+document.getElementById("search").addEventListener("input", applyFilters);
+
+// ✅ SHOW ENTRIES
+document.getElementById("showEntries").addEventListener("change", applyFilters);
+
+// ✅ ROLE FILTER
+function filterList() {
+  applyFilters();
 }
 
-document.getElementById("search").addEventListener("input", function () {
-  const searchTerm = this.value.toLowerCase();
+// ✅ Apply all filters together
+function applyFilters() {
+  const searchTerm = document.getElementById("search").value.toLowerCase();
+  const filter = document.getElementById("filter").value;
+  const entriesPerPage = parseInt(document.getElementById("showEntries").value);
+
   const rows = document.querySelectorAll("#personList tr");
-  rows.forEach((row) => {
-    const name = row.cells[2].textContent.toLowerCase().trim();
-    const id = row.cells[1].textContent.toLowerCase().trim();
-    const phone = row.cells[4].textContent.toLowerCase().trim();
-    const status = row.cells[5].textContent.toLowerCase().trim();
-    if (
+  let visibleCount = 0;
+
+  rows.forEach(row => {
+    if (row.querySelector('td[colspan]')) {
+      row.style.display = '';
+      return;
+    }
+
+    const role = row.getAttribute("data-role") || "";
+    const cells = row.cells;
+    const name = cells[1]?.textContent.toLowerCase().trim() || "";
+    const email = cells[3]?.textContent.toLowerCase().trim() || "";
+    const status = cells[8]?.textContent.toLowerCase().trim() || "";
+
+    const matchesSearch = (
       name.includes(searchTerm) ||
-      id.includes(searchTerm) ||
-      phone.includes(searchTerm) ||
+      email.includes(searchTerm) ||
       status.includes(searchTerm)
-    ) {
+    );
+
+    const matchesFilter = (filter === "all" || role === filter);
+
+    if (matchesSearch && matchesFilter && visibleCount < entriesPerPage) {
       row.style.display = "";
+      visibleCount++;
     } else {
       row.style.display = "none";
     }
   });
-
-  updateEntriesVisibility();
-});
-
-document.getElementById("showEntries").addEventListener("change", function () {
-  updateEntriesVisibility();
-});
-
-function updateEntriesVisibility() {
-  const entriesPerPage = parseInt(document.getElementById("showEntries").value);
-  const rows = document.querySelectorAll("#personList tr");
-  const totalRows = rows.length;
-  const visibleRows = Array.from(rows).filter(
-    (row) => row.style.display !== "none"
-  );
-  rows.forEach((row) => (row.style.display = "none"));
-  for (let i = 0; i < entriesPerPage && i < visibleRows.length; i++) {
-    visibleRows[i].style.display = "";
-  }
 }
 
-function filterList() {
-  const filter = document.getElementById("filter").value;
-  document.querySelectorAll("#personList tr").forEach((row) => {
-    const role = row.getAttribute("data-role");
-    row.style.display = filter === "all" || role === filter ? "" : "none";
-  });
-  updateEntriesVisibility();
-}
-
+// ✅ MODAL
 function openModal() {
-  document.getElementById("messageModal").style.display = "block";
+  document.getElementById("messageModal").style.display = "flex";
 }
 
 function closeModal() {
   document.getElementById("messageModal").style.display = "none";
 }
 
-function submitMessage() {
-  const message = document.getElementById("messageInput").value;
-  if (message.trim()) {
-    alert("Message Sent: " + message);
-    closeModal();
-  } else {
-    alert("Please enter a message.");
-  }
-}
-const table = document.getElementById("sortableTable");
-const table_rows = Array.from(document.querySelectorAll("#personList tr"));
-const table_headings = document.querySelectorAll("th");
+// ✅ SUBMIT MESSAGE
+async function submitMessage() {
+  const message = document.getElementById("messageInput").value.trim();
 
-table_headings.forEach((head, i) => {
-  let sort_asc = true;
+  if (!message) {
+    alert("Please enter a message.");
+    return;
+  }
+
+  const selectedNames = Array.from(document.querySelectorAll(".select-person:checked"))
+    .map(cb => cb.getAttribute("data-name"))
+    .filter(name => !!name);
+
+  if (!selectedNames.length) {
+    alert("Please select at least one recipient.");
+    return;
+  }
+
+  try {
+    const response = await fetch('/admin/send-notification', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ recipientNames: selectedNames, message })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Message sent successfully!");
+    } else {
+      alert("Failed: " + result.message);
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Error sending message. Check console.");
+  }
+
+  closeModal();
+}
+
+// ✅ SORTABLE TABLE
+document.querySelectorAll("th").forEach((head, i) => {
+  let sortAsc = true;
   head.onclick = () => {
-    table_headings.forEach((head) => head.classList.remove("active"));
+    document.querySelectorAll("th").forEach(h => h.classList.remove("active"));
     head.classList.add("active");
 
-    sort_asc = head.classList.contains("asc") ? false : true;
-    head.classList.toggle("asc", sort_asc);
-    head.classList.toggle("desc", !sort_asc);
+    sortAsc = !head.classList.contains("asc");
+    head.classList.toggle("asc", sortAsc);
+    head.classList.toggle("desc", !sortAsc);
 
-    sortTable(i, sort_asc);
+    sortTable(i, sortAsc);
   };
 });
 
-function sortTable(column, sort_asc) {
-  const sortedRows = [...table_rows].sort((a, b) => {
-    let first = a.cells[column].textContent.trim();
-    let second = b.cells[column].textContent.trim();
+function sortTable(column, sortAsc) {
+  const tbody = document.getElementById("personList");
+  const rows = Array.from(tbody.querySelectorAll("tr")).filter(row => !row.querySelector('td[colspan]'));
 
-    // Check if the value is numeric
+  const sortedRows = rows.sort((a, b) => {
+    let first = a.cells[column]?.textContent.trim() || "";
+    let second = b.cells[column]?.textContent.trim() || "";
+
     const isNumeric = !isNaN(parseFloat(first)) && !isNaN(parseFloat(second));
-
     if (isNumeric) {
-      return sort_asc ? first - second : second - first;
+      return sortAsc ? first - second : second - first;
     } else {
-      return sort_asc
+      return sortAsc
         ? first.localeCompare(second)
         : second.localeCompare(first);
     }
   });
 
-  // Reinsert sorted rows into the table
-  const tbody = document.getElementById("personList");
   tbody.innerHTML = "";
-  sortedRows.forEach((row) => tbody.appendChild(row));
+  sortedRows.forEach(row => tbody.appendChild(row));
 }
-//mobile
+
+// ✅ MOBILE SIDEBAR
 const sidebarToggle = document.createElement("button");
 sidebarToggle.classList.add("sidebar-toggle");
-sidebarToggle.innerHTML = "☰"; // Hamburger icon
+sidebarToggle.innerHTML = "☰";
 document.body.appendChild(sidebarToggle);
 
 const sidebar = document.querySelector(".sidebar");
@@ -135,33 +212,14 @@ sidebarToggle.addEventListener("click", () => {
   sidebar.classList.toggle("active");
   content.classList.toggle("active");
 });
-// Function to open the modal
-function openModal() {
-  const modal = document.getElementById("messageModal");
-  modal.style.display = "flex"; // Display the modal as a flex container
-}
 
-// Function to close the modal
-function closeModal() {
-  const modal = document.getElementById("messageModal");
-  modal.style.display = "none"; // Hide the modal
-}
-
-// Function to submit the message
-function submitMessage() {
-  const message = document.getElementById("messageInput").value;
-  if (message.trim() === "") {
-    alert("Please enter a message."); // Validate the message
-    return;
-  }
-  alert(`Message sent: ${message}`); // Simulate sending the message
-  closeModal(); // Close the modal after sending
-}
-
-// Close the modal if the user clicks outside of it
+// ✅ CLOSE MODAL WHEN CLICKING OUTSIDE
 window.onclick = function (event) {
   const modal = document.getElementById("messageModal");
   if (event.target === modal) {
     closeModal();
   }
 };
+
+// ✅ INITIAL LOAD
+window.addEventListener('DOMContentLoaded', loadUsers);

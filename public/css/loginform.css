@@ -1,24 +1,44 @@
-body {
-  font-family: "Poppins", sans-serif;
+* {
   margin: 0;
   padding: 0;
-  background: #f8f9fa;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-image: url("../images/clg-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Flex centering for main content */
+.main-content {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  padding: 20px;
 }
 
+/* Login form box */
 .container {
   width: 100%;
   max-width: 400px;
   background: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Form styling */
 .form-title {
   text-align: center;
   margin-bottom: 20px;
@@ -38,12 +58,11 @@ body {
 }
 
 .input-group input {
-  width: calc(100% - 40px);
+  width: calc(100% - 5px);
   padding: 10px 10px 10px 30px;
   border: 1px solid #ddd;
   border-radius: 5px;
   outline: none;
-  box-sizing: border-box;
 }
 
 .input-group label {
@@ -93,21 +112,52 @@ body {
 }
 
 .icons i {
-  font-size: 24px;
+  font-size: 26px;
+  padding: 12px;
+  border-radius: 50%;
+  transition: 0.3s ease;
   cursor: pointer;
-  transition: color 0.3s;
+  color: white;
+}
+
+.google-icon {
+  font-size: 40px;
+  background: conic-gradient(
+    from -45deg,
+    #EA4335 0deg 90deg,
+    #4285F4 90deg 180deg, 
+    #34A853 180deg 270deg,
+    #FBBC05 270deg 360deg 
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.google-icon:hover {
+  transform: scale(1.1);
+}
+
+
+.icons .fa-facebook {
+  color: #3b5998;
 }
 
 .icons i:hover {
-  color: #5b86e5;
+  transform: scale(1.1);
+  opacity: 0.85;
 }
 
 .links {
   text-align: center;
 }
 
+
 .links p {
   margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
 }
 
 .links button {
@@ -115,11 +165,17 @@ body {
   border: none;
   color: #5b86e5;
   cursor: pointer;
-  text-decoration: underline;
   font-size: 16px;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.links button:hover {
+  color: #001f76;
 }
 
 .recover {
+  margin-bottom: 10px;
   text-align: right;
 }
 
@@ -129,5 +185,51 @@ body {
 }
 
 .recover a:hover {
-  text-decoration: underline;
+  color: #001f76;
+}
+
+/* Navbar Styling */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 10px 20px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 5px;
+  margin: 12px;
+}
+
+.nav-list li {
+  display: inline-block;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 5px;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-list a:hover {
+  color: #0056b3;
+}
+
+.menu-toggle {
+  display: none;
 }

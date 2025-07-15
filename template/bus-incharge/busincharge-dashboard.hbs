@@ -48,7 +48,7 @@
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
-                        <span class="title">Staff Details</span>
+                        <span class="title">Teacher Details</span>
                     </a>
                 </li>
                 <li>
@@ -106,11 +106,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/bus-incharge/logout">
+                    <a href="/loginform" onclick="logout();return false;">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
-                        <span class="title">Log Out</span>
+                        <span class="title" >Log Out</span>
                     </a>
                 </li>
             </ul>
@@ -130,10 +130,10 @@
 
                     <div class="right-section">
                         <div class="user">
-                            <img src="../images/avatar.png" alt="User Menu" id="avatar" class="avatar"></img></div>
+                            <img src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}" alt="User Menu" id="avatar" class="avatar"></img></div>
                         <div class="collapse-menu" id="collapseMenu">
                             <a href="/bus-incharge/profile">View Profile</a>
-                            <a href="/bus-incharge/logout">Log Out</a>
+                            <a href="/loginform" onclick="logout();return false;">Log Out</a>
                         </div>
 
                     </div>
@@ -202,7 +202,7 @@
             <section class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">1,504</div>
+                        <div class="numbers">{{studentCount}}</div>
                         <div class="cardName">Total Number<br> Of Students</div>
                     </div>
                     <div class="iconBx">
@@ -211,8 +211,8 @@
                 </div>
                 <div class="card">
                     <div>
-                        <div class="numbers">80</div>
-                        <div class="cardName">Total Number<br> Of Staff</div>
+                        <div class="numbers">{{teacherCount}}</div>
+                        <div class="cardName">Total Number<br> Of Teachers</div>
                     </div>
                     <div class="iconBx">
                         <i class="fa fa-users" aria-hidden="true"></i>
@@ -220,7 +220,7 @@
                 </div>
                 <div class="card">
                     <div>
-                        <div class="numbers">284</div>
+                        <div class="numbers">{{paidCount}}</div>
                         <div class="cardName">Total Students Paid</div>
                     </div>
                     <div class="iconBx">
@@ -229,7 +229,7 @@
                 </div>
                 <div class="card">
                     <div>
-                        <div class="numbers">842</div>
+                        <div class="numbers">{{unpaidCount}}</div>
                         <div class="cardName">Total Students Unpaid</div>
                     </div>
                     <div class="iconBx">
@@ -245,6 +245,7 @@
                         <h2>Recent Payments</h2>
                         <a href="/bus-incharge/view-all-payments" class="d-btn">View All</a>
                     </header>
+                   
                     <table>
                         <thead>
                             <tr>
@@ -260,53 +261,43 @@
                             </tr>
                         </thead>
                         <tbody>
+                             {{#each payments}}
                             <tr>
-                                <td>12345</td>
-                                <td>Priya</td>
-                                <td>123</td>
-                                <td>CSE</td>
-                                <td>3rd SEM</td>
-                                <td>DEVAIAH PARK</td>
-                                <td>Rs 30000</td>
-                                <td>12-09-2025</td>
-                                <td><a href="/bus-incharge/view-payments" class="d-btn">View</a></td>
+                                <td>{{payment_ref_id}}</td>
+                                <td>{{studentName}}</td>
+                                <td>{{usn}}</td>
+                                <td>{{branch}}</td>
+                                <td>{{semester}}</td>
+                                <td>{{pickupPoint}}</td>
+                                <td>{{amount}}</td>
+                                <td>{{createdAtFormatted}}</td>
+                                <td><a href="/bus-incharge/view-payments/{{payment_ref_id}}" class="d-btn">View</a></td>
                             </tr>
-                            <tr>
-                                <td>23456</td>
-                                <td>Aswini</td>
-                                <td>12345</td>
-                                <td>CSE</td>
-                                <td>3rd SEM</td>
-                                <td>DEVAIAH PARK</td>
-                                <td>Rs 30000</td>
-                                <td>30-10-2025</td>
-                                <td><a href="/bus-incharge/view-payments" class="d-btn">View</a></td>
-                            </tr>
+                             {{/each}}
                         </tbody>
                     </table>
+                   
                 </div>
                 <div class="recentCustomers">
                     <header class="cardHeader">
-                        <h2>New Students And Staffs</h2>
+                        <h2>New Students And Teachers</h2>
                     </header>
+                    {{#each newUsers}}
                     <table>
                         <tr>
                             <td width="60px">
-                                <div class="imgBx"><img src="../images/avatar.png" alt="Student"></div>
+                                <div class="imgBx"><img src="{{#if this.profileImageBase64}}data:{{this.profileImageType}};base64,{{this.profileImageBase64}}{{else}}../images/avatar.png{{/if}}"
+                                alt="{{this.role}}"></div>
                             </td>
                             <td>
-                                <h4>Pavani<br><span>Malleshwaram</span><br><span>Student</span></h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="imgBx"><img src="../images/avatar.png" alt="Staff"></div>
-                            </td>
-                            <td>
-                                <h4>Neha<br><span>Rajajinagar</span><br><span>Staff</span></h4>
+                                 <h4>{{this.fName}}{{this.lName}}<br>
+                                        <span>{{this.pickupPoint}}</span><br>
+                                        <span>{{#if (eq this.role "teacher")}}Teacher{{else}}Student{{/if}}</span>
+                                </h4>
                             </td>
                         </tr>
                     </table>
+                    {{/each}}
                 </div>
             </section>
         </main>
@@ -321,6 +312,43 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="/bus-incharge/js/dashboard.js"></script>
     <script src="/bus-incharge/js/notification.js"></script>
+   <!-- JWT Auto Logout Script -->
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script>
+      function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+      }
+
+      function checkTokenExpiration() {
+        const token = getCookie("token");
+        if (!token) {
+          window.location.href = "/loginform"; // If token is missing, go to login
+          return;
+        }
+
+        try {
+          const decoded = jwt_decode(token);
+          const now = Date.now() / 1000;
+
+          if (decoded.exp < now) {
+            alert("Session expired. You will be logged out.");
+            document.cookie = "token=; Max-Age=0; path=/"; // Clear cookie
+            window.location.href = "/loginform";
+          }
+        } catch (err) {
+          console.error("Invalid token");
+          window.location.href = "/loginform";
+        }
+      }
+
+      function logout() {
+        document.cookie = "token=; Max-Age=0; path=/";
+        window.location.href = "/loginform";
+      }
+
+      setInterval(checkTokenExpiration, 5000);
+    </script>
 </body>
 
 </html>

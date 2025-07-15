@@ -50,7 +50,7 @@
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
-                        <span class="title">Staff Details</span>
+                        <span class="title">Teacher Details</span>
                     </a>
                 </li>
                 <li>
@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/bus-incharge/logout">
+                    <a href="/loginform">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -132,10 +132,10 @@
 
                     <div class="right-section">
                         <div class="user">
-                            <img src="../images/avatar.png" alt="User Menu" id="avatar" class="avatar"></img></div>
+                            <img src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}" alt="User Menu" id="avatar" class="avatar"></img></div>
                         <div class="collapse-menu" id="collapseMenu">
                             <a href="/bus-incharge/profile">View Profile</a>
-                            <a href="/bus-incharge/logout">Log Out</a>
+                            <a href="/loginform">Log Out</a>
                         </div>
 
                     </div>
@@ -213,7 +213,7 @@
                 <div class="inquiry-container">
                     <p>We will get in touch with you shortly</p>
 
-                    <form action="/submit" method="POST">
+                    <form action="/submitinquiry" method="POST">
                         <label for="first-name">Your Name <span>*</span></label>
                         <div class="name-container">
                             <input type="text" id="first-name" name="first_name" placeholder="First Name" required>
@@ -276,6 +276,7 @@
 
                         <button type="submit">Submit</button>
                     </form>
+                    
                 </div>
             </div>
         </main>

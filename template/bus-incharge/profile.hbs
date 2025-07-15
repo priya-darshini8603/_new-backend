@@ -50,7 +50,7 @@
             <span class="icon">
               <ion-icon name="people-outline"></ion-icon>
             </span>
-            <span class="title">Staff Details</span>
+            <span class="title">Teacher Details</span>
           </a>
         </li>
         <li>
@@ -108,7 +108,7 @@
           </a>
         </li>
         <li>
-          <a href="/bus-incharge/logout">
+          <a href="/loginform">
             <span class="icon">
               <ion-icon name="log-out-outline"></ion-icon>
             </span>
@@ -132,10 +132,10 @@
 
           <div class="right-section">
             <div class="user">
-              <img src="../images/avatar.png" alt="User Menu" id="avatar" class="avatar"></img></div>
+              <img src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}" alt="User Menu" id="avatar" class="avatar"></img></div>
             <div class="collapse-menu" id="collapseMenu">
               <a href="/bus-incharge/profile">View Profile</a>
-              <a href="/bus-incharge/logout">Log Out</a>
+              <a href="/loginform">Log Out</a>
             </div>
 
           </div>
@@ -207,6 +207,22 @@
           <a href="/bus-incharge/busincharge-dashboard" class="breadcrumb-link">Home</a>
           <span>/</span>
         </div>
+
+<!--changed as per backend -->
+        <form action="/profileupdate" method="POST" enctype="multipart/form-data" id="profileForm">
+          <input type="hidden" name="email" value="{{profile.email}}" />
+          <input type="hidden" name="fName" id="fNameHidden" value="{{profile.fName}}" />
+          <input type="hidden" name="lName" id="lNameHidden" value="{{profile.lName}}" />
+  <input type="hidden" name="gender" id="genderHidden" value="{{profile.gender}}" />
+  <input type="hidden" name="phone_num" id="phoneNumberHidden" value="{{profile.phone_num}}" />
+  <input type="hidden" name="license_num" id="licenseNumberHidden" value="{{profile.license_num}}" />
+  <input type="hidden" name="DOB" id="dobHidden" value="{{profile.DOB}}" />
+  <input type="hidden" name="joined_date" id="joinedDateHidden" value="{{profile.joined_date}}" />
+  <input type="hidden" name="years_of_experience" id="experienceHidden" value="{{profile.years_of_experience}}" />
+  <input type="hidden" name="address" id="addressHidden" value="{{profile.address}}" />
+  <input type="hidden" name="postal_code" id="postalHidden" value="{{profile.postal_code}}" />
+  
+ 
         <div class="profile-container">
 
           <!-- Driver Profile -->
@@ -214,45 +230,48 @@
             <div class="header">
               <div class="profile-header">
                 <div class="image-container">
-                  <img id="profilePhoto" src="../images/avatar.png" alt="Profile Photo" class="profile-photo" />
-                  <input type="file" id="fileInput" accept="image/*" style="display: none;" />
-                  <button class="edit-icon" onclick="document.getElementById('fileInput').click()">✎</button>
+                  <img id="profilePhoto"  src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}" alt="Profile Photo" class="profile-photo" />
+                  <input type="file" id="fileInput" accept="image/*" name="profileImage" style="display: none;" />
+                  <button type="button" class="edit-icon" onclick="document.getElementById('fileInput').click()">✎</button>
+                  <button type="submit" class="save-image-btn" id="saveImageBtn" style="display:none;">💾</button>
                 </div>
                 <div class="profile-info">
-                  <h2 id="driverName">Vijay Joe</h2>
+                  <h2 id="driverName">{{profile.fName}} {{profile.lName}}</h2>
                   <p>Route Driver</p>
-                  <p>Route Number: <span>1</span></p>
+                  <p>Route Number: <span id="route_num">{{profile.route_num}}</span></p>
+                   <input type="hidden" name="route_num" id="route_numHidden" value="{{profile.route_num}}" />
                 </div>
               </div>
-              <button class="edit-btn" onclick="editSection(this, ['driverName'])">Edit ✎</button>
+              <button type="button" class="edit-btn" onclick="editSection(this, ['route_num'])">Edit ✎</button>
             </div>
           </div>
 
+        
           <!-- Personal Information -->
           <div class="section">
             <div class="header">
               <span class="section-title">Personal Information</span>
-              <button class="edit-btn"
+              <button type="button" class="edit-btn"
                 onclick="editSection(this, ['gender', 'phoneNumber', 'licenseNumber', 'dob', 'joinedDate', 'experience'])">Edit
                 ✎</button>
             </div>
-            <div class="profile-details" id="personalInfo">
-              <div class="detail-item"><span class="label">Driver ID:</span><span class="value">DR12345</span></div>
-              <div class="detail-item"><span class="label">Gender:</span><span class="value" id="gender">Male</span>
+            <div class="profile-details" id="personalInfo" >
+              <div class="detail-item"><span class="label">Driver ID:</span><span class="value">{{profile.driver_ID}}</span></div>
+              <div class="detail-item"><span class="label">Gender:</span><span class="value" id="gender">{{profile.gender}}</span>
               </div>
-              <div class="detail-item"><span class="label">Email:</span><span class="value">vijay.joe@example.com</span>
+              <div class="detail-item"><span class="label">Email:</span><span class="value">{{profile.email}}</span>
               </div>
               <div class="detail-item"><span class="label">Phone Number:</span><span class="value"
-                  id="phoneNumber">7890987670</span></div>
+                  id="phoneNumber">{{profile.phone_num}}</span></div>
               <div class="detail-item"><span class="label">License Number:</span><span class="value"
-                  id="licenseNumber">LIC4567890</span></div>
+                  id="licenseNumber">{{profile.license_num}}</span></div>
               <div class="detail-item"><span class="label">Date of Birth:</span><span class="value"
-                  id="dob">23-06-1986</span>
+                  id="dob">{{profile.DOB}}</span>
               </div>
               <div class="detail-item"><span class="label">Joined Date:</span><span class="value"
-                  id="joinedDate">15-06-2024</span></div>
+                  id="joinedDate">{{profile.joined_date}}</span></div>
               <div class="detail-item"><span class="label">Years of Experience:</span><span class="value"
-                  id="experience">8</span></div>
+                  id="experience">{{profile.years_of_experience}}</span></div>
             </div>
           </div>
 
@@ -260,21 +279,22 @@
           <div class="section">
             <div class="header">
               <span class="section-title">Address</span>
-              <button class="edit-btn" onclick="editSection(this, ['address', 'postal'])">Edit ✎</button>
+              <button type="button" class="edit-btn" onclick="editSection(this, ['address', 'postal'])">Edit ✎</button>
             </div>
             <div class="profile-details">
-              <div class="detail-item"><span class="label">Address:</span><span class="value" id="address">3rd Cross,
-                  123 Main
-                  Street, Rajajinagar</span></div>
+              <div class="detail-item"><span class="label">Address:</span><span class="value" id="address">
+                  {{profile.address}}</span></div>
               <div class="detail-item"><span class="label">Postal Code:</span><span class="value"
-                  id="postal">560078</span>
+                  id="postal">{{profile.postal_code}}</span>
               </div>
             </div>
           </div>
 
         </div>
+        </form>
 
       </div>
+     
 
     </main>
     <footer class="bg-body-tertiary text-center">

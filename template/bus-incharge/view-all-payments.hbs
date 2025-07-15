@@ -48,7 +48,7 @@
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
-                        <span class="title">Staff Details</span>
+                        <span class="title">Teacher Details</span>
                     </a>
                 </li>
                 <li>
@@ -130,10 +130,10 @@
 
                     <div class="right-section">
                         <div class="user">
-                            <img src="../images/avatar.png" alt="User Menu" id="avatar" class="avatar"></img></div>
+                            <img src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}" alt="User Menu" id="avatar" class="avatar"></img></div>
                         <div class="collapse-menu" id="collapseMenu">
                             <a href="/bus-incharge/profile">View Profile</a>
-                            <a href="/bus-incharge/logout">Log Out</a>
+                            <a href="/loginform">Log Out</a>
                         </div>
 
                     </div>
@@ -264,50 +264,25 @@
                         </tr>
                     </thead>
                     <tbody id="personList">
-                        <tr data-date="01-02-2025">
-                            <td>12345</td>
-                            <td>Priya Darshini I</td>
-                            <td>1NT22CS146</td>
-                            <td>CSE</td>
-                            <td>3rd</td>
-                            <td>Devaiah Park</td>
-                            <td>Rs 30000</td>
-                            <td>01-02-2025</td>
+                         {{#each payments}}
+                        <tr data-date={{formattedDate}}>
+                            <td>{{paymet_ref_id}}</td>
+                            <td>{{studentName}}</td>
+                            <td>{{usn}}</td>
+                            <td>{{branch}}</td>
+                            <td>{{semester}}</td>
+                            <td>{{pickupPoint}}</td>
+                            <td>{{amount}}</td>
+                            <td>{{formattedDate}}</td>
                             <td>
                                 <button class="view-btn"
-                                    onclick="location.href='/bus-incharge/view-payments'">View</button>
+                                    onclick="location.href='/bus-incharge/view-payments/{{_id}}'">View</button>
                             </td>
                         </tr>
-
-                        <tr data-date="06-02-2025">
-                            <td>23583</td>
-                            <td>Swetha</td>
-                            <td>1NT21EC143</td>
-                            <td>ECE</td>
-                            <td>4th</td>
-                            <td>Malleshwaram</td>
-                            <td>Rs 30000</td>
-                            <td>06-02-2025</td>
-                            <td>
-                                <button class="view-btn"
-                                    onclick="location.href='/bus-incharge/view-payments'">View</button>
-                            </td>
-                        </tr>
-
-                        <tr data-date="08-02-2025">
-                            <td>34567</td>
-                            <td>Ashok</td>
-                            <td>1NT23CV133</td>
-                            <td>CV</td>
-                            <td>3rd</td>
-                            <td>Devaiah Park</td>
-                            <td>Rs 30000</td>
-                            <td>08-02-2025</td>
-                            <td>
-                                <button class="view-btn"
-                                    onclick="location.href='/bus-incharge/view-payments'">View</button>
-                            </td>
-                        </tr>
+                    {{/each}}
+                        
+                            
+            
 
                     </tbody>
                 </table>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All Notifications | BusSys</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+  <link rel="stylesheet" href="/student_home.css" />
+  <style>
+    .notifications-page {
+      margin-left: 260px;
+      padding: 40px;
+    }
+
+    .notif-card {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .notif-card h3 {
+      margin: 0 0 10px;
+    }
+
+    .notif-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .notif-card .author {
+      font-size: 13px;
+      color: #287bff;
+    }
+
+    .back-link {
+      margin-top: 20px;
+      display: inline-block;
+      color: #287bff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="notifications-page">
+    <h1>All Notifications</h1>
+
+    <div class="notif-card">
+      <h3>New Students</h3>
+      <p>New Students Added</p>
+      <p class="author">👤 Neha</p>
+    </div>
+
+    <div class="notif-card">
+      <h3>Fees Amount</h3>
+      <p>Fees amount for this year increased. It's 35000</p>
+      <p class="author">👤 Himanchi Kumari M</p>
+    </div>
+
+    <!-- You can add more dummy notifications here -->
+
+    <a href="/student/student_home" class="back-link"><i class="fas fa-arrow-left"></i> Home Page</a>
+  </div>
+</body>
+</html>

@@ -50,7 +50,7 @@
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
-                        <span class="title">Staff Details</span>
+                        <span class="title">Teacher Details</span>
                     </a>
                 </li>
                 <li>
@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/bus-incharge/logout">
+                    <a href="/loginform">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -132,10 +132,10 @@
 
                     <div class="right-section">
                         <div class="user">
-                            <img src="../images/avatar.png" alt="User Menu" id="avatar" class="avatar"></img></div>
+                            <img src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}" alt="User Menu" id="avatar" class="avatar"></img></div>
                         <div class="collapse-menu" id="collapseMenu">
                             <a href="/bus-incharge/profile">View Profile</a>
-                            <a href="/bus-incharge/logout">Log Out</a>
+                            <a href="/loginform">Log Out</a>
                         </div>
 
                     </div>
@@ -212,17 +212,17 @@
 
                 </div>
                 <section class="bus-details">
-                    <img src="../images/image.png" alt="Bus Image" class="bus-image">
+                    <img src="{{#if busImageBase64}}data:{{busImageType}};base64,{{busImageBase64}}{{else}}/images/image.png{{/if}}"
+                     alt="Bus Image" class="bus-image">
 
                     <div class="details">
-                        <p><strong>Bus Number:</strong> KA-05-1234</p>
-                        <p><strong>Route Number:</strong> 1</p>
-                        <p><strong>Total Number Of Seats:</strong> 75</p>
-                        <p><strong>Total Seats Available:</strong> 45</p>
-                        <p><strong>Pickup Points:</strong> Devaiah Park, Navrang, Harishchandra Ghatt, Malleshwaram 18th
-                            cross, KC General</p>
-                        <p><strong>Last Service Date:</strong> 2024-08-15</p>
-                        <p><strong>Next Service Date:</strong> 2025-02-20</p>
+                        <p><strong>Bus Number:</strong> {{bus.busNumber}}</p>
+                        <p><strong>Route Number:</strong>{{bus.routeNumber}}</p>
+                        <p><strong>Total Number Of Seats:</strong>{{bus.totalSeats}}</p>
+                        <p><strong>Total Seats Available:</strong> {{bus.availableSeats}}</p>
+                        <p><strong>Pickup Points:</strong> {{bus.pickupPoints}}</p>
+                        <p><strong>Last Service Date:</strong>{{bus.lastServiceDate}}</p>
+                        <p><strong>Next Service Date:</strong>{{bus.nextServiceDate}}</p>
                     </div>
                 </section>
         </main>
