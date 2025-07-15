@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile | BusSys</title>
+  <link rel="stylesheet" href="/home.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <!-- ✅ Font Awesome Icons -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+/>
+
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><i class="fas fa-home"></i> <a href="/student/home">Home</a></li>
+        <li><i class="fas fa-id-card"></i> <a href="/student/registration">Registration</a></li>
+        <li><i class="fas fa-credit-card"></i> <a href="/student/payment">Payment</a></li>
+        <li><i class="fas fa-user"></i> <a href="/student/profile">Profile</a></li>
+        <li><i class="fas fa-comment-dots"></i> <a href="/student/complaint">Complaint</a></li>
+        <li><i class="fas fa-question-circle"></i> <a href="/student/enquiry">Enquiry</a></li>
+      </ul>
+      <ul class="sidebar-menu">
+        <li><i class="fas fa-sign-out-alt"></i> <a href="#">Logout</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-section">
+      <!-- Top Navigation -->
+      <nav class="top-nav">
+        <div class="top-left">
+          <img src="nitte-nmit-logo.png" alt="Nitte Logo" class="top-logo">
+        </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+        </div>
+        <div class="nav-actions">
+          <i class="fas fa-bell"></i>
+          <div class="profile-dropdown">
+            <img src="https://i.pravatar.cc/40" alt="Profile" class="avatar" id="profileToggle">
+            <div class="dropdown-menu" id="dropdownMenu">
+              <a href="/student/profile"><i class="fas fa-user"></i> Profile</a>
+              <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Profile Form -->
+      <div class="dashboard-content">
+        <div class="card">
+          <h2>Your Profile</h2>
+          <form class="form">
+            <!-- Image Upload Section -->
+            <div class="form-group profile-pic-group">
+              <label for="profilePic">Student Image:</label>
+              <input type="file" id="profilePic" accept="image/*" />
+              <img id="previewImage" src="https://i.pravatar.cc/120" alt="Preview" class="profile-preview" />
+            </div>
+
+            <div class="form-group">
+              <label for="name">Full Name:</label>
+              <input type="text" id="name" value="Himanchi Kumari" />
+            </div>
+
+            <div class="form-group">
+              <label for="id">Student ID:</label>
+              <input type="text" id="id" value="NMIT2025CS123" disabled />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" value="himanchi@nmit.ac.in" />
+            </div>
+
+            <div class="form-group">
+              <label for="department">Department:</label>
+              <input type="text" id="department" value="CSE" />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number:</label>
+              <input type="tel" id="phone" value="9876543210" />
+            </div>
+
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <input type="text" id="address" value="Bangalore, Karnataka" />
+            </div>
+
+            <button type="submit" class="btn-primary">Update Profile</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/home.js"></script>
+
+  <script>
+    // Preview uploaded profile image
+    document.getElementById('profilePic').addEventListener('change', function(event) {
+      const preview = document.getElementById('previewImage');
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
