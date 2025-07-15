@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,6 +17,7 @@
         </a>
       </div>
     </nav>
+
     <!-- Sidebar -->
     <div class="sidebar">
       <a href="/admin/manage_admin">
@@ -73,38 +75,34 @@
       <div class="breadcrumb">
         <h2 class="breadcrumb-title">Notify Passengers</h2>
       </div>
+
       <div class="toolbar">
-        <!-- Left Side: Show Entries Dropdown -->
         <div>
           <label for="showEntries">Show</label>
           <select id="showEntries">
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
-            <option value="50">100</option>
+            <option value="100">100</option>
           </select>
           entries
         </div>
 
-        <!-- Right Side: Search Box -->
         <div class="search-box">
           <input type="text" id="search" placeholder="Search..." />
         </div>
       </div>
 
-      <!-- Filter and Button Container -->
       <div class="filter-buttons-container">
-        <!-- Filter Section -->
         <div class="filter-section">
           <label for="filter">Filter: </label>
           <select id="filter" onchange="filterList()">
             <option value="all">All</option>
             <option value="student">Students</option>
-            <option value="staff">Staffs</option>
+            <option value="staff">Staff</option>
           </select>
         </div>
 
-        <!-- Buttons Section -->
         <div class="button-container">
           <button class="button" onclick="selectAll()">Select All</button>
           <button class="button" onclick="openModal()">Send Message</button>
@@ -112,7 +110,6 @@
         </div>
       </div>
 
-      <!-- Modal for Sending Messages -->
       <!-- Modal for Sending Messages -->
       <div id="messageModal" class="modal">
         <div class="modal-content">
@@ -151,44 +148,22 @@
         <thead>
           <tr>
             <th>Select</th>
-            <th onclick="sortTable(0)">
-              ID
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(1)">
-              Name
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(2)">
-              Role
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(3)">
-              Contact No.
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(3)">
-              Bus N0.
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(3)">
-              Route No.
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(3)">
-              Payment Status.
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
-            <th onclick="sortTable(4)">
-              Status
-              <span class="sort-icon">&DownArrowUpArrow;</span>
-            </th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Contact No.</th>
+            <th>Bus No.</th>
+            <th>Route No.</th>
+            <th>Payment Status</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody id="personList">
           <tr data-role="student">
-            <td><input type="checkbox" class="select-person" /></td>
+            <td>
+              <input type="checkbox" class="select-person" data-name="Alfie Jr" />
+            </td>
             <td>12353</td>
             <td>Alfie Jr</td>
             <td>Student</td>
@@ -200,7 +175,9 @@
             <td><button class="msg" onclick="openModal()">📩</button></td>
           </tr>
           <tr data-role="staff">
-            <td><input type="checkbox" class="select-person" /></td>
+            <td>
+              <input type="checkbox" class="select-person" data-name="Neha G" />
+            </td>
             <td>45678</td>
             <td>Jane Smith</td>
             <td>Staff</td>
@@ -210,9 +187,11 @@
             <td><span class="status-paid">Paid</span></td>
             <td><span class="status-active">Active</span></td>
             <td><button class="msg" onclick="openModal()">📩</button></td>
-          </tr>
+          </tr> 
           <tr data-role="staff">
-            <td><input type="checkbox" class="select-person" /></td>
+            <td>
+              <input type="checkbox" class="select-person" data-name="John Doe" />
+            </td>
             <td>78901</td>
             <td>John Doe</td>
             <td>Staff</td>
