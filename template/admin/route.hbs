@@ -64,6 +64,10 @@
         <i class="fas fa-bell"></i>
         <span>Admin Notification</span>
       </a>
+      <a href="/admin/siteannouncement">
+        <i class="fas fa-bullhorn"></i>
+        <span>Site Announcements</span>
+      </a>
       <a href="/admin/inquiery">
         <i class="fas fa-question-circle"></i>
         <span>Inquiry</span>
@@ -94,11 +98,9 @@
               <tr>
                 <th>Route Number</th>
                 <th>Bus Number</th>
-                <th>Number of Students</th>
                 <th>Number of Seats</th>
-                <th>Start Point</th>
-                <th>Destination Point</th>
-                <th>Driver Name</th>
+                <th>Pickup Point</th>
+                <th>Driver ID</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -130,38 +132,22 @@
           <label for="edit-bus-number">Bus Number:</label>
           <input type="text" id="edit-bus-number" name="bus-number" required />
 
-          <label for="edit-num-students">Number of Students:</label>
-          <input
-            type="number"
-            id="edit-num-students"
-            name="num-students"
-            required
-          />
-
           <label for="edit-num-seats">Number of Seats:</label>
           <input type="number" id="edit-num-seats" name="num-seats" required />
 
-          <label for="edit-start-point">Start Point:</label>
+          <label for="edit-pickup-point">Pickup Point:</label>
           <input
             type="text"
-            id="edit-start-point"
-            name="start-point"
+            id="edit-pickup-point"
+            name="pickup-point"
             required
           />
 
-          <label for="edit-destination-point">Destination Point:</label>
+          <label for="edit-driver-id">Driver ID:</label>
           <input
             type="text"
-            id="edit-destination-point"
-            name="destination-point"
-            required
-          />
-
-          <label for="edit-driver-name">Driver Name:</label>
-          <input
-            type="text"
-            id="edit-driver-name"
-            name="driver-name"
+            id="edit-driver-id"
+            name="driver-id"
             required
           />
 

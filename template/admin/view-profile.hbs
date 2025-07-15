@@ -13,19 +13,27 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
   </head>
-  <style></style>
+  <style>
+    .role-designation { color: #666; font-size: 14px; margin-top: 5px;
+    font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+  </style>
 
   <body>
     <nav class="navbar">
-      <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
-      <div class="profile-region"></div>
+      <div class="navbar-left">
+        <img src="../images/nmit-logo.svg" alt="NITTE Logo" class="logo" />
+        <div class="search-container">
+          <input type="text" placeholder="Search..." class="search-input" />
+          <i class="fas fa-search search-icon"></i>
+        </div>
+      </div>
       <div class="nav-icons">
         <a href="/admin/newadmin" class="breadcrumb-link">Home</a>
         <a href="/admin/notification" id="notification-bell">
           <i class="fas fa-bell"></i>
           <span class="notification-count" id="notification-count">0</span>
         </a>
-        <a href="/admin/view-profile">
+        <a href="/admin/view-profile" class="avatar-circle">
           <i class="fas fa-user"></i>
         </a>
       </div>
@@ -76,6 +84,10 @@
         <i class="fas fa-bell"></i>
         <span>Admin Notification</span>
       </a>
+      <a href="/admin/siteannouncement">
+        <i class="fas fa-bullhorn"></i>
+        <span>Site Announcements</span>
+      </a>
       <a href="/admin/inquiery">
         <i class="fas fa-question-circle"></i>
         <span>Inquiry</span>
@@ -90,13 +102,14 @@
       </a>
     </div>
 
-    <!-- Cards -->
-    <div class="student-details">
+    <!-- Main Content -->
+    <div class="admin-details">
       <div class="breadcrumb">
         <h2 class="breadcrumb-title">My Profile</h2>
       </div>
+
       <div class="profile-container">
-        <!-- Driver Profile -->
+        <!-- Profile Header Section -->
         <div class="psection">
           <div class="header">
             <div class="profile-header">
@@ -122,75 +135,70 @@
               </div>
 
               <div class="profile-info">
-                <h2 id="driverName">Joe Vijay</h2>
+                <h2 id="adminName">ADMIN USER</h2>
+                <p class="role-designation">System Administrator</p>
+                <p class="department-info">Department: <span id="department">Administration</span></p>
               </div>
             </div>
             <button
               class="edit-btn"
-              onclick="editSection(this, ['driverName'])"
+              onclick="editSection(this, ['adminName', 'department'])"
             >
-              Edit ✎
+              EDIT
             </button>
           </div>
         </div>
 
-        <!-- Personal Information -->
+        <!-- Personal Information Section -->
         <div class="section">
           <div class="header">
             <span class="section-title">Personal Information</span>
             <button
               class="edit-btn"
-              onclick="editSection(this, ['gender', 'phoneNumber', 'licenseNumber', 'dob', 'joinedDate', 'experience'])"
+              onclick="editSection(this, ['gender', 'phoneNumber', 'employeeId', 'dob', 'joinedDate', 'accessLevel'])"
             >
-              Edit ✎
+              EDIT
             </button>
           </div>
           <div class="profile-details" id="personalInfo">
-            <div class="detail-item">
-              <span class="label">Admin Id :</span><span
-                class="value"
-              >DR12345</span>
-            </div>
-            <div class="detail-item">
-              <span class="label">Gender:</span><span
-                class="value"
-                id="gender"
-              >Male</span>
-            </div>
-            <div class="detail-item">
-              <span class="label">Email:</span><span
-                class="value"
-              >vijay.joe@example.com</span>
-            </div>
-            <div class="detail-item">
-              <span class="label">Phone Number:</span><span
-                class="value"
-                id="phoneNumber"
-              >7890987670</span>
-            </div>
-            <div class="detail-item">
-              <span class="label">License Number:</span><span
-                class="value"
-                id="licenseNumber"
-              >LIC4567890</span>
-            </div>
-            <div class="detail-item">
-              <span class="label">Date of Birth:</span><span
-                class="value"
-                id="dob"
-              >23-06-1986</span>
-            </div>
-            <div class="detail-item">
-              <span class="label">Joined Date:</span><span
-                class="value"
-                id="joinedDate"
-              >15-06-2024</span>
-            </div>
-            <div class="detail-item">
-              <span class="label">Years of Experience:</span><span
-                class="value"
-                id="experience"
-              >8</span>
+            <div class="details-grid">
+              <div class="details-column">
+                <div class="detail-item">
+                  <span class="label">ADMIN ID:</span>
+                  <span class="value" id="adminId">ADM12345</span>
+                </div>
+                <div class="detail-item">
+                  <span class="label">EMAIL:</span>
+                  <span class="value" id="email">admin@nmit.edu</span>
+                </div>
+                <div class="detail-item">
+                  <span class="label">EMPLOYEE ID:</span>
+                  <span class="value" id="employeeId">EMP4567890</span>
+                </div>
+                <div class="detail-item">
+                  <span class="label">JOINED DATE:</span>
+                  <span class="value" id="joinedDate">15-06-2020</span>
+                </div>
+              </div>
+
+              <div class="details-column">
+                <div class="detail-item">
+                  <span class="label">GENDER:</span>
+                  <span class="value" id="gender">Male</span>
+                </div>
+                <div class="detail-item">
+                  <span class="label">PHONE NUMBER:</span>
+                  <span class="value" id="phoneNumber">9876543210</span>
+                </div>
+                <div class="detail-item">
+                  <span class="label">DATE OF BIRTH:</span>
+                  <span class="value" id="dob">15-08-1985</span>
+                </div>
+                <div class="detail-item">
+                  <span class="label">ACCESS LEVEL:</span>
+                  <span class="value" id="accessLevel">Super Admin</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -203,26 +211,29 @@
               class="edit-btn"
               onclick="editSection(this, ['address', 'postal'])"
             >
-              Edit ✎
+              EDIT
             </button>
           </div>
           <div class="profile-details">
-            <div class="detail-item">
-              <span class="label">Address:</span><span
-                class="value"
-                id="address"
-              >3rd Cross, 123 Main Street, Rajajinagar</span>
-            </div>
-            <div class="detail-item">
-              <span class="label">Postal Code:</span><span
-                class="value"
-                id="postal"
-              >560078</span>
+            <div class="details-grid">
+              <div class="details-column">
+                <div class="detail-item">
+                  <span class="label">ADDRESS:</span>
+                  <span class="value" id="address">NMIT Campus, Nitte, Karkala</span>
+                </div>
+              </div>
+              <div class="details-column">
+                <div class="detail-item">
+                  <span class="label">POSTAL CODE:</span>
+                  <span class="value" id="postal">574110</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Toast Notification Container -->
     <div id="toast-container"></div>
 
@@ -231,7 +242,7 @@
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
     ></script>
     <script
-      nomodule
+      nomodule"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
     <script src="/admin/js/viewprofile.js"></script>

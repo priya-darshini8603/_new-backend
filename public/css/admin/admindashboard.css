@@ -50,16 +50,16 @@ body {
 /* SIDEBAR */
 #sidebar {
   width: 250px;
-  background: #343a40;
+  background: #5b86e5; /* Same color as navbar */
   color: white;
   position: fixed;
-  top: 60px; /* Adjusted to account for navbar height */
+  top: 70px; /* Position below navbar only */
   left: 0;
-  height: calc(100% - 60px);
+  height: calc(100% - 70px);
   padding-top: 20px;
   display: flex;
   flex-direction: column;
-  z-index: 1000;
+  z-index: 999;
 }
 
 #sidebar a {
@@ -73,7 +73,7 @@ body {
 }
 
 #sidebar a:hover {
-  background: #495057;
+  background: rgba(255, 255, 255, 0.1); /* Light hover effect for blue background */
 }
 
 #sidebar i {
@@ -86,46 +86,169 @@ body {
 
 /* NAVBAR */
 .navbar {
+  background-color: #5b86e5;
+  color: white;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  width: 100%;
+}
+
+.navbar-main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  background: #5b86e5;
-  color: white;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10;
 }
 
 .navbar .logo {
-  width: 150px;
-  height: auto;
+  height: 40px;
 }
 
-.navbar .nav-icons {
+/* Search Section - Outside the blue navbar */
+.search-section {
+  background-color: #f8f9fa;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  position: fixed;
+  top: 70px; /* Position below the blue navbar */
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Dashboard Search - Inside main content */
+.dashboard-search {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Search Container Styles */
+.search-container {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 20px;
+  width: 100%;
+  max-width: 400px;
 }
 
-.navbar .nav-icons a {
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  position: relative;
-  text-decoration: none;
+.search-input {
+  padding: 12px 45px 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  background-color: white;
+  color: #333;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar .nav-icons a .notification-count {
+.search-input::placeholder {
+  color: #999;
+}
+
+.search-input:focus {
+  border-color: #5b86e5;
+  box-shadow: 0 0 0 3px rgba(91, 134, 229, 0.1);
+  transform: scale(1.02);
+}
+
+.search-icon {
   position: absolute;
-  top: -5px;
-  right: -10px;
-  background: red;
+  right: 15px;
+  color: #999;
+  pointer-events: none;
+  font-size: 16px;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-icons a {
+  color: white !important;
+  text-decoration: none;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icons a i {
+  color: white !important;
+  font-size: 18px;
+}
+
+.nav-icons a:hover {
+  color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Bell icon styling */
+#notification-bell {
+  position: relative;
+  font-size: 20px !important;
+  color: white !important; /* Ensure bell icon is white */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#notification-bell i {
+  color: white !important; /* Make sure the icon itself is white */
+  font-size: 20px !important;
+}
+
+#notification-bell .fas {
+  color: white !important; /* Specifically target Font Awesome icons */
+  font-weight: 900 !important; /* Ensure solid icons are displayed */
+}
+
+.notification-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff6384;
   color: white;
   border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 12px;
+  padding: 3px 7px;
+  font-size: 11px;
+  font-weight: bold;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Avatar styling for navbar profile icon */
+.nav-icons .avatar-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-icons .avatar-circle:hover {
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
 
 /* CONTENT */
@@ -133,132 +256,7 @@ body {
   margin-left: 250px;
   padding: 20px;
   transition: 0.3s ease;
-}
-
-#content nav {
-  height: 56px;
-  background: var(--light);
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  grid-gap: 24px;
-  font-family: var(--lato);
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-}
-
-#content nav a {
-  color: var(--dark);
-}
-
-#content nav .bx.bx-menu {
-  cursor: pointer;
-  color: var(--dark);
-}
-
-#content nav .nav-link {
-  font-size: 16px;
-  transition: 0.3s ease;
-}
-
-#content nav .nav-link:hover {
-  color: var(--blue);
-}
-
-#content nav form {
-  max-width: 400px;
-  width: 100%;
-  margin-right: auto;
-}
-
-#content nav form .form-input {
-  display: flex;
-  align-items: center;
-  height: 36px;
-}
-
-#content nav form .form-input input {
-  flex-grow: 1;
-  padding: 0 16px;
-  height: 100%;
-  border: none;
-  background: var(--grey);
-  border-radius: 36px 0 0 36px;
-  outline: none;
-  width: 100%;
-  color: var(--dark);
-}
-
-#content nav form .form-input button {
-  width: 36px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--blue);
-  color: var(--light);
-  font-size: 18px;
-  border: none;
-  outline: none;
-  border-radius: 0 36px 36px 0;
-  cursor: pointer;
-}
-
-#content nav .notification {
-  font-size: 20px;
-  position: relative;
-}
-
-#content nav .notification .num {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid var(--light);
-  background: var(--red);
-  color: var(--light);
-  font-weight: 700;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#content nav .profile img {
-  width: 36px;
-  height: 36px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-#content nav .switch-mode {
-  display: block;
-  min-width: 50px;
-  height: 25px;
-  border-radius: 25px;
-  background: var(--grey);
-  cursor: pointer;
-  position: relative;
-}
-
-#content nav .switch-mode::before {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  bottom: 2px;
-  width: calc(25px - 4px);
-  background: var(--blue);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-}
-
-#content nav #switch-mode:checked + .switch-mode::before {
-  left: calc(100% - (25px - 4px) - 2px);
+  padding-top: 90px; /* Account for navbar only */
 }
 
 /* MAIN */
@@ -266,7 +264,7 @@ body {
   width: 100%;
   padding: 36px 24px;
   font-family: var(--poppins);
-  max-height: calc(100vh - 56px);
+  max-height: calc(100vh - 110px); /* Adjust for navbar only */
   overflow-y: auto;
 }
 
@@ -334,15 +332,6 @@ body {
   grid-gap: 24px;
 }
 
-#content main .box-info li .bx {
-  width: 80px;
-  height: 80px;
-  border-radius: 10px;
-  font-size: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 /* Box Info Styling */
 .box-info {
   display: grid;
@@ -574,66 +563,280 @@ body {
   margin-bottom: 0;
 }
 
-/* Responsive Styles */
+/* Admin Dashboard Content */
+.admin-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 24px;
+  margin-top: 24px;
+}
+
+.section-header {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--light-blue);
+}
+
+.section-header h3 {
+  color: var(--dark);
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-header i {
+  color: var(--blue);
+  font-size: 22px;
+}
+
+/* Quick Actions Styling */
+.quick-actions {
+  background: var(--light);
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  grid-column: 1 / -1;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 16px;
+}
+
+.action-card {
+  background: linear-gradient(135deg, var(--blue), var(--light-blue));
+  color: white;
+  text-decoration: none;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  color: white;
+}
+
+.action-card i {
+  font-size: 28px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.action-card span {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Statistics Overview Styling */
+.statistics-overview {
+  background: var(--light);
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stats-grid {
+  display: grid;
+  grid-gap: 16px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(45deg, var(--blue), var(--light-blue));
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card.revenue::before {
+  background: linear-gradient(45deg, #4caf50, #81c784);
+}
+
+.stat-card.attendance::before {
+  background: linear-gradient(45deg, #2196f3, #64b5f6);
+}
+
+.stat-card.routes::before {
+  background: linear-gradient(45deg, #ff9800, #ffb74d);
+}
+
+.stat-card.satisfaction::before {
+  background: linear-gradient(45deg, #e91e63, #f06292);
+}
+
+.stat-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.revenue .stat-icon {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: white;
+}
+
+.attendance .stat-icon {
+  background: linear-gradient(135deg, #2196f3, #64b5f6);
+  color: white;
+}
+
+.routes .stat-icon {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+  color: white;
+}
+
+.satisfaction .stat-icon {
+  background: linear-gradient(135deg, #e91e63, #f06292);
+  color: white;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1;
+}
+
+.stat-info p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: var(--dark-grey);
+  font-weight: 500;
+}
+
+.stat-trend {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.stat-trend.positive {
+  background: #e8f5e8;
+  color: #4caf50;
+}
+
+.stat-trend.negative {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.stat-trend.neutral {
+  background: #f5f5f5;
+  color: #757575;
+}
+
+/* Recent Activity Styling */
+.recent-activity {
+  background: var(--light);
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.activity-item {
+  display: flex;
+  gap: 15px;
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+  border-left: 4px solid var(--blue);
+  transition: all 0.3s ease;
+}
+
+.activity-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--light-blue);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.activity-content h4 {
+  margin: 0 0 5px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.activity-content p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: var(--dark-grey);
+}
+
+.activity-content .time {
+  font-size: 12px;
+  color: var(--blue);
+  font-weight: 500;
+}
+
+/* Responsive Design for Admin Content */
 @media screen and (max-width: 768px) {
-  #sidebar {
-    width: 200px;
+  .admin-content {
+    grid-template-columns: 1fr;
   }
-
-  #content {
-    width: calc(100% - 200px);
-    left: 200px;
-  }
-
-  #content nav .nav-link {
-    display: none;
+  
+  .action-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media screen and (max-width: 576px) {
-  #content nav form .form-input input {
-    display: none;
-  }
-
-  #content nav form .form-input button {
-    width: auto;
-    height: auto;
-    background: transparent;
-    border-radius: none;
-    color: var(--dark);
-  }
-
-  #content nav form.show .form-input input {
-    display: block;
-    width: 100%;
-  }
-
-  #content nav form.show .form-input button {
-    width: 36px;
-    height: 100%;
-    border-radius: 0 36px 36px 0;
-    color: var(--light);
-    background: var(--red);
-  }
-
-  #content nav form.show ~ .notification,
-  #content nav form.show ~ .profile {
-    display: none;
-  }
-
-  #content main .box-info {
+  .action-grid {
     grid-template-columns: 1fr;
-  }
-
-  #content main .table-data .head {
-    min-width: 420px;
-  }
-
-  #content main .table-data .order table {
-    min-width: 420px;
-  }
-
-  #content main .table-data .todo .todo-list {
-    min-width: 420px;
   }
 }

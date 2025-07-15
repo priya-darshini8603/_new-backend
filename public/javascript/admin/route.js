@@ -14,11 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
       row.innerHTML = `
         <td>${route.routeNumber}</td>
         <td>${route.busNumber}</td>
-        <td>${route.numStudents}</td>
         <td>${route.numSeats}</td>
-        <td>${route.startPoint}</td>
-        <td>${route.destinationPoint}</td>
-        <td>${route.driverName}</td>
+        <td>${route.pickupPoint}</td>
+        <td>${route.driverID}</td>
         <td>
           <i class="fas fa-edit edit-icon" onclick="editRoute(${index})"></i>
           <i class="fas fa-trash delete-icon" onclick="deleteRoute(${index})"></i>

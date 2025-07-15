@@ -5,7 +5,7 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Use min-height instead of height for better responsiveness */
+  min-height: 100vh;
   background-color: #f4f4f4;
 }
 
@@ -18,6 +18,12 @@ body {
   color: white;
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  height: 60px;
 }
 
 .navbar .logo {
@@ -37,7 +43,7 @@ body {
 }
 
 .nav-icons a:hover {
-  color: black;
+  color: #fbbf24;
 }
 
 .notification-count {
@@ -53,12 +59,15 @@ body {
 .sidebar {
   background-color: #5b86e5;
   color: white;
-  height: 100vh;
+  height: calc(100vh - 60px);
   padding: 10px;
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
-  position: fixed; /* Adjusted to account for navbar height */
+  position: fixed;
   left: 0;
   top: 60px;
+  width: 250px;
+  overflow-y: auto;
+  z-index: 1000;
 }
 
 .sidebar a {
@@ -77,138 +86,246 @@ body {
 }
 
 .sidebar a:hover {
-  background-color: #34495e;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .sidebar a.active {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
 }
 
 /* Main Content Styles */
 .content {
-  flex: 1;
-  padding: 20px;
-  margin-left: 100px; /* Adjusted for sidebar width */
+  margin-left: 250px;
+  margin-top: 60px;
+  padding: 2rem;
+  min-height: calc(100vh - 60px);
+  background-color: #f5f7fa;
 }
 
 .content h2 {
-  color: #333;
-  margin-bottom: 20px;
+  color: #2d3748;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
-/* Bus Box Styles */
+/* Centered Chart Container */
 .chart-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 0;
 }
 
+/* Bus Box Styles */
 .bus-box {
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  width: 200px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 280px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .bus-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .bus-box h3 {
-  margin: 0 0 10px;
-  color: #333;
+  margin: 0 0 1rem;
+  color: #2d3748;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .bus-box canvas {
   max-width: 100%;
   height: auto;
+  margin: 1rem 0;
 }
 
 .bus-box p {
-  margin: 5px 0;
-  color: #666;
+  margin: 0.75rem 0;
+  color: #64748b;
+  font-size: 0.95rem;
 }
 
 .bus-box button {
-  background-color: #ff6384;
+  background-color: #5b86e5;
   color: white;
   border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  margin-top: 1rem;
+  width: 100%;
 }
 
 .bus-box button:hover {
-  background-color: #e55370;
+  background-color: #4a6bb7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(91, 134, 229, 0.4);
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  background-color: #5b86e5;
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.page-header p {
+  margin: 0.5rem 0 0 0;
+  opacity: 0.9;
+}
+
+/* Stats Overview Section */
+.stats-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 800px;
+  width: 100%;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #5b86e5;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  color: #5b86e5;
+}
+
+.stat-card p {
+  margin: 0.5rem 0 0 0;
+  color: #64748b;
+  font-size: 0.9rem;
 }
 
 /* Modal Styles */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  display: none;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
-  z-index: 1000; /* Sit on top */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  backdrop-filter: blur(4px);
 }
 
 .modal-content {
   position: absolute;
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Offset to truly center */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 300px; /* Set a fixed width */
-  max-width: 90%; /* Ensure it doesn't overflow on small screens */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  max-width: 90%;
 }
 
 .modal-content h3 {
   margin-top: 0;
+  color: #2d3748;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .modal-content label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
 }
 
 .modal-content input {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #5b86e5;
+  box-shadow: 0 0 0 3px rgba(91, 134, 229, 0.1);
 }
 
 .modal-content button {
-  padding: 8px 16px;
-  background-color: #28a745;
+  padding: 0.75rem 1.5rem;
+  background-color: #5b86e5;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
 .modal-content button:hover {
-  background-color: #218838;
+  background-color: #4a6bb7;
+  transform: translateY(-1px);
 }
 
 .close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
   cursor: pointer;
+  color: #64748b;
+  transition: color 0.3s ease;
 }
 
 .close:hover {
@@ -217,96 +334,137 @@ body {
 
 /* Responsive Styles */
 @media (max-width: 767.98px) {
-  /* Mobile Phones */
-  .navbar {
-    padding: 10px;
-  }
-
   .sidebar {
-    width: 100%; /* Full width for mobile */
-    height: auto;
-    position: relative;
-    top: 0;
-    margin-top: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
   }
 
   .content {
-    margin-left: 0; /* Remove margin for mobile */
-    padding: 10px;
+    margin-left: 0;
+    padding: 1rem;
   }
 
   .chart-container {
-    flex-direction: column; /* Stack bus boxes vertically on mobile */
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .bus-box {
-    width: 100%; /* Full width for mobile */
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .page-header {
+    padding: 1.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
   }
 
   .modal-content {
-    width: 90%; /* Wider modal for mobile */
+    width: 90%;
+    padding: 1.5rem;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-  /* Tablets */
   .sidebar {
-    width: 200px; /* Slightly narrower sidebar for tablets */
+    width: 200px;
   }
 
   .content {
-    margin-left: 200px; /* Adjust margin for tablets */
+    margin-left: 200px;
   }
 
   .chart-container {
-    gap: 15px; /* Smaller gap for tablets */
+    gap: 1.5rem;
   }
 
   .bus-box {
-    width: calc(50% - 10px); /* Two columns for tablets */
+    width: calc(50% - 1rem);
+    max-width: 300px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
-  /* Small Laptops */
-  .sidebar {
-    width: 220px; /* Slightly wider sidebar for small laptops */
-  }
-
-  .content {
-    margin-left: 220px; /* Adjust margin for small laptops */
-  }
-
   .chart-container {
-    gap: 20px; /* Standard gap for small laptops */
+    gap: 2rem;
   }
 
   .bus-box {
-    width: calc(33.33% - 14px); /* Three columns for small laptops */
+    width: calc(33.33% - 1.5rem);
+    max-width: 320px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 1200px) {
-  /* Monitors and Large Screens */
-  .sidebar {
-    width: 250px; /* Wider sidebar for large screens */
-  }
-
-  .content {
-    margin-left: 250px; /* Adjust margin for large screens */
-  }
-
   .chart-container {
-    gap: 20px; /* Standard gap for large screens */
+    gap: 2rem;
   }
 
   .bus-box {
-    width: calc(25% - 15px); /* Four columns for large screens */
+    width: calc(25% - 1.5rem);
+    max-width: 300px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* Focus States */
 button:focus,
 input:focus,
 a:focus {
   outline: 2px solid #5b86e5;
   outline-offset: 2px;
+}
+
+/* Loading Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bus-box {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Scrollbar Styling */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }

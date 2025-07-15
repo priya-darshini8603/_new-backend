@@ -9,22 +9,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const routeNumber = document.getElementById("route-number").value;
     const busNumber = document.getElementById("bus-number").value;
-    const numberOfStudents =
-      document.getElementById("number-of-students").value;
-    const numberOfSeats = document.getElementById("number-of-seats").value;
-    const startPoint = document.getElementById("start-point").value;
-    const destinationPoint = document.getElementById("destination-point").value;
-    const driverName = document.getElementById("driver-name").value;
+    const numberOfSeats = document.getElementById("num-seats").value;
+    const pickupPoint = document.getElementById("pickup-point").value;
+    const driverID = document.getElementById("driver-id").value;
 
     const newRow = document.createElement("tr");
     newRow.innerHTML = `
             <td>${routeNumber}</td>
             <td>${busNumber}</td>
-            <td>${numberOfStudents}</td>
             <td>${numberOfSeats}</td>
-            <td>${startPoint}</td>
-            <td>${destinationPoint}</td>
-            <td>${driverName}</td>
+            <td>${pickupPoint}</td>
+            <td>${driverID}</td>
         `;
 
     routeTableBody.appendChild(newRow);

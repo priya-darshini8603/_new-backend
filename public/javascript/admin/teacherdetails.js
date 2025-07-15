@@ -43,33 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
     renderTeachers(filteredTeachers);
   };
 
-  // Function to handle adding a new teacher
-  document.getElementById("addTeacherForm").onsubmit = function (e) {
-    e.preventDefault();
-
-    const newTeacher = {
-      name: document.getElementById("name").value,
-      id: document.getElementById("id").value,
-      busNumber: document.getElementById("busNumber").value,
-      routeNumber: document.getElementById("routeNumber").value,
-      department: document.getElementById("department").value,
-      phoneNumber: document.getElementById("phoneNumber").value,
-    };
-
-    // Add the new teacher to the array
-    teachers.push(newTeacher);
-
-    // Save updated data to localStorage
-    localStorage.setItem("teachers", JSON.stringify(teachers));
-
-    // Re-render the table
-    renderTeachers();
-
-    // Clear the form and hide the modal
-    document.getElementById("addTeacherForm").reset();
-    $("#addTeacherModal").modal("hide");
-  };
-
   // Function to handle editing a teacher
   window.editTeacher = function (index) {
     const teacher = teachers[index];
@@ -119,6 +92,27 @@ document.addEventListener("DOMContentLoaded", function () {
       // Re-render the table
       renderTeachers();
     }
+  };
+
+  // Function to load and display all teachers (called by View Teacher button)
+  window.loadAllTeachers = function () {
+    // Clear any search filters and show all teachers
+    document.getElementById("search").value = "";
+    
+    // Refresh teachers from localStorage in case new data was added
+    teachers = JSON.parse(localStorage.getItem("teachers")) || [];
+    
+    // Show all teachers in the table
+    renderTeachers();
+    
+    // Smooth scroll to the table to show the results
+    document.querySelector('.table').scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
+    });
+    
+    // Show a success message
+    alert(`Displaying ${teachers.length} teacher(s) in the system.`);
   };
 
   // Initial render of the table
