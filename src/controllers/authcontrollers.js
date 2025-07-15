@@ -2,6 +2,7 @@ const LogInCollection = require("../models/loginModel");
 const ProfileCollection=require("../models/profileModel");
 const OTPCollection = require("../models/otpModel");
 const contactCollection=require("../models/Contact");
+const sendNotification = require('../helpers/notifications');
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
