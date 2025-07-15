@@ -1,110 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Student Dashboard</title>
-    <link rel="stylesheet" href="/student_home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | BusSys</title>
+
+  <!-- ✅ Correct Font Awesome CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+  <link rel="stylesheet" type="text/css" href="/student_home.css" />
 </head>
 <body>
-
-
-<!-- Navbar -->
-<nav class="navbar">
-    <div class="logo">
-        <img src="../images/logoside.png" alt="Logo"> <!-- (Put your logo in /images/logo.png) -->
-        <span>Student Dashboard</span>
-
-    <!-- Top Horizontal Navbar -->
-    <div class="top-navbar">
-        <button class="menu-btn" onclick="toggleSidebar()">
-            <i class="fa fa-bars"></i>
-        </button>
-        <div class="nav-links">
-            <a href="/student/student_home"><i class="fa fa-home"></i> Home</a>
-            <a href="#notifications"><i class="fa fa-bell"></i> Notifications</a>
-            <a href="/loginform" onclick="logout(); return false;"><i class="fa fa-sign-out-alt"></i> Log Out</a>
-        </div>
-
-    </div>
-    <ul class="nav-links">
-        <li><a href="/student/student_home">Home</a></li>
-        <li><a href="/student/student_profile">Profile</a></li>
-        <li><a href="/logout">Logout</a></li>
-    </ul>
-</nav>
-
-<!-- Sidebar + Main -->
-<div class="container">
+  <div class="dashboard-container">
+    <!-- Sidebar -->
     <aside class="sidebar">
-        <ul>
-            <li><a href="/student/student_profile"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="/student/student_registration"><i class="fas fa-pen"></i> Registration</a></li>
-            <li><a href="#"><i class="fas fa-credit-card"></i> Payment</a></li>
-            <li><a href="/student/student_enquiry"><i class="fas fa-question-circle"></i> Enquiry</a></li>
-            <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Complaint</a></li>
-            <li><a href="#"><i class="fas fa-map"></i> Tracking</a></li>
-            <li><a href="/student/routelist"><i class="fas fa-route"></i> Route List</a></li>
-        </ul>
+      <ul class="sidebar-menu">
+        <li><i class="fas fa-home"></i> <a href="/student/student_home">Home</a></li>
+        <li><i class="fas fa-id-card"></i> <a href="/student/registration">Registration</a></li>
+        <li><i class="fas fa-credit-card"></i> <a href="/student/payment">Payment</a></li>
+        <li><i class="fas fa-user"></i> <a href="/student/profile">Profile</a></li>
+        <li><i class="fas fa-comment-dots"></i> <a href="/student/complaint">Complaint</a></li>
+        <li><i class="fas fa-question-circle"></i> <a href="/student/enquiry">Enquiry</a></li>
+      </ul>
+      <ul class="sidebar-menu">
+        <li><i class="fas fa-sign-out-alt"></i> <a href="#">Logout</a></li>
+      </ul>
     </aside>
 
-    <main class="dashboard">
-        <h1>Welcome to Student Dashboard</h1>
-        <div class="cards">
-            <div class="card"><a href="/student/student_profile"><i class="fas fa-user"></i><p>Profile</p></a></div>
-            <div class="card"><a href="/student/student_registration"><i class="fas fa-pen"></i><p>Registration</p></a></div>
-            <div class="card"><a href="#"><i class="fas fa-credit-card"></i><p>Payment</p></a></div>
-            <div class="card"><a href="/student/student_enquiry"><i class="fas fa-question-circle"></i><p>Enquiry</p></a></div>
-            <div class="card"><a href="#"><i class="fas fa-exclamation-triangle"></i><p>Complaint</p></a></div>
-            <div class="card"><a href="#"><i class="fas fa-map"></i><p>Tracking</p></a></div>
-            <div class="card"><a href="/student/routelist"><i class="fas fa-route"></i><p>Route List</p></a></div>
+    <!-- Main Content -->
+    <div class="main-section">
+      <!-- Top Navigation -->
+      <nav class="top-nav">
+        <div class="top-left">
+          <img src="../images/nitte-nmit-logo.png" alt="Nitte Logo" class="top-logo">
         </div>
-    </main>
-</div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+        </div>
+        <div class="nav-actions">
+          <!-- Notification Bell -->
+          <div class="notification-wrapper">
+            <div class="notification-bell" id="bellToggle">
+              <i class="fas fa-bell"></i>
+              <span class="notification-count">2</span>
+            </div>
+            <div class="notification-dropdown" id="notificationMenu">
+              <div class="notif-header">You have 2 notifications</div>
+              <div class="notif-item">
+                <div class="notif-title">New Students</div>
+                <div class="notif-desc">New Students Added</div>
+                <div class="notif-user">👤 Neha</div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-title">Fees Amount</div>
+                <div class="notif-desc">Fees amount for this year increased. It's 35000</div>
+                <div class="notif-user">👤 Himanchi Kumari</div>
+              </div>
+              <div class="notif-footer"><a href="/student/notifications">View All</a></div>
+            </div>
+          </div>
 
-<script src="/student/js/student_home.js"></script>
+          <!-- Profile -->
+          <div class="profile-dropdown">
+            <img src="https://i.pravatar.cc/40" alt="Profile" class="avatar" id="profileToggle">
+            <div class="dropdown-menu" id="dropdownMenu">
+              <a href="/student/profile"><i class="fas fa-user"></i> Profile</a>
+              <a href="/loginform"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-<<<<<<< HEAD
-=======
-    <!-- JWT Auto Logout Script -->
-    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
-    <script>
-      function getCookie(name) {
-        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        return match ? match[2] : null;
-      }
+      <!-- Dashboard Body -->
+      <div class="dashboard-content">
+        <div class="card welcome-card">
+          <h2>Hello Student! 👋</h2>
+          <p>You have 2 updates today. Please check your schedule below!</p>
+        </div>
 
-      function checkTokenExpiration() {
-        const token = getCookie("token");
-        if (!token) {
-          window.location.href = "/loginform"; // If token is missing, go to login
-          return;
-        }
+        <div class="grid-2">
+          <div class="card">
+            <h3>Your Bus Info</h3>
+            <p><strong>Route:</strong> Route 12</p>
+            <p><strong>Pickup Point:</strong> Main Gate, 7:10 AM</p>
+            <p><strong>Driver:</strong> Mr. Ramesh (📞 9876543210)</p>
+          </div>
 
-        try {
-          const decoded = jwt_decode(token);
-          const now = Date.now() / 1000;
+          <div class="card">
+            <h3>Notifications</h3>
+            <ul>
+              <li>🕓 Tomorrow's pickup will be delayed by 15 mins.</li>
+              <li>📢 New route adjustment from next week.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          if (decoded.exp < now) {
-            alert("Session expired. You will be logged out.");
-            document.cookie = "token=; Max-Age=0; path=/"; // Clear cookie
-            window.location.href = "/loginform";
-          }
-        } catch (err) {
-          console.error("Invalid token");
-          window.location.href = "/loginform";
-        }
-      }
-
-      function logout() {
-        document.cookie = "token=; Max-Age=0; path=/";
-        window.location.href = "/loginform";
-      }
-
-      setInterval(checkTokenExpiration, 5000);
-    </script>
-
-    <script src="/student/js/student_home.js"></script>
->>>>>>> 7ed71b854ba67d99bb03f4fb32fbdcaac8f599ee
+  <script src="/js/student_home.js"></script>
 </body>
 </html>
