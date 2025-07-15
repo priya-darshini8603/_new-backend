@@ -1,3 +1,4 @@
+
 function selectAll() {
   document
     .querySelectorAll(".select-person")
@@ -16,6 +17,7 @@ function sendMessage(name) {
   alert(`Sending message to ${name}`);
 }
 
+// SEARCH FILTER
 document.getElementById("search").addEventListener("input", function () {
   const searchTerm = this.value.toLowerCase();
   const rows = document.querySelectorAll("#personList tr");
@@ -39,6 +41,7 @@ document.getElementById("search").addEventListener("input", function () {
   updateEntriesVisibility();
 });
 
+// SHOW ENTRIES
 document.getElementById("showEntries").addEventListener("change", function () {
   updateEntriesVisibility();
 });
@@ -46,16 +49,17 @@ document.getElementById("showEntries").addEventListener("change", function () {
 function updateEntriesVisibility() {
   const entriesPerPage = parseInt(document.getElementById("showEntries").value);
   const rows = document.querySelectorAll("#personList tr");
-  const totalRows = rows.length;
   const visibleRows = Array.from(rows).filter(
     (row) => row.style.display !== "none"
   );
+
   rows.forEach((row) => (row.style.display = "none"));
   for (let i = 0; i < entriesPerPage && i < visibleRows.length; i++) {
     visibleRows[i].style.display = "";
   }
 }
 
+// ROLE FILTER
 function filterList() {
   const filter = document.getElementById("filter").value;
   document.querySelectorAll("#personList tr").forEach((row) => {
@@ -65,23 +69,69 @@ function filterList() {
   updateEntriesVisibility();
 }
 
+// MODAL
 function openModal() {
-  document.getElementById("messageModal").style.display = "block";
+  document.getElementById("messageModal").style.display = "flex";
 }
 
 function closeModal() {
   document.getElementById("messageModal").style.display = "none";
 }
 
-function submitMessage() {
-  const message = document.getElementById("messageInput").value;
-  if (message.trim()) {
-    alert("Message Sent: " + message);
-    closeModal();
-  } else {
+// ✅ SUBMIT MESSAGE (fixed version)
+async function submitMessage() {
+  const message = document.getElementById("messageInput").value.trim();
+
+  if (!message) {
     alert("Please enter a message.");
+    return;
   }
+
+  // Get selected checkboxes
+  const selectedNames = Array.from(document.querySelectorAll(".select-person:checked"))
+  .map(cb => cb.getAttribute("data-name"))
+  .filter(name => !!name);  // remove any null/undefined
+
+
+  if (!selectedNames.length) {
+    alert("Please select at least one recipient.");
+    return;
+  }
+
+  // Debug output
+  console.log("Sending to server:", { recipientNames: selectedNames, message });
+
+  try {
+    const response = await fetch('/api/notifications/send-notification', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        recipientNames: selectedNames,
+        message
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Message sent successfully!");
+      console.log("Server response:", result);
+    } else {
+      alert("Failed: " + result.message);
+      console.error("Server error:", result);
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Error sending message. Check console.");
+  }
+
+  closeModal();
 }
+
+// SORTABLE TABLE
 const table = document.getElementById("sortableTable");
 const table_rows = Array.from(document.querySelectorAll("#personList tr"));
 const table_headings = document.querySelectorAll("th");
@@ -105,9 +155,7 @@ function sortTable(column, sort_asc) {
     let first = a.cells[column].textContent.trim();
     let second = b.cells[column].textContent.trim();
 
-    // Check if the value is numeric
     const isNumeric = !isNaN(parseFloat(first)) && !isNaN(parseFloat(second));
-
     if (isNumeric) {
       return sort_asc ? first - second : second - first;
     } else {
@@ -117,15 +165,15 @@ function sortTable(column, sort_asc) {
     }
   });
 
-  // Reinsert sorted rows into the table
   const tbody = document.getElementById("personList");
   tbody.innerHTML = "";
   sortedRows.forEach((row) => tbody.appendChild(row));
 }
-//mobile
+
+// MOBILE SIDEBAR
 const sidebarToggle = document.createElement("button");
 sidebarToggle.classList.add("sidebar-toggle");
-sidebarToggle.innerHTML = "☰"; // Hamburger icon
+sidebarToggle.innerHTML = "☰";
 document.body.appendChild(sidebarToggle);
 
 const sidebar = document.querySelector(".sidebar");
@@ -135,33 +183,12 @@ sidebarToggle.addEventListener("click", () => {
   sidebar.classList.toggle("active");
   content.classList.toggle("active");
 });
-// Function to open the modal
-function openModal() {
-  const modal = document.getElementById("messageModal");
-  modal.style.display = "flex"; // Display the modal as a flex container
-}
 
-// Function to close the modal
-function closeModal() {
-  const modal = document.getElementById("messageModal");
-  modal.style.display = "none"; // Hide the modal
-}
-
-// Function to submit the message
-function submitMessage() {
-  const message = document.getElementById("messageInput").value;
-  if (message.trim() === "") {
-    alert("Please enter a message."); // Validate the message
-    return;
-  }
-  alert(`Message sent: ${message}`); // Simulate sending the message
-  closeModal(); // Close the modal after sending
-}
-
-// Close the modal if the user clicks outside of it
+// CLOSE MODAL WHEN CLICKING OUTSIDE
 window.onclick = function (event) {
   const modal = document.getElementById("messageModal");
   if (event.target === modal) {
     closeModal();
   }
 };
+

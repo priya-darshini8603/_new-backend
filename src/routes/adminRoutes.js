@@ -4,6 +4,9 @@ const loginCollection = require("../models/loginModel");
 const InquiryCollection = require("../models/inquiryModel"); 
 const adminControllers = require("../controllers/admincontrollers");
 // adjust path as needed
+const notificationController = require('../controllers/notificationcontrollers');
+
+router.post('/admin/send-notification', notificationController.sendNotification);
 
 router.post("/inquiryupdate/:id",adminControllers.inquiryupdate);
 
