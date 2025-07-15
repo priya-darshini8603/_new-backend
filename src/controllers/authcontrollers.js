@@ -47,7 +47,7 @@ exports.signup = async (req, res) => {
   }
 };
 
-// ========================== LOGIN ==========================
+
 exports.login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
@@ -104,7 +104,7 @@ exports.login = async (req, res) => {
   }
 };
 
-// ========================== FORGOT PASSWORD ==========================
+
 exports.forgpass = async (req, res) => {
   const { email } = req.body;
   try {
@@ -146,7 +146,7 @@ exports.forgpass = async (req, res) => {
   }
 };
 
-// ========================== VERIFY OTP ==========================
+
 exports.verifyotp = async (req, res) => {
   const { email, otp } = req.body;
   try {
@@ -163,7 +163,7 @@ exports.verifyotp = async (req, res) => {
   }
 };
 
-// ========================== RESET PASSWORD ==========================
+
 exports.resetpassword = async (req, res) => {
   const { email, newpassword, confirmpassword } = req.body;
   try {
