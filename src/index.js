@@ -78,9 +78,15 @@ app.get('/student/:page', (req, res) => res.render(`student/${req.params.page}`)
 app.use('/student/js', express.static('public/javascript/student'));
 app.use('/', express.static('public/css/student'));
 
+app.use('/js', express.static('public/javascript'));
+app.use('/js', express.static('src'));
+
 app.get('/admin/:page', (req, res) => res.render(`admin/${req.params.page}`));
 app.use('/admin/js', express.static('public/javascript/admin'));
-app.use('/', express.static('public/css/student'));
+
+app.use('/images', express.static('public/images'));
+app.use('/', express.static('public/css/admin'));
+app.use(express.static('public/css'));
 
 // ✅ Socket.io setup
 const server = http.createServer(app);

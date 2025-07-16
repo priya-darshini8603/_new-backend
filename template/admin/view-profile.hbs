@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Profile</title>
-    <link rel="stylesheet" href="/admin/viewprofile.css" />
+    <link rel="stylesheet" type="text/css" href="/viewprofile.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
       rel="stylesheet"
@@ -111,7 +111,19 @@
       <div class="breadcrumb">
         <h2 class="breadcrumb-title">My Profile</h2>
       </div>
-
+<form action="/Adminprofileupdate" method="POST" enctype="multipart/form-data" id="profileForm">
+          <input type="hidden" name="email" value="{{profile.email}}" />
+          <input type="hidden" name="fName" id="fNameHidden" value="{{profile.fName}}" />
+          <input type="hidden" name="lName" id="lNameHidden" value="{{profile.lName}}" />
+  <input type="hidden" name="gender" id="genderHidden" value="{{profile.gender}}" />
+  <input type="hidden" name="phone_num" id="phoneNumberHidden" value="{{profile.phone_num}}" />
+ 
+  <input type="hidden" name="DOB" id="dobHidden" value="{{profile.DOB}}" />
+  <input type="hidden" name="joined_date" id="joinedDateHidden" value="{{profile.joined_date}}" />
+  <input type="hidden" name="years_of_experience" id="experienceHidden" value="{{profile.years_of_experience}}" />
+  <input type="hidden" name="address" id="addressHidden" value="{{profile.address}}" />
+  <input type="hidden" name="postal_code" id="postalHidden" value="{{profile.postal_code}}" />
+      
       <div class="profile-container">
         <!-- Profile Header Section -->
         <div class="psection">
@@ -120,36 +132,35 @@
               <div class="image-container">
                 <img
                   id="profilePhoto"
-                  src="../images/avatar.png"
+                  src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}"
                   alt="Profile Photo"
                   class="profile-photo"
                 />
                 <input
                   type="file"
                   id="fileInput"
+                  name="profileImage"
                   accept="image/*"
-                  style="display: none"
+                  style="display: none;"
                 />
-                <button
+                <button 
+                  type="button"
                   class="edit-icon"
                   onclick="document.getElementById('fileInput').click()"
                 >
                   ✎
                 </button>
+                 <button type="submit" class="save-image-btn" id="saveImageBtn" style="display:none;">💾</button>
               </div>
 
               <div class="profile-info">
-                <h2 id="adminName">ADMIN USER</h2>
+                <h2 id="adminName">{{profile.fName}} {{profile.lName}}</h2>
                 <p class="role-designation">System Administrator</p>
                 <p class="department-info">Department: <span id="department">Administration</span></p>
               </div>
             </div>
-            <button
-              class="edit-btn"
-              onclick="editSection(this, ['adminName', 'department'])"
-            >
-              EDIT
-            </button>
+    
+            
           </div>
         </div>
 
@@ -158,8 +169,9 @@
           <div class="header">
             <span class="section-title">Personal Information</span>
             <button
+            type="button"
               class="edit-btn"
-              onclick="editSection(this, ['gender', 'phoneNumber', 'employeeId', 'dob', 'joinedDate', 'accessLevel'])"
+              onclick="editSection(this, ['gender', 'phoneNumber', 'dob', 'joinedDate', 'experience'])"
             >
               EDIT
             </button>
@@ -169,11 +181,11 @@
               <div class="details-column">
                 <div class="detail-item">
                   <span class="label">ADMIN ID:</span>
-                  <span class="value" id="adminId">ADM12345</span>
+                  <span class="value">ADM12345</span>
                 </div>
                 <div class="detail-item">
                   <span class="label">EMAIL:</span>
-                  <span class="value" id="email">admin@nmit.edu</span>
+                  <span class="value">{{profile.email}}</span>
                 </div>
                 <div class="detail-item">
                   <span class="label">EMPLOYEE ID:</span>
@@ -181,26 +193,26 @@
                 </div>
                 <div class="detail-item">
                   <span class="label">JOINED DATE:</span>
-                  <span class="value" id="joinedDate">15-06-2020</span>
+                  <span class="value" id="joinedDate">{{profile.joined_date}}</span>
                 </div>
               </div>
 
               <div class="details-column">
                 <div class="detail-item">
                   <span class="label">GENDER:</span>
-                  <span class="value" id="gender">Male</span>
+                  <span class="value" id="gender">{{profile.gender}}</span>
                 </div>
                 <div class="detail-item">
                   <span class="label">PHONE NUMBER:</span>
-                  <span class="value" id="phoneNumber">9876543210</span>
+                  <span class="value" id="phoneNumber">{{profile.phone_num}}</span>
                 </div>
                 <div class="detail-item">
                   <span class="label">DATE OF BIRTH:</span>
-                  <span class="value" id="dob">15-08-1985</span>
+                  <span class="value" id="dob">{{profile.DOB}}</span>
                 </div>
                 <div class="detail-item">
-                  <span class="label">ACCESS LEVEL:</span>
-                  <span class="value" id="accessLevel">Super Admin</span>
+                  <span class="label">years of experience:</span>
+                  <span class="value" id="experience">{{profile.years_of_experience}}</span>
                 </div>
               </div>
             </div>
@@ -212,6 +224,7 @@
           <div class="header">
             <span class="section-title">Address</span>
             <button
+              type="button"
               class="edit-btn"
               onclick="editSection(this, ['address', 'postal'])"
             >
@@ -223,20 +236,22 @@
               <div class="details-column">
                 <div class="detail-item">
                   <span class="label">ADDRESS:</span>
-                  <span class="value" id="address">NMIT Campus, Nitte, Karkala</span>
+                  <span class="value" id="address">{{profile.address}}</span>
                 </div>
               </div>
               <div class="details-column">
                 <div class="detail-item">
                   <span class="label">POSTAL CODE:</span>
-                  <span class="value" id="postal">574110</span>
+                  <span class="value" id="postal">{{profile.postal_code}}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        </div>
+        </form>
       </div>
-    </div>
+    
 
     <!-- Toast Notification Container -->
     <div id="toast-container"></div>
@@ -245,10 +260,8 @@
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
     ></script>
-    <script
-      nomodule"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
     <script src="/admin/js/viewprofile.js"></script>
   </body>
 </html>

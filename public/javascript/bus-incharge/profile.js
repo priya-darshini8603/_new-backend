@@ -116,10 +116,10 @@ const urlParams = new URLSearchParams(window.location.search);
   const status = urlParams.get("status");
 
   if (status === "success") {
-    alert("Profile updated successfully!");
+    showToast("Profile updated successfully!", "success");
     window.history.replaceState(null, "", window.location.pathname); // clear the URL param
   } else if (status === "error") {
-    alert("Something went wrong while updating profile.");
+    showToast("Something went wrong!", "error");
     window.history.replaceState(null, "", window.location.pathname);
   }
 // Profile image change handler

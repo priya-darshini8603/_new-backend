@@ -129,65 +129,32 @@
               <th>Semester</th>
               <th>Pickup Point</th>
               <th>Amount Paid</th>
-              <th onclick="sortTable(7)">Paid Date</th>
+              <th onclick="sortTable(7,true)">Paid Date ⬍</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody id="personList">
-            <tr data-date="2025-02-01">
-              <td>12345</td>
-              <td>Priya Darshini I</td>
-              <td>1NT22CS146</td>
-              <td>CSE</td>
-              <td>3rd</td>
-              <td>Devaiah Park</td>
-              <td>Rs 30000</td>
-              <td>2025-02-01</td>
-              <td>
-                <button
-                  class="view-btn"
-                  onclick="location.href='view_payments.html'"
-                >
-                  View
-                </button>
-              </td>
-            </tr>
-            <tr data-date="2025-02-06">
-              <td>23583</td>
-              <td>Swetha</td>
-              <td>1NT21EC143</td>
-              <td>ECE</td>
-              <td>4th</td>
-              <td>Malleshwaram</td>
-              <td>Rs 30000</td>
-              <td>2025-02-06</td>
-              <td>
-                <button
-                  class="view-btn"
-                  onclick="location.href='view_payments.html'"
-                >
-                  View
-                </button>
-              </td>
-            </tr>
-            <tr data-date="2025-02-08">
-              <td>34567</td>
-              <td>Ashok</td>
-              <td>1NT23CV133</td>
-              <td>CV</td>
-              <td>3rd</td>
-              <td>Devaiah Park</td>
-              <td>Rs 30000</td>
-              <td>2025-02-08</td>
-              <td>
-                <button
-                  class="view-btn"
-                  onclick="location.href='/admin/view_payments.hbs'"
-                >
-                  View
-                </button>
-              </td>
-            </tr>
+              {{#each payments}}
+                            <tr data-date="{{formattedDate}}">
+                                <td>{{payment_ref_id}}</td>
+                                <td>{{studentName}}</td>
+                                <td>{{usn}}</td>
+                                <td>{{branch}}</td>
+                                <td>{{semester}}</td>
+                                <td>{{pickupPoint}}</td>
+                                <td>{{amount}}</td>
+                                <td>{{formattedDate}}</td>
+                               <td> <button
+                                    class="view-btn"
+                                    onclick="location.href='/admin/view_payments/{{payment_ref_id}}'"
+                                     >
+                                    View
+                                   </button
+                                   ></td>
+                            </tr>
+                             {{/each}}
+               
+             
           </tbody>
         </table>
       </div>
