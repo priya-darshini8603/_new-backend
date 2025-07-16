@@ -110,18 +110,30 @@
       </div>
       <table class="table table-bordered">
         <thead>
-          <tr>
+         
             <th>Name</th>
             <th>ID</th>
-            <th>Bus Number</th>
             <th>Route Number</th>
+            <th>pickupPoint</th>
             <th>Department</th>
             <th>Phone Number</th>
-            <th>Actions</th>
-          </tr>
+           
+        
         </thead>
         <tbody id="teacher-details">
-          <!-- Teacher details will be populated here -->
+          {{#each teachers}}
+                  <tr>    
+                            <td>{{fName}}{{lName}}</td>
+                            <td>{{usn}}</td>
+                            <td>{{route_num}}</td>
+                            
+                            <td>{{pickupPoint}}</td>
+
+                            <td>{{brach}}</td>
+                           
+                            <td>{{phone_num}}</td>
+                  </tr> 
+            {{/each}} 
         </tbody>
       </table>
       <div class="button-container text-center">
@@ -219,6 +231,6 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     ></script>
-    <script src="/admin/js/teacherdetails.js"></script>
+    
   </body>
 </html>

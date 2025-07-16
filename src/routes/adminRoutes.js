@@ -135,11 +135,25 @@ function generatePaymentRefId() {
 
 router.get("/admin/studentdetails",async (req,res)=>{
   try{
-   console.log('inside get');
+   
     //need to change to profile after student page updated
     const students=await loginCollection.find({role:"student"}).lean()
-    console.log(students);
+   
     res.render("admin/studentdetails", {students});
+    
+  }
+  catch{
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get("/admin/teacherdetails",async (req,res)=>{
+  try{
+   
+    //need to change to profile after student page updated
+    const teachers=await loginCollection.find({role:"teacher"}).lean()
+    
+    res.render("admin/teacherdetails", {teachers});
     
   }
   catch{
