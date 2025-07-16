@@ -3,145 +3,350 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> CHAT</title>
+    <title>Chat</title>
+    <link rel="stylesheet" type="text/css" href="/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/studentdetails.css">
     <link rel="stylesheet" href="/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="/socket.io/socket.io.js"></script>
 </head>
-<style>
-
-</style>
 
 <body>
-    <div class="container">
-        
-        <div class="leftSide">
-            
-            <div class="header">
-                <ul class="nav_icons">
-                    <li>
-                        <ion-icon name="scan-circle-outline"></ion-icon>
-                    </li>
-                    <li>
-                        <ion-icon name="people"></ion-icon>
-                    </li>
-                    <li class="menu-wrapper">
-                        <button class="menu-button" onclick="toggleMenu(this)">
-                            <ion-icon name="ellipsis-vertical" size="large"></ion-icon>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a href="create-group.html">
-                                <ion-icon name="add-circle-outline"></ion-icon> Create Group
-                            </a>
-                            <a href="all-users.html">
-                                <ion-icon name="people-outline"></ion-icon> See All Users
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+    <div class="container-fluid">
+        <!-- Navigation -->
+        <nav class="navigation">
+            <ul>
+                <li>
+                    <a href="/bus-incharge/busincharge-dashboard">
+                        <span class="title">
+                            <span class="image-wrapper">
+                                <img src="/images/logoside.png" alt="Logo">
+                            </span>
+                        </span>
 
-            <!-- Search Chat -->
-            <div class="search_chat">
-                <div>
-                    <input type="text" placeholder="Search or start new chat">
-                    <ion-icon name="search-outline"></ion-icon>
+                        <span class="box">NITTE MEENAKSHI
+                            INSTITUTE OF TECHNOLOGY</span>
+
+                    </a>
+                </li>
+
+                <li class="hovered">
+                    <a href="/bus-incharge/busincharge-dashboard">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/studentdetails">
+                        <span class="icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+                        <span class="title">Student Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/staffdetails">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Teacher Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/busdetails">
+                        <span class="icon"><i class="fa fa-bus" aria-hidden="true"></i></span>
+                        <span class="title">Bus Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/share-location">
+                        <span class="icon">
+                            <i class="fas fa-location"></i>
+                        </span>
+                        <span class="title">Share Location</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/view-all-payments">
+                        <span class="icon"><i class="fa-solid fa-indian-rupee-sign" aria-hidden="true"></i></span>
+                        <span class="title">Payment Records</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/announcement">
+                        <span class="icon"><i class="fa fa-bullhorn" aria-hidden="true"></i></span>
+                        <span class="title">Announcements</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/schedule">
+                        <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                        <span class="title">View Schedule</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/notify">
+                        <span class="icon"><i class="fa fa-bell" aria-hidden="true"></i></span>
+                        <span class="title">Notify Passengers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/chat">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Chat</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bus-incharge/inquiry">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">Inquiry</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/loginform">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Log Out</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <header class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                <div class="right-section">
+
+                    <div class="notification-icon" onclick="toggleNotifications()" aria-label="Toggle Notifications">
+                        🔔<span class="badge" id="notifCount">2</span>
+                    </div>
+
+                    <div class="right-section">
+                        <div class="user">
+                            <img src="{{#if profileImageBase64}}data:{{profileImageType}};base64,{{profileImageBase64}}{{else}}/images/avatar.png{{/if}}" alt="User Menu" id="avatar" class="avatar"></img></div>
+                        <div class="collapse-menu" id="collapseMenu">
+                            <a href="/bus-incharge/profile">View Profile</a>
+                            <a href="/loginform">Log Out</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+            <div>
+                <!-- Notification Dropdown Panel -->
+                <div class="notification-panel" id="notificationPanel" style="display: none;">
+                    <div class="notif-header">
+                        <h3 id="notifHeader">You have 2 notifications</h3>
+                        <button class="dclose" onclick="closePanel()">&times;</button>
+                    </div>
+
+                    <div class="notification"
+                        onclick="openDetails('New Students', 'New student records have been successfully added to the system. Please review the updated student list for further details.')">
+                        <div class="notification-content">
+                            <strong>New Students</strong>
+                            <p>New Students Added</p>
+                            <div class="notification-right">
+                                <img src="/images/avatar.png" alt="Profile" class="profile-image"><span
+                                    class="user-name">
+                                    <h5>Vanitha</h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notification"
+                        onclick="openDetails('Fees Amount', 'Kindly Note ! Fees amount for this year increased.Its 35000')">
+                        <div class="notification-content">
+                            <strong>Fees Amount</strong>
+                            <p>Fees amount for this year increased.Its 35000</p>
+                            <div class="notification-right">
+                                <img src="/images/avatar.png" alt="Profile" class="profile-image"><span
+                                    class="user-name">
+                                    <h5>Priya Darshini</h5>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="/bus-incharge/notification" class="view-all" onclick="showNotificationPageAndClear()">View
+                        All</a>
+                </div>
+
+                <div class="notification-details" id="notificationDetails" style="display: none;">
+                    <h2 id="notifTitle">Notification Title</h2>
+                    <p id="notifDescription">Notification description.</p>
+                    <button class="dclose" onclick="closeNotification()">&times;</button>
+                    <button class="n-reply-btn"
+                        onclick="openReplyPopup(document.getElementById('notifTitle').textContent)">Reply</button>
+                </div>
+                <!-- Reply Popup -->
+                <div class="reply-popup" id="replyPopup" style="display: none;">
+                    <h2 id="replyTitle">Reply</h2>
+                    <textarea id="replyMessage" placeholder="Type your message..."></textarea>
+                    <div class="popup-btn-container">
+                        <button class="popup-btn n-send-btn" onclick="sendReply()">Send</button>
+                        <button class="popup-btn n-close-btn" onclick="closeReplyPopup()">Cancel</button>
+                    </div>
                 </div>
             </div>
-            <!-- CHAT LIST -->
-            
-           <div class="chatlist">
-            {{#each contacts}}
-             <a href="/bus-incharge/chat/{{encodeURIComponent name}}" class="chat-link">
-                <div class="block {{#if unread}}unread{{/if}} {{#if active}}active{{/if}}">
-                 <div class="imgBox">
-                    <img src="{{avatar}}" class="cover" alt="User Avatar">
-                 </div>
-        <div class="details">
-          <div class="listHead">
-            <h4>{{displayName}}</h4>
-            <p class="time">{{lastMessageTime}}</p>
-          </div>
-          <div class="message_p">
-            <p>{{lastMessage}}</p>
-          </div>
-          <div class="roleTag">
-            <small>{{role}}</small>
-          </div>
-        </div>
-      </div>
-    </a>
-  {{/each}}
-</div>
-</div>
+            <!-- Toast Notification Container -->
+            <div id="toast-container"></div>
 
-         
-       
-                
-        <div class="rightSide">
-            <div class="header">
-                <div class="imgText">
-                    <div class="userimg">
-                        <img src="{{selectedAvatar}}" alt="" class="cover">
-                    </div>
-                    <h4>{{selectedDisplayName}}<br><span>online</span></h4>
+            <!-- Cards -->
+            <div class="student-details">
+                <div class="breadcrumb">
+                    <h2 class="breadcrumb-title">Chat with others</h2>
+                   <a href="/bus-incharge/busincharge-dashboard" class="breadcrumb-link">Home</a>
+                    <span>/</span>
+
                 </div>
-                <ul class="nav_icons">
-                    <li>
-                        <ion-icon name="search-outline"></ion-icon>
-                    </li>
-                    <li class="menu-wrapper">
-                        <button class="menu-button" onclick="toggleMenu(this)">
-                            <ion-icon name="ellipsis-vertical" size="large"></ion-icon>
-                        </button>
-                        <div class="dropdown-menu">
-                            <span>
-                                <ion-icon name="checkbox-outline"></ion-icon>
-                                Select
-                            </span>
-                            <span>
-                                <ion-icon name="trash-outline"></ion-icon>
-                                Delete Message
-                            </span>
+                <div class="container">
+                <div class="chat-card">
 
-                            <span>
-                                <ion-icon name="arrow-undo-outline"></ion-icon>
-                                Forward
-                            </span>
-                            <span>
-                                <ion-icon name="trash-bin-outline"></ion-icon>
-                                Clear Chat
-                            </span>
+                    <div class="leftSide">
+
+                        <div class="header">
+                            <ul class="nav_icons">
+                                <li>
+                                    <ion-icon name="scan-circle-outline"></ion-icon>
+                                </li>
+                                <li>
+                                    <ion-icon name="people"></ion-icon>
+                                </li>
+                                <li class="menu-wrapper">
+                                    <button class="menu-button" onclick="toggleMenu(this)">
+                                        <ion-icon name="ellipsis-vertical" size="large"></ion-icon>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a href="create-group.html">
+                                            <ion-icon name="add-circle-outline"></ion-icon> Create Group
+                                        </a>
+                                        <a href="all-users.html">
+                                            <ion-icon name="people-outline"></ion-icon> See All Users
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Search Chat -->
+                        <div class="search_chat">
+                            <div>
+                                <input type="text" placeholder="Search or start new chat">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </div>
+                        </div>
+                        <!-- CHAT LIST -->
+
+                        <div class="chatlist">
+                            {{#each contacts}}
+                            <a href="/bus-incharge/chat/{{encodeURIComponent name}}" class="chat-link">
+                                <div class="block {{#if unread}}unread{{/if}} {{#if active}}active{{/if}}">
+                                    <div class="imgBox">
+                                        <img src="{{avatar}}" class="cover" alt="User Avatar">
+                                    </div>
+                                    <div class="details">
+                                        <div class="listHead">
+                                            <h4>{{displayName}}</h4>
+                                            <p class="time">{{lastMessageTime}}</p>
+                                        </div>
+                                        <div class="message_p">
+                                            <p>{{lastMessage}}</p>
+                                        </div>
+                                        <div class="roleTag">
+                                            <small>{{role}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            {{/each}}
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="rightSide">
+                        <div class="header">
+                            <div class="imgText">
+                                <div class="userimg">
+                                    <img src="{{selectedAvatar}}" alt="" class="cover">
+                                </div>
+                                <h4>{{selectedDisplayName}}<br><span>online</span></h4>
+                            </div>
+                            <ul class="nav_icons">
+                                <li>
+                                    <ion-icon name="search-outline"></ion-icon>
+                                </li>
+                                <li class="menu-wrapper">
+                                    <button class="menu-button" onclick="toggleMenu(this)">
+                                        <ion-icon name="ellipsis-vertical" size="large"></ion-icon>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <span>
+                                            <ion-icon name="checkbox-outline"></ion-icon>
+                                            Select
+                                        </span>
+                                        <span>
+                                            <ion-icon name="trash-outline"></ion-icon>
+                                            Delete Message
+                                        </span>
+
+                                        <span>
+                                            <ion-icon name="arrow-undo-outline"></ion-icon>
+                                            Forward
+                                        </span>
+                                        <span>
+                                            <ion-icon name="trash-bin-outline"></ion-icon>
+                                            Clear Chat
+                                        </span>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- CHAT-BOX -->
+                        <div class="chatbox" id="chatBox">
+                            {{#each messages}}
+                            <div class="message {{#if isMe}}my_msg{{else}}friend_msg{{/if}}">
+                                <p>{{message}}<br><span>{{time}}</span></p>
+                            </div>
+                            {{/each}}
 
                         </div>
-                    </li>
-                </ul>
-            </div>
 
-            <!-- CHAT-BOX -->
-            <div class="chatbox" id="chatBox">
-                 {{#each messages}}
-                    <div class="message {{#if isMe}}my_msg{{else}}friend_msg{{/if}}">
-                        <p>{{message}}<br><span>{{time}}</span></p>
+                        <!-- CHAT INPUT -->
+                        <div class="chat_input">
+                            <ion-icon name="happy-outline"></ion-icon>
+                            <ion-icon name="attach-outline"></ion-icon>
+                            <input type="text" placeholder="Type a message" id="msgInput">
+                            <ion-icon name="mic"></ion-icon>
+                            <ion-icon name="send" id="sendBtn"></ion-icon></button>
+                        </div>
                     </div>
-                {{/each}}
-                
+                </div>
+                </div>
+        </main>
+        <footer class="bg-body-tertiary text-center">
+            <div class="rights text-center p-3">
+                &copy; 2024 Nitte Meenakshi Institute Of Technology. All Rights Reserved.
             </div>
-
-            <!-- CHAT INPUT -->
-            <div class="chat_input">
-                <ion-icon name="happy-outline"></ion-icon>
-                <ion-icon name="attach-outline"></ion-icon>
-                <input type="text" placeholder="Type a message" id="msgInput">
-                <ion-icon name="mic"></ion-icon>
-                <ion-icon name="send" id="sendBtn"></ion-icon></button>
-            </div>
-        </div>
+        </footer>
     </div>
-    
-
-    <script>
+     <script>
         function toggleMenu(btn) {
             const wrapper = btn.closest('.menu-wrapper');
             wrapper.classList.toggle('active');
@@ -159,14 +364,18 @@
             });
         });
     </script>
-   
-    <script>
+     <script>
         const USER_EMAIL = "{{user.email}}";
         const SELECTED_USER_EMAIL = "{{selectedUser}}";
     </script>
     <script src="/bus-incharge/js/chat.js"></script>
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="/bus-incharge/js/dashboard.js"></script>
+    <script src="/bus-incharge/js/notification.js"></script>
+    <script src="/bus-incharge/js/chat.js"></script>
+    
 </body>
 
 </html>
