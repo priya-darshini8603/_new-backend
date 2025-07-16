@@ -12,16 +12,20 @@ const driverSchema = new mongoose.Schema({
   },
   busNumber: {
     type: String,
-    required: true
+    required: true,
+    unique: true 
   },
   routeNumber: {
     type: String,
-    required: true
+    required: true,
+    unique: true 
+
   },
   phoneNumber: {
     type: String,
     
-    match: /^[6-9]\d{9}$/ // Optional: Indian phone number validation
+    match: /^[6-9]\d{9}$/ ,// Optional: Indian phone number validation
+    unique: true 
   },
 }, {
   timestamps: true // Adds createdAt and updatedAt fields

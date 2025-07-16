@@ -8,6 +8,7 @@ const loginCollection = require("../models/loginModel");
 const mongoose = require("mongoose");
 const MessageCollection = require("../models/Message");
 const ContactCollection = require("../models/Contact");
+const DriverCollection = require("../models/assign_bus");
 //post methods
 router.post("/profileupdate", businchargeControllers.uploadMiddleware,businchargeControllers.profileupdate);
 router.post("/submitinquiry",businchargeControllers.submitinquiry);
@@ -80,6 +81,7 @@ router.get("/bus-incharge/profile", async (req, res) => {
     const email = req.query.email || req.session?.user?.email;
    
     if (!email) return res.redirect("/loginform")
+  
     
    const profile = await ProfileCollection.findOne({ email })// Important: .lean() converts it to plain object
 
@@ -89,10 +91,16 @@ router.get("/bus-incharge/profile", async (req, res) => {
       profileImageBase64 = profile.profileImage.data.toString("base64");
       profileImageType = profile.profileImage.contentType || "image/jpeg";
     }
-
+     let driverId = null;
+    if (profile?.route_num) {
+      const driverDoc = await DriverCollection.findOne({ routeNumber: profile.route_num });
+      if (driverDoc) {
+        driverId = driverDoc.driverId;
+      }
+    }
    
     
-    res.render("./bus-incharge/profile", { profile,profileImageBase64,profileImageType });
+    res.render("./bus-incharge/profile", { profile,profileImageBase64,profileImageType,driverId });
   } catch (err) {
     console.error("Error loading profile:", err);
     res.status(500).send("Internal Server Error");

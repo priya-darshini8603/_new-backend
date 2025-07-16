@@ -3,12 +3,21 @@ const Message = require("../models/Message");
 const Contact = require("../models/Contact");
 const multer = require("multer");
 const InquiryCollection=require("../models/inquiryModel");
+const DriverCollection=require("../models/assign_bus");
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 exports.uploadMiddleware = upload.single("profileImage");
 exports.profileupdate = async (req, res) => {
   try {
+    let driver_ID = req.body.driver_ID;
+
+    if (!driver_ID && req.body.route_num) {
+      const driverDoc = await DriverCollection.findOne({ routeNumber: req.body.route_num });
+      if (driverDoc) {
+        driver_ID = driverDoc.driverId;
+      }
+    }
     const updateData = {
       fName: req.body.fName,
       lName: req.body.lName,
@@ -21,6 +30,7 @@ exports.profileupdate = async (req, res) => {
       address: req.body.address,
       postal_code: req.body.postal_code,
       route_num: req.body.route_num,
+      driver_ID:req.body.driver_ID,
      
     };
    if (req.file) {

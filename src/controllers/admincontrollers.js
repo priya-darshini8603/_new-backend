@@ -6,6 +6,7 @@ const DriverCollection = require('../models/assign_bus');
 
 exports.Adminprofileupdate = async (req, res) => {
   try {
+    
     const updateData = {
       fName: req.body.fName,
       lName: req.body.lName,
@@ -109,24 +110,9 @@ exports.deleteDriver = async (req, res) => {
    
 
     // Step 3: Remove reference from ProfileCollection
-    await ProfileCollection.updateOne(
-      { role: "busincharge", route_num: routeNumber },
-      {
-        $unset: {
-          driver_ID: "",
-          fName: "",
-          lName: "",
-          phone_num: "",
-          license_num: "",
-          DOB: "",
-          joined_date: "",
-          years_of_experience: "",
-          address: "",
-          postal_code: "",
-          profileImage: ""
-        }
-      }
-    );
+    await ProfileCollection.deleteOne({ role: "busincharge", route_num: routeNumber });
+    await loginCollection.deleteOne({ role: "busincharge"});
+   
 
     res.redirect("/admin/driverdetails");
   } catch (err) {

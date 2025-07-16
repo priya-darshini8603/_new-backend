@@ -210,10 +210,11 @@
 
 <!--changed as per backend -->
         <form action="/profileupdate" method="POST" enctype="multipart/form-data" id="profileForm">
+        <input type="hidden" name="driver_ID" value="{{driverId}}" />
           <input type="hidden" name="email" value="{{profile.email}}" />
           <input type="hidden" name="fName" id="fNameHidden" value="{{profile.fName}}" />
-          <input type="hidden" name="lName" id="lNameHidden" value="{{profile.lName}}" />
-  <input type="hidden" name="gender" id="genderHidden" value="{{profile.gender}}" />
+        <input type="hidden" name="lName" id="lNameHidden" value="{{profile.lName}}" />
+        <input type="hidden" name="gender" id="genderHidden" value="{{profile.gender}}" />
   <input type="hidden" name="phone_num" id="phoneNumberHidden" value="{{profile.phone_num}}" />
   <input type="hidden" name="license_num" id="licenseNumberHidden" value="{{profile.license_num}}" />
   <input type="hidden" name="DOB" id="dobHidden" value="{{profile.DOB}}" />
@@ -256,7 +257,7 @@
                 ✎</button>
             </div>
             <div class="profile-details" id="personalInfo" >
-              <div class="detail-item"><span class="label">Driver ID:</span><span class="value">{{profile.driver_ID}}</span></div>
+              <div class="detail-item"><span class="label">Driver ID:</span><span class="value">{{driverId}}</span></div>
               <div class="detail-item"><span class="label">Gender:</span><span class="value" id="gender">{{profile.gender}}</span>
               </div>
               <div class="detail-item"><span class="label">Email:</span><span class="value">{{profile.email}}</span>
