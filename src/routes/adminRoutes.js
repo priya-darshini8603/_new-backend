@@ -133,9 +133,23 @@ function generatePaymentRefId() {
   return `PAY-${year}-${random}`;
 }
 
+router.get("/admin/studentdetails",async (req,res)=>{
+  try{
+   console.log('inside get');
+    //need to change to profile after student page updated
+    const students=await loginCollection.find({role:"student"}).lean()
+    console.log(students);
+    res.render("admin/studentdetails", {students});
+    
+  }
+  catch{
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 router.get("/admin/notify", async (req, res) => {
   try {
-    const users = await User.find(
+    const users = await loginCollection.find(
       {}, // 👉 find all users, regardless of role
       "fName lName email role"
     );
