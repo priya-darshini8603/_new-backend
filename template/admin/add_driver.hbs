@@ -26,17 +26,20 @@
 
     <div class="container">
       <h1>Add Driver</h1>
-      <form id="driver-form">
+      <form action="/admin/add_driver" method="POST" id="driver-form">
         <div class="form-group">
-          <label for="name">Driver Name:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            name="name"
-            required
-          />
-        </div>
+  <label for="driver-id">Driver ID:</label>
+  <input
+    type="text"
+    class="form-control"
+    id="driver-id"
+    name="driver-id"
+  readonly
+  required
+  />
+</div>
+        
+        
         <div class="form-group">
           <label for="bus-number">Bus Number:</label>
           <input
@@ -57,16 +60,6 @@
             required
           />
         </div>
-        <div class="form-group">
-          <label for="phone-number">Phone Number:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="phone-number"
-            name="phone-number"
-            required
-          />
-        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
@@ -79,6 +72,39 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     ></script>
-    <script src="/admin/js/add_driver.js"></script>
+    <script>
+function generateDriverID() {
+  const routeInput = document.getElementById("route-number");
+  const driverIdInput = document.getElementById("driver-id");
+
+  function createDriverID(routeNumber) {
+    const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    return `NMITbus-${routeNumber}-${randomDigits}`;
+  }
+
+  function updateID() {
+    const route = routeInput.value.trim();
+    if (route) {
+      driverIdInput.value = createDriverID(route);
+    } else {
+      driverIdInput.value = "";
+    }
+  }
+
+  // update on input
+  routeInput.addEventListener("input", updateID);
+
+  // generate before submit
+  const form = document.getElementById("driver-form");
+  form.addEventListener("submit", (e) => {
+    if (!driverIdInput.value) {
+      updateID(); // generate if missing
+    }
+  });
+}
+
+window.onload = generateDriverID;
+</script>
+
   </body>
 </html>

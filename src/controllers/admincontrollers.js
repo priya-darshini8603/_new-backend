@@ -1,5 +1,6 @@
 const ProfileCollection = require("../models/profileModel");
 const InquiryCollection = require("../models/inquiryModel"); 
+const DriverCollection = require('../models/assign_bus');
 
 
 
@@ -67,5 +68,69 @@ exports.getInquiriesByStatus = async (req, res) => {
   } catch (err) {
     console.error("Error fetching inquiries:", err);
     res.status(500).json({ error: "Failed to fetch inquiries" });
+  }
+};
+
+exports.add_driver=async(req,res)=>{
+  const { "driver-id": driverId,"name":name, "bus-number": busNumber, "route-number": routeNumber, "phone-number": phoneNumber } = req.body;
+
+  try {
+    await DriverCollection.create({
+      driverId,
+      name,
+      busNumber,
+      routeNumber,
+      phoneNumber,
+    });
+     await ProfileCollection.findOneAndUpdate(
+      { role: "busincharge", route_num: routeNumber },  // find driver by route number
+      { $set: {driver_ID:driverId} }
+    );
+
+    res.redirect("/admin/driverdetails");
+  } catch (err) {
+    console.error("Error adding driver:", err);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
+// Controller function
+exports.deleteDriver = async (req, res) => {
+  try {
+    const driverId = req.params.driverId;
+
+    // Step 1: Find driver by ID
+    const driver = await DriverCollection.findOne({ driverId });
+    if (!driver) return res.status(404).send("Driver not found");
+
+    const routeNumber = driver.routeNumber;
+
+  
+   
+
+    // Step 3: Remove reference from ProfileCollection
+    await ProfileCollection.updateOne(
+      { role: "busincharge", route_num: routeNumber },
+      {
+        $unset: {
+          driver_ID: "",
+          fName: "",
+          lName: "",
+          phone_num: "",
+          license_num: "",
+          DOB: "",
+          joined_date: "",
+          years_of_experience: "",
+          address: "",
+          postal_code: "",
+          profileImage: ""
+        }
+      }
+    );
+
+    res.redirect("/admin/driverdetails");
+  } catch (err) {
+    console.error("Error deleting driver:", err);
+    res.status(500).send("Internal Server Error");
   }
 };

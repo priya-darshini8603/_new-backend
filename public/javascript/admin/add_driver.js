@@ -1,19 +1,22 @@
-document
-  .getElementById("driver-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
+// /public/admin/js/add_driver.js
+function generateDriverID() {
+  const routeInput = document.getElementById("route-number");
+  const driverIdInput = document.getElementById("driver-id");
 
-    const driver = {
-      name: document.getElementById("name").value,
-      busNumber: document.getElementById("bus-number").value,
-      routeNumber: document.getElementById("route-number").value,
-      phoneNumber: document.getElementById("phone-number").value,
-    };
+  function createDriverID(routeNumber) {
+    const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    return `NMITbus-${routeNumber}-${randomDigits}`;
+  }
 
-    let drivers = JSON.parse(localStorage.getItem("drivers")) || [];
-    drivers.push(driver);
-    localStorage.setItem("drivers", JSON.stringify(drivers));
-
-    alert("Driver details submitted successfully.");
-    window.location.href = "/admin/driverdetails.hbs";
+  // Generate when route number is typed
+  routeInput.addEventListener("input", () => {
+    const route = routeInput.value.trim();
+    if (route) {
+      driverIdInput.value = createDriverID(route);
+    } else {
+      driverIdInput.value = "";
+    }
   });
+}
+
+window.onload = generateDriverID;

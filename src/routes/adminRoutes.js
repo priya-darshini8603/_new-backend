@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 const loginCollection = require("../models/loginModel"); 
@@ -7,13 +8,16 @@ const notificationController = require('../controllers/notificationcontrollers')
 const Notification = require("../models/notificationmodel");
 const ProfileCollection = require("../models/profileModel");
 const PaymentCollection = require("../models/paymentModel");
+const DriverCollection = require('../models/assign_bus');
+
 const multer = require('multer');
 const upload = multer();
 
 router.post('/admin/send-notification', notificationController.sendNotification);
 router.post("/inquiryupdate/:id", adminControllers.inquiryupdate);
 router.post("/Adminprofileupdate",upload.single('profileImage'),adminControllers.Adminprofileupdate);
-
+router.post("/admin/add_driver",adminControllers.add_driver);
+router.get("/admin/delete_driver/:driverId", adminControllers.deleteDriver);
 
 
 
@@ -160,6 +164,39 @@ router.get("/admin/teacherdetails",async (req,res)=>{
     res.status(500).send("Internal Server Error");
   }
 });
+
+
+
+router.get("/admin/driverdetails",async (req,res)=>{
+  try {
+    const drivers = await DriverCollection.find().lean();
+
+    for (let driver of drivers) {
+      const profile = await ProfileCollection.findOne({
+        role: "busincharge",
+        route_num: driver.routeNumber
+      }).lean();
+
+      // Combine profile data into driver
+      if (profile) {
+        driver.name = `${profile.fName} ${profile.lName}` || "N/A";
+        driver.phoneNumber = profile.phone_num || "N/A";
+      } else {
+        driver.name = "N/A";
+        driver.phoneNumber = "N/A";
+      }
+    }
+
+    res.render("admin/driverdetails", { drivers });
+  } catch (err) {
+    console.error("Error loading drivers:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+
+
 
 router.get("/admin/notify", async (req, res) => {
   try {
