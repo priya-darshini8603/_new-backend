@@ -53,9 +53,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 const templatepath = path.join('template');
 app.set('view engine', 'hbs');
 app.set('views', templatepath);
+
 hbs.registerHelper('encodeURIComponent', str => encodeURIComponent(str));
 hbs.registerHelper('eq', function (a, b) {
   return a === b;
+});
+hbs.registerHelper('formatTime', function (timestamp) {
+  return moment(timestamp).fromNow(); // e.g., "3 minutes ago"
 });
 
 // ✅ Register routes AFTER body parsers

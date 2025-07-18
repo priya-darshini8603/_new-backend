@@ -126,7 +126,7 @@
                 <div class="right-section">
 
                     <div class="notification-icon" onclick="toggleNotifications()" aria-label="Toggle Notifications">
-                        🔔<span class="badge" id="notifCount">2</span>
+                        🔔<span class="badge" id="notifCount">{{notificationCount}}</span>
                     </div>
 
                     <div class="right-section">
@@ -146,41 +146,24 @@
                 <!-- Notification Dropdown Panel -->
                 <div class="notification-panel" id="notificationPanel" style="display: none;">
                     <div class="notif-header">
-                        <h3 id="notifHeader">You have 2 notifications</h3>
+                        <h3 id="notifHeader">You have {{notificationCount}}notifications</h3>
                         <button class="dclose" onclick="closePanel()">&times;</button>
                     </div>
-
+                {{#each notifications}}
                     <div class="notification"
-                        onclick="openDetails('New Students', 'New student records have been successfully added to the system. Please review the updated student list for further details.')">
+                        onclick="openDetails('{{this.title}}', '{{this.title}}records have been successfully added to the system. Please review the updated student list for further details.')">
                         <div class="notification-content">
-                            <strong>New Students</strong>
-                            <p>New Students Added</p>
-                            <div class="notification-right">
-                                <img src="../images/avatar.png" alt="Profile" class="profile-image"><span
-                                    class="user-name">
-                                    <h5>Vanitha</h5>
-                                </span>
+                            <strong>{{this.title}}</strong>
+                            <p>{{this.message}}</p>
+                        
+                               
                             </div>
                         </div>
-                    </div>
-
-                    <div class="notification"
-                        onclick="openDetails('Fees Amount', 'Kindly Note ! Fees amount for this year increased.Its 35000')">
-                        <div class="notification-content">
-                            <strong>Fees Amount</strong>
-                            <p>Fees amount for this year increased.Its 35000</p>
-                            <div class="notification-right">
-                                <img src="../images/avatar.png" alt="Profile" class="profile-image"><span
-                                    class="user-name">
-                                    <h5>Priya Darshini</h5>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="/bus-incharge/view-all-payments.hbs" class="view-all"
+                        {{/each}}
+                    <a href="/bus-incharge/notification" class="view-all"
                         onclick="showNotificationPageAndClear()">View All</a>
                 </div>
+                
 
                 <div class="notification-details" id="notificationDetails" style="display: none;">
                     <h2 id="notifTitle">Notification Title</h2>
@@ -213,18 +196,18 @@
                         <span class="icon"><i class="fa fa-search" aria-hidden="true"></i></span>
                     </div>
                 </div>
-
+            {{#each notifications}}
                 <div class="card">
                     <div>
-                        <h3>New Students</h3>
-                        <p>New Students Added</p>
-                        <p><small>33 minutes ago</small></p>
+                        <h3>{{this .title}}</h3>
+                        <p>{{this.message}}</p>
+                        <p><small>{{this.timestamp}}</small></p>
 
                         <div class="image-name-container">
                             <img src="../images/avatar.png" alt="Notification Image" class="notification-image">
                             <div class="name-role">
-                                <h4>Vanitha</h4>
-                                <h6>Student</h6>
+                                <h4>{{this.senderName}}</h4>
+                                <h6>{{this.role}}</h6>
                             </div>
                         </div>
 
@@ -233,32 +216,13 @@
                     <!-- Button Section -->
                     <div class="btn-container">
                         <button class="n-view-btn"
-                            onclick="openDetails('New Students', 'New student records have been successfully added to the system. Please review the updated student list for further details.')">View
+                            onclick="openDetails('{{this.title}}', '{{this.description}}.')">View
                             Details</button>
                     </div>
                 </div>
+               
 
-                <div class="card">
-                    <div>
-                        <h3>Fees Amount</h3>
-                        <p>Fees amount for this year increased.Its 35000</p>
-                        <p><small>55 minutes ago</small></p>
-
-                        <div class="image-name-container">
-                            <img src="../images/avatar.png" alt="Notification Image" class="notification-image">
-                            <div class="name-role">
-                                <h4>Priya Darshini</h4>
-                                <h6>Staff</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="btn-container">
-                        <button class="n-view-btn"
-                            onclick="openDetails('Fees Amount', 'Kindly Note! Fees amount for this year increased.Its 35000')">View
-                            Details</button>
-                    </div>
-                </div>
-            </div>
+              
 
             <!-- Notification Detail Popup -->
             <div class="notification-details" id="notificationDetails" style="display: none;">
@@ -276,7 +240,7 @@
                     <button class="popup-btn n-close-btn" onclick="closeReplyPopup()">Cancel</button>
                 </div>
             </div>
-
+         {{/each}}
             <!-- Toast Notification Container -->
             <div id="toast-container"></div>
 
@@ -293,6 +257,7 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="/bus-incharge/js/notification.js"></script>
     <script src="/bus-incharge/js/dashboard.js"></script>
+    
 </body>
 
 </html>

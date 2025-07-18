@@ -2,6 +2,7 @@ const LogInCollection = require("../models/loginModel");
 const ProfileCollection = require("../models/profileModel");
 const OTPCollection = require("../models/otpModel");
 const contactCollection=require("../models/Contact");
+const Notification=require("../models/notificationmodel");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
@@ -39,7 +40,37 @@ exports.signup = async (req, res) => {
 
     // Also save to profile collection
     await new ProfileCollection({ fName, lName, email, role }).save();
+  
+  if(newUser.role!="bus-incharge" &&newUser.role!="admin"  ) {// Create messages for both admin and busincharge
+  const message = `New ${newUser.role} signed up: ${newUser.fName} ${newUser.lName} `;
 
+  await Notification.insertMany([
+    {
+      title:"New ${newUser.role} Added",
+      recipientRole:'admin',
+      senderId: newUser._id,
+      message,
+    },
+    {
+      title:"New ${newUser.role} Added",
+      recipientRole: 'busincharge',
+      senderId: newUser._id,
+      message,
+    }
+  ]);
+  }
+  else if(newUser.role=="busincharge"){
+const message = `New ${newUser.role} signed up: ${newUser.fName} ${newUser.lName} `;
+
+  await Notification.insertOne([
+    {
+      title:"New ${newUser.role} Added",
+      recipientRole:'admin',
+      senderId: newUser._id,
+      message,
+    },
+  ])
+}
     res.redirect("/loginform");
   } catch (error) {
     console.error("Error during signup:", error);

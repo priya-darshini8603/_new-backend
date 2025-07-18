@@ -24,6 +24,7 @@ router.get("/admin/delete_driver/:driverId", adminControllers.deleteDriver);
 router.use("/admin", async (req, res, next) => {
   try {
     const email = req.session?.user?.email;
+     const role = req.session?.user?.role;
     if (!email) return res.redirect("/loginform");
 
     const profile = await ProfileCollection.findOne({ email });
@@ -37,7 +38,14 @@ router.use("/admin", async (req, res, next) => {
       res.locals.profileImageBase64 = null;
       res.locals.profileImageType = "image/jpeg";
     }
-
+     const notifications = await Notification.find({ recipientRole: role })
+          .sort({ createdAt: -1 })
+          .limit(5)
+          .lean();
+    
+        res.locals.notifications = notifications;
+        res.locals.notificationCount = notifications.length;
+    
     next();
   } catch (error) {
     console.error("Bus-incharge profile image middleware error:", error);
@@ -212,17 +220,7 @@ router.get("/admin/notify", async (req, res) => {
 });
 
 
-router.get("/admin/notifications", async (req, res) => {
-  try {
-    const notifications = await Notification.find()
-      .populate('sender', 'fName lName email')
-      .populate('recipients', 'fName lName email');
-    res.render("./admin/notifications", { notifications });
-  } catch (error) {
-    console.error("Error loading notifications page:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
+
 
 
 router.get('/admin/api/users', async (req, res) => {
@@ -236,6 +234,34 @@ router.get('/admin/api/users', async (req, res) => {
   } catch (error) {
     console.error("Error fetching users:", error);
     res.json({ success: false, message: "Error fetching users." });
+  }
+});
+
+router.get('/admin/notification', async (req, res) => {
+  try {
+    
+    const role = req.session.user?.role;
+
+    const notifications = await Notification.find({
+     
+       
+        recipientRole: role 
+    
+    }).sort({ createdAt: -1 }).limit(5).lean();
+
+    const notificationCount = notifications.length;
+ res.render('admin/notification', {
+      user: req.session.user,
+      notifications,
+      notificationCount
+    });
+  } catch (error) {
+    console.error('Error fetching notifications:', error);
+    res.render('bus-incharge/notification', {
+      user: req.session.user,
+      notifications: [],
+      notificationCount: 0
+    });
   }
 });
 

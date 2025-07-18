@@ -60,7 +60,7 @@ function filterList() {
 function formatDateToDDMMYYYY(date) {
     if (!date) return '';
     const [year, month, day] = date.split('-');
-    return `${day}-${month}-${year}`;
+    return `${day}/${month}/${year}`;
 }
 // Trigger filtering on input change (clears on reset)
 document.getElementById('filter').addEventListener('change', filterList);

@@ -126,7 +126,7 @@
                 <div class="right-section">
 
                     <div class="notification-icon" onclick="toggleNotifications()" aria-label="Toggle Notifications">
-                        🔔<span class="badge" id="notifCount">2</span>
+                        🔔<span class="badge" id="notifCount">{{notificationCount}}</span>
                     </div>
 
                     <div class="right-section">
@@ -146,41 +146,22 @@
                 <!-- Notification Dropdown Panel -->
                 <div class="notification-panel" id="notificationPanel" style="display: none;">
                     <div class="notif-header">
-                        <h3 id="notifHeader">You have 2 notifications</h3>
+                        <h3 id="notifHeader">You have {{notificationCount}} notifications</h3>
                         <button class="dclose" onclick="closePanel()">&times;</button>
                     </div>
-
+                {{#each notifications}}
                     <div class="notification"
                         onclick="openDetails('New Students', 'New student records have been successfully added to the system. Please review the updated student list for further details.')">
                         <div class="notification-content">
-                            <strong>New Students</strong>
-                            <p>New Students Added</p>
-                            <div class="notification-right">
-                                <img src="../images/avatar.png" alt="Profile" class="profile-image"><span
-                                    class="user-name">
-                                    <h5>Vanitha</h5>
-                                </span>
-                            </div>
+                            <strong>{{this.title}}</strong>
+                            <p>{{this.message}}</p>
+                            
                         </div>
                     </div>
-
-                    <div class="notification"
-                        onclick="openDetails('Fees Amount', 'Kindly Note ! Fees amount for this year increased.Its 35000')">
-                        <div class="notification-content">
-                            <strong>Fees Amount</strong>
-                            <p>Fees amount for this year increased.Its 35000</p>
-                            <div class="notification-right">
-                                <img src="../images/avatar.png" alt="Profile" class="profile-image"><span
-                                    class="user-name">
-                                    <h5>Priya Darshini</h5>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="/bus-incharge/notification" class="view-all" onclick="showNotificationPageAndClear()">View
+                {{/each}}
+                 <a href="/bus-incharge/notification" class="view-all" onclick="showNotificationPageAndClear()">View
                         All</a>
-                </div>
+                    
 
                 <div class="notification-details" id="notificationDetails" style="display: none;">
                     <h2 id="notifTitle">Notification Title</h2>

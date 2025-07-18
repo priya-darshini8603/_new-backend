@@ -134,7 +134,7 @@ window.onload = () => {
     document.getElementById('notificationPage').style.display = 'block';
 
     // Reset notification count and badge
-    resetNotifications();
+   
 };
 
 function resetNotifications() {

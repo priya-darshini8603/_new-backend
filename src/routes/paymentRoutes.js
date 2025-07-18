@@ -3,6 +3,7 @@ const router = express.Router();
 
 const paymentcontrollers = require("../controllers/paymentcontrollers");
 const PaymentCollection = require("../models/paymentModel");
+const Notification= require("../models/notificationmodel");
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
 
@@ -60,6 +61,19 @@ router.post("/razorpay/submit", async (req, res) => {
     });
 
     await payment.save();
+    await Notification.insertMany([
+    {
+      recipientRole: 'admin',
+      senderId: req.session.user._id,
+      message: `Payment from ${payment.name} - ₹${payment.amount}`,
+    },
+    {
+      recipientRole: 'busincharge',
+      senderId: req.session.user._id,
+      message: `Payment from ${payment.name} - ₹${payment.amount}`,
+    },
+  ]);
+
 
     res.send("Payment Successful and Saved!");
   } catch (error) {

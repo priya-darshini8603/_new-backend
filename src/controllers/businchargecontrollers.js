@@ -4,6 +4,7 @@ const Contact = require("../models/Contact");
 const multer = require("multer");
 const InquiryCollection=require("../models/inquiryModel");
 const DriverCollection=require("../models/assign_bus");
+const Notification=require("../models/notificationmodel");
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -88,6 +89,36 @@ exports.submitinquiry = async (req, res) => {
   }
 };
 
+exports.sendNotification = async (req, res) => {
+  const { recipientRole, message } = req.body;
+
+  await Notification.create({
+    recipientRole,
+    senderId: req.session.user._id,
+    message,
+  });
+
+  res.redirect('/notifications');
+};
+
+exports.viewNotifications = async (req, res) => {
+  try {
+    const userId = req.session.user?._id;
+    const role = req.session.user?.role;
+
+    const notifications = await Notification.find({
+      $or: [
+        { recipientId: userId },
+        { recipientRole: role }, // in case you want to broadcast to roles
+      ],
+    }).sort({ createdAt: -1 }).lean();
+
+    res.render('/notification', { notifications });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error loading notifications');
+  }
+};
 
 
 

@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const MessageCollection = require("../models/Message");
 const ContactCollection = require("../models/Contact");
 const DriverCollection = require("../models/assign_bus");
+const Notification = require("../models/notificationmodel");
 //post methods
 router.post("/profileupdate", businchargeControllers.uploadMiddleware,businchargeControllers.profileupdate);
 router.post("/submitinquiry",businchargeControllers.submitinquiry);
@@ -23,6 +24,7 @@ router.post("/submitinquiry",businchargeControllers.submitinquiry);
 router.use("/bus-incharge", async (req, res, next) => {
   try {
     const email = req.session?.user?.email;
+    const role = req.session?.user?.role;
     if (!email) return res.redirect("/loginform");
 
     const profile = await ProfileCollection.findOne({ email });
@@ -37,12 +39,24 @@ router.use("/bus-incharge", async (req, res, next) => {
       res.locals.profileImageType = "image/jpeg";
     }
 
+    // Fetch notifications
+    const notifications = await Notification.find({ recipientRole: role })
+      .sort({ createdAt: -1 })
+      .limit(5)
+      .lean();
+
+    res.locals.notifications = notifications;
+    res.locals.notificationCount = notifications.length;
+
+
     next();
+
   } catch (error) {
     console.error("Bus-incharge profile image middleware error:", error);
     res.status(500).send("Something went wrong");
   }
 });
+
 
 
 router.get("/bus-incharge/busincharge-dashboard", async (req, res) => {
@@ -56,12 +70,12 @@ router.get("/bus-incharge/busincharge-dashboard", async (req, res) => {
   role: { $in: ["student", "teacher"] }
 })
 .sort({ createdAt: -1 }) // latest first
-.limit(5)                // adjust count as needed
+.limit(4)                // adjust count as needed
 .lean();
 const payments = await PaymentCollection
   .find()
   .sort({ createdAt: -1 }) // sort newest first
-  .limit(5)
+  .limit(4)
 payments.forEach(payment => {
   if (payment.createdAt) {
     const date = new Date(payment.createdAt);
@@ -180,7 +194,7 @@ router.get("/bus-incharge/view-all-payments",async (req,res)=>{
       const date = new Date(payment.createdAt);
       payment.formattedDate = !isNaN(date) ? date.toLocaleDateString('en-GB') : 'N/A';
     });
-    
+   
   res.render("bus-incharge/view-all-payments", { payments });
   }
   catch{
@@ -376,6 +390,41 @@ router.get("/bus-incharge/chat/:user", async (req, res) => {
   }
 });
 
+
+router.get('/bus-incharge/notification', async (req, res) => {
+  try {
+    
+    const role = req.session.user?.role;
+
+    const notifications = await Notification.find({
+     
+       
+        recipientRole: role 
+    
+    }).sort({ createdAt: -1 }).limit(5).lean();
+
+    const notificationCount = notifications.length;
+   console.log(notifications);
    
+   console.log(notificationCount);
+
+    res.render('bus-incharge/notification', {
+      user: req.session.user,
+      notifications,
+      notificationCount
+    });
+  } catch (error) {
+    console.error('Error fetching notifications:', error);
+    res.render('bus-incharge/notification', {
+      user: req.session.user,
+      notifications: [],
+      notificationCount: 0
+    });
+  }
+});
+
+ 
+
+ 
 
 module.exports = router;
