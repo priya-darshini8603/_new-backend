@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Student Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: Poppins, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .payment-card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .payment-card h2 {
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            color: #333;
+
+        }
+
+        .payment-card h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 20%;
+            height: 3px;
+            background: linear-gradient(to right, #15b7e8, #2575fc);
+            border-radius: 2px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px 30px;
+        }
+
+        form label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        form input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to right,  #15b7e8, #2575fc);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #00a2ff,blue);
+        }
+
+        @media (max-width: 600px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="payment-card">
+        <h2>Student Bus Payment</h2>
+        <form id="paymentForm" method="POST" action="/razorpay/submit">
+            <div>
+                <label>Name:</label>
+                <input type="text" name="studentName" required>
+            </div>
+            <div>
+                <label>USN:</label>
+                <input type="text" name="usn" required>
+            </div>
+            <div>
+                <label>Branch:</label>
+                <input type="text" name="branch" required>
+            </div>
+            <div>
+                <label>Semester:</label>
+                <input type="text" name="semester" required>
+            </div>
+            <div>
+                <label>Phone Number:</label>
+                <input type="text" name="phone_num" required>
+            </div>
+            <div>
+                <label>Pickup Point:</label>
+                <input type="text" name="pickupPoint" required>
+            </div>
+            <div class="full-width">
+                <label>Amount (₹):</label>
+                <input type="number" name="amount" required>
+            </div>
+            <div class="full-width">
+                <button type="button" onclick="payNow()">Pay Now</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        function payNow() {
+            const form = document.getElementById('paymentForm');
+            const formData = new FormData(form);
+            const amount = formData.get("amount") * 100; // Convert to paise
+
+            const options = {
+                key: 'rzp_test_XLEobc5mihNeOK', // Replace with your Razorpay key
+                amount: amount,
+                currency: 'INR',
+                name: 'Bus Payment',
+                description: 'Student Bus Payment',
+                handler: function (response) {
+                    const input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = "razorpay_payment_id";
+                    input.value = response.razorpay_payment_id;
+                    form.appendChild(input);
+                    form.submit();
+                },
+                prefill: {
+                    email: formData.get("email")
+                }
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        }
+    </script>
+</body>
+
+</html>
